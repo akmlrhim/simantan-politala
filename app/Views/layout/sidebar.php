@@ -2,7 +2,7 @@
 	<div id="sidebar-menu">
 		<ul>
 			<li>
-				<a href="#" class="waves-effect">
+				<a href="<?= base_url('/'); ?>" class="waves-effect">
 					<i class="fa-solid fa-house"></i>
 					<span> Dashboard </span>
 				</a>
@@ -18,9 +18,9 @@
 				</a>
 				<ul class="list-unstyled">
 					<li>
-						<a href="#">Surat Masuk</a>
+						<a href="<?= base_url('surat_masuk'); ?>">Surat Masuk</a>
 						<a href="#">Telaahan Staf</a>
-						<a href="#">Surat Keluar</a>
+						<a href="<?= base_url('surat_keluar'); ?>">Surat Keluar</a>
 					</li>
 				</ul>
 			</li>
