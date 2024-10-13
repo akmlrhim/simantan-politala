@@ -20,6 +20,10 @@ class Disposisi extends Migration
                 'constraint' => 11,
                 'unsigned' => true,
             ],
+            'uuid' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+            ],
             'disposisi' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
