@@ -5,12 +5,16 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Dashboard::index');
+$routes->get('/', 'DashboardController::index');
 
 $routes->group('surat_masuk', function ($routes) {
-	$routes->get('/', 'SuratMasuk::index');
+	$routes->get('/', 'SuratMasukController::index');
 });
 
 $routes->group('surat_keluar', function ($routes) {
-	$routes->get('/', 'SuratKeluar::index');
+	$routes->get('/', 'SuratKeluarController::index');
+});
+
+$routes->group('user', static function ($routes) {
+	$routes->get('/', 'UserController::index');
 });

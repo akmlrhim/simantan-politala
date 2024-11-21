@@ -34,7 +34,7 @@
 		</div>
 
 		<div class="col-sm-12 col-md-6 col-xl-3">
-			<div class="card bg-danger m-b-30">
+			<div class="card bg-success m-b-30">
 				<div class="card-body">
 					<div class="d-flex row">
 						<div class="col-3 align-self-center">
@@ -54,7 +54,7 @@
 		</div>
 
 		<div class="col-sm-12 col-md-6 col-xl-3">
-			<div class="card bg-danger m-b-30">
+			<div class="card bg-primary m-b-30">
 				<div class="card-body">
 					<div class="d-flex row">
 						<div class="col-3 align-self-center">
@@ -74,7 +74,7 @@
 		</div>
 
 		<div class="col-sm-12 col-md-6 col-xl-3">
-			<div class="card bg-danger m-b-30">
+			<div class="card bg-secondary m-b-30">
 				<div class="card-body">
 					<div class="d-flex row">
 						<div class="col-3 align-self-center">

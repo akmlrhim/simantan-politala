@@ -23,27 +23,32 @@
 					<table id="datatable" class="table table-bordered">
 						<thead>
 							<tr>
-								<th>Name</th>
-								<th>Position</th>
-								<th>Office</th>
-								<th>Age</th>
-								<th>Start date</th>
-								<th>Salary</th>
+								<th>No</th>
+								<th>Nama Lengkap</th>
+								<th>Email</th>
+								<th>Role</th>
+								<th>Dibuat pada</th>
+								<th>Aksi</th>
 							</tr>
 						</thead>
-
-
-						<tbody>
-							<tr>
-								<td>Tiger Nixon</td>
-								<td>System Architect</td>
-								<td>Edinburgh</td>
-								<td>61</td>
-								<td>2011/04/25</td>
-								<td>$320,800</td>
-							</tr>
-						</tbody>
+						<?php $no = 1; ?>
+						<?php foreach ($user as $u) : ?>
+							<tbody>
+								<tr>
+									<td><?= $no++; ?></td>
+									<td><?= $u->nama_lengkap ?? 'T'; ?></td>
+									<td><?= $u->email ?? 'T'; ?></td>
+									<td><?= $u->role ?? 'T'; ?></td>
+									<td><?= $u->created_at ?? 'T'; ?></td>
+									<td>
+										<a href="#" class="btn btn-warning">Edit</a>
+										<a href="#" class="btn btn-primary btn-sm rounded">Hapus</a>
+									</td>
+								</tr>
+							</tbody>
+						<?php endforeach; ?>
 					</table>
+
 				</div>
 			</div>
 		</div>
