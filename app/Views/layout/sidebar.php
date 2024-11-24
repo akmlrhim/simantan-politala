@@ -1,81 +1,148 @@
-<div class="left-side-bar">
-	<div class="brand-logo">
-		<a href="index.html">
-			<img
-				src="vendors/images/deskapp-logo.svg"
-				alt=""
-				class="dark-logo" />
-			<img
-				src="vendors/images/deskapp-logo-white.svg"
-				alt=""
-				class="light-logo" />
-		</a>
-		<div
-			class="close-sidebar"
-			data-toggle="left-sidebar-close">
-			<i class="ion-close-round"></i>
-		</div>
-	</div>
-	<div class="menu-block customscroll">
-		<div class="sidebar-menu">
-			<ul id="accordion-menu">
+<div class="sidebar">
 
-				<li>
-					<a
-						href="calendar.html"
-						class="dropdown-toggle no-arrow">
-						<span class="micon bi bi-house"></span><span class="mtext">Dashboard</span>
+	<nav class="mt-2">
+		<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+			<li class="nav-item">
+				<a href="<?= base_url('dashboard'); ?>" class="nav-link">
+					<i class="nav-icon fas fa-tachometer-alt"></i>
+					<p>Dashboard</p>
+				</a>
+			</li>
+			<li class="nav-header">Menu Data</li>
+			<?php if (session()->get('role') == 'Owner') : ?>
+				<li class="nav-item">
+					<a class="nav-link ">
+						<i class="nav-icon fas fa-file-alt"></i>
+						<p>
+							Data Master
+							<i class="right fas fa-angle-left"></i>
+						</p>
 					</a>
-				</li>
-
-				<li class="dropdown">
-					<a
-						href="javascript:;"
-						class="dropdown-toggle">
-						<span class="micon bi bi-archive"></span><span class="mtext">Master</span>
-					</a>
-					<ul class="submenu">
-						<li><a href="index.html">Surat Keluar</a></li>
-						<li><a href="index2.html">Surat Masuk</a></li>
-					</ul>
-				</li>
-
-
-				<li>
-					<div class="dropdown-divider"></div>
-				</li>
-				<li>
-					<div class="sidebar-small-cap">USER</div>
-				</li>
-				<li>
-					<a
-						href="javascript:;"
-						class="dropdown-toggle">
-						<span class="micon bi bi-file-pdf"></span><span class="mtext">Documentation</span>
-					</a>
-					<ul class="submenu">
-						<li><a href="introduction.html">Introduction</a></li>
-						<li><a href="getting-started.html">Getting Started</a></li>
-						<li><a href="color-settings.html">Color Settings</a></li>
-						<li>
-							<a href="third-party-plugins.html">Third Party Plugins</a>
+					<ul class="nav nav-treeview" id="dropwdown">
+						<li class="nav-item">
+							<a href="<?= base_url('barang'); ?>" class="nav-link">
+								<i class="far fa-circle nav-icon"></i>
+								<p>Barang</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="<?= base_url('supplier'); ?>" class="nav-link">
+								<i class="far fa-circle nav-icon"></i>
+								<p>Supplier</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="<?= base_url('kategori'); ?>" class="nav-link">
+								<i class="far fa-circle nav-icon"></i>
+								<p>Kategori</p>
+							</a>
 						</li>
 					</ul>
 				</li>
-				<li>
-					<a
-						href="https://dropways.github.io/deskapp-free-single-page-website-template/"
-						target="_blank"
-						class="dropdown-toggle no-arrow">
-						<span class="micon bi bi-layout-text-window-reverse"></span>
-						<span class="mtext">Landing Page
-							<img
-								src="vendors/images/coming-soon.png"
-								alt=""
-								width="25" /></span>
+
+			<?php endif; ?>
+
+			<li class="nav-item">
+				<a class="nav-link ">
+					<i class="nav-icon fas fa-money-check-alt"></i>
+					<p>
+						Data Transaksi
+						<i class="right fas fa-angle-left"></i>
+					</p>
+				</a>
+				<ul class="nav nav-treeview" id="dropwdown">
+
+					<?php if (session()->get('role') == 'Owner') : ?>
+						<li class="nav-item">
+							<a href="<?= base_url('barang_masuk'); ?>" class="nav-link">
+								<i class="far fa-circle nav-icon"></i>
+								<p>Barang Masuk</p>
+							</a>
+						</li>
+					<?php endif; ?>
+
+					<?php if (session()->get('role') == 'Karyawan') : ?>
+						<li class="nav-item">
+							<a href="<?= base_url('barang_masuk/krw'); ?>" class="nav-link">
+								<i class="far fa-circle nav-icon"></i>
+								<p>Barang Masuk</p>
+							</a>
+						</li>
+					<?php endif; ?>
+
+					<?php if (session()->get('role') == 'Owner') : ?>
+						<li class="nav-item">
+							<a href="<?= base_url('barang_keluar'); ?>" class="nav-link">
+								<i class="far fa-circle nav-icon"></i>
+								<p>Barang Keluar</p>
+							</a>
+						</li>
+					<?php endif; ?>
+
+					<?php if (session()->get('role') == 'Karyawan') : ?>
+						<li class="nav-item">
+							<a href="<?= base_url('barang_keluar/krw'); ?>" class="nav-link">
+								<i class="far fa-circle nav-icon"></i>
+								<p>Barang Keluar</p>
+							</a>
+						</li>
+					<?php endif; ?>
+				</ul>
+			</li>
+
+			<!-- laporan -->
+			<li class="nav-header">Menu Laporan</li>
+			<li class="nav-item">
+				<a class="nav-link ">
+					<i class="nav-icon fas fa-file-pdf"></i>
+					<p>
+						Laporan
+						<i class="right fas fa-angle-left"></i>
+					</p>
+				</a>
+				<ul class="nav nav-treeview" id="dropwdown">
+					<li class="nav-item">
+						<a href="<?= base_url('barang_masuk/rep-barang-masuk'); ?>" class="nav-link">
+							<i class="far fa-circle nav-icon"></i>
+							<p>Barang Masuk</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="<?= base_url('barang_keluar/rep-barang-keluar'); ?>" class="nav-link">
+							<i class="far fa-circle nav-icon"></i>
+							<p>Barang Keluar</p>
+						</a>
+					</li>
+				</ul>
+			</li>
+
+
+			<li class="nav-header">Menu User</li>
+			<?php if (session()->get('role') == 'Owner') : ?>
+				<li class="nav-item">
+					<a href="<?= base_url('user'); ?>" class="nav-link">
+						<i class="nav-icon fas fa-users-cog"></i>
+						<p>Kelola User</p>
 					</a>
 				</li>
-			</ul>
-		</div>
-	</div>
+			<?php endif; ?>
+
+			<li class="nav-item">
+				<a href="<?= base_url('user/ubah-password'); ?>" class="nav-link">
+					<i class="nav-icon fas fa-lock"></i>
+					<p>Ubah Password</p>
+				</a>
+			</li>
+
+
+			</li>
+			<li class="nav-item">
+				<a href="<?= base_url('auth/logout'); ?>" class="nav-link">
+					<i class="nav-icon fas fa-sign-out-alt"></i>
+					<p>Logout</p>
+				</a>
+			</li>
+		</ul>
+	</nav>
 </div>

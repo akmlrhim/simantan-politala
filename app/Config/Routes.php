@@ -5,6 +5,8 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
+
+
 $routes->get('/', 'DashboardController::index');
 
 $routes->group('surat_masuk', function ($routes) {

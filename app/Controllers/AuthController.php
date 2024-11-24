@@ -7,8 +7,5 @@ use CodeIgniter\HTTP\ResponseInterface;
 
 class AuthController extends BaseController
 {
-    public function index()
-    {
-        //
-    }
+    public function index() {}
 }
