@@ -30,18 +30,89 @@ class UserController extends BaseController
     {
         if ($id == false) {
             $db = db_connect();
-            $builder = $db->table('users')->select('id, nama_lengkap, email, role');
+            $builder = $db->table('users')->select('id, nama_lengkap, email, username, role');
 
             return DataTable::of($builder)
                 ->add('action', function ($row) {
                     return '
-                <a class="btn btn-warning btn-sm" href="' . base_url('user/edit/' . $row->id_user) . '"><i class="fas fa-edit"></i></a>
-                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal' . $row->id_user . '">
+                <a class="btn btn-warning btn-sm" href="' . base_url('user/edit/' . $row->id) . '"><i class="fas fa-edit"></i></a>
+                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal' . $row->id . '">
                     <i class="fas fa-trash"></i> 
                 </button>';
                 })
                 ->addNumbering('no')
                 ->toJson(true);
+        } else {
+            $data = [
+                'title' => 'Detail User',
+                'user' => $this->userModel->first()
+            ];
+            return view('user/detail', $data);
         }
+    }
+
+    public function create()
+    {
+        $data['title'] = 'Tambah User';
+        return view('user/create', $data);
+    }
+
+    public function save()
+    {
+        $validation = $this->validate([
+            'nama_lengkap' => [
+                'label' => 'Nama Lengkap',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} harus diisi'
+                ],
+            ],
+            'email' => [
+                'label' => 'Email',
+                'rules' => 'required|is_unique[users.email]',
+                'errors' => [
+                    'required' => '{field} harus diisi',
+                    'is_unique' => '{field} sudah terdaftar'
+                ],
+            ],
+            'username' => [
+                'label' => 'Username',
+                'rules' => 'required|is_unique[users.username]',
+                'errors' => [
+                    'required' => '{field} harus diisi',
+                    'is_unique' => '{field} sudah terdaftar'
+                ],
+            ],
+            'password' => [
+                'label' => 'Password',
+                'rules' => 'required|min_length[8]',
+                'errors' => [
+                    'required' => '{field} harus diisi',
+                    'min_length' => '{field} minimal 8 karakter'
+                ],
+            ],
+            'role' => [
+                'label' => 'Role',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} harus diisi'
+                ]
+            ]
+        ]);
+
+        if (!$validation) {
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        }
+
+        $data = [
+            'nama_lengkap' => esc($this->request->getPost('nama_lengkap')),
+            'email' => esc($this->request->getPost('email')),
+            'username' => esc($this->request->getPost('username')),
+            'password' => password_hash(esc($this->request->getVar('password')), PASSWORD_BCRYPT),
+            'role' => esc($this->request->getPost('role')),
+        ];
+
+        $this->userModel->insert($data);
+        return redirect()->to(base_url('user'))->with('pesan', 'Data berhasil ditambahkan');
     }
 }

@@ -7,9 +7,9 @@
 	<meta http-equiv="Content-Type" content="text/html, charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="csrf-token" content="<?= csrf_token(); ?>">
-	<title><?= $title; ?></title>
+	<title>SIMANTAN | <?= $title; ?></title>
 
-	<link rel="shortcut icon" href="<?= base_url(); ?>img/pngegg.png" type="image/x-icon">
+	<link rel="shortcut icon" href="<?= base_url(); ?>img/logo_politala.png" type="image/x-icon">
 	<link rel="stylesheet" href="<?= base_url(); ?>/css/style.css">
 	<link rel="stylesheet" href="<?= base_url(); ?>fontawesome-free/css/all.min.css">
 	<link rel="stylesheet" href="<?= base_url(); ?>css/adminlte.min.css">
@@ -20,7 +20,7 @@
 
 </head>
 
-<body class="hold-transition sidebar-mini">
+<body class="sidebar-mini">
 	<div class="wrapper">
 
 		<?= $this->include('layout/navbar'); ?>

@@ -51,6 +51,13 @@
 
 			<li class="nav-item">
 				<a href="<?= base_url('dashboard'); ?>" class="nav-link">
+					<i class="nav-icon fas fa-user"></i>
+					<p>User</p>
+				</a>
+			</li>
+
+			<li class="nav-item">
+				<a href="<?= base_url('dashboard'); ?>" class="nav-link">
 					<i class="nav-icon fas fa-envelope"></i>
 					<p>Disposisi</p>
 				</a>

@@ -19,4 +19,7 @@ $routes->group('surat_keluar', function ($routes) {
 
 $routes->group('user', static function ($routes) {
 	$routes->get('/', 'UserController::index');
+	$routes->get('show', 'UserController::show');
+	$routes->get('tambah', 'UserController::create');
+	$routes->post('tambah', 'UserController::save');
 });
