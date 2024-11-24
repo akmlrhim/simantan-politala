@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Users extends Migration
+class KlasifikasiSurat extends Migration
 {
     public function up()
     {
@@ -15,27 +15,18 @@ class Users extends Migration
                 'unsigned' => true,
                 'auto_increment' => true,
             ],
-            'username' => [
-                'type' => 'VARCHAR',
-                'constraint' => 100,
-                'unique' => true,
-            ],
-            'password' => [
-                'type' => 'VARCHAR',
-                'constraint' => 255,
-            ],
-            'nama_lengkap' => [
-                'type' => 'VARCHAR',
-                'constraint' => 255,
-            ],
-            'email' => [
-                'type' => 'VARCHAR',
-                'constraint' => 255,
-                'unique' => true,
-            ],
-            'role' => [
+            'kode' => [
                 'type' => 'VARCHAR',
                 'constraint' => 20,
+                'unique' => true,
+            ],
+            'nama' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+            ],
+            'keterangan' => [
+                'type' => 'TEXT',
+                'null' => true,
             ],
             'created_at' => [
                 'type' => 'DATETIME',
@@ -46,13 +37,12 @@ class Users extends Migration
                 'null' => true,
             ],
         ]);
-
         $this->forge->addKey('id', true);
-        $this->forge->createTable('users');
+        $this->forge->createTable('klasifikasi_surat');
     }
 
     public function down()
     {
-        $this->forge->dropTable('users');
+        $this->forge->dropTable('klasifikasi_surat');
     }
 }

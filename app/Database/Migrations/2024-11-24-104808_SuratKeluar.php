@@ -9,46 +9,50 @@ class SuratKeluar extends Migration
     public function up()
     {
         $this->forge->addField([
-            'id_surat_keluar' => [
+            'id' => [
                 'type' => 'INT',
                 'constraint' => 11,
                 'unsigned' => true,
                 'auto_increment' => true,
             ],
-            'uuid' => [
-                'type' => 'VARCHAR',
-                'constraint' => 255,
-            ],
-            'tanggal_kirim' => [
-                'type' => 'DATE',
-                'null' => true,
-            ],
             'nomor_surat' => [
                 'type' => 'VARCHAR',
-                'constraint' => 255,
+                'constraint' => 100,
+                'unique' => true,
             ],
-            'tujuan_surat' => [
+            'tanggal_surat' => [
+                'type' => 'DATE',
+            ],
+            'tujuan' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
             'perihal' => [
+                'type' => 'TEXT',
+            ],
+            'isi_surat' => [
+                'type' => 'TEXT',
+            ],
+            'file_surat' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
-            ],
-            'lampiran' => [
-                'type' => 'INT',
-                'constraint' => 11,
                 'null' => true,
             ],
-            'id_staf' => [
+            'status' => [
+                'type' => 'ENUM',
+                'constraint' => ['draft', 'review', 'approved', 'sent'],
+                'default' => 'draft',
+            ],
+            'created_by' => [
                 'type' => 'INT',
                 'constraint' => 11,
                 'unsigned' => true,
             ],
-            'id_user' => [
+            'klasifikasi_id' => [
                 'type' => 'INT',
                 'constraint' => 11,
                 'unsigned' => true,
+                'null' => true,
             ],
             'created_at' => [
                 'type' => 'DATETIME',
@@ -59,10 +63,9 @@ class SuratKeluar extends Migration
                 'null' => true,
             ],
         ]);
-
-        $this->forge->addKey('id_surat_keluar', true);
-        $this->forge->addForeignKey('id_staf', 'staf', 'id_staf', 'CASCADE', 'CASCADE');
-        $this->forge->addForeignKey('id_user', 'users', 'id_user', 'CASCADE', 'CASCADE');
+        $this->forge->addKey('id', true);
+        $this->forge->addForeignKey('created_by', 'users', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('klasifikasi_id', 'klasifikasi_surat', 'id', 'CASCADE', 'SET NULL');
         $this->forge->createTable('surat_keluar');
     }
 

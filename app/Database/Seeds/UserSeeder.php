@@ -15,7 +15,8 @@ class UserSeeder extends Seeder
         for ($i = 0; $i < 10; $i++) {
             $data = [
                 'email'         => $faker->email,
-                'password'      => password_hash('password', PASSWORD_DEFAULT),
+                'username'      => $faker->userName,
+                'password'      => password_hash('password', PASSWORD_BCRYPT),
                 'nama_lengkap'  => $faker->name,
                 'role'          => $faker->randomElement(['admin', 'user']),
                 'created_at'    => Time::now(),
