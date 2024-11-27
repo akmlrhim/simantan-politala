@@ -2,7 +2,7 @@
 
 	<div class="user-panel mt-3 pb-3 mb-3 d-flex">
 		<div class="image">
-			<img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+			<img src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" class="img-circle elevation-2" alt="User Image">
 		</div>
 		<div class="info">
 			<a href="#" class="d-block">Alexander Pierce</a>
@@ -50,7 +50,7 @@
 			</li>
 
 			<li class="nav-item">
-				<a href="<?= base_url('dashboard'); ?>" class="nav-link">
+				<a href="<?= base_url('user'); ?>" class="nav-link">
 					<i class="nav-icon fas fa-user"></i>
 					<p>User</p>
 				</a>

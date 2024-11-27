@@ -6,7 +6,8 @@
 	<meta charset="utf-8">
 	<meta http-equiv="Content-Type" content="text/html, charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="csrf-token" content="<?= csrf_token(); ?>">
+	<?= csrf_meta(); ?>
+
 	<title>SIMANTAN | <?= $title; ?></title>
 
 	<link rel="shortcut icon" href="<?= base_url(); ?>img/logo_politala.png" type="image/x-icon">
@@ -59,11 +60,11 @@
 		<?= $this->include('layout/footer'); ?>
 	</div>
 
+
 	<script src="<?= base_url('js'); ?>/jquery.min.js"></script>
 	<script src="<?= base_url('js'); ?>/jquery.mask.min.js"></script>
 	<script src="<?= base_url('js'); ?>/bootstrap.bundle.min.js"></script>
 	<script src="<?= base_url('js'); ?>/adminlte.min.js"></script>
-
 
 	<script src="<?= base_url(); ?>plugins/datatables/jquery.dataTables.min.js"></script>
 	<script src="<?= base_url(); ?>plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -72,8 +73,6 @@
 	<script src="<?= base_url(); ?>plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
 
 	<?= $this->renderSection('script'); ?>
-
-
 </body>
 
 </html>
