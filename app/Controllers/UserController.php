@@ -5,7 +5,6 @@ namespace App\Controllers;
 use App\Models\User;
 use Hermawan\DataTables\DataTable;
 use App\Controllers\BaseController;
-use CodeIgniter\HTTP\ResponseInterface;
 
 class UserController extends BaseController
 {
@@ -30,16 +29,30 @@ class UserController extends BaseController
     public function show($id = false)
     {
         if ($id == false) {
+            $isLoggedIn = session()->get('id_user');
+
             $db = db_connect();
-            $builder = $db->table('users')->select('id, nama_lengkap, email, username, role');
+            $builder = $db->table('users')
+                ->select('id, nama_lengkap, email, username, role')
+                ->where('id !=', $isLoggedIn);
 
             return DataTable::of($builder)
                 ->add('action', function ($row) {
                     return '
-                <a class="btn btn-warning btn-sm" href="' . base_url('user/' . $row->id) . '">Edit</a>
+                <a class="btn btn-warning btn-sm" href="' . base_url('user/' . $row->id) . '"><i class="fas fa-pencil-alt"></i></a>
                 <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal' . $row->id . '">
-                    Hapus
+                    <i class="fas fa-trash"></i>
                 </button>';
+                })
+                ->add('role', function ($row) {
+                    return ($row->role == 'admin')
+                        ? '<span class="badge badge-danger">Admin</span>'
+                        : (($row->role == 'ketua-jurusan')
+                            ? '<span class="badge badge-warning">Ketua Jurusan</span>'
+                            : (($row->role == 'direktur')
+                                ? '<span class="badge badge-success">Direktur</span>'
+                                : '<span class="badge badge-secondary">User</span>')
+                        );
                 })
                 ->addNumbering('no')
                 ->toJson(true);
@@ -102,7 +115,10 @@ class UserController extends BaseController
         ]);
 
         if (!$validation) {
-            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+            return redirect()->back()->withInput()->with('toastr', [
+                'type' => 'error',
+                'message' => implode('<br>', $this->validator->getErrors())
+            ]);
         }
 
         $data = [
@@ -114,14 +130,17 @@ class UserController extends BaseController
         ];
 
         $this->userModel->insert($data);
-        return redirect()->to(base_url('user'))->with('pesan', 'Data berhasil ditambahkan');
+        return redirect()->to(base_url('user'))->with('toastr', [
+            'type' => 'success',
+            'message' => 'Data Berhasil ditambahkan!'
+        ]);
     }
 
     public function edit($id)
     {
         $data = [
             'title' => 'Edit User',
-            'user' => $this->userModel->where(['id' => $id])->first(),
+            'user' => $this->userModel->find($id)
         ];
         return view('user/edit', $data);
     }
@@ -160,23 +179,33 @@ class UserController extends BaseController
         ]);
 
         if (!$validation) {
-            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+            return redirect()->back()->withInput()->with('toastr', [
+                'type' => 'error',
+                'message' => implode('<br>', $this->validator->getErrors())
+            ]);;
         }
 
-        $this->userModel->save([
-            'id' => $id,
+        $data = [
             'nama_lengkap' => esc($this->request->getPost('nama_lengkap')),
             'email' => esc($this->request->getPost('email')),
             'username' => esc($this->request->getPost('username')),
             'role' => esc($this->request->getPost('role')),
-        ]);
+        ];
 
-        return redirect()->to(base_url('user'))->with('pesan', 'Data berhasil diperbarui.');
+        $this->userModel->update($id, $data);
+
+        return redirect()->to(base_url('user'))->with('toastr', [
+            'type' => 'success',
+            'message' => 'Data Berhasil diperbarui!'
+        ]);
     }
 
     public function delete($id)
     {
         $this->userModel->delete($id);
-        return redirect()->to(base_url('user'))->with('pesan', 'Data berhasil dihapus.');
+        return redirect()->to(base_url('user'))->with('toastr', [
+            'type' => 'success',
+            'message' => 'Data Berhasil dihapus!'
+        ]);
     }
 }

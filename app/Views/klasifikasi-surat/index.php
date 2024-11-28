@@ -3,9 +3,7 @@
 <?= $this->section('content'); ?>
 <div class="content">
 	<div class="container-fluid">
-		<a href="<?= base_url('user/tambah'); ?>" class="btn btn-primary mb-3">
-			Tambah Data
-		</a>
+		<a href="<?= base_url('klasifikasi-surat/tambah'); ?>" class="btn btn-primary mb-3">Tambah Data</a>
 
 		<div class="card">
 			<div class="card-body">
@@ -14,10 +12,9 @@
 						<thead>
 							<tr>
 								<th scope="col">No</th>
-								<th scope="col">Nama Lengkap</th>
-								<th scope="col">Email</th>
-								<th scope="col">Username</th>
-								<th scope="col">Role</th>
+								<th scope="col">Kode</th>
+								<th scope="col">Nama</th>
+								<th scope="col">Keterangan</th>
 								<th scope="col">Aksi</th>
 							</tr>
 						</thead>
@@ -30,7 +27,9 @@
 	</div>
 </div>
 
-<?php foreach ($user as $row) : ?>
+
+
+<?php foreach ($kl_surat as $row) : ?>
 	<div class="modal fade" id="modal<?= $row->id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
@@ -42,8 +41,8 @@
 				</div>
 				<div class="modal-body text-center">
 					<i class="fas fa-info-circle text-danger mb-4" style="font-size: 70px;"></i>
-					<p>Apakah anda yakin untuk menghapus <?= $row->nama_lengkap; ?> ?</p>
-					<form action="<?= base_url('user/' . $row->id); ?>" method="POST">
+					<p>Apakah anda yakin untuk menghapus <?= $row->nama; ?> ?</p>
+					<form action="<?= base_url('klasifikasi-surat/' . $row->id); ?>" method="POST">
 						<?= csrf_field(); ?>
 						<div class="modal-footer justify-content-center">
 							<input type="hidden" name="_method" value="DELETE">
@@ -66,23 +65,20 @@
 			lengthChange: true,
 			processing: true,
 			serverSide: true,
-			ajax: '<?= base_url('user/show'); ?>',
+			ajax: '<?= base_url('klasifikasi-surat/show'); ?>',
 			order: [],
 			columns: [{
 					data: 'no',
 					orderable: false
 				},
 				{
-					data: 'nama_lengkap'
+					data: 'kode'
 				},
 				{
-					data: 'email'
+					data: 'nama'
 				},
 				{
-					data: 'username'
-				},
-				{
-					data: 'role'
+					data: 'keterangan'
 				},
 				{
 					data: 'action',

@@ -14,10 +14,11 @@
 	<link rel="stylesheet" href="<?= base_url(); ?>/css/style.css">
 	<link rel="stylesheet" href="<?= base_url(); ?>fontawesome-free/css/all.min.css">
 	<link rel="stylesheet" href="<?= base_url(); ?>css/adminlte.min.css">
-	<link rel="stylesheet" href="<?= base_url(); ?>css/cover.css">
 	<link rel="stylesheet" href="<?= base_url(); ?>plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
 	<link rel="stylesheet" href="<?= base_url(); ?>plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
 	<link rel="stylesheet" href="<?= base_url(); ?>plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+	<link rel="stylesheet" href="<?= base_url(); ?>plugins/toastr/toastr.min.css">
+
 
 </head>
 
@@ -49,9 +50,9 @@
 								<li class="breadcrumb-item"><a href="<?= base_url('dashboard'); ?>">Home</a></li>
 								<li class="breadcrumb-item active"><?= $title; ?></li>
 							</ol>
-						</div><!-- /.col -->
-					</div><!-- /.row -->
-				</div><!-- /.container-fluid -->
+						</div>
+					</div>
+				</div>
 			</div>
 
 			<?= $this->renderSection('content'); ?>
@@ -71,8 +72,21 @@
 	<script src="<?= base_url(); ?>plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 	<script src="<?= base_url(); ?>plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 	<script src="<?= base_url(); ?>plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+	<script src="<?= base_url(); ?>plugins/toastr/toastr.min.js"></script>
 
 	<?= $this->renderSection('script'); ?>
+
+	<script>
+		<?php if (session()->getFlashdata('toastr')): ?>
+			let toastrData = <?= json_encode(session()->getFlashdata('toastr')) ?>;
+			toastr.options = {
+				"closeButton": true,
+				"progressBar": true,
+				"timeOut": "3000"
+			};
+			toastr[toastrData.type](toastrData.message);
+		<?php endif; ?>
+	</script>
 </body>
 
 </html>

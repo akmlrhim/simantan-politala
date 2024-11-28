@@ -3,17 +3,6 @@
 <?= $this->section('content'); ?>
 <section class="content">
 	<div class="container-fluid">
-
-		<?= session()->getFlashdata('errors')
-			? '<div class="alert alert-danger" style="font-size: 0.875rem;"> 
-        <strong>Terjadi Kesalahan Inputan:</strong>
-        <ul>' .
-			implode('', array_map(fn($error) => "<li>{$error}</li>", session()->getFlashdata('errors'))) .
-			'</ul>
-       </div>'
-			: ''
-		?>
-
 		<div class="card card-primary">
 			<div class="card-header">
 				<h3 class="card-title text-sm">Isi Form untuk Menambahkan User Baru</h3>
@@ -61,8 +50,8 @@
 							<select class="form-control" id="role" name="role">
 								<option value="" <?= old('role') === '' ? 'selected' : '' ?>>-- Pilih Role --</option>
 								<option value="admin" <?= old('role') === 'admin' ? 'selected' : '' ?>>Admin</option>
-								<option value="editor" <?= old('role') === 'editor' ? 'selected' : '' ?>>Editor</option>
-								<option value="user" <?= old('role') === 'user' ? 'selected' : '' ?>>User</option>
+								<option value="ketua-jurusan" <?= old('role') === 'ketua-jurusan' ? 'selected' : '' ?>>Ketua Jurusan</option>
+								<option value="direktur" <?= old('role') === 'direktur' ? 'selected' : '' ?>>Direktur</option>
 							</select>
 
 						</div>

@@ -5,7 +5,7 @@
 			<img src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" class="img-circle elevation-2" alt="User Image">
 		</div>
 		<div class="info">
-			<a href="#" class="d-block">Alexander Pierce</a>
+			<a href="#" class="d-block"><?= session()->get('nama_lengkap'); ?></a>
 		</div>
 	</div>
 
@@ -29,21 +29,27 @@
 				</a>
 				<ul class="nav nav-treeview" id="dropwdown">
 					<li class="nav-item">
-						<a href="#" class="nav-link">
+						<a href="<?= base_url('surat-keluar'); ?>" class="nav-link">
 							<i class="far fa-circle nav-icon"></i>
 							<p>Surat Keluar</p>
 						</a>
 					</li>
 					<li class="nav-item">
-						<a href="#" class="nav-link">
+						<a href="<?= base_url('telaah-staf'); ?>" class="nav-link">
 							<i class="far fa-circle nav-icon"></i>
 							<p>Telaah Staf</p>
 						</a>
 					</li>
 					<li class="nav-item">
-						<a href="#" class="nav-link">
+						<a href="<?= base_url('surat-masuk'); ?>" class="nav-link">
 							<i class="far fa-circle nav-icon"></i>
 							<p>Surat Masuk</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="<?= base_url('klasifikasi-surat'); ?>" class="nav-link">
+							<i class="far fa-circle nav-icon"></i>
+							<p>Klasifikasi Surat</p>
 						</a>
 					</li>
 				</ul>
@@ -57,18 +63,26 @@
 			</li>
 
 			<li class="nav-item">
-				<a href="<?= base_url('dashboard'); ?>" class="nav-link">
+				<a href="<?= base_url('disposisi'); ?>" class="nav-link">
 					<i class="nav-icon fas fa-envelope"></i>
 					<p>Disposisi</p>
 				</a>
 			</li>
 
 			<li class="nav-item">
-				<a href="<?= base_url('auth/logout'); ?>" class="nav-link">
+				<a
+					href="#"
+					class="nav-link"
+					onclick="event.preventDefault(); document.getElementById('logout-form').submit(); ">
 					<i class="nav-icon fas fa-sign-out-alt"></i>
 					<p>Logout</p>
 				</a>
 			</li>
+
+			<form action="<?= base_url('logout'); ?>" method="POST" id="logout-form" class="d-none">
+				<?= csrf_field(); ?>
+			</form>
+
 		</ul>
 	</nav>
 </div>
