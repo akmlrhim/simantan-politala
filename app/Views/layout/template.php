@@ -22,7 +22,7 @@
 
 </head>
 
-<body class="sidebar-mini">
+<body class="sidebar-mini layout-footer-fixed">
 	<div class="wrapper">
 
 		<?= $this->include('layout/navbar'); ?>
@@ -58,6 +58,7 @@
 			<?= $this->renderSection('content'); ?>
 		</div>
 
+		<?= $this->include('layout/footer'); ?>
 	</div>
 
 

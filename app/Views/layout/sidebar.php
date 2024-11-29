@@ -1,21 +1,4 @@
 <div class="sidebar">
-
-	<div class="user-panel mt-3 pb-3 mb-3 d-flex align-items-center">
-		<div class="image">
-			<img src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" class="img-circle elevation-2" alt="User Image" style="width: 40px; height: 40px;">
-		</div>
-		<div class="info ml-2">
-			<a href="#" class="d-block font-weight-bold text-xs"><?= session()->get('nama_lengkap'); ?></a>
-			<span class="d-block text-sm">
-				<?php
-				$role = session()->get('role');
-				echo $role === 'direktur' ? '<span class="badge bg-primary">Direktur</span>' : ($role === 'admin' ? '<span class="badge bg-success">Admin</span>' : ($role === 'ketua-jurusan' ? '<span class="badge bg-warning text-dark">Ketua Jurusan</span>' : ''));
-				?>
-			</span>
-		</div>
-	</div>
-
-
 	<nav class="mt-2">
 		<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
@@ -89,7 +72,6 @@
 			<form action="<?= base_url('logout'); ?>" method="POST" id="logout-form" class="d-none">
 				<?= csrf_field(); ?>
 			</form>
-
 		</ul>
 	</nav>
 </div>

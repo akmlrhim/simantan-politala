@@ -12,7 +12,7 @@ $routes->post('logout', 'AuthController::logout');
 
 $routes->get('dashboard', 'DashboardController::index');
 
-$routes->group('surat-masuk', function ($routes) {
+$routes->group('surat-masuk', ['filter' => ['auth']], function ($routes) {
 	$routes->get('/', 'SuratMasukController::index');
 	$routes->get('show', 'SuratMasukController::show');
 	$routes->get('tambah', 'SuratMasukController::create');

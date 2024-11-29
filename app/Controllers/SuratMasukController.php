@@ -28,11 +28,41 @@ class SuratMasukController extends BaseController
 
     public function show()
     {
+        // $db = db_connect();
+        // $builder = $db->table('surat_masuk')
+        //     ->select('
+        //         surat_masuk.id as surat_masuk_id, 
+        //         surat_masuk.perihal, 
+        //         surat_masuk.nomor_surat, 
+        //         surat_masuk.asal_surat, 
+        //         surat_masuk.tanggal_diterima, 
+        //         surat_masuk.tanggal_surat, 
+        //         surat_masuk.file_surat, 
+        //         surat_masuk.status_telaah, 
+        //         telaah_staf.file_telaah_staf, 
+        //         users.id as created_by_user_id
+        //     ')
+        //     ->join('telaah_staf', 'telaah_staf.surat_masuk_id = surat_masuk.id', 'left')
+        //     ->join('users', 'users.id = surat_masuk.created_by', 'left')
+        //     ->where('surat_masuk.status_telaah', 'belum_ditelaah')
+        //     ->where('surat_masuk.created_by', session()->get('id_user'));
+
         $db = db_connect();
         $builder = $db->table('surat_masuk')
-            ->select('surat_masuk.id as surat_masuk_id, surat_masuk.perihal, surat_masuk.nomor_surat, surat_masuk.asal_surat, surat_masuk.tanggal_diterima, surat_masuk.tanggal_surat, surat_masuk.file_surat, surat_masuk.status_telaah, telaah_staf.file_telaah_staf')
+            ->select('
+                surat_masuk.id as surat_masuk_id,
+                surat_masuk.perihal,
+                surat_masuk.nomor_surat,
+                surat_masuk.asal_surat,
+                surat_masuk.tanggal_diterima,
+                surat_masuk.tanggal_surat,
+                surat_masuk.file_surat,
+                surat_masuk.status_telaah,
+                telaah_staf.file_telaah_staf
+            ')
             ->join('telaah_staf', 'telaah_staf.surat_masuk_id = surat_masuk.id', 'left')
             ->where('surat_masuk.status_telaah', 'belum_ditelaah');
+
 
         return DataTable::of($builder)
             ->add('action', function ($row) {
