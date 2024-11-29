@@ -9,18 +9,18 @@ use App\Controllers\BaseController;
 class UserController extends BaseController
 {
 
-    protected $userModel;
+    protected $user;
 
     public function __construct()
     {
-        $this->userModel = new User();
+        $this->user = new User();
     }
 
     public function index()
     {
         $data = [
             'title' => 'User',
-            'user' => $this->userModel->findAll()
+            'user' => $this->user->findAll()
         ];
 
         return view('user/index', $data);
@@ -60,7 +60,7 @@ class UserController extends BaseController
 
         $data = [
             'title' => 'Detail User',
-            'user' => $this->userModel->first()
+            'user' => $this->user->first()
         ];
         return view('user/detail', $data);
     }
@@ -129,7 +129,7 @@ class UserController extends BaseController
             'role' => esc($this->request->getPost('role')),
         ];
 
-        $this->userModel->insert($data);
+        $this->user->insert($data);
         return redirect()->to(base_url('user'))->with('toastr', [
             'type' => 'success',
             'message' => 'Data Berhasil ditambahkan!'
@@ -140,7 +140,7 @@ class UserController extends BaseController
     {
         $data = [
             'title' => 'Edit User',
-            'user' => $this->userModel->find($id)
+            'user' => $this->user->find($id)
         ];
         return view('user/edit', $data);
     }
@@ -192,7 +192,7 @@ class UserController extends BaseController
             'role' => esc($this->request->getPost('role')),
         ];
 
-        $this->userModel->update($id, $data);
+        $this->user->update($id, $data);
 
         return redirect()->to(base_url('user'))->with('toastr', [
             'type' => 'success',
@@ -202,7 +202,7 @@ class UserController extends BaseController
 
     public function delete($id)
     {
-        $this->userModel->delete($id);
+        $this->user->delete($id);
         return redirect()->to(base_url('user'))->with('toastr', [
             'type' => 'success',
             'message' => 'Data Berhasil dihapus!'

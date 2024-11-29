@@ -20,42 +20,33 @@ class SuratMasuk extends Migration
                 'constraint' => 100,
                 'unique' => true,
             ],
+            'asal_surat' => [
+                'type' => 'VARCHAR',
+                'constraint' => 100,
+            ],
+            'tanggal_diterima' => [
+                'type' => 'DATE',
+            ],
             'tanggal_surat' => [
                 'type' => 'DATE',
             ],
-            'tanggal_terima' => [
-                'type' => 'DATE',
-            ],
-            'pengirim' => [
-                'type' => 'VARCHAR',
-                'constraint' => 255,
-            ],
-            'perihal' => [
-                'type' => 'TEXT',
-            ],
-            'isi_ringkas' => [
-                'type' => 'TEXT',
-            ],
             'file_surat' => [
                 'type' => 'VARCHAR',
-                'constraint' => 255,
-                'null' => true,
+                'constraint' => 100,
             ],
-            'status' => [
-                'type' => 'ENUM',
-                'constraint' => ['pending', 'disposisi', 'selesai'],
-                'default' => 'pending',
+            'perihal' => [
+                'type' => 'VARCHAR',
+                'constraint' => 100,
             ],
             'created_by' => [
                 'type' => 'INT',
                 'constraint' => 11,
                 'unsigned' => true,
             ],
-            'klasifikasi_id' => [
-                'type' => 'INT',
-                'constraint' => 11,
-                'unsigned' => true,
-                'null' => true,
+            'status_telaah' => [
+                'type' => 'VARCHAR',
+                'constraint' => 100,
+                'default' => 'belum_ditelaah',
             ],
             'created_at' => [
                 'type' => 'DATETIME',
@@ -68,7 +59,6 @@ class SuratMasuk extends Migration
         ]);
         $this->forge->addKey('id', true);
         $this->forge->addForeignKey('created_by', 'users', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->addForeignKey('klasifikasi_id', 'klasifikasi_surat', 'id', 'CASCADE', 'SET NULL');
         $this->forge->createTable('surat_masuk');
     }
 

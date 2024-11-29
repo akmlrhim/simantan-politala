@@ -10,7 +10,10 @@ class DashboardController extends BaseController
     public function index()
     {
         $data = [
-            'title' => 'Dashboard'
+            'title' => 'Dashboard',
+            'user' => (new \App\Models\User())->countAll(),
+            'kl_surat' => (new \App\Models\KlasifikasiSurat())->countAll(),
+            'surat_masuk' => (new \App\Models\SuratMasuk())->countAll()
         ];
         return view('dashboard/index', $data);
     }

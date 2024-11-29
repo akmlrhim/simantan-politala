@@ -54,7 +54,7 @@ class TelaahStaf extends Migration
                 'constraint' => 11,
                 'unsigned' => true,
             ],
-            'file_lampiran' => [
+            'file_telaah_staf' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
                 'null' => true,

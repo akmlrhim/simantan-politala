@@ -14,10 +14,18 @@ $routes->get('dashboard', 'DashboardController::index');
 
 $routes->group('surat-masuk', function ($routes) {
 	$routes->get('/', 'SuratMasukController::index');
+	$routes->get('show', 'SuratMasukController::show');
+	$routes->get('tambah', 'SuratMasukController::create');
+	$routes->post('tambah', 'SuratMasukController::save');
+	$routes->get('(:num)', 'SuratMasukController::edit/$1');
+	$routes->put('(:num)', 'SuratMasukController::update/$1');
+	$routes->delete('(:num)', 'SuratMasukController::delete/$1');
 });
 
 $routes->group('surat-keluar', function ($routes) {
 	$routes->get('/', 'SuratKeluarController::index');
+	$routes->get('show', 'SuratKeluarController::show');
+	$routes->get('tambah', 'SuratKeluarController::create');
 });
 
 $routes->group('klasifikasi-surat', function ($routes) {

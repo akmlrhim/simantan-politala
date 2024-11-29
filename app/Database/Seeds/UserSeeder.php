@@ -12,7 +12,7 @@ class UserSeeder extends Seeder
     {
         $faker = Factory::create('id_ID');
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 40; $i++) {
             $data = [
                 'email'         => $faker->email,
                 'username'      => $faker->userName,
