@@ -15,10 +15,13 @@ class TelaahStaf extends Migration
                 'unsigned' => true,
                 'auto_increment' => true,
             ],
-            'nomor_telaah' => [
+            'dari' => [
                 'type' => 'VARCHAR',
                 'constraint' => 100,
-                'unique' => true,
+            ],
+            'perihal' => [
+                'type' => 'VARCHAR',
+                'constraint' => 100,
             ],
             'surat_masuk_id' => [
                 'type' => 'INT',
@@ -26,42 +29,19 @@ class TelaahStaf extends Migration
                 'unsigned' => true,
                 'null' => true,
             ],
-            'tanggal_telaah' => [
-                'type' => 'DATE',
-            ],
-            'perihal' => [
-                'type' => 'TEXT',
-            ],
-            'dasar' => [
-                'type' => 'TEXT',
-            ],
-            'analisis' => [
-                'type' => 'TEXT',
-            ],
-            'kesimpulan' => [
-                'type' => 'TEXT',
-            ],
-            'rekomendasi' => [
-                'type' => 'TEXT',
-            ],
-            'status' => [
-                'type' => 'ENUM',
-                'constraint' => ['draft', 'review', 'approved', 'rejected'],
-                'default' => 'draft',
-            ],
             'created_by' => [
                 'type' => 'INT',
                 'constraint' => 11,
                 'unsigned' => true,
             ],
-            'file_telaah_staf' => [
-                'type' => 'VARCHAR',
-                'constraint' => 255,
-                'null' => true,
-            ],
-            'catatan_review' => [
+            'isi_surat' => [
                 'type' => 'TEXT',
-                'null' => true,
+            ],
+            'fakta_dan_data' => [
+                'type' => 'TEXT',
+            ],
+            'saran_dan_tindak' => [
+                'type' => 'TEXT',
             ],
             'created_at' => [
                 'type' => 'DATETIME',
@@ -73,7 +53,7 @@ class TelaahStaf extends Migration
             ],
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->addForeignKey('surat_masuk_id', 'surat_masuk', 'id', 'CASCADE', 'SET NULL');
+        $this->forge->addForeignKey('surat_masuk_id', 'surat_masuk', 'id', 'CASCADE', 'CASCADE');
         $this->forge->addForeignKey('created_by', 'users', 'id', 'CASCADE', 'CASCADE');
         $this->forge->createTable('telaah_staf');
     }

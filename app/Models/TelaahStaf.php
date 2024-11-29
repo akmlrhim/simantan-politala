@@ -6,13 +6,13 @@ use CodeIgniter\Model;
 
 class TelaahStaf extends Model
 {
-    protected $table            = 'telaahstafs';
+    protected $table            = 'telaah_staf';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
-    protected $returnType       = 'array';
+    protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['dari', 'perihal', 'surat_masuk_id', 'created_by', 'isi_surat', 'fakta_dan_data', 'saran_dan_tindak'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -21,7 +21,7 @@ class TelaahStaf extends Model
     protected array $castHandlers = [];
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

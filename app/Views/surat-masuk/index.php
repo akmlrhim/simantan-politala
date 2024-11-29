@@ -3,10 +3,11 @@
 <?= $this->section('content'); ?>
 <div class="content">
 	<div class="container-fluid">
-		<a href="<?= base_url('surat-masuk/tambah'); ?>" class="btn btn-primary mb-3">Tambah Data</a>
-
 		<div class="card">
 			<div class="card-body">
+				<div class="d-flex justify-content-end">
+					<a href="<?= base_url('surat-masuk/tambah'); ?>" class="btn btn-primary mb-3">Tambah Data</a>
+				</div>
 				<div class="table-responsive-sm">
 					<table class="table table-bordered text-center table-sm" id="tables" style="width: 100%;">
 						<thead>
@@ -30,6 +31,7 @@
 		</div>
 	</div>
 </div>
+
 
 
 <!-- modal konfirmasi hapus  -->
@@ -114,7 +116,7 @@
 					data: 'file_surat'
 				},
 				{
-					data: 'file_telaah_staf'
+					data: 'telaah_staf'
 				},
 				{
 					data: 'action',

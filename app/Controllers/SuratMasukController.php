@@ -28,41 +28,19 @@ class SuratMasukController extends BaseController
 
     public function show()
     {
-        // $db = db_connect();
-        // $builder = $db->table('surat_masuk')
-        //     ->select('
-        //         surat_masuk.id as surat_masuk_id, 
-        //         surat_masuk.perihal, 
-        //         surat_masuk.nomor_surat, 
-        //         surat_masuk.asal_surat, 
-        //         surat_masuk.tanggal_diterima, 
-        //         surat_masuk.tanggal_surat, 
-        //         surat_masuk.file_surat, 
-        //         surat_masuk.status_telaah, 
-        //         telaah_staf.file_telaah_staf, 
-        //         users.id as created_by_user_id
-        //     ')
-        //     ->join('telaah_staf', 'telaah_staf.surat_masuk_id = surat_masuk.id', 'left')
-        //     ->join('users', 'users.id = surat_masuk.created_by', 'left')
-        //     ->where('surat_masuk.status_telaah', 'belum_ditelaah')
-        //     ->where('surat_masuk.created_by', session()->get('id_user'));
-
         $db = db_connect();
         $builder = $db->table('surat_masuk')
-            ->select('
-                surat_masuk.id as surat_masuk_id,
-                surat_masuk.perihal,
-                surat_masuk.nomor_surat,
-                surat_masuk.asal_surat,
-                surat_masuk.tanggal_diterima,
-                surat_masuk.tanggal_surat,
-                surat_masuk.file_surat,
-                surat_masuk.status_telaah,
-                telaah_staf.file_telaah_staf
-            ')
-            ->join('telaah_staf', 'telaah_staf.surat_masuk_id = surat_masuk.id', 'left')
+            ->select(
+                'surat_masuk.id as surat_masuk_id, 
+                surat_masuk.perihal, 
+                surat_masuk.nomor_surat, 
+                surat_masuk.asal_surat, 
+                surat_masuk.tanggal_diterima, 
+                surat_masuk.tanggal_surat, 
+                surat_masuk.file_surat, 
+                surat_masuk.status_telaah'
+            )
             ->where('surat_masuk.status_telaah', 'belum_ditelaah');
-
 
         return DataTable::of($builder)
             ->add('action', function ($row) {
@@ -84,10 +62,15 @@ class SuratMasukController extends BaseController
             ->add('file_surat', function ($row) {
                 return '<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#fileModal" data-file="' . base_url('uploads/surat-masuk/' . $row->file_surat) . '">Lihat Dokumen</button>';
             })
-            ->add('file_telaah_staf', function ($row) {
-                return $row->file_telaah_staf
-                    ? '<a class="btn btn-sm btn-primary" href="' . base_url('surat-masuk/file-telaah-staf/' . $row->surat_masuk_id) . '"">Lihat Dokumen</a>'
-                    : '<span class="badge badge-danger">Belum Ditelaah</span>';
+            ->add('telaah_staf', function ($row) {
+                return '<button 
+                            class="btn btn-sm btn-primary btn-telaah" 
+                            data-toggle="modal" 
+                            data-target="#telaahModal" 
+                            data-id="' . $row->surat_masuk_id . '"
+                        >
+                            Telaah Staf
+                        </button>';
             })
             ->addNumbering('no')
             ->toJson(true);

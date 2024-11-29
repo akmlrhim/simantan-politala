@@ -17,8 +17,8 @@
 				<div class="info-box">
 					<span class="info-box-icon bg-info"><i class="fas fa-list"></i></span>
 					<div class="info-box-content">
-						<span class="info-box-text">Klasifikasi Surat</span>
 						<span class="info-box-number"><?= $kl_surat; ?></span>
+						<span class="info-box-text">Klasifikasi Surat</span>
 					</div>
 				</div>
 			</div>
@@ -27,8 +27,8 @@
 				<div class="info-box">
 					<span class="info-box-icon bg-warning"><i class="fas fa-user"></i></span>
 					<div class="info-box-content">
-						<span class="info-box-text">User</span>
 						<span class="info-box-number"><?= $user; ?></span>
+						<span class="info-box-text">User</span>
 					</div>
 				</div>
 			</div>
@@ -37,8 +37,8 @@
 				<div class="info-box">
 					<span class="info-box-icon bg-success"><i class="fas fa-envelope-open"></i></span>
 					<div class="info-box-content">
-						<span class="info-box-text">Surat Masuk</span>
 						<span class="info-box-number"><?= $surat_masuk; ?></span>
+						<span class="info-box-text">Surat Masuk</span>
 					</div>
 				</div>
 			</div>
