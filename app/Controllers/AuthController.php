@@ -2,8 +2,9 @@
 
 namespace App\Controllers;
 
-use App\Controllers\BaseController;
 use App\Models\User;
+use ReCaptcha\Recaptcha;
+use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 
 class AuthController extends BaseController
@@ -24,6 +25,18 @@ class AuthController extends BaseController
 
     public function authenticate()
     {
+        $recaptchaResponse = $this->request->getPost('g-recaptcha-response');
+
+        $recaptcha = new Recaptcha('6LdRsI8qAAAAAC7XtjjW2zwYCr3hK-xpOCMUcxYx');
+        $result = $recaptcha->verify($recaptchaResponse);
+
+        if (!$result->isSuccess()) {
+            return redirect()->back()->withInput()->with('toastr', [
+                'type' => 'error',
+                'message' => 'Validasi reCAPTCHA gagal. Silakan coba lagi.'
+            ]);
+        }
+
         $validation = $this->validate([
             'username' => [
                 'label' => 'Username',
@@ -40,7 +53,6 @@ class AuthController extends BaseController
                 ]
             ],
         ]);
-
         if (!$validation) {
             return redirect()->back()->withInput()->with('toastr', [
                 'type' => 'error',

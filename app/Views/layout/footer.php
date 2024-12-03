@@ -1,4 +1,4 @@
-<footer class="main-footer mt-2 text-sm">
+<footer class="main-footer mt-2 text-sm d-none">
 	<div class="float-right d-none d-sm-inline">
 		Simantan - 2024
 	</div>

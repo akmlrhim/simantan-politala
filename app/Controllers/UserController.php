@@ -45,11 +45,11 @@ class UserController extends BaseController
                 </button>';
                 })
                 ->add('role', function ($row) {
-                    return ($row->role == 'admin')
+                    return ($row->role == 'Admin')
                         ? '<span class="badge badge-danger">Admin</span>'
-                        : (($row->role == 'ketua-jurusan')
+                        : (($row->role == 'Ketua Jurusan')
                             ? '<span class="badge badge-warning">Ketua Jurusan</span>'
-                            : (($row->role == 'direktur')
+                            : (($row->role == 'Direktur')
                                 ? '<span class="badge badge-success">Direktur</span>'
                                 : '<span class="badge badge-secondary">User</span>')
                         );

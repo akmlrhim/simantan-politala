@@ -46,7 +46,7 @@ class SuratMasuk extends Migration
             'status_telaah' => [
                 'type' => 'VARCHAR',
                 'constraint' => 100,
-                'default' => 'belum_ditelaah',
+                'default' => 'Belum Ditelaah',
             ],
             'created_at' => [
                 'type' => 'DATETIME',

@@ -3,18 +3,20 @@
 namespace App\Controllers;
 
 use App\Models\SuratMasuk;
+use App\Models\TelaahStaf;
 use Hermawan\DataTables\DataTable;
 use App\Controllers\BaseController;
-use App\Models\KlasifikasiSurat;
 use CodeIgniter\HTTP\ResponseInterface;
 
 class SuratMasukController extends BaseController
 {
     protected $suratMasuk;
+    protected $telaahStaf;
 
     public function __construct()
     {
         $this->suratMasuk = new SuratMasuk();
+        $this->telaahStaf = new TelaahStaf();
     }
 
     public function index()
@@ -39,8 +41,7 @@ class SuratMasukController extends BaseController
                 surat_masuk.tanggal_surat, 
                 surat_masuk.file_surat, 
                 surat_masuk.status_telaah'
-            )
-            ->where('surat_masuk.status_telaah', 'belum_ditelaah');
+            );
 
         return DataTable::of($builder)
             ->add('action', function ($row) {
@@ -63,14 +64,11 @@ class SuratMasukController extends BaseController
                 return '<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#fileModal" data-file="' . base_url('uploads/surat-masuk/' . $row->file_surat) . '">Lihat Dokumen</button>';
             })
             ->add('telaah_staf', function ($row) {
-                return '<button 
-                            class="btn btn-sm btn-primary btn-telaah" 
-                            data-toggle="modal" 
-                            data-target="#telaahModal" 
-                            data-id="' . $row->surat_masuk_id . '"
-                        >
-                            Telaah Staf
-                        </button>';
+                if ($row->status_telaah == 'Sudah Ditelaah') {
+                    return '<a href="' . base_url('surat-masuk/telaah-staf/' . $row->surat_masuk_id) . '" class="btn btn-sm btn-primary">Telaah Staf</a>';
+                } else {
+                    return '<span class="badge badge-danger">Belum Ditelaah</span>';
+                }
             })
             ->addNumbering('no')
             ->toJson(true);
@@ -271,12 +269,36 @@ class SuratMasukController extends BaseController
         ]);
     }
 
-    public function file($id)
+    public function telaahStaf($id)
     {
         $data = [
-            'title' => 'File Surat Masuk',
-            'surat_masuk' => $this->suratMasuk->find($id),
+            'title' => 'Data Telaah Staf',
+            'telaah_staf' => $this->telaahStaf->where('surat_masuk_id', $id)
+                ->join('surat_masuk', 'surat_masuk.id = telaah_staf.surat_masuk_id', 'left')
+                ->first()
         ];
-        return view('surat-masuk/file_surat', $data);
+
+        if (!$data['telaah_staf']) {
+            return redirect()->to(base_url('surat-masuk'))->with('toastr', [
+                'type' => 'warning',
+                'message' => 'Surat Masuk belum ditelaah.'
+            ]);
+        }
+
+        return view('surat-masuk/telaah-staf', $data);
+    }
+
+    public function telaahStafPdf($id)
+    {
+        $data['telaah_staf'] = $this->telaahStaf->where('surat_masuk_id', $id)->first();
+
+        if (!$data['telaah_staf']) {
+            return redirect()->to(base_url('surat-masuk'))->with('toastr', [
+                'type' => 'warning',
+                'message' => 'Data tidak ditemukan.'
+            ]);
+        }
+
+        return view('surat-masuk/telaah-staf-pdf', $data);
     }
 }

@@ -20,6 +20,8 @@ $routes->group('surat-masuk', ['filter' => ['auth']], function ($routes) {
 	$routes->get('(:num)', 'SuratMasukController::edit/$1');
 	$routes->put('(:num)', 'SuratMasukController::update/$1');
 	$routes->delete('(:num)', 'SuratMasukController::delete/$1');
+	$routes->get('telaah-staf/(:num)', 'SuratMasukController::telaahStaf/$1');
+	$routes->get('telaah-staf/pdf/(:num)', 'SuratMasukController::telaahStafPdf/$1');
 });
 
 $routes->group('surat-keluar', function ($routes) {
@@ -36,6 +38,16 @@ $routes->group('klasifikasi-surat', function ($routes) {
 	$routes->get('(:num)', 'KlasifikasiSuratController::edit/$1');
 	$routes->put('(:num)', 'KlasifikasiSuratController::update/$1');
 	$routes->delete('(:num)', 'KlasifikasiSuratController::delete/$1');
+});
+
+$routes->group('telaah-staf', function ($routes) {
+	$routes->get('/', 'TelaahStafController::index');
+	$routes->get('show', 'TelaahStafController::show');
+	$routes->get('surat-masuk/show', 'TelaahStafController::suratMasuk');
+	$routes->get('surat-masuk/(:num)', 'TelaahStafController::create/$1');
+	$routes->get('surat-masuk/edit/(:num)', 'TelaahStafController::edit/$1');
+	$routes->post('surat-masuk', 'TelaahStafController::save');
+	$routes->put('surat-masuk/(:num)', 'TelaahStafController::update/$1');
 });
 
 $routes->group('user', static function ($routes) {

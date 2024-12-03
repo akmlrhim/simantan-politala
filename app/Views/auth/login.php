@@ -12,12 +12,21 @@
 	<link rel="stylesheet" href="<?= base_url(); ?>fontawesome-free/css/all.min.css">
 	<link rel="stylesheet" href="<?= base_url(); ?>css/adminlte.min.css">
 	<link rel="stylesheet" href="<?= base_url(); ?>plugins/toastr/toastr.min.css">
+
+	<style>
+		.g-recaptcha {
+			width: 100% !important;
+			align-items: center;
+			transform: scale(1.05);
+			transform-origin: 0 0;
+		}
+	</style>
 </head>
 
 <body class="hold-transition login-page">
 	<div class="login-box">
 		<div class="login-logo">
-			<b>SIMANTAN</b>
+			<b class="text-primary font-weight-bold">SIMANTAN</b>
 		</div>
 		<div class="card">
 			<div class="card-body login-card-body">
@@ -43,6 +52,7 @@
 							</button>
 						</div>
 					</div>
+					<div class="g-recaptcha mb-3" data-sitekey="6LdRsI8qAAAAAIe9MWjY_vu5S6BzFGkAeUnHra46"></div>
 					<div class="row">
 						<div class="col-12">
 							<button type="submit" class="btn btn-primary btn-block">Login</button>
@@ -65,6 +75,7 @@
 	<script src="<?= base_url('js'); ?>/adminlte.min.js"></script>
 	<script src="<?= base_url(); ?>plugins/toastr/toastr.min.js"></script>
 
+	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 	<script>
 		document.getElementById('togglePassword').addEventListener('click', function() {

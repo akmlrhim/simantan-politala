@@ -18,11 +18,12 @@
 	<link rel="stylesheet" href="<?= base_url(); ?>plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
 	<link rel="stylesheet" href="<?= base_url(); ?>plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 	<link rel="stylesheet" href="<?= base_url(); ?>plugins/toastr/toastr.min.css">
+	<link rel="stylesheet" href="<?= base_url(); ?>plugins/summernote/summernote-bs4.css">
 
 
 </head>
 
-<body class="sidebar-mini layout-footer-fixed">
+<body class="sidebar-mini layout-footer-fixed layout-fixed layout-navbar-fixed">
 	<div class="wrapper">
 
 		<?= $this->include('layout/navbar'); ?>
@@ -73,7 +74,7 @@
 	<script src="<?= base_url(); ?>plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 	<script src="<?= base_url(); ?>plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
 	<script src="<?= base_url(); ?>plugins/toastr/toastr.min.js"></script>
-
+	<script src="<?= base_url(); ?>plugins/summernote/summernote-bs4.js"></script>
 	<?= $this->renderSection('script'); ?>
 
 	<script>
