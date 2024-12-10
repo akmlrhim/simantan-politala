@@ -1,43 +1,34 @@
-<!DOCTYPE html>
 <html>
 
 <head>
 	<title>Surat Keputusan</title>
 	<style>
-		/* CSS Styles */
+		table {
+			width: 100%;
+			border-collapse: collapse;
+		}
+
+		table,
+		th,
+		td {
+			border: 1px solid black;
+		}
+
+		th,
+		td {
+			padding: 10px;
+			text-align: left;
+		}
+
 		body {
-			font-family: Arial, sans-serif;
+			font-family: 'Times New Roman', Times, serif, sans-serif;
+			line-height: 1.2;
 			margin: 0;
 			padding: 0;
 		}
 
-		.container {
-			max-width: 800px;
-			margin: 0 auto;
-			padding: 20px;
-		}
-
-		.header {
-			text-align: center;
-			margin-bottom: 20px;
-		}
-
-		.header h1 {
-			margin: 0;
-		}
-
-		.content {
-			padding: 20px;
-			border: 1px solid #ccc;
-		}
-
-		.signature {
-			display: flex;
-			justify-content: flex-end;
-			margin-top: 20px;
-		}
-
-		.signature p {
+		p {
+			line-height: 1.2;
 			margin: 0;
 		}
 	</style>
@@ -45,27 +36,19 @@
 
 <body>
 	<div class="container">
-		<div class="header">
-			<h1>Surat Keputusan</h1>
+		<h1>Surat Keputusan</h1>
+		<p><strong>Nomor:</strong> <?= $telaah_staf->nomor_surat; ?></p>
+		<p><strong>Tentang:</strong> <?= $telaah_staf->perihal; ?></p>
+		<br>
+		<p><strong>Isi:</strong></p>
+		<div>
+			<?= $telaah_staf->isi_surat; ?>
 		</div>
-		<div class="content">
-			<p>Nomor: 123/SK/2023</p>
-			<p>Tentang: Pengangkatan Pegawai Baru</p>
-			<br>
-			<p>Dengan ini, kami menyatakan bahwa:</p>
-			<ul>
-				<li>Nama: John Doe</li>
-				<li>Jabatan: Manager</li>
-				<li>Bagian: Keuangan</li>
-			</ul>
-			<br>
-			<p>Keputusan ini berlaku mulai tanggal 1 Januari 2023.</p>
-			<div class="signature">
-				<p>Hormat kami,</p>
-				<br>
-				<br>
-				<p>Direktur</p>
-			</div>
+		<br>
+		<p>Keputusan ini berlaku mulai tanggal 1 Januari 2023.</p>
+		<div class="signature">
+			<p>Hormat kami,</p>
+			<p><strong>Direktur</strong></p>
 		</div>
 	</div>
 </body>

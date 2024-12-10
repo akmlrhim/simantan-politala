@@ -51,8 +51,8 @@ class TelaahStafController extends BaseController
             ->add('action', function ($row) {
                 if ($row->status_telaah == 'Sudah Ditelaah') {
                     return '
-                <a class="btn btn-warning btn-sm" href="' . base_url('telaah-staf/surat-masuk/edit/' . $row->telaah_staf_id) . '">
-                    Edit Telaah
+                <a class="btn btn-warning btn-xs" href="' . base_url('telaah-staf/surat-masuk/edit/' . $row->telaah_staf_id) . '">
+                    Edit
                 </a>';
                 } else {
                     return 'T';
@@ -65,13 +65,13 @@ class TelaahStafController extends BaseController
                 return date('d-m-Y', strtotime($row->tanggal_surat));
             })
             ->add('file_surat', function ($row) {
-                return '<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#fileModal" data-file="' . base_url('uploads/surat-masuk/' . $row->file_surat) . '">Lihat Dokumen</button>';
+                return '<button class="btn btn-xs btn-primary" data-toggle="modal" data-target="#fileModal" data-file="' . base_url('uploads/surat-masuk/' . $row->file_surat) . '">Lihat Dokumen</button>';
             })
             ->add('telaah_staf', function ($row) {
                 if ($row->status_telaah == 'Belum Ditelaah') {
                     return '<a class="btn btn-warning btn-sm" href="' . base_url('telaah-staf/surat-masuk/' . $row->surat_masuk_id) . '">Telaah Surat</a>';
                 } else {
-                    return '<span class="badge badge-success"><i class="fas fa-check-circle"></i> Sudah Ditelaah</span>';
+                    return '<span class="badge badge-success"><i class="fas fa-check-circle"></i>Sudah Ditelaah</span>';
                 }
             })
             ->addNumbering('no')
@@ -196,6 +196,7 @@ class TelaahStafController extends BaseController
             'message' => 'Telaah Staf berhasil ditambahkan'
         ]);
     }
+
     public function edit($id)
     {
         $data['telaah_staf'] = $this->telaahStaf->find($id);

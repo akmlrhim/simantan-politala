@@ -3,7 +3,7 @@
 <?= $this->section('content'); ?>
 <section class="content">
 	<div class="container-fluid">
-		<div class="card card-primary">
+		<div class="card">
 			<div class="card-body">
 				<form action="<?= base_url('telaah-staf/surat-masuk/' . $telaah_staf->id); ?>" method="POST" enctype="multipart/form-data">
 					<?= csrf_field(); ?>
@@ -92,26 +92,43 @@
 <script>
 	$(function() {
 		$('#summernote_isi').summernote({
+			placeholder: 'Masukan Isi Surat..',
 			toolbar: [
 				['style', ['style']],
 				['font', ['bold', 'italic', 'underline', 'clear']],
 				['para', ['ul', 'ol', 'paragraph']],
+				['table', ['table']],
 			]
 		});
 
 		$('#summernote_fakta_data').summernote({
+			placeholder: 'Masukan Fakta dan Data..',
 			toolbar: [
 				['style', ['style']],
 				['font', ['bold', 'italic', 'underline', 'clear']],
 				['para', ['ul', 'ol', 'paragraph']],
-			]
+				['table', ['table']],
+			],
+			tableClassName: function() {
+				$(this).addClass('table table-bordered')
+					.attr('cellpadding', 12)
+					.attr('cellspacing', 0)
+					.attr('border', 1)
+					.css('borderCollapse', 'collapse');
+
+				$(this).find('td')
+					.css('borderColor', '#ccc')
+					.css('padding', '15px');
+			}
 		});
 
 		$('#summernote_saran_tindak').summernote({
+			placeholder: 'Masukan Saran dan Tindak..',
 			toolbar: [
 				['style', ['style']],
 				['font', ['bold', 'italic', 'underline', 'clear']],
 				['para', ['ul', 'ol', 'paragraph']],
+				['table', ['table']],
 			]
 		});
 	});

@@ -1,45 +1,72 @@
 <?= $this->extend('layout/template'); ?>
 
 <?= $this->section('content'); ?>
-<section class="content">
+<section class="content text-sm">
 	<div class="container-fluid">
 		<div class="card card-primary">
 			<div class="card-header">
 				<h3 class="card-title text-sm">Isi Form untuk Menambahkan User Baru</h3>
 			</div>
 			<div class="card-body">
-				<form action="<?= base_url('user/tambah'); ?>" method="POST">
+				<form action="<?= base_url('user/tambah'); ?>" method="POST" enctype="multipart/form-data">
 					<?= csrf_field(); ?>
 					<div class="form-group row">
 						<label for="nama_lengkap" class="col-sm-2 col-form-label">Nama Lengkap</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" placeholder="Masukan Nama Lengkap" autocomplete="off" value="<?= old('nama_lengkap'); ?>">
+							<input type="text" class="form-control form-control-sm" id="nama_lengkap" name="nama_lengkap" placeholder="Masukan Nama Lengkap" autocomplete="off" value="<?= old('nama_lengkap'); ?>">
 						</div>
 					</div>
 
 					<div class="form-group row">
 						<label for="email" class="col-sm-2 col-form-label">Email</label>
 						<div class="col-sm-10">
-							<input type="email" class="form-control" id="email" name="email" placeholder="Masukan Email" autocomplete="off" value="<?= old('email'); ?>">
+							<input type="email" class="form-control form-control-sm" id="email" name="email" placeholder="Masukan Email" autocomplete="off" value="<?= old('email'); ?>">
 						</div>
 					</div>
 
 					<div class="form-group row">
 						<label for="username" class="col-sm-2 col-form-label">Username</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="username" name="username" placeholder="Masukan Username" autocomplete="off" value="<?= old('username'); ?>">
+							<input type="text" class="form-control form-control-sm" id="username" name="username" placeholder="Masukan Username" autocomplete="off" value="<?= old('username'); ?>">
 						</div>
 					</div>
 
 					<div class="form-group row">
 						<label for="password" class="col-sm-2 col-form-label">Password</label>
-						<div class="col-sm-10 input-group">
-							<input type="password" class="form-control" id="password" name="password" placeholder="Masukan Password" autocomplete="off" value="<?= old('password'); ?>">
-							<div class="input-group-append">
-								<button class="btn btn-outline-secondary" type="button" id="togglePassword">
-									<i class="fa fa-eye" id="eyeIcon"></i>
-								</button>
+						<div class="col-sm-10">
+							<div class="input-group">
+								<input
+									type="password"
+									class="form-control form-control-sm"
+									id="password"
+									name="password"
+									placeholder="Masukan Password"
+									autocomplete="off"
+									value="<?= old('password'); ?>">
 							</div>
+							<div class="form-check mt-2">
+								<input
+									class="form-check-input"
+									type="checkbox"
+									id="showPassword"
+									style="cursor: pointer;">
+								<label class="form-check-label text-xs" for="showPassword">
+									Tampilkan Password
+								</label>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="form-group row">
+						<label for="jabatan" class="col-sm-2 col-form-label">Jabatan</label>
+						<div class="col-sm-10">
+							<select class="form-control form-control-sm" id="jabatan" name="jabatan_id">
+								<option value="" <?= old('jabatan_id') === '' ? 'selected' : '' ?>>-- Pilih Jabatan --</option>
+								<?php foreach ($jabatan as $row => $key) : ?>
+									<option value="<?= $key->id; ?>" <?= old('jabatan_id') === $key->id ? 'selected' : '' ?>><?= $key->jabatan; ?></option>
+								<?php endforeach; ?>
+							</select>
 						</div>
 					</div>
 
@@ -47,13 +74,22 @@
 					<div class="form-group row">
 						<label for="role" class="col-sm-2 col-form-label">Role</label>
 						<div class="col-sm-10">
-							<select class="form-control" id="role" name="role">
+							<select class="form-control form-control-sm" id="role" name="role">
 								<option value="" <?= old('role') === '' ? 'selected' : '' ?>>-- Pilih Role --</option>
-								<option value="admin" <?= old('role') === 'admin' ? 'selected' : '' ?>>Admin</option>
-								<option value="ketua-jurusan" <?= old('role') === 'ketua-jurusan' ? 'selected' : '' ?>>Ketua Jurusan</option>
-								<option value="direktur" <?= old('role') === 'direktur' ? 'selected' : '' ?>>Direktur</option>
+								<option value="Admin" <?= old('role') === 'admin' ? 'selected' : '' ?>>Admin</option>
+								<option value="Ketua Jurusan" <?= old('role') === 'ketua-jurusan' ? 'selected' : '' ?>>Ketua Jurusan</option>
+								<option value="Direktur" <?= old('role') === 'direktur' ? 'selected' : '' ?>>Direktur</option>
 							</select>
+						</div>
+					</div>
 
+					<div class="form-group row align-items-center">
+						<label for="customFile" class="col-sm-2 col-form-label">Upload Foto Profil (Opsional)</label>
+						<div class="col-sm-10">
+							<div class="custom-file">
+								<input type="file" class="custom-file-input form-control-sm" id="customFile" name="foto">
+								<label class="custom-file-label" for="customFile">Choose file</label>
+							</div>
 						</div>
 					</div>
 
@@ -72,20 +108,15 @@
 
 <?= $this->section('script'); ?>
 <script>
-	document.getElementById('togglePassword').addEventListener('click', function() {
-		var passwordField = document.getElementById('password');
-		var eyeIcon = document.getElementById('eyeIcon');
+	document.getElementById('showPassword').addEventListener('change', function() {
+		const passwordInput = document.getElementById('password');
+		passwordInput.type = this.checked ? 'text' : 'password';
+	});
 
-		if (passwordField.type === 'password') {
-			passwordField.type = 'text';
-			eyeIcon.classList.remove('fa-eye');
-			eyeIcon.classList.add('fa-eye-slash');
-
-		} else {
-			passwordField.type = 'password';
-			eyeIcon.classList.remove('fa-eye-slash');
-			eyeIcon.classList.add('fa-eye');
-		}
+	document.querySelector('.custom-file-input').addEventListener('change', function(e) {
+		const fileName = e.target.files[0]?.name || 'Choose file';
+		const label = e.target.nextElementSibling;
+		label.textContent = fileName;
 	});
 </script>
 <?= $this->endSection(); ?>

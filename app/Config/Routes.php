@@ -8,7 +8,7 @@ use CodeIgniter\Router\RouteCollection;
 
 $routes->get('/', 'AuthController::index');
 $routes->post('authenticate', 'AuthController::authenticate');
-$routes->post('logout', 'AuthController::logout');
+$routes->post('logout', 'AuthController::logout', ['filter' => ['auth']]);
 
 $routes->get('dashboard', 'DashboardController::index');
 
@@ -29,6 +29,7 @@ $routes->group('surat-keluar', function ($routes) {
 	$routes->get('show', 'SuratKeluarController::show');
 	$routes->get('tambah', 'SuratKeluarController::create');
 });
+
 
 $routes->group('klasifikasi-surat', function ($routes) {
 	$routes->get('/', 'KlasifikasiSuratController::index');

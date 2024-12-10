@@ -25,18 +25,6 @@ class AuthController extends BaseController
 
     public function authenticate()
     {
-        $recaptchaResponse = $this->request->getPost('g-recaptcha-response');
-
-        $recaptcha = new Recaptcha('6LdRsI8qAAAAAC7XtjjW2zwYCr3hK-xpOCMUcxYx');
-        $result = $recaptcha->verify($recaptchaResponse);
-
-        if (!$result->isSuccess()) {
-            return redirect()->back()->withInput()->with('toastr', [
-                'type' => 'error',
-                'message' => 'Validasi reCAPTCHA gagal. Silakan coba lagi.'
-            ]);
-        }
-
         $validation = $this->validate([
             'username' => [
                 'label' => 'Username',
@@ -60,6 +48,17 @@ class AuthController extends BaseController
             ]);
         }
 
+        $recaptchaResponse = $this->request->getPost('g-recaptcha-response');
+        $recaptcha = new Recaptcha('6LdRsI8qAAAAAC7XtjjW2zwYCr3hK-xpOCMUcxYx');
+        $result = $recaptcha->verify($recaptchaResponse);
+
+        if (!$result->isSuccess()) {
+            return redirect()->back()->withInput()->with('toastr', [
+                'type' => 'error',
+                'message' => 'Validasi reCAPTCHA gagal. Silakan coba lagi.'
+            ]);
+        }
+
         $username = esc($this->request->getPost('username'));
         $password = esc($this->request->getPost('password'));
 
@@ -73,7 +72,9 @@ class AuthController extends BaseController
                     'nama_lengkap' => $user->nama_lengkap,
                     'username' => $user->username,
                     'role' => $user->role,
-                    'email' => $user->email
+                    'email' => $user->email,
+                    'jabatan_id' => $user->jabatan_id,
+                    'foto' => $user->foto,
                 ]);
                 return redirect()->to(base_url('/dashboard'))->with('toastr', [
                     'type' => 'success',
@@ -101,7 +102,9 @@ class AuthController extends BaseController
             'nama_lengkap',
             'username',
             'role',
-            'email'
+            'email',
+            'jabatan_id',
+            'foto',
         ]);
 
         return redirect()->to(base_url('/'))->with('toastr', [

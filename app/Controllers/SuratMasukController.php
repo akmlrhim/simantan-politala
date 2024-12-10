@@ -46,12 +46,19 @@ class SuratMasukController extends BaseController
         return DataTable::of($builder)
             ->add('action', function ($row) {
                 return '
-            <a href="' . base_url('surat-masuk/download/' . $row->surat_masuk_id) . '" class="btn btn-success btn-sm"><i class="fa fa-print"></i></a>
-            <a class="btn btn-warning btn-sm" href="' . base_url('surat-masuk/' . $row->surat_masuk_id) . '"><i class="fas fa-pencil-alt"></i></a>
-            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal' . $row->surat_masuk_id . '">
-                <i class="fas fa-trash"></i>
-            </button>';
+            <div class="btn-group" role="group" aria-label="Aksi">
+                <a href="' . base_url('surat-masuk/download/' . $row->surat_masuk_id) . '" class="btn btn-success btn-sm">
+                    <i class="fa fa-print"></i>
+                </a>
+                <a href="' . base_url('surat-masuk/' . $row->surat_masuk_id) . '" class="btn btn-warning btn-sm">
+                    <i class="fas fa-pencil-alt"></i>
+                </a>
+                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal' . $row->surat_masuk_id . '">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>';
             })
+
             ->add('tanggal_diterima', function ($row) {
                 $tanggal = $row->tanggal_diterima;
                 return date('d-m-Y', strtotime($tanggal));
@@ -290,7 +297,9 @@ class SuratMasukController extends BaseController
 
     public function telaahStafPdf($id)
     {
-        $data['telaah_staf'] = $this->telaahStaf->where('surat_masuk_id', $id)->first();
+        $data['telaah_staf'] = $this->telaahStaf->where('surat_masuk_id', $id)
+            ->join('surat_masuk', 'surat_masuk.id = telaah_staf.surat_masuk_id', 'left')
+            ->first();
 
         if (!$data['telaah_staf']) {
             return redirect()->to(base_url('surat-masuk'))->with('toastr', [

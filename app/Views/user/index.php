@@ -6,7 +6,7 @@
 		<div class="card">
 			<div class="card-body">
 				<div class="d-flex justify-content-end">
-					<a href="<?= base_url('surat-masuk/tambah'); ?>" class="btn btn-primary mb-3">Tambah Data</a>
+					<a href="<?= base_url('user/tambah'); ?>" class="btn btn-primary mb-3">Tambah Data</a>
 				</div>
 				<div class="table-responsive-sm">
 					<table class="table table-bordered text-center table-sm text-sm" id="tables" style="width: 100%;">
@@ -17,6 +17,7 @@
 								<th scope="col">Email</th>
 								<th scope="col">Username</th>
 								<th scope="col">Role</th>
+								<th scope="col">Jabatan</th>
 								<th scope="col">Aksi</th>
 							</tr>
 						</thead>
@@ -82,6 +83,9 @@
 				},
 				{
 					data: 'role'
+				},
+				{
+					data: 'jabatan'
 				},
 				{
 					data: 'action',

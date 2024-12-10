@@ -18,7 +18,7 @@
 	<link rel="stylesheet" href="<?= base_url(); ?>plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
 	<link rel="stylesheet" href="<?= base_url(); ?>plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 	<link rel="stylesheet" href="<?= base_url(); ?>plugins/toastr/toastr.min.css">
-	<link rel="stylesheet" href="<?= base_url(); ?>plugins/summernote/summernote-bs4.css">
+	<link rel="stylesheet" href="<?= base_url(); ?>plugins/summernote-0.9.0/summernote-bs4.min.css">
 
 
 </head>
@@ -74,7 +74,10 @@
 	<script src="<?= base_url(); ?>plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 	<script src="<?= base_url(); ?>plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
 	<script src="<?= base_url(); ?>plugins/toastr/toastr.min.js"></script>
-	<script src="<?= base_url(); ?>plugins/summernote/summernote-bs4.js"></script>
+	<script src="<?= base_url(); ?>plugins/summernote-0.9.0/summernote-bs4.min.js"></script>
+
+	<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
+
 	<?= $this->renderSection('script'); ?>
 
 	<script>

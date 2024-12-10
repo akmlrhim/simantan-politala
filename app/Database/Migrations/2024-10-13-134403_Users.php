@@ -37,6 +37,12 @@ class Users extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 20,
             ],
+            'jabatan_id' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'null' => true,
+            ],
             'foto' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
@@ -53,6 +59,7 @@ class Users extends Migration
         ]);
 
         $this->forge->addKey('id', true);
+        $this->forge->addForeignKey('jabatan_id', 'jabatan', 'id', 'CASCADE', 'CASCADE');
         $this->forge->createTable('users');
     }
 

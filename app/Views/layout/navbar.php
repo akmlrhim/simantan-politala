@@ -8,7 +8,7 @@
 				<li class="nav-item dropdown">
 					<span class="nav-link d-flex align-items-center">
 						<img
-							src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+							src="<?= base_url('uploads/foto-profil/' . session()->get('foto')); ?>"
 							alt="Foto Profil"
 							class="rounded-circle"
 							style="width: 40px; height: 40px; object-fit: cover; margin-right: 10px;">

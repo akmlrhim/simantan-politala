@@ -33,8 +33,9 @@ class UserController extends BaseController
 
             $db = db_connect();
             $builder = $db->table('users')
-                ->select('id, nama_lengkap, email, username, role')
-                ->where('id !=', $isLoggedIn);
+                ->select('users.id, nama_lengkap, email, username, role, jabatan')
+                ->join('jabatan', 'jabatan.id = users.jabatan_id')
+                ->where('users.id !=', $isLoggedIn);
 
             return DataTable::of($builder)
                 ->add('action', function ($row) {
@@ -57,17 +58,12 @@ class UserController extends BaseController
                 ->addNumbering('no')
                 ->toJson(true);
         }
-
-        $data = [
-            'title' => 'Detail User',
-            'user' => $this->user->first()
-        ];
-        return view('user/detail', $data);
     }
 
     public function create()
     {
         $data['title'] = 'Tambah User';
+        $data['jabatan'] = (new \App\Models\Jabatan())->findAll();
         return view('user/create', $data);
     }
 
@@ -97,6 +93,13 @@ class UserController extends BaseController
                     'is_unique' => '{field} sudah terdaftar'
                 ],
             ],
+            'jabatan_id' => [
+                'label' => 'Jabatan',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} harus diisi'
+                ]
+            ],
             'password' => [
                 'label' => 'Password',
                 'rules' => 'required|min_length[8]',
@@ -111,6 +114,14 @@ class UserController extends BaseController
                 'errors' => [
                     'required' => '{field} harus diisi'
                 ]
+            ],
+            'foto' => [
+                'label' => 'Foto Profil',
+                'rules' => 'is_image[foto]|mime_in[foto,image/jpg,image/jpeg,image/png]',
+                'errors' => [
+                    'is_image' => '{field} harus berupa gambar',
+                    'mime_in' => '{field} harus JPEG/JPG/PNG'
+                ]
             ]
         ]);
 
@@ -121,12 +132,24 @@ class UserController extends BaseController
             ]);
         }
 
+        $fileFoto = $this->request->getFile('foto');
+        if ($fileFoto->getError() == 4) {
+            $fileName = "default.jpeg";
+        }
+
+        if ($fileFoto->isValid() && !$fileFoto->hasMoved()) {
+            $fileName = $fileFoto->getRandomName();
+            $fileFoto->move('uploads/foto-profil', $fileName);
+        }
+
         $data = [
             'nama_lengkap' => esc($this->request->getPost('nama_lengkap')),
             'email' => esc($this->request->getPost('email')),
             'username' => esc($this->request->getPost('username')),
             'password' => password_hash(esc($this->request->getVar('password')), PASSWORD_BCRYPT),
             'role' => esc($this->request->getPost('role')),
+            'jabatan_id' => esc($this->request->getPost('jabatan_id')),
+            'foto' => $fileName
         ];
 
         $this->user->insert($data);
@@ -140,7 +163,8 @@ class UserController extends BaseController
     {
         $data = [
             'title' => 'Edit User',
-            'user' => $this->user->find($id)
+            'user' => $this->user->find($id),
+            'jabatan' => (new \App\Models\Jabatan())->findAll()
         ];
         return view('user/edit', $data);
     }
@@ -175,6 +199,21 @@ class UserController extends BaseController
                 'errors' => [
                     'required' => '{field} harus diisi'
                 ]
+            ],
+            'jabatan_id' => [
+                'label' => 'Jabatan',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} harus diisi'
+                ]
+            ],
+            'foto' => [
+                'label' => 'Foto Profil',
+                'rules' => 'is_image[foto]|mime_in[foto,image/jpg,image/jpeg,image/png]',
+                'errors' => [
+                    'is_image' => '{field} harus berupa gambar',
+                    'mime_in' => '{field} harus JPEG/JPG/PNG'
+                ]
             ]
         ]);
 
@@ -185,11 +224,23 @@ class UserController extends BaseController
             ]);;
         }
 
+        $fileFoto = $this->request->getFile('foto');
+        if ($fileFoto->getError() == 4) {
+            $fileName = "default.png";
+        }
+
+        if ($fileFoto->isValid() && !$fileFoto->hasMoved()) {
+            $fileName = $fileFoto->getRandomName();
+            $fileFoto->move('uploads/foto-profil', $fileName);
+        }
+
         $data = [
             'nama_lengkap' => esc($this->request->getPost('nama_lengkap')),
             'email' => esc($this->request->getPost('email')),
             'username' => esc($this->request->getPost('username')),
             'role' => esc($this->request->getPost('role')),
+            'jabatan_id' => esc($this->request->getPost('jabatan_id')),
+            'foto' => $fileName
         ];
 
         $this->user->update($id, $data);
@@ -202,6 +253,9 @@ class UserController extends BaseController
 
     public function delete($id)
     {
+        $user = $this->user->find($id);
+        $user->foto != "default.jpeg" ? unlink('uploads/foto-profil/' . $user->foto) : null;
+
         $this->user->delete($id);
         return redirect()->to(base_url('user'))->with('toastr', [
             'type' => 'success',

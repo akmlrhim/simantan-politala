@@ -61,10 +61,10 @@
 				</form>
 
 				<p class="mb-1 mt-3">
-					<a href="forgot-password.html">Lupa password?</a>
+					<a href="forgot-password.html" class="text-sm">Lupa password?</a>
 				</p>
 				<p class="mb-0">
-					<a href="register.html" class="text-center">Belum punya akun, register ?</a>
+					<a href="register.html" class="text-center text-sm">Belum punya akun, register ?</a>
 				</p>
 			</div>
 		</div>

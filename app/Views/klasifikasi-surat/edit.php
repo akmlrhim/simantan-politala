@@ -3,10 +3,7 @@
 <?= $this->section('content'); ?>
 <section class="content">
 	<div class="container-fluid">
-		<div class="card card-primary">
-			<div class="card-header">
-				<h3 class="card-title text-sm">Isi Form untuk memperbarui data klasifikasi surat yang ada !</h3>
-			</div>
+		<div class="card">
 			<div class="card-body">
 				<form action="<?= base_url('klasifikasi-surat/' . $kl_surat->id); ?>" method="POST">
 					<?= csrf_field(); ?>
