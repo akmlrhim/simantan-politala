@@ -59,12 +59,12 @@
 					<div class="form-row">
 						<div class="form-group col-md-12">
 							<label for="summernote_isi">II. Isi</label>
-							<textarea name="isi_surat" id="summernote_isi" class="form-control"></textarea>
+							<textarea name="isi_surat" id="summernote_isi" class="form-control form-control-sm"></textarea>
 						</div>
 
 						<div class="form-group col-md-12">
 							<label for="summernote_fakta_data">III. Fakta dan Data</label>
-							<textarea name="fakta_dan_data" id="summernote_fakta_data" class="form-control"></textarea>
+							<textarea name="fakta_dan_data" id="summernote_fakta_data" class="form-control form-control-sm"></textarea>
 						</div>
 
 						<div class="form-group col-md-12">
@@ -98,17 +98,6 @@
 				['para', ['ul', 'ol', 'paragraph']],
 				['table', ['table']],
 			],
-			tableClassName: function() {
-				$(this).addClass('table table-bordered')
-					.attr('cellpadding', 12)
-					.attr('cellspacing', 0)
-					.attr('border', 1)
-					.css('borderCollapse', 'collapse');
-
-				$(this).find('td')
-					.css('borderColor', '#ccc')
-					.css('padding', '15px');
-			}
 		});
 
 		$('#summernote_fakta_data').summernote({

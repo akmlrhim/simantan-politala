@@ -10,7 +10,8 @@ $routes->get('/', 'AuthController::index');
 $routes->post('authenticate', 'AuthController::authenticate');
 $routes->post('logout', 'AuthController::logout', ['filter' => ['auth']]);
 
-$routes->get('dashboard', 'DashboardController::index');
+$routes->get('dashboard', 'DashboardController::index', ['filter' => ['auth']]);
+
 
 $routes->group('surat-masuk', ['filter' => ['auth']], function ($routes) {
 	$routes->get('/', 'SuratMasukController::index');
@@ -24,12 +25,15 @@ $routes->group('surat-masuk', ['filter' => ['auth']], function ($routes) {
 	$routes->get('telaah-staf/pdf/(:num)', 'SuratMasukController::telaahStafPdf/$1');
 });
 
-$routes->group('surat-keluar', function ($routes) {
+$routes->group('surat-keluar', ['filter' => ['auth']], function ($routes) {
 	$routes->get('/', 'SuratKeluarController::index');
 	$routes->get('show', 'SuratKeluarController::show');
 	$routes->get('tambah', 'SuratKeluarController::create');
+	$routes->post('tambah', 'SuratKeluarController::save');
+	$routes->get('(:num)', 'SuratKeluarController::edit/$1');
+	$routes->put('(:num)', 'SuratKeluarController::update/$1');
+	$routes->delete('(:num)', 'SuratKeluarController::delete/$1');
 });
-
 
 $routes->group('klasifikasi-surat', function ($routes) {
 	$routes->get('/', 'KlasifikasiSuratController::index');
@@ -49,6 +53,16 @@ $routes->group('telaah-staf', function ($routes) {
 	$routes->get('surat-masuk/edit/(:num)', 'TelaahStafController::edit/$1');
 	$routes->post('surat-masuk', 'TelaahStafController::save');
 	$routes->put('surat-masuk/(:num)', 'TelaahStafController::update/$1');
+});
+
+$routes->group('jabatan', ['filter' => ['auth', 'role:admin']], function ($routes) {
+	$routes->get('/', 'JabatanController::index');
+	$routes->get('show', 'JabatanController::show');
+	$routes->get('tambah', 'JabatanController::create');
+	$routes->post('tambah', 'JabatanController::save');
+	$routes->get('(:num)', 'JabatanController::edit/$1');
+	$routes->put('(:num)', 'JabatanController::update/$1');
+	$routes->delete('(:num)', 'JabatanController::delete/$1');
 });
 
 $routes->group('user', static function ($routes) {

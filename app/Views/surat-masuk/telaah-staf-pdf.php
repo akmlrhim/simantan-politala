@@ -3,6 +3,11 @@
 <head>
 	<title>Surat Keputusan</title>
 	<style>
+		@page {
+			size: A4;
+			margin: 3cm;
+		}
+
 		table {
 			width: 100%;
 			border-collapse: collapse;
@@ -16,7 +21,7 @@
 
 		th,
 		td {
-			padding: 10px;
+			padding: 2px;
 			text-align: left;
 		}
 
@@ -35,20 +40,22 @@
 </head>
 
 <body>
-	<div class="container">
-		<h1>Surat Keputusan</h1>
-		<p><strong>Nomor:</strong> <?= $telaah_staf->nomor_surat; ?></p>
-		<p><strong>Tentang:</strong> <?= $telaah_staf->perihal; ?></p>
-		<br>
-		<p><strong>Isi:</strong></p>
-		<div>
-			<?= $telaah_staf->isi_surat; ?>
-		</div>
-		<br>
-		<p>Keputusan ini berlaku mulai tanggal 1 Januari 2023.</p>
-		<div class="signature">
-			<p>Hormat kami,</p>
-			<p><strong>Direktur</strong></p>
+	<div class="main">
+		<div class="container">
+			<h1>Surat Keputusan</h1>
+			<p><strong>Nomor:</strong> <?= $telaah_staf->nomor_surat; ?></p>
+			<p><strong>Tentang:</strong> <?= $telaah_staf->perihal; ?></p>
+			<br>
+			<p><strong>Isi:</strong></p>
+			<div>
+				<?= $telaah_staf->isi_surat; ?>
+			</div>
+			<br>
+			<p>Keputusan ini berlaku mulai tanggal 1 Januari 2023.</p>
+			<div class="signature">
+				<p>Hormat kami,</p>
+				<p><strong>Direktur</strong></p>
+			</div>
 		</div>
 	</div>
 </body>

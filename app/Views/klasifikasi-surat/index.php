@@ -3,13 +3,13 @@
 <?= $this->section('content'); ?>
 <div class="content">
 	<div class="container-fluid">
+		<div class="d-flex justify-content-end">
+			<a href="<?= base_url('klasifikasi-surat/tambah'); ?>" class="btn btn-primary mb-3">Tambah Data</a>
+		</div>
 		<div class="card">
 			<div class="card-body">
-				<div class="d-flex justify-content-end">
-					<a href="<?= base_url('klasifikasi-surat/tambah'); ?>" class="btn btn-primary mb-3">Tambah Data</a>
-				</div>
 				<div class="table-responsive-sm">
-					<table class="table table-bordered text-center table-sm text-md" id="tables" style="width: 100%;">
+					<table class="table table-bordered text-center table-sm text-sm" id="tables" style="width: 100%;">
 						<thead>
 							<tr>
 								<th scope="col">No</th>
@@ -40,7 +40,7 @@
 				</div>
 				<div class="modal-body text-center">
 					<i class="fas fa-info-circle text-danger mb-4" style="font-size: 70px;"></i>
-					<p>Apakah anda yakin untuk menghapus <?= $row->nama; ?> ?</p>
+					<p>Apakah anda yakin untuk menghapus <b><?= $row->nama; ?></b> ?</p>
 					<form action="<?= base_url('klasifikasi-surat/' . $row->id); ?>" method="POST">
 						<?= csrf_field(); ?>
 						<div class="modal-footer justify-content-center">

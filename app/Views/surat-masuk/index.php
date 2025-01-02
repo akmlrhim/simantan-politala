@@ -3,11 +3,11 @@
 <?= $this->section('content'); ?>
 <div class="content">
 	<div class="container-fluid">
+		<div class="d-flex justify-content-end">
+			<a href="<?= base_url('surat-masuk/tambah'); ?>" class="btn btn-primary mb-3">Tambah Data</a>
+		</div>
 		<div class="card">
 			<div class="card-body">
-				<div class="d-flex justify-content-end">
-					<a href="<?= base_url('surat-masuk/tambah'); ?>" class="btn btn-primary mb-3">Tambah Data</a>
-				</div>
 				<div class="table-responsive-sm">
 					<table class="table table-bordered text-center table-sm text-sm" id="tables" style="width: 100%;">
 						<thead>
@@ -64,7 +64,7 @@
 
 <!-- Modal  file -->
 <div class="modal fade" id="fileModal" tabindex="-1" role="dialog" aria-labelledby="fileModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-lg" role="document">
+	<div class="modal-dialog modal-xl" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="fileModalLabel">Lihat Dokumen</h5>

@@ -22,6 +22,7 @@ class UserSeeder extends Seeder
                 'jabatan_id'    => $faker->numberBetween(1, 2),
                 'role'          => $faker->randomElement(['Admin', 'Ketua Jurusan', 'Direktur']),
                 'foto'          => 'default.jpeg',
+                'nip'           => random_int(1000000000, 9999999999),
                 'created_at'    => Time::now(),
                 'updated_at'    => Time::now(),
             ];

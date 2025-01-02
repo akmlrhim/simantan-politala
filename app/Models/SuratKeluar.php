@@ -6,13 +6,18 @@ use CodeIgniter\Model;
 
 class SuratKeluar extends Model
 {
-    protected $table            = 'suratkeluars';
+    protected $table            = 'surat_keluar';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
-    protected $returnType       = 'array';
+    protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = [
+        'nomor_surat',
+        'tanggal_surat',
+        'klasifikasi_id',
+        'isi'
+    ];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -21,7 +26,7 @@ class SuratKeluar extends Model
     protected array $castHandlers = [];
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

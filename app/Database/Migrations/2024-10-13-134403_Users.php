@@ -37,6 +37,10 @@ class Users extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 20,
             ],
+            'nip' => [
+                'type' => 'VARCHAR',
+                'constraint' => 30,
+            ],
             'jabatan_id' => [
                 'type' => 'INT',
                 'constraint' => 11,

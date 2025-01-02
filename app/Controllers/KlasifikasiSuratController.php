@@ -20,7 +20,7 @@ class KlasifikasiSuratController extends BaseController
     public function index()
     {
         $data = [
-            'title' => 'Klasifikasi Surat',
+            'title' => 'Jenis Surat',
             'kl_surat' => $this->klasifikasi->findAll()
         ];
 

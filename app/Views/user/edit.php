@@ -4,9 +4,6 @@
 <section class="content text-sm">
 	<div class="container-fluid">
 		<div class="card card-primary">
-			<div class="card-header">1
-				<h3 class="card-title text-sm">Isi Form untuk Menambahkan User Baru</h3>
-			</div>
 			<div class="card-body">
 				<form action="<?= base_url('user/' . $user->id); ?>" method="POST" enctype="multipart/form-data">
 					<?= csrf_field(); ?>

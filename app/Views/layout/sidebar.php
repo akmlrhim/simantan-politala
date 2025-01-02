@@ -36,12 +36,6 @@
 							<p>Surat Masuk</p>
 						</a>
 					</li>
-					<li class="nav-item">
-						<a href="<?= base_url('klasifikasi-surat'); ?>" class="nav-link">
-							<i class="far fa-circle nav-icon"></i>
-							<p>Klasifikasi Surat</p>
-						</a>
-					</li>
 				</ul>
 			</li>
 
@@ -56,6 +50,20 @@
 				<a href="<?= base_url('disposisi'); ?>" class="nav-link">
 					<i class="nav-icon fas fa-envelope"></i>
 					<p>Disposisi</p>
+				</a>
+			</li>
+
+			<li class="nav-item">
+				<a href="<?= base_url('klasifikasi-surat'); ?>" class="nav-link">
+					<i class="nav-icon fas fa-list"></i>
+					<p>Jenis Surat</p>
+				</a>
+			</li>
+
+			<li class="nav-item">
+				<a href="<?= base_url('jabatan'); ?>" class="nav-link">
+					<i class="nav-icon fas fa-user-tie"></i>
+					<p>Jabatan</p>
 				</a>
 			</li>
 

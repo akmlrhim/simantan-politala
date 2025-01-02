@@ -8,8 +8,6 @@ use App\Controllers\BaseController;
 use App\Models\SuratMasuk;
 use CodeIgniter\HTTP\ResponseInterface;
 
-use function PHPUnit\Framework\isEmpty;
-
 class TelaahStafController extends BaseController
 {
 
@@ -69,9 +67,9 @@ class TelaahStafController extends BaseController
             })
             ->add('telaah_staf', function ($row) {
                 if ($row->status_telaah == 'Belum Ditelaah') {
-                    return '<a class="btn btn-warning btn-sm" href="' . base_url('telaah-staf/surat-masuk/' . $row->surat_masuk_id) . '">Telaah Surat</a>';
+                    return '<a class="btn btn-warning btn-xs" href="' . base_url('telaah-staf/surat-masuk/' . $row->surat_masuk_id) . '">Telaah Surat</a>';
                 } else {
-                    return '<span class="badge badge-success"><i class="fas fa-check-circle"></i>Sudah Ditelaah</span>';
+                    return '<span class="badge badge-success"><i class="fas fa-check-circle mr-1"></i>Sudah Ditelaah</span>';
                 }
             })
             ->addNumbering('no')

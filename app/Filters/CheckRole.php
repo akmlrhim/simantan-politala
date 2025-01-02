@@ -6,7 +6,7 @@ use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 
-class AdminFilter implements FilterInterface
+class CheckRole implements FilterInterface
 {
     /**
      * Do whatever processing this filter needs to do.
@@ -25,10 +25,12 @@ class AdminFilter implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
-        if (session()->get('role') !== 'admin') {
+        $role = session()->get('role');
+
+        if (in_array($role, $arguments)) {
             return redirect()->back()->with('toastr', [
                 'type' => 'error',
-                'message' => 'Anda Tidak Memiliki Akses!'
+                'message' => 'Anda tidak memiliki akses ke halaman ini'
             ]);
         }
     }

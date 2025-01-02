@@ -3,10 +3,7 @@
 <?= $this->section('content'); ?>
 <section class="content text-sm">
 	<div class="container-fluid">
-		<div class="card card-primary">
-			<div class="card-header">
-				<h3 class="card-title text-sm">Isi Form untuk Menambahkan User Baru</h3>
-			</div>
+		<div class="card">
 			<div class="card-body">
 				<form action="<?= base_url('user/tambah'); ?>" method="POST" enctype="multipart/form-data">
 					<?= csrf_field(); ?>
@@ -76,9 +73,9 @@
 						<div class="col-sm-10">
 							<select class="form-control form-control-sm" id="role" name="role">
 								<option value="" <?= old('role') === '' ? 'selected' : '' ?>>-- Pilih Role --</option>
-								<option value="Admin" <?= old('role') === 'admin' ? 'selected' : '' ?>>Admin</option>
-								<option value="Ketua Jurusan" <?= old('role') === 'ketua-jurusan' ? 'selected' : '' ?>>Ketua Jurusan</option>
-								<option value="Direktur" <?= old('role') === 'direktur' ? 'selected' : '' ?>>Direktur</option>
+								<option value="Admin" <?= old('role') === 'Admin' ? 'selected' : '' ?>>Admin</option>
+								<option value="Ketua Jurusan" <?= old('role') === 'Ketua Jurusan' ? 'selected' : '' ?>>Ketua Jurusan</option>
+								<option value="Direktur" <?= old('role') === 'Direktur' ? 'selected' : '' ?>>Direktur</option>
 							</select>
 						</div>
 					</div>
