@@ -35,10 +35,40 @@
 
 			<div class="col-md-3 col-sm-6 col-12">
 				<div class="info-box">
-					<span class="info-box-icon bg-success"><i class="fas fa-envelope-open"></i></span>
+					<span class="info-box-icon bg-secondary"><i class="fas fa-user-tie"></i></span>
+					<div class="info-box-content">
+						<span class="info-box-number"><?= $jabatan; ?></span>
+						<span class="info-box-text">Jabatan</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-3 col-sm-6 col-12">
+				<div class="info-box">
+					<span class="info-box-icon bg-primary"><i class="fas fa-inbox"></i></span>
 					<div class="info-box-content">
 						<span class="info-box-number"><?= $surat_masuk; ?></span>
 						<span class="info-box-text">Surat Masuk</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-3 col-sm-6 col-12">
+				<div class="info-box">
+					<span class="info-box-icon bg-success"><i class="fas fa-paper-plane"></i></span>
+					<div class="info-box-content">
+						<span class="info-box-number"><?= $surat_keluar; ?></span>
+						<span class="info-box-text">Surat Keluar</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-3 col-sm-6 col-12">
+				<div class="info-box">
+					<span class="info-box-icon bg-danger"><i class="fas fa-tags"></i></span>
+					<div class="info-box-content">
+						<span class="info-box-number"><?= $surat_keluar; ?></span>
+						<span class="info-box-text">Disposisi</span>
 					</div>
 				</div>
 			</div>

@@ -6,7 +6,7 @@
 		<div class="card">
 			<div class="card-body">
 				<div class="table-responsive-sm">
-					<table class="table table-bordered text-center table-sm text-sm" id="tables" style="width: 100%;">
+					<table class="table table-bordered text-center table-sm" id="tables" style="width: 100%;">
 						<thead>
 							<tr>
 								<th scope="col">NO</th>
@@ -47,8 +47,6 @@
 		</div>
 	</div>
 </div>
-
-
 <?= $this->endSection(); ?>
 
 <?= $this->section('script'); ?>

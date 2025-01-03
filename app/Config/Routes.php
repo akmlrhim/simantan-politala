@@ -28,6 +28,7 @@ $routes->group('surat-masuk', ['filter' => ['auth']], function ($routes) {
 $routes->group('surat-keluar', ['filter' => ['auth']], function ($routes) {
 	$routes->get('/', 'SuratKeluarController::index');
 	$routes->get('show', 'SuratKeluarController::show');
+	$routes->get('detail/(:num)', 'SuratKeluarController::detail/$1');
 	$routes->get('tambah', 'SuratKeluarController::create');
 	$routes->post('tambah', 'SuratKeluarController::save');
 	$routes->get('(:num)', 'SuratKeluarController::edit/$1');

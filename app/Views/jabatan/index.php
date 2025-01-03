@@ -4,7 +4,7 @@
 <div class="content">
 	<div class="container-fluid">
 		<div class="d-flex justify-content-end">
-			<a href="<?= base_url('klasifikasi-surat/tambah'); ?>" class="btn btn-sm btn-primary mb-3">Tambah Data</a>
+			<a href="<?= base_url('jabatan/tambah'); ?>" class="btn btn-sm btn-primary mb-3">Tambah Data</a>
 		</div>
 		<div class="card">
 			<div class="card-body">
@@ -13,9 +13,7 @@
 						<thead>
 							<tr>
 								<th scope="col">No</th>
-								<th scope="col">Kode</th>
-								<th scope="col">Nama</th>
-								<th scope="col">Keterangan</th>
+								<th scope="col">Jabatan</th>
 								<th scope="col">Aksi</th>
 							</tr>
 						</thead>
@@ -28,7 +26,7 @@
 	</div>
 </div>
 
-<?php foreach ($kl_surat as $row) : ?>
+<?php foreach ($jabatan as $row) : ?>
 	<div class="modal fade" id="modal<?= $row->id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
@@ -40,8 +38,8 @@
 				</div>
 				<div class="modal-body text-center">
 					<i class="fas fa-info-circle text-danger mb-4" style="font-size: 70px;"></i>
-					<p>Apakah anda yakin untuk menghapus <b><?= $row->nama; ?></b> ?</p>
-					<form action="<?= base_url('klasifikasi-surat/' . $row->id); ?>" method="POST">
+					<p>Apakah anda yakin untuk menghapus <b><?= $row->jabatan; ?></b> ?</p>
+					<form action="<?= base_url('jabatan/' . $row->id); ?>" method="POST">
 						<?= csrf_field(); ?>
 						<div class="modal-footer justify-content-center">
 							<input type="hidden" name="_method" value="DELETE">
@@ -64,20 +62,14 @@
 			lengthChange: true,
 			processing: true,
 			serverSide: true,
-			ajax: '<?= base_url('klasifikasi-surat/show'); ?>',
+			ajax: '<?= base_url('jabatan/show'); ?>',
 			order: [],
 			columns: [{
 					data: 'no',
 					orderable: false
 				},
 				{
-					data: 'kode'
-				},
-				{
-					data: 'nama'
-				},
-				{
-					data: 'keterangan'
+					data: 'jabatan'
 				},
 				{
 					data: 'action',

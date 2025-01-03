@@ -4,12 +4,12 @@
 <div class="content">
 	<div class="container-fluid">
 		<div class="d-flex justify-content-end">
-			<a href="<?= base_url('user/tambah'); ?>" class="btn btn-primary mb-3">Tambah Data</a>
+			<a href="<?= base_url('user/tambah'); ?>" class="btn btn-sm btn-primary mb-3">Tambah Data</a>
 		</div>
 		<div class="card">
 			<div class="card-body">
 				<div class="table-responsive-sm">
-					<table class="table table-bordered text-center table-sm text-sm" id="tables" style="width: 100%;">
+					<table class="table table-bordered text-center table-sm" id="tables" style="width: 100%;">
 						<thead>
 							<tr>
 								<th scope="col">No</th>
@@ -57,6 +57,7 @@
 	</div>
 <?php endforeach ?>
 <?= $this->endSection(); ?>
+
 
 <?= $this->section('script'); ?>
 <script>
