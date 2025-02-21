@@ -18,6 +18,8 @@ class App extends BaseConfig
 	 */
 	// public string $baseURL = 'http://simantan.test:88/';
 	public string $baseURL = 'http://localhost:8080/';
+	// public string $baseURL = 'http://192.168.193.142:8080/';
+
 
 
 	/**

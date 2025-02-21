@@ -13,8 +13,8 @@
 							class="rounded-circle"
 							style="width: 40px; height: 40px; object-fit: cover; margin-right: 10px;">
 						<div>
-							<span class="d-block text-dark text-sm"><?= session()->get('username'); ?></span>
-							<span class="text-dark text-sm">
+							<span class="d-block text-sm"><?= session()->get('username'); ?></span>
+							<span class="text-md">
 								<?=
 								session()->get('role') === 'Admin' ? '<span class="badge badge-danger">Admin</span>'
 									: (session()->get('role') === 'Ketua Jurusan' ? '<span class="badge badge-warning">Ketua Jurusan</span>'

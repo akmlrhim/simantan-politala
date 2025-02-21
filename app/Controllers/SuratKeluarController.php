@@ -7,6 +7,7 @@ use App\Models\KlasifikasiSurat;
 use Hermawan\DataTables\DataTable;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
+use Dompdf\Dompdf;
 
 class SuratKeluarController extends BaseController
 {
@@ -198,5 +199,25 @@ class SuratKeluarController extends BaseController
 			'type' => 'success',
 			'message' => 'Data berhasil dihapus'
 		]);
+	}
+
+	public function print($id)
+	{
+		$dompdf = new Dompdf();
+		$data['surat_keluar'] = $this->suratKeluar->find($id);
+
+		if ($data['surat_keluar']) {
+			$html = view('surat-keluar/pdf', $data);
+			$dompdf->loadHtml($html);
+			$dompdf->setPaper('A4', 'Potrait');
+			$dompdf->render();
+			$filename = 'Surat Keluar-' . $data['surat_keluar']->nomor_surat . '.pdf';
+			$dompdf->stream($filename, ['Attachment' => false]);
+		} else {
+			return redirect()->to(base_url('surat-keluar'))->with('toastr', [
+				'type' => 'error',
+				'message' => 'Error.'
+			]);
+		}
 	}
 }

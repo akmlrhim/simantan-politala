@@ -7,6 +7,7 @@ use App\Models\TelaahStaf;
 use Hermawan\DataTables\DataTable;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
+use Dompdf\Dompdf;
 
 class SuratMasukController extends BaseController
 {
@@ -46,7 +47,7 @@ class SuratMasukController extends BaseController
 		return DataTable::of($builder)
 			->add('action', function ($row) {
 				return '
-                <a href="' . base_url('surat-masuk/download/' . $row->surat_masuk_id) . '" class="btn btn-success btn-sm">
+                <a href="' . base_url('surat-masuk/telaah-staf/download/' . $row->surat_masuk_id) . '" class="btn btn-success btn-sm" target="_blank">
                     <i class="fa fa-print"></i>
                 </a>
                 <a href="' . base_url('surat-masuk/' . $row->surat_masuk_id) . '" class="btn btn-warning btn-sm">
@@ -308,5 +309,28 @@ class SuratMasukController extends BaseController
 		}
 
 		return view('surat-masuk/telaah-staf-pdf', $data);
+	}
+
+	public function telaahStafPrint($id)
+	{
+		$dompdf = new Dompdf();
+
+		$data['telaah_staf'] = $this->telaahStaf->where('surat_masuk_id', $id)
+			->join('surat_masuk', 'surat_masuk.id = telaah_staf.surat_masuk_id', 'left')
+			->first();
+
+		if ($data['telaah_staf']) {
+			$html = view('surat-masuk/telaah-staf-pdf', $data);
+			$dompdf->loadHtml($html);
+			$dompdf->setPaper('A4', 'Landscape');
+			$dompdf->render();
+			$filename = 'Telaah Staf-' . $data['telaah_staf']->nomor_surat . '.pdf';
+			$dompdf->stream($filename, ['Attachment' => false]);
+		} else {
+			return redirect()->to(base_url('surat-masuk'))->with('toastr', [
+				'type' => 'error',
+				'message' => 'Error.'
+			]);
+		}
 	}
 }

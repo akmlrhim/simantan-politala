@@ -23,6 +23,7 @@ $routes->group('surat-masuk', ['filter' => ['auth']], function ($routes) {
 	$routes->delete('(:num)', 'SuratMasukController::delete/$1');
 	$routes->get('telaah-staf/(:num)', 'SuratMasukController::telaahStaf/$1');
 	$routes->get('telaah-staf/pdf/(:num)', 'SuratMasukController::telaahStafPdf/$1');
+	$routes->get('telaah-staf/download/(:num)', 'SuratMasukController::telaahStafPrint/$1');
 });
 
 $routes->group('surat-keluar', ['filter' => ['auth']], function ($routes) {

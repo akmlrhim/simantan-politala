@@ -3,15 +3,14 @@
 
 <head>
 	<meta charset="utf-8">
+	<?= csrf_meta(); ?>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>SIMANTAN | <?= $title; ?></title>
 
 	<?= csrf_meta(); ?>
 	<link rel="shortcut icon" href="<?= base_url(); ?>img/logo_politala.png" type="image/x-icon">
 	<link rel="stylesheet" href="<?= base_url(); ?>/css/style.css">
-	<link rel="stylesheet" href="<?= base_url(); ?>fontawesome-free/css/all.min.css">
 	<link rel="stylesheet" href="<?= base_url(); ?>css/adminlte.min.css">
-	<link rel="stylesheet" href="<?= base_url(); ?>plugins/toastr/toastr.min.css">
 
 	<style>
 		.g-recaptcha {
@@ -23,6 +22,8 @@
 	</style>
 </head>
 
+
+
 <body class="hold-transition login-page">
 	<div class="login-box">
 		<div class="login-logo">
@@ -33,26 +34,28 @@
 
 				<p class="login-box-msg">Silahkan login untuk memulai sesi</p>
 
+				<?= $this->include('auth/partials/alert'); ?>
 
 				<form action="<?= base_url('authenticate'); ?>" method="POST">
 					<?= csrf_field(); ?>
-					<div class="input-group mb-3">
-						<input type="text" class="form-control" placeholder="Username" name="username" value="<?= old('username'); ?>" autocomplete="off">
-						<div class="input-group-append">
-							<div class="input-group-text">
-								<span class="fas fa-at"></span>
+					<div class="mb-3">
+						<input type="text" class="form-control <?= session('errors.username') ? 'is-invalid' : '' ?>" placeholder="Username" name="username" value="<?= old('username'); ?>" autocomplete="off">
+						<?php if (session('errors.username')): ?>
+							<div class="invalid-feedback">
+								<?= session('errors.username') ?>
 							</div>
-						</div>
+						<?php endif; ?>
 					</div>
-					<div class="input-group mb-3">
-						<input id="password" type="password" class="form-control" placeholder="Password" name="password" value="<?= old('password'); ?>" autocomplete="off">
-						<div class="input-group-append">
-							<button type="button" class="btn btn-secondary" id="togglePassword">
-								<i class="fas fa-eye"></i>
-							</button>
-						</div>
+					<div class="mb-3">
+						<input id="password" type="password" class="form-control <?= session('errors.username') ? 'is-invalid' : '' ?>" placeholder="Password" name="password" autocomplete="off">
+						<?php if (session('errors.password')): ?>
+							<div class="invalid-feedback">
+								<?= session('errors.password') ?>
+							</div>
+						<?php endif; ?>
 					</div>
-					<div class="g-recaptcha mb-3" data-sitekey="6LdRsI8qAAAAAIe9MWjY_vu5S6BzFGkAeUnHra46"></div>
+					<div class="g-recaptcha mb-3" data-sitekey="<?= esc($site_key); ?>"></div>
+
 					<div class="row">
 						<div class="col-12">
 							<button type="submit" class="btn btn-primary btn-block">Login</button>
@@ -73,35 +76,12 @@
 	<script src="<?= base_url('js'); ?>/jquery.min.js"></script>
 	<script src="<?= base_url('js'); ?>/bootstrap.bundle.min.js"></script>
 	<script src="<?= base_url('js'); ?>/adminlte.min.js"></script>
-	<script src="<?= base_url(); ?>plugins/toastr/toastr.min.js"></script>
 
 	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
-	<script>
-		document.getElementById('togglePassword').addEventListener('click', function() {
-			const passwordField = document.getElementById('password');
-			const icon = this.querySelector('i');
-			if (passwordField.type === 'password') {
-				passwordField.type = 'text';
-				icon.classList.remove('fa-eye');
-				icon.classList.add('fa-eye-slash');
-			} else {
-				passwordField.type = 'password';
-				icon.classList.remove('fa-eye-slash');
-				icon.classList.add('fa-eye');
-			}
-		});
+</body>
 
-		<?php if (session()->getFlashdata('toastr')): ?>
-			let toastrData = <?= json_encode(session()->getFlashdata('toastr')) ?>;
-			toastr.options = {
-				"closeButton": true,
-				"progressBar": true,
-				"timeOut": "3000"
-			};
-			toastr[toastrData.type](toastrData.message);
-		<?php endif; ?>
-	</script>
+</script>
 </body>
 
 </html>

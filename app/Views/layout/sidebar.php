@@ -40,13 +40,6 @@
 			</li>
 
 			<li class="nav-item">
-				<a href="<?= base_url('user'); ?>" class="nav-link">
-					<i class="nav-icon fas fa-user"></i>
-					<p>User</p>
-				</a>
-			</li>
-
-			<li class="nav-item">
 				<a href="<?= base_url('disposisi'); ?>" class="nav-link">
 					<i class="nav-icon fas fa-envelope"></i>
 					<p>Disposisi</p>
@@ -64,6 +57,13 @@
 				<a href="<?= base_url('jabatan'); ?>" class="nav-link">
 					<i class="nav-icon fas fa-user-tie"></i>
 					<p>Jabatan</p>
+				</a>
+			</li>
+
+			<li class="nav-item">
+				<a href="<?= base_url('user'); ?>" class="nav-link">
+					<i class="nav-icon fas fa-user"></i>
+					<p>User</p>
 				</a>
 			</li>
 

@@ -2,10 +2,11 @@
 
 namespace App\Controllers;
 
+use App\Models\SuratMasuk;
 use App\Models\TelaahStaf;
+use App\Models\KlasifikasiSurat;
 use Hermawan\DataTables\DataTable;
 use App\Controllers\BaseController;
-use App\Models\SuratMasuk;
 use CodeIgniter\HTTP\ResponseInterface;
 
 class TelaahStafController extends BaseController
@@ -13,11 +14,13 @@ class TelaahStafController extends BaseController
 
 	protected $telaahStaf;
 	protected $suratMasuk;
+	protected $klasifikasi_surat;
 
 	public function __construct()
 	{
 		$this->telaahStaf = new TelaahStaf();
 		$this->suratMasuk = new SuratMasuk();
+		$this->klasifikasi_surat = new KlasifikasiSurat();
 	}
 
 	public function index()
@@ -115,6 +118,7 @@ class TelaahStafController extends BaseController
 	{
 		$data = [
 			'title' => 'Tambah Telaah Staf',
+			'klasifikasi_surat' => $this->klasifikasi_surat->findAll(),
 			'surat_masuk' => $this->suratMasuk->find($id)
 		];
 
@@ -139,7 +143,7 @@ class TelaahStafController extends BaseController
 					'required' => 'Dari harus diisi'
 				]
 			],
-			'perihal' => [
+			'klasifikasi_id' => [
 				'label' => 'Perihal',
 				'rules' => 'required',
 				'errors' => [
@@ -182,7 +186,7 @@ class TelaahStafController extends BaseController
 		$data = [
 			'surat_masuk_id' => $this->request->getPost('surat_masuk_id'),
 			'dari' => esc($this->request->getPost('dari')),
-			'perihal' => esc($this->request->getPost('perihal')),
+			'klasifikasi_id' => esc($this->request->getPost('klasifikasi_id')),
 			'created_by' => session()->get('id_user'),
 			'isi_surat' => $this->request->getPost('isi_surat'),
 			'fakta_dan_data' => $this->request->getPost('fakta_dan_data'),

@@ -11,60 +11,65 @@
 					<input type="hidden" name="surat_masuk_id" value="<?= $surat_masuk->id; ?>">
 
 					<div class="form-group row">
-						<label for="dari" class="col-sm-2 col-form-label col-form-label-sm">Dari</label>
+						<label for="dari" class="col-sm-2 col-form-label ">Dari</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control-sm form-control" id="dari" name="dari" placeholder="Masukan Dari..." autocomplete="off" value="<?= old('dari'); ?>">
+							<input type="text" class="form-control" id="dari" name="dari" placeholder="Masukan Dari..." autocomplete="off" value="<?= old('dari'); ?>">
 						</div>
 					</div>
 
 					<div class="form-group row">
-						<label for="perihal_ts" class="col-sm-2 col-form-label col-form-label-sm">Perihal</label>
+						<label for="perihal_ts" class="col-sm-2 col-form-label ">Perihal</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control-sm form-control" id="perihal_ts" name="perihal" placeholder="Masukan Perihal.." autocomplete="off" value="<?= old('perihal'); ?>">
+							<select class="custom-select">
+								<option value="" selected>Pilih Perihal</option>
+								<?php foreach ($klasifikasi_surat as $row): ?>
+									<option value="<?= $row->id; ?>"><?= $row->nama; ?></option>
+								<?php endforeach; ?>
+							</select>
 						</div>
 					</div>
 
 					<div class="form-group row">
-						<label class="col-sm-2 col-form-label col-form-label-sm">I. Dasar</label>
+						<label class="col-sm-2 col-form-label ">I. Dasar</label>
 					</div>
 
 					<div class="form-group row">
-						<label for="asal_surat" class="col-sm-2 col-form-label col-form-label-sm">Asal Surat</label>
+						<label for="asal_surat" class="col-sm-2 col-form-label ">Asal Surat</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control-sm form-control" id="asal_surat" readonly value="<?= $surat_masuk->asal_surat; ?>">
+							<input type="text" class="form-control" id="asal_surat" readonly value="<?= $surat_masuk->asal_surat; ?>">
 						</div>
 					</div>
 
 					<div class="form-group row">
-						<label for="nomor_surat" class="col-sm-2 col-form-label col-form-label-sm">Nomor Surat</label>
+						<label for="nomor_surat" class="col-sm-2 col-form-label ">Nomor Surat</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control-sm form-control" id="nomor_surat" readonly value="<?= $surat_masuk->nomor_surat; ?>">
+							<input type="text" class="form-control" id="nomor_surat" readonly value="<?= $surat_masuk->nomor_surat; ?>">
 						</div>
 					</div>
 
 					<div class="form-group row">
-						<label for="tanggal_surat" class="col-sm-2 col-form-label col-form-label-sm">Tanggal Surat</label>
+						<label for="tanggal_surat" class="col-sm-2 col-form-label">Tanggal Surat</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control-sm form-control" id="tanggal_surat" readonly value="<?= date('d-m-Y', strtotime($surat_masuk->tanggal_surat)); ?>">
+							<input type="text" class="form-control" id="tanggal_surat" readonly value="<?= date('d-m-Y', strtotime($surat_masuk->tanggal_surat)); ?>">
 						</div>
 					</div>
 
 					<div class="form-group row">
-						<label for="perihal" class="col-sm-2 col-form-label col-form-label-sm">Perihal</label>
+						<label for="perihal" class="col-sm-2 col-form-label ">Perihal</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control-sm form-control" id="perihal" readonly value="<?= $surat_masuk->perihal; ?>">
+							<input type="text" class="form-control" id="perihal" readonly value="<?= $surat_masuk->perihal; ?>">
 						</div>
 					</div>
 
 					<div class="form-row">
 						<div class="form-group col-md-12">
 							<label for="summernote_isi">II. Isi</label>
-							<textarea name="isi_surat" id="summernote_isi" class="form-control form-control-sm"></textarea>
+							<textarea name="isi_surat" id="summernote_isi" class="form-control"></textarea>
 						</div>
 
 						<div class="form-group col-md-12">
 							<label for="summernote_fakta_data">III. Fakta dan Data</label>
-							<textarea name="fakta_dan_data" id="summernote_fakta_data" class="form-control form-control-sm"></textarea>
+							<textarea name="fakta_dan_data" id="summernote_fakta_data" class="form-control"></textarea>
 						</div>
 
 						<div class="form-group col-md-12">

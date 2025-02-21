@@ -19,13 +19,14 @@ class AuthController extends BaseController
 
 	public function index()
 	{
+		$data['site_key'] = env('RECAPTCHA_SITE_KEY');
 		$data['title'] = 'Login';
 		return view('auth/login', $data);
 	}
 
 	public function authenticate()
 	{
-		$validation = $this->validate([
+		$validationRules = [
 			'username' => [
 				'label' => 'Username',
 				'rules' => 'required',
@@ -40,12 +41,10 @@ class AuthController extends BaseController
 					'required' => '{field} Tidak Boleh Kosong.',
 				]
 			],
-		]);
-		if (!$validation) {
-			return redirect()->back()->withInput()->with('toastr', [
-				'type' => 'error',
-				'message' => implode('<br>', $this->validator->getErrors())
-			]);
+		];
+
+		if (!$this->validate($validationRules)) {
+			return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
 		}
 
 		$recaptchaResponse = $this->request->getPost('g-recaptcha-response');
@@ -53,10 +52,7 @@ class AuthController extends BaseController
 		$result = $recaptcha->verify($recaptchaResponse);
 
 		if (!$result->isSuccess()) {
-			return redirect()->back()->withInput()->with('toastr', [
-				'type' => 'error',
-				'message' => 'Validasi reCAPTCHA gagal. Silakan coba lagi.'
-			]);
+			return redirect()->back()->withInput()->with('error', 'Validasi ReCaptcha Gagal!');
 		}
 
 		$username = esc($this->request->getPost('username'));
@@ -79,12 +75,9 @@ class AuthController extends BaseController
 				return redirect()->to(base_url('/dashboard'))->with('toastr', [
 					'type' => 'success',
 					'message' => 'Login Berhasil! Selamat datang, ' . $user->nama_lengkap
-				]);;
-			} else {
-				return redirect()->back()->withInput()->with('toastr', [
-					'type' => 'error',
-					'message' => 'Password Salah!'
 				]);
+			} else {
+				return redirect()->back()->withInput()->with('error', 'Password Salah!');
 			}
 		} else {
 			return redirect()->back()->with('toastr', [
