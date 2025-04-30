@@ -12,18 +12,33 @@
 					<input type="hidden" name="surat_masuk_id" value="<?= $surat_masuk->id; ?>">
 
 					<div class="form-group row">
-						<label for="dari" class="col-sm-2 col-form-label col-form-label-sm">Dari</label>
+						<label for="Dari" class="col-sm-2 col-form-label">Dari</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control-sm form-control" id="dari" name="dari" placeholder="Masukan Dari..." autocomplete="off" value="<?= old('dari', $telaah_staf->dari); ?>">
+							<select name="jabatan_id" id="Dari" class="form-control custom-select">
+								<option value="" disabled <?= old('jabatan_id', $existing_data->jabatan_id) === null ? 'selected' : ''; ?>>Dari</option>
+								<?php foreach ($jabatan as $j) : ?>
+									<option value="<?= $j->id; ?>" <?= old('jabatan_id', $existing_data->jabatan_id) == $j->id ? 'selected' : ''; ?>>
+										<?= $j->jabatan; ?>
+									</option>
+								<?php endforeach; ?>
+							</select>
 						</div>
 					</div>
 
 					<div class="form-group row">
-						<label for="perihal_ts" class="col-sm-2 col-form-label col-form-label-sm">Perihal</label>
+						<label for="perihal_ts" class="col-sm-2 col-form-label">Perihal</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control-sm form-control" id="perihal_ts" name="perihal" placeholder="Masukan Perihal.." autocomplete="off" value="<?= old('perihal', $telaah_staf->perihal); ?>">
+							<select class="custom-select" name="klasifikasi_id" id="perihal_ts">
+								<option value="" disabled <?= old('klasifikasi_id', $existing_data->klasifikasi_id) === null ? 'selected' : ''; ?>>Pilih Perihal</option>
+								<?php foreach ($klasifikasi_surat as $row): ?>
+									<option value="<?= $row->id; ?>" <?= old('klasifikasi_id', $existing_data->klasifikasi_id) == $row->id ? 'selected' : ''; ?>>
+										<?= $row->nama; ?>
+									</option>
+								<?php endforeach; ?>
+							</select>
 						</div>
 					</div>
+
 
 					<div class="form-group row">
 						<label class="col-sm-2 col-form-label col-form-label-sm">I. Dasar</label>

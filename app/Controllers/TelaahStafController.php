@@ -7,6 +7,7 @@ use App\Models\TelaahStaf;
 use App\Models\KlasifikasiSurat;
 use Hermawan\DataTables\DataTable;
 use App\Controllers\BaseController;
+use App\Models\Jabatan;
 use CodeIgniter\HTTP\ResponseInterface;
 
 class TelaahStafController extends BaseController
@@ -108,7 +109,7 @@ class TelaahStafController extends BaseController
 				return '<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#fileModal" data-file="' . base_url('uploads/surat-masuk/' . $row->file_surat) . '">Lihat Dokumen</button>';
 			})
 			->add('telaah_staf', function ($row) {
-				return '  <button class="btn btn-info btn-sm btn-detail" data-id="' . $row->id . '">Lihat Telaah</button>';
+				return '<button class="btn btn-info btn-sm btn-detail" data-id="' . $row->id . '">Lihat Telaah</button>';
 			})
 			->addNumbering('no')
 			->toJson(true);
@@ -119,7 +120,8 @@ class TelaahStafController extends BaseController
 		$data = [
 			'title' => 'Tambah Telaah Staf',
 			'klasifikasi_surat' => $this->klasifikasi_surat->findAll(),
-			'surat_masuk' => $this->suratMasuk->find($id)
+			'surat_masuk' => $this->suratMasuk->find($id),
+			'jabatan' => (new \App\Models\Jabatan())->findAll()
 		];
 
 		return view('telaah-staf/create', $data);
@@ -136,11 +138,11 @@ class TelaahStafController extends BaseController
 					'is_unique' => 'Surat Masuk sudah ditelaah'
 				]
 			],
-			'dari' => [
-				'label' => 'Dari',
+			'jabatan_id' => [
+				'label' => 'jabatan_id',
 				'rules' => 'required',
 				'errors' => [
-					'required' => 'Dari harus diisi'
+					'required' => 'jabatan_id harus diisi'
 				]
 			],
 			'klasifikasi_id' => [
@@ -185,7 +187,7 @@ class TelaahStafController extends BaseController
 
 		$data = [
 			'surat_masuk_id' => $this->request->getPost('surat_masuk_id'),
-			'dari' => esc($this->request->getPost('dari')),
+			'jabatan_id' => esc($this->request->getPost('jabatan_id')),
 			'klasifikasi_id' => esc($this->request->getPost('klasifikasi_id')),
 			'created_by' => session()->get('id_user'),
 			'isi_surat' => $this->request->getPost('isi_surat'),
@@ -213,6 +215,9 @@ class TelaahStafController extends BaseController
 			]);
 		}
 
+		$data['existing_data'] = $this->telaahStaf->where('surat_masuk_id', $data['telaah_staf']->surat_masuk_id)->first();
+		$data['klasifikasi_surat'] = $this->klasifikasi_surat->findAll();
+		$data['jabatan'] = (new Jabatan())->findAll();
 		$data['surat_masuk'] = $this->suratMasuk->find($data['telaah_staf']->surat_masuk_id);
 		$data['title'] = 'Edit Telaah Staf';
 
@@ -230,14 +235,14 @@ class TelaahStafController extends BaseController
 					'required' => 'Surat Masuk harus diisi',
 				]
 			],
-			'dari' => [
+			'jabatan_id' => [
 				'label' => 'Dari',
 				'rules' => 'required',
 				'errors' => [
-					'required' => 'Dari harus diisi'
+					'required' => 'dari harus diisi'
 				]
 			],
-			'perihal' => [
+			'klasifikasi_id' => [
 				'label' => 'Perihal',
 				'rules' => 'required',
 				'errors' => [
@@ -279,8 +284,8 @@ class TelaahStafController extends BaseController
 
 		$data = [
 			'surat_masuk_id' => $this->request->getPost('surat_masuk_id'),
-			'dari' => esc($this->request->getPost('dari')),
-			'perihal' => esc($this->request->getPost('perihal')),
+			'jabatan_id' => esc($this->request->getPost('jabatan_id')),
+			'klasifikasi_id' => esc($this->request->getPost('klasifikasi_id')),
 			'created_by' => session()->get('id_user'),
 			'isi_surat' => $this->request->getPost('isi_surat'),
 			'fakta_dan_data' => $this->request->getPost('fakta_dan_data'),

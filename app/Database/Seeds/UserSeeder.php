@@ -9,25 +9,25 @@ use PhpParser\Node\Expr\Cast\Array_;
 
 class UserSeeder extends Seeder
 {
-    public function run()
-    {
-        $faker = Factory::create('id_ID');
+	public function run()
+	{
+		$faker = Factory::create('id_ID');
 
-        for ($i = 0; $i < 5; $i++) {
-            $data = [
-                'email'         => $faker->email,
-                'username'      => $faker->userName,
-                'password'      => password_hash('password', PASSWORD_BCRYPT),
-                'nama_lengkap'  => $faker->name,
-                'jabatan_id'    => $faker->numberBetween(1, 2),
-                'role'          => $faker->randomElement(['Admin', 'Ketua Jurusan', 'Direktur']),
-                'foto'          => 'default.jpeg',
-                'nip'           => random_int(1000000000, 9999999999),
-                'created_at'    => Time::now(),
-                'updated_at'    => Time::now(),
-            ];
+		for ($i = 0; $i < 5; $i++) {
+			$data = [
+				'email'         => $faker->email,
+				'username'      => $faker->userName,
+				'password'      => password_hash('password', PASSWORD_BCRYPT),
+				'nama_lengkap'  => $faker->name,
+				'jabatan_id'    => $faker->numberBetween(1, 2),
+				'role'          => $faker->randomElement(['admin', 'ketua_jurusan', 'direktur']),
+				'foto'          => 'default.jpeg',
+				'nip'           => random_int(1000000000, 9999999999),
+				'created_at'    => Time::now(),
+				'updated_at'    => Time::now(),
+			];
 
-            $this->db->table('users')->insert($data);
-        }
-    }
+			$this->db->table('users')->insert($data);
+		}
+	}
 }

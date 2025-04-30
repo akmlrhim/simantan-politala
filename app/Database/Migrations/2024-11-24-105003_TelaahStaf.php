@@ -15,9 +15,10 @@ class TelaahStaf extends Migration
 				'unsigned' => true,
 				'auto_increment' => true,
 			],
-			'dari' => [
-				'type' => 'VARCHAR',
-				'constraint' => 100,
+			'jabatan_id' => [
+				'type' => 'INT',
+				'unsigned' => true,
+				'constraint' => 11
 			],
 			'klasifikasi_id' => [
 				'type' => 'INT',
@@ -54,6 +55,7 @@ class TelaahStaf extends Migration
 			],
 		]);
 		$this->forge->addKey('id', true);
+		$this->forge->addForeignKey('jabatan_id', 'jabatan', 'id', 'CASCADE', 'CASCADE');
 		$this->forge->addForeignKey('surat_masuk_id', 'surat_masuk', 'id', 'CASCADE', 'CASCADE');
 		$this->forge->addForeignKey('klasifikasi_id', 'klasifikasi_surat', 'id', 'CASCADE', 'CASCADE');
 		$this->forge->addForeignKey('created_by', 'users', 'id', 'CASCADE', 'CASCADE');

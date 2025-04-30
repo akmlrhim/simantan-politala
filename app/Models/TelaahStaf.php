@@ -12,7 +12,7 @@ class TelaahStaf extends Model
 	protected $returnType       = 'object';
 	protected $useSoftDeletes   = false;
 	protected $protectFields    = true;
-	protected $allowedFields    = ['dari', 'klasifikasi_id', 'surat_masuk_id', 'created_by', 'isi_surat', 'fakta_dan_data', 'saran_dan_tindak'];
+	protected $allowedFields    = ['jabatan_id', 'klasifikasi_id', 'surat_masuk_id', 'created_by', 'isi_surat', 'fakta_dan_data', 'saran_dan_tindak'];
 
 	protected bool $allowEmptyInserts = false;
 	protected bool $updateOnlyChanged = true;

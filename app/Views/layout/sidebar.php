@@ -2,6 +2,8 @@
 	<nav class="mt-2">
 		<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
+			<li class="nav-header text-muted">Utama</li>
+
 			<li class="nav-item">
 				<a href="<?= base_url('dashboard'); ?>" class="nav-link">
 					<i class="nav-icon fas fa-tachometer-alt"></i>
@@ -46,6 +48,7 @@
 				</a>
 			</li>
 
+			<li class="nav-header text-muted">Tambahan</li>
 			<li class="nav-item">
 				<a href="<?= base_url('klasifikasi-surat'); ?>" class="nav-link">
 					<i class="nav-icon fas fa-list"></i>
@@ -64,6 +67,15 @@
 				<a href="<?= base_url('user'); ?>" class="nav-link">
 					<i class="nav-icon fas fa-user"></i>
 					<p>User</p>
+				</a>
+			</li>
+
+			<li class="nav-header text-muted">User</li>
+
+			<li class="nav-item">
+				<a href="<?= base_url('user'); ?>" class="nav-link">
+					<i class="nav-icon fas fa-user-lock"></i>
+					<p>Profil Saya</p>
 				</a>
 			</li>
 

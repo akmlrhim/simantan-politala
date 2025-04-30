@@ -11,16 +11,22 @@
 					<input type="hidden" name="surat_masuk_id" value="<?= $surat_masuk->id; ?>">
 
 					<div class="form-group row">
-						<label for="dari" class="col-sm-2 col-form-label ">Dari</label>
+						<label for="Dari" class="col-sm-2 col-form-label">Dari</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="dari" name="dari" placeholder="Masukan Dari..." autocomplete="off" value="<?= old('dari'); ?>">
+							<select name="jabatan_id" id="Dari" class="form-control custom-select">
+								<option value="" disabled <?= old('jabatan_id') === null ? 'selected' : ''; ?>>Dari</option>
+								<?php foreach ($jabatan as $j) : ?>
+									<option value="<?= $j->id; ?>" <?= old('jabatan_id') == $j->id ? 'selected' : ''; ?>>
+										<?= $j->jabatan; ?>
+									</option>
+								<?php endforeach; ?>
+							</select>
 						</div>
 					</div>
-
 					<div class="form-group row">
 						<label for="perihal_ts" class="col-sm-2 col-form-label ">Perihal</label>
 						<div class="col-sm-10">
-							<select class="custom-select">
+							<select class="custom-select" name="klasifikasi_id" id="perihal_ts">
 								<option value="" selected>Pilih Perihal</option>
 								<?php foreach ($klasifikasi_surat as $row): ?>
 									<option value="<?= $row->id; ?>"><?= $row->nama; ?></option>

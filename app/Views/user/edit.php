@@ -18,6 +18,13 @@
 					</div>
 
 					<div class="form-group row">
+						<label for="nip" class="col-sm-2 col-form-label">NIP</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="nip" name="nip" placeholder="Masukan NIP" value="<?= old('nip', $user->nip); ?>" autocomplete="off">
+						</div>
+					</div>
+
+					<div class="form-group row">
 						<label for="email" class="col-sm-2 col-form-label">Email</label>
 						<div class="col-sm-10">
 							<input type="email" class="form-control" id="email" name="email" placeholder="Masukan Email" value="<?= old('email', $user->email); ?>" autocomplete="off">
@@ -34,7 +41,7 @@
 					<div class="form-group row">
 						<label for="jabatan" class="col-sm-2 col-form-label">Jabatan</label>
 						<div class="col-sm-10">
-							<select class="form-control" id="jabatan" name="jabatan_id">
+							<select class="custom-select" id="jabatan" name="jabatan_id">
 								<option value="" disabled>-- Pilih Jabatan --</option>
 								<?php foreach ($jabatan as $key) : ?>
 									<option value="<?= $key->id; ?>" <?= old('jabatan_id', $user->jabatan_id) == $key->id ? 'selected' : ''; ?>>
@@ -48,11 +55,11 @@
 					<div class="form-group row">
 						<label for="role" class="col-sm-2 col-form-label">Role</label>
 						<div class="col-sm-10">
-							<select class="form-control" id="role" name="role">
+							<select class="custom-select" id="role" name="role">
 								<option value="" disabled>-- Pilih Role --</option>
-								<option value="Admin" <?= old('role', $user->role) == 'Admin' ? 'selected' : ''; ?>>Admin</option>
-								<option value="Ketua Jurusan" <?= old('role', $user->role) == 'Ketua Jurusan' ? 'selected' : ''; ?>>Ketua Jurusan</option>
-								<option value="Direktur" <?= old('role', $user->role) == 'Direktur' ? 'selected' : ''; ?>>Direktur</option>
+								<option value="admin" <?= old('role', $user->role) == 'admin' ? 'selected' : ''; ?>>Admin</option>
+								<option value="ketua_jurusan" <?= old('role', $user->role) == 'Ketua Jurusan' ? 'selected' : ''; ?>>Ketua Jurusan</option>
+								<option value="direktur" <?= old('role', $user->role) == 'direktur' ? 'selected' : ''; ?>>Direktur</option>
 							</select>
 						</div>
 					</div>

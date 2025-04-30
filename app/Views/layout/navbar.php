@@ -16,9 +16,9 @@
 							<span class="d-block text-sm"><?= session()->get('username'); ?></span>
 							<span class="text-md">
 								<?=
-								session()->get('role') === 'Admin' ? '<span class="badge badge-danger">Admin</span>'
-									: (session()->get('role') === 'Ketua Jurusan' ? '<span class="badge badge-warning">Ketua Jurusan</span>'
-										: (session()->get('role') === 'Direktur' ? '<span class="badge badge-success">Direktur</span>'
+								session()->get('role') === 'admin' ? '<span class="badge badge-danger">Admin</span>'
+									: (session()->get('role') === 'ketua_jurusan' ? '<span class="badge badge-warning">Ketua Jurusan</span>'
+										: (session()->get('role') === 'direktur' ? '<span class="badge badge-success">Direktur</span>'
 											: 'Tidak Diketahui'));
 								?>
 							</span>

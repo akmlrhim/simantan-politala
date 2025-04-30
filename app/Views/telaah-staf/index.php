@@ -31,6 +31,8 @@
 </div>
 
 
+
+
 <!-- Modal  file -->
 <div class="modal fade" id="fileModal" tabindex="-1" role="dialog" aria-labelledby="fileModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg" role="document">

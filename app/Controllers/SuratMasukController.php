@@ -2,12 +2,13 @@
 
 namespace App\Controllers;
 
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use App\Models\SuratMasuk;
 use App\Models\TelaahStaf;
 use Hermawan\DataTables\DataTable;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
-use Dompdf\Dompdf;
 
 class SuratMasukController extends BaseController
 {
@@ -72,7 +73,7 @@ class SuratMasukController extends BaseController
 			})
 			->add('telaah_staf', function ($row) {
 				if ($row->status_telaah == 'Sudah Ditelaah') {
-					return '<a href="' . base_url('surat-masuk/telaah-staf/' . $row->surat_masuk_id) . '" class="btn btn-sm btn-primary">Telaah Staf</a>';
+					return '<a target="_blank" href="' . base_url('surat-masuk/telaah-staf/' . $row->surat_masuk_id) . '" class="btn btn-sm btn-primary">Telaah Staf</a>';
 				} else {
 					return '<span class="badge badge-danger">Belum Ditelaah</span>';
 				}
@@ -278,59 +279,34 @@ class SuratMasukController extends BaseController
 
 	public function telaahStaf($id)
 	{
-		$data = [
-			'title' => 'Data Telaah Staf',
-			'telaah_staf' => $this->telaahStaf->where('surat_masuk_id', $id)
-				->join('surat_masuk', 'surat_masuk.id = telaah_staf.surat_masuk_id', 'left')
-				->first()
-		];
-
-		if (!$data['telaah_staf']) {
-			return redirect()->to(base_url('surat-masuk'))->with('toastr', [
-				'type' => 'warning',
-				'message' => 'Surat Masuk belum ditelaah.'
-			]);
-		}
-
-		return view('surat-masuk/telaah-staf', $data);
-	}
-
-	public function telaahStafPdf($id)
-	{
-		$data['telaah_staf'] = $this->telaahStaf->where('surat_masuk_id', $id)
+		$telaahStaf = $this->telaahStaf
+			->where('surat_masuk_id', $id)
 			->join('surat_masuk', 'surat_masuk.id = telaah_staf.surat_masuk_id', 'left')
 			->first();
 
-		if (!$data['telaah_staf']) {
+		if (!$telaahStaf) {
 			return redirect()->to(base_url('surat-masuk'))->with('toastr', [
-				'type' => 'warning',
+				'type' => 'error',
 				'message' => 'Data tidak ditemukan.'
 			]);
 		}
 
-		return view('surat-masuk/telaah-staf-pdf', $data);
-	}
+		$options = new Options();
+		$options->set('isHtml5ParserEnabled', true);
+		$options->set('isRemoteEnabled', true);
+		$dompdf = new Dompdf($options);
 
-	public function telaahStafPrint($id)
-	{
-		$dompdf = new Dompdf();
+		$data['telaah_staf'] = $telaahStaf;
+		$html = view('surat-masuk/telaah-staf-pdf', $data);
 
-		$data['telaah_staf'] = $this->telaahStaf->where('surat_masuk_id', $id)
-			->join('surat_masuk', 'surat_masuk.id = telaah_staf.surat_masuk_id', 'left')
-			->first();
+		$dompdf->loadHtml($html);
+		$dompdf->setPaper('A4', 'landscape');
+		$dompdf->render();
 
-		if ($data['telaah_staf']) {
-			$html = view('surat-masuk/telaah-staf-pdf', $data);
-			$dompdf->loadHtml($html);
-			$dompdf->setPaper('A4', 'Landscape');
-			$dompdf->render();
-			$filename = 'Telaah Staf-' . $data['telaah_staf']->nomor_surat . '.pdf';
-			$dompdf->stream($filename, ['Attachment' => false]);
-		} else {
-			return redirect()->to(base_url('surat-masuk'))->with('toastr', [
-				'type' => 'error',
-				'message' => 'Error.'
-			]);
-		}
+		$filename = 'Telaah-Staf-' . $telaahStaf->nomor_surat . '.pdf';
+		return $this->response
+			->setContentType('application/pdf')
+			->setHeader('Content-Disposition', 'inline; filename="' . $filename . '"')
+			->setBody($dompdf->output());
 	}
 }
