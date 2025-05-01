@@ -3,15 +3,12 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Surat Keputusan</title>
+	<title>Telaah Staf <?= $telaah_staf->asal_surat; ?></title>
+	<link rel="shortcut icon" href="<?= base_url(); ?>img/logo_politala.png" type="image/x-icon">
 	<style>
 		@page {
 			size: A4;
 			margin: 2cm 2.5cm 3cm 2.5cm;
-		}
-
-		* {
-			font-family: 'Times New Roman', Times, serif;
 		}
 
 		body {
@@ -36,14 +33,14 @@
 			background-color: #4CAF50 !important;
 			font-weight: bold;
 			color: #fff;
-			padding: 6px;
+			padding: 3px;
 			text-align: center;
 			border: 1px solid #000;
 		}
 
 		.ckeditor table td {
 			text-align: center;
-			padding: 6px;
+			padding: 3px;
 			border: 1px solid #000;
 		}
 
@@ -58,7 +55,7 @@
 
 		h1 {
 			text-align: center;
-			font-size: 16pt;
+			font-size: 12pt;
 			text-transform: uppercase;
 			margin-bottom: 10px;
 		}
@@ -132,9 +129,9 @@
 	<table style="width:100%">
 		<tr>
 			<td>
-				<strong>Perihal</strong><br>
+				<strong>Perihal : </strong><br>
 				<p style="text-align: justify; margin: 0; line-height: normal;">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt, neque.
+					Berdasarkan surat yang diterima dari <?= $telaah_staf->asal_surat; ?> dengan nomor <?= $telaah_staf->nomor_surat; ?> tanggal <?= date('d F Y', strtotime($telaah_staf->tanggal_surat)); ?>, perihal <?= $telaah_staf->perihal; ?>, kami sampaikan hal-hal sebagai berikut:
 				</p>
 			</td>
 		</tr>
@@ -142,8 +139,21 @@
 		<tr>
 			<td>
 				<strong style="margin: 0; line-height: 1.2;">Isi surat :</strong><br>
-				<!-- Hapus line-height di sini -->
 				<span class="ckeditor"><?= $telaah_staf->isi_surat; ?></span>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<strong style="margin: 0; line-height: 1.2;">Fakta dan Data :</strong><br>
+				<span class="ckeditor"><?= $telaah_staf->fakta_dan_data; ?></span>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<strong style="margin: 0; line-height: 1.2;">Saran Tindak :</strong><br>
+				<span class="ckeditor"><?= $telaah_staf->saran_dan_tindak; ?></span>
 			</td>
 		</tr>
 	</table>
@@ -151,12 +161,15 @@
 
 
 	<div class="signature">
-		<p>Hormat kami,</p>
-		<p class="bold">Direktur</p>
+		<p>Pelaihari, <?= $created_at; ?></p>
+		<p class="bold"><?= $telaah_staf->jabatan; ?></p>
 		<div class="ttd">
-			<p class="bold">(__________________________)</p>
+			<p class="bold"><?= $telaah_staf->nama_lengkap; ?></p>
+			<p class="bold">NIP. <?= $telaah_staf->nip; ?></p>
 		</div>
 	</div>
+
+	<div class="page-break"></div>
 
 </body>
 

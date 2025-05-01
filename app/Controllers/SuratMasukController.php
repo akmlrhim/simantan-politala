@@ -3,12 +3,11 @@
 namespace App\Controllers;
 
 use Dompdf\Dompdf;
-use Dompdf\Options;
 use App\Models\SuratMasuk;
 use App\Models\TelaahStaf;
 use Hermawan\DataTables\DataTable;
 use App\Controllers\BaseController;
-use CodeIgniter\HTTP\ResponseInterface;
+use Carbon\Carbon;
 
 class SuratMasukController extends BaseController
 {
@@ -282,6 +281,8 @@ class SuratMasukController extends BaseController
 		$telaahStaf = $this->telaahStaf
 			->where('surat_masuk_id', $id)
 			->join('surat_masuk', 'surat_masuk.id = telaah_staf.surat_masuk_id', 'left')
+			->join('jabatan', 'jabatan.id = telaah_staf.jabatan_id', 'left')
+			->join('users', 'users.id = telaah_staf.created_by', 'left')
 			->first();
 
 		if (!$telaahStaf) {
@@ -291,12 +292,13 @@ class SuratMasukController extends BaseController
 			]);
 		}
 
-		$options = new Options();
-		$options->set('isHtml5ParserEnabled', true);
-		$options->set('isRemoteEnabled', true);
-		$dompdf = new Dompdf($options);
+		$created_at = Carbon::parse($telaahStaf->created_at)
+			->locale('id_ID')->translatedFormat('d F Y');
+
+		$dompdf = new Dompdf();
 
 		$data['telaah_staf'] = $telaahStaf;
+		$data['created_at'] = $created_at;
 		$html = view('surat-masuk/telaah-staf-pdf', $data);
 
 		$dompdf->loadHtml($html);
