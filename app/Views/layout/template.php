@@ -8,7 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<?= csrf_meta(); ?>
 
-	<title>SIMANTAN | <?= $title; ?></title>
+	<title>Surat POLITALA | <?= $title; ?></title>
 
 	<link rel="shortcut icon" href="<?= base_url(); ?>img/logo_politala.png" type="image/x-icon">
 	<link rel="stylesheet" href="<?= base_url(); ?>/css/style.css">

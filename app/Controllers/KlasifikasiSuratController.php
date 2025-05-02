@@ -32,7 +32,7 @@ class KlasifikasiSuratController extends BaseController
 		if ($id == false) {
 			$db = db_connect();
 			$builder = $db->table('klasifikasi_surat')
-				->select('id, kode, nama');
+				->select('id, nama');
 
 			return DataTable::of($builder)
 				->add('action', function ($row) {
@@ -50,7 +50,7 @@ class KlasifikasiSuratController extends BaseController
 	public function create()
 	{
 		$data = [
-			'title' => 'Tambah Klasifikasi Surat'
+			'title' => 'Tambah Jenis Surat',
 		];
 		return view('klasifikasi-surat/create', $data);
 	}
@@ -58,14 +58,6 @@ class KlasifikasiSuratController extends BaseController
 	public function save()
 	{
 		$validation = $this->validate([
-			'kode' => [
-				'label' => 'Kode',
-				'rules' => 'required|is_unique[klasifikasi_surat.kode]',
-				'errors' => [
-					'required' => '{field} harus diisi.',
-					'is_unique' => '{field} sudah terdaftar.'
-				]
-			],
 			'nama' => [
 				'label' => 'Nama Surat',
 				'rules' => 'required|is_unique[klasifikasi_surat.nama]',
@@ -84,7 +76,6 @@ class KlasifikasiSuratController extends BaseController
 		}
 
 		$data = [
-			'kode' => esc($this->request->getPost('kode')),
 			'nama' => esc($this->request->getPost('nama')),
 			'keterangan' => esc($this->request->getPost('keterangan'))
 		];
@@ -100,7 +91,7 @@ class KlasifikasiSuratController extends BaseController
 	public function edit($id)
 	{
 		$data = [
-			'title' => 'Edit Klasifikasi Surat',
+			'title' => 'Edit Jenis Surat',
 			'kl_surat' => $this->klasifikasi->find($id)
 		];
 
@@ -110,13 +101,6 @@ class KlasifikasiSuratController extends BaseController
 	public function update($id)
 	{
 		$validation = $this->validate([
-			'kode' => [
-				'label' => 'Kode',
-				'rules' => 'required',
-				'errors' => [
-					'required' => '{field} harus diisi.',
-				]
-			],
 			'nama' => [
 				'label' => 'Nama Surat',
 				'rules' => 'required',
@@ -134,7 +118,6 @@ class KlasifikasiSuratController extends BaseController
 		}
 
 		$data = [
-			'kode' => esc($this->request->getPost('kode')),
 			'nama' => esc($this->request->getPost('nama')),
 			'keterangan' => esc($this->request->getPost('keterangan'))
 		];

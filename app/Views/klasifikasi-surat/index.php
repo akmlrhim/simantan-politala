@@ -13,7 +13,6 @@
 						<thead>
 							<tr>
 								<th scope="col">No</th>
-								<th scope="col">Kode</th>
 								<th scope="col">Nama</th>
 								<th scope="col">Aksi</th>
 							</tr>
@@ -68,9 +67,6 @@
 			columns: [{
 					data: 'no',
 					orderable: false
-				},
-				{
-					data: 'kode'
 				},
 				{
 					data: 'nama'

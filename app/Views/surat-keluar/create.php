@@ -23,16 +23,9 @@
 					</div>
 
 					<div class="form-group row">
-						<label for="perihal" class="col-sm-2 col-form-label">Hal</label>
+						<label for="perihal" class="col-sm-2 col-form-label">Perihal</label>
 						<div class="col-sm-10">
-							<select name="klasifikasi_id" id="perihal" class="form-control custom-select">
-								<option value="" disabled <?= old('klasifikasi_id') === null ? 'selected' : ''; ?>>Pilih Perihal</option>
-								<?php foreach ($klasifikasi as $k) : ?>
-									<option value="<?= $k->id; ?>" <?= old('klasifikasi_id') == $k->id ? 'selected' : ''; ?>>
-										<?= $k->nama; ?>
-									</option>
-								<?php endforeach; ?>
-							</select>
+							<input type="text" class="form-control" id="perihal" name="perihal" placeholder="Masukan Perihal..." autocomplete="off" value="<?= old('perihal'); ?>">
 						</div>
 					</div>
 

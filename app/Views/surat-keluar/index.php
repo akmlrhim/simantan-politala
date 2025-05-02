@@ -95,7 +95,7 @@
 					data: 'nomor_surat'
 				},
 				{
-					data: 'klasifikasi_surat'
+					data: 'perihal'
 				},
 				{
 					data: 'tanggal_surat'

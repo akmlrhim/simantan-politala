@@ -27,7 +27,7 @@
 <body class="hold-transition login-page">
 	<div class="login-box">
 		<div class="login-logo">
-			<b class="text-primary font-weight-bold">SIMANTAN</b>
+			<b class="text-primary font-weight-bold">Surat POLITALA</b>
 		</div>
 		<div class="card">
 			<div class="card-body login-card-body">

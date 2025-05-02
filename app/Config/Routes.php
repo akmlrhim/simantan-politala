@@ -28,12 +28,12 @@ $routes->group('', ['filter' => ['auth']], function ($routes) {
 	$routes->group('surat-keluar', function ($routes) {
 		$routes->get('/', 'SuratKeluarController::index');
 		$routes->get('show', 'SuratKeluarController::show');
-		$routes->get('detail/(:num)', 'SuratKeluarController::detail/$1');
 		$routes->get('tambah', 'SuratKeluarController::create');
 		$routes->post('tambah', 'SuratKeluarController::save');
 		$routes->get('(:num)', 'SuratKeluarController::edit/$1');
 		$routes->put('(:num)', 'SuratKeluarController::update/$1');
 		$routes->delete('(:num)', 'SuratKeluarController::delete/$1');
+		$routes->get('pdf/(:num)', 'SuratKeluarController::pdf/$1');
 	});
 
 	$routes->group('klasifikasi-surat', function ($routes) {

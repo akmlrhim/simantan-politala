@@ -15,8 +15,9 @@ class SuratKeluar extends Model
 	protected $allowedFields    = [
 		'nomor_surat',
 		'tanggal_surat',
-		'klasifikasi_id',
-		'isi'
+		'perihal',
+		'isi',
+		'created_by'
 	];
 
 	protected bool $allowEmptyInserts = false;

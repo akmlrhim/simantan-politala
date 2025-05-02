@@ -8,12 +8,6 @@
 				<form action="<?= base_url('klasifikasi-surat/' . $kl_surat->id); ?>" method="POST">
 					<?= csrf_field(); ?>
 					<input type="hidden" name="_method" value="PUT">
-					<div class="form-group row">
-						<label for="kode" class="col-sm-2 col-form-label">Kode</label>
-						<div class="col-sm-5">
-							<input type="text" class="form-control" id="kode" name="kode" placeholder="Masukan Kode" autocomplete="off" value="<?= old('kode', $kl_surat->kode); ?>">
-						</div>
-					</div>
 
 					<div class="form-group row">
 						<label for="nama" class="col-sm-2 col-form-label">Nama</label>

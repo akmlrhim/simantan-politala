@@ -6,6 +6,7 @@ use App\Models\SuratKeluar;
 use App\Models\KlasifikasiSurat;
 use Hermawan\DataTables\DataTable;
 use App\Controllers\BaseController;
+use Carbon\Carbon;
 use CodeIgniter\HTTP\ResponseInterface;
 use Dompdf\Dompdf;
 
@@ -32,16 +33,15 @@ class SuratKeluarController extends BaseController
 		if ($id == false) {
 			$db = db_connect();
 			$builder = $db->table('surat_keluar AS sk')
-				->select('sk.id AS surat_keluar_id, sk.nomor_surat, sk.tanggal_surat, ks.nama AS klasifikasi_surat')
-				->join('klasifikasi_surat AS ks', 'ks.id = sk.klasifikasi_id');
+				->select('id, nomor_surat, tanggal_surat, perihal, isi');
 
 			return DataTable::of($builder)
 				->add('action', function ($row) {
 					return '
-						<a href="' . base_url('surat-keluar/' . $row->surat_keluar_id) . '" class="btn btn-warning btn-sm" title="Edit">
+						<a href="' . base_url('surat-keluar/' . $row->id) . '" class="btn btn-warning btn-sm" title="Edit">
 								<i class="fas fa-pencil-alt"></i>
 						</a>
-						<button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal' . $row->surat_keluar_id . '" title="Hapus">
+						<button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal' . $row->id . '" title="Hapus">
 								<i class="fas fa-trash"></i>
 						</button>
 				';
@@ -53,7 +53,7 @@ class SuratKeluarController extends BaseController
 				})
 
 				->add('file', function ($row) {
-					return '<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#fileModal">Lihat Dokumen</button>';
+					return '<a href="' . base_url('surat-keluar/pdf/' . $row->id) . '" target="_blank" class="btn btn-sm btn-primary">Lihat Dokumen</a>';
 				})
 				->addNumbering('no')
 				->toJson(true)
@@ -86,8 +86,8 @@ class SuratKeluarController extends BaseController
 					'required' => '{field} harus diisi'
 				]
 			],
-			'klasifikasi_id' => [
-				'label' => 'Klasifikasi Surat',
+			'perihal' => [
+				'label' => 'Perihal',
 				'rules' => 'required',
 				'errors' => [
 					'required' => '{field} harus diisi'
@@ -113,8 +113,9 @@ class SuratKeluarController extends BaseController
 		$data = [
 			'nomor_surat' => esc($this->request->getPost('nomor_surat')),
 			'tanggal_surat' => esc($this->request->getPost('tanggal_surat')),
-			'klasifikasi_id' => esc($this->request->getPost('klasifikasi_id')),
+			'perihal' => esc($this->request->getPost('perihal')),
 			'isi' => $this->request->getPost('isi'),
+			'created_by' => session()->get('id_user')
 		];
 
 		$this->suratKeluar->insert($data);
@@ -153,8 +154,8 @@ class SuratKeluarController extends BaseController
 					'required' => '{field} harus diisi'
 				]
 			],
-			'klasifikasi_id' => [
-				'label' => 'Klasifikasi Surat',
+			'perihal' => [
+				'label' => 'Perihal',
 				'rules' => 'required',
 				'errors' => [
 					'required' => '{field} harus diisi'
@@ -180,7 +181,7 @@ class SuratKeluarController extends BaseController
 		$data = [
 			'nomor_surat' => esc($this->request->getPost('nomor_surat')),
 			'tanggal_surat' => esc($this->request->getPost('tanggal_surat')),
-			'klasifikasi_id' => esc($this->request->getPost('klasifikasi_id')),
+			'perihal' => esc($this->request->getPost('perihal')),
 			'isi' => $this->request->getPost('isi'),
 		];
 
@@ -201,23 +202,35 @@ class SuratKeluarController extends BaseController
 		]);
 	}
 
-	public function print($id)
+	public function pdf($id)
 	{
 		$dompdf = new Dompdf();
-		$data['surat_keluar'] = $this->suratKeluar->find($id);
+		$suratKeluar = $this->suratKeluar
+			->select('surat_keluar.id as sk_id, surat_keluar.*, users.nama_lengkap as nama_lengkap, users.nip as nip, jabatan.jabatan as jabatan')
+			->join('users', 'users.id = surat_keluar.created_by', 'left')
+			->join('jabatan', 'jabatan.id = users.jabatan_id', 'left')
+			->where('surat_keluar.id', $id)
+			->first();
 
-		if ($data['surat_keluar']) {
-			$html = view('surat-keluar/pdf', $data);
-			$dompdf->loadHtml($html);
-			$dompdf->setPaper('A4', 'Potrait');
-			$dompdf->render();
-			$filename = 'Surat Keluar-' . $data['surat_keluar']->nomor_surat . '.pdf';
-			$dompdf->stream($filename, ['Attachment' => false]);
-		} else {
+
+		if (!$suratKeluar) {
 			return redirect()->to(base_url('surat-keluar'))->with('toastr', [
 				'type' => 'error',
-				'message' => 'Error.'
+				'message' => 'Data tidak ditemukan'
 			]);
 		}
+
+		$tanggalSurat = Carbon::parse($suratKeluar->tanggal_surat)
+			->locale('id_ID')->translatedFormat('d F Y');
+
+		$data['surat_keluar'] = $suratKeluar;
+		$data['tanggal_surat'] = $tanggalSurat;
+
+		$html = view('surat-keluar/pdf', $data);
+		$dompdf->loadHtml($html);
+		$dompdf->setPaper('A4', 'potrait');
+		$filename = 'Surat Keluar' . $suratKeluar->nomor_surat . 'pdf';
+		$dompdf->render();
+		$dompdf->stream($filename, ['Attachment' => false]);
 	}
 }

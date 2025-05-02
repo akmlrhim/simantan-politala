@@ -18,7 +18,7 @@
 					<span class="info-box-icon bg-info"><i class="fas fa-list"></i></span>
 					<div class="info-box-content">
 						<span class="info-box-number"><?= $kl_surat; ?></span>
-						<span class="info-box-text">Klasifikasi Surat</span>
+						<span class="info-box-text">Jenis Surat</span>
 					</div>
 				</div>
 			</div>

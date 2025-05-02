@@ -2,12 +2,13 @@
 
 namespace App\Controllers;
 
+use Carbon\Carbon;
 use Dompdf\Dompdf;
+use setasign\Fpdi\Fpdi;
 use App\Models\SuratMasuk;
 use App\Models\TelaahStaf;
 use Hermawan\DataTables\DataTable;
 use App\Controllers\BaseController;
-use Carbon\Carbon;
 
 class SuratMasukController extends BaseController
 {
@@ -47,7 +48,7 @@ class SuratMasukController extends BaseController
 		return DataTable::of($builder)
 			->add('action', function ($row) {
 				return '
-                <a href="' . base_url('surat-masuk/telaah-staf/download/' . $row->surat_masuk_id) . '" class="btn btn-success btn-sm" target="_blank">
+                <a href="' . base_url('surat-masuk/download/' . $row->surat_masuk_id) . '" class="btn btn-success btn-sm" target="_blank">
                     <i class="fa fa-print"></i>
                 </a>
                 <a href="' . base_url('surat-masuk/' . $row->surat_masuk_id) . '" class="btn btn-warning btn-sm">
@@ -302,13 +303,9 @@ class SuratMasukController extends BaseController
 		$html = view('surat-masuk/telaah-staf-pdf', $data);
 
 		$dompdf->loadHtml($html);
-		$dompdf->setPaper('A4', 'landscape');
-		$dompdf->render();
-
+		$dompdf->setPaper('A4', 'potrait');
 		$filename = 'Telaah-Staf-' . $telaahStaf->nomor_surat . '.pdf';
-		return $this->response
-			->setContentType('application/pdf')
-			->setHeader('Content-Disposition', 'inline; filename="' . $filename . '"')
-			->setBody($dompdf->output());
+		$dompdf->render();
+		$dompdf->stream($filename, ['Attachment' => false]);
 	}
 }
