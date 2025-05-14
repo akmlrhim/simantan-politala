@@ -47,13 +47,13 @@ class AuthController extends BaseController
 			return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
 		}
 
-		$recaptchaResponse = $this->request->getPost('g-recaptcha-response');
-		$recaptcha = new Recaptcha('6LdRsI8qAAAAAC7XtjjW2zwYCr3hK-xpOCMUcxYx');
-		$result = $recaptcha->verify($recaptchaResponse);
+		// $recaptchaResponse = $this->request->getPost('g-recaptcha-response');
+		// $recaptcha = new Recaptcha('6LdRsI8qAAAAAC7XtjjW2zwYCr3hK-xpOCMUcxYx');
+		// $result = $recaptcha->verify($recaptchaResponse);
 
-		if (!$result->isSuccess()) {
-			return redirect()->back()->withInput()->with('error', 'Validasi ReCaptcha Gagal!');
-		}
+		// if (!$result->isSuccess()) {
+		// 	return redirect()->back()->withInput()->with('error', 'Validasi ReCaptcha Gagal!');
+		// }
 
 		$username = esc($this->request->getPost('username'));
 		$password = esc($this->request->getPost('password'));

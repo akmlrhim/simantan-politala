@@ -54,7 +54,7 @@
 							</div>
 						<?php endif; ?>
 					</div>
-					<div class="g-recaptcha mb-3" data-sitekey="<?= esc($site_key); ?>"></div>
+					<!-- <div class="g-recaptcha mb-3" data-sitekey="<?= esc($site_key); ?>"></div> -->
 
 					<div class="row">
 						<div class="col-12">
