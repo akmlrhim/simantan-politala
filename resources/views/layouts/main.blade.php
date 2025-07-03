@@ -3,18 +3,9 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta
-    http-equiv="X-UA-Compatible"
-    content="ie=edge"
-  >
-  <meta
-    name="csrf-token"
-    content="{{ csrf_token() }}"
-  >
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1"
-  >
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>{{ $title }}</title>
 
@@ -38,14 +29,14 @@
 
   <x-toast></x-toast>
 
-  <script>
-    setTimeout(() => {
-      const toast = document.getElementById('toast-message');
-      if (toast) {
-        toast.style.display = 'none';
-      }
-    }, 6000);
-  </script>
+  {{-- custom js  --}}
+  @if ($errors->any())
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        showCreateModalIfErrors();
+      });
+    </script>
+  @endif
 
   @stack('scripts')
 </body>

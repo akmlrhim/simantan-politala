@@ -12,16 +12,7 @@ class ConfirmDelete extends Component
 	 * Create a new component instance.
 	 */
 
-	public $modalId;
-	public $action;
-	public $message;
-
-	public function __construct($modalId, $action, $message = null)
-	{
-		$this->modalId = $modalId;
-		$this->action = $action;
-		$this->message = $message;
-	}
+	public function __construct() {}
 
 	/**
 	 * Get the view / contents that represent the component.

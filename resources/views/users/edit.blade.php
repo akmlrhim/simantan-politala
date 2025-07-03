@@ -10,60 +10,78 @@
             @method('PUT')
             <div class="grid gap-4">
               <div class="sw-full">
-                <label for="nama" class="block mb-1 text-xs font-medium text-gray-900 dark:text-white">Nama
+                <label for="nama"
+                  class="block mb-1 text-xs font-medium text-gray-900 dark:text-white">Nama
                   Lengkap</label>
                 <input type="text" name="nama" id="nama"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-3/4 p-2 text-xs dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 font-medium"
-                  placeholder="Masukkan nama lengkap" value="{{ old('nama', $user->nama) }}" autocomplete="off" />
+                  class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full md:w-3/4 p-2 text-xs dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 font-medium"
+                  placeholder="Masukkan nama lengkap" value="{{ old('nama', $user->nama) }}"
+                  autocomplete="off" />
                 @error('nama')
-                  <small class="text-red-500 font-medium text-xs mt-1"> {{ $message }}</small>
+                  <small class="text-red-500 font-medium text-xs mt-1">
+                    {{ $message }}</small>
                 @enderror
               </div>
 
               <div class="sw-full">
-                <label for="email" class="block mb-1 text-xs font-medium text-gray-900 dark:text-white">Email</label>
+                <label for="email"
+                  class="block mb-1 text-xs font-medium text-gray-900 dark:text-white">Email</label>
                 <input type="email" name="email" id="email"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-3/4 p-2 text-xs dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 font-medium"
-                  placeholder="Masukkan email" value="{{ old('email', $user->email) }}" autocomplete="off" />
+                  class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full md:w-3/4 p-2 text-xs dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 font-medium"
+                  placeholder="Masukkan email" value="{{ old('email', $user->email) }}"
+                  autocomplete="off" />
                 @error('email')
-                  <small class="text-red-500 font-medium text-xs mt-1"> {{ $message }}</small>
+                  <small class="text-red-500 font-medium text-xs mt-1">
+                    {{ $message }}</small>
                 @enderror
               </div>
 
               <div>
-                <label for="role" class="block mb-1 text-xs font-medium text-gray-900 dark:text-white">Role</label>
+                <label for="role"
+                  class="block mb-1 text-xs font-medium text-gray-900 dark:text-white">Role</label>
                 <select id="role" name="role"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-xs font-medium rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-3/4 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-xs font-medium rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full md:w-3/4 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
 
-                  <option value="" {{ old('role', $user->role ?? '') == '' ? 'selected' : '' }}>--- Pilih Role ---
+                  <option value=""
+                    {{ old('role', $user->role ?? '') == '' ? 'selected' : '' }}>--- Pilih
+                    Role ---
                   </option>
-                  <option value="Admin" {{ old('role', $user->role ?? '') == 'Admin' ? 'selected' : '' }}>Admin</option>
-                  <option value="Ketua Jurusan" {{ old('role', $user->role ?? '') == 'Ketua Jurusan' ? 'selected' : '' }}>
+                  <option value="Admin"
+                    {{ old('role', $user->role ?? '') == 'Admin' ? 'selected' : '' }}>Admin
+                  </option>
+                  <option value="Ketua Jurusan"
+                    {{ old('role', $user->role ?? '') == 'Ketua Jurusan' ? 'selected' : '' }}>
                     Ketua Jurusan</option>
                   <option value="Sespim/Direktur"
-                    {{ old('role', $user->role ?? '') == 'Sespim/Direktur' ? 'selected' : '' }}>Sespim/Direktur</option>
+                    {{ old('role', $user->role ?? '') == 'Sespim/Direktur' ? 'selected' : '' }}>
+                    Sespim/Direktur</option>
                 </select>
 
                 @error('role')
-                  <small class="text-red-500 font-medium text-xs mt-1">{{ $message }}</small>
+                  <small
+                    class="text-red-500 font-medium text-xs mt-1">{{ $message }}</small>
                 @enderror
               </div>
 
 
               <div class="sw-full">
-                <label for="nip" class="block mb-1 text-xs font-medium text-gray-900 dark:text-white">NIP</label>
+                <label for="nip"
+                  class="block mb-1 text-xs font-medium text-gray-900 dark:text-white">NIP</label>
                 <input type="text" name="nip" id="nip" inputmode="numeric"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-3/4 p-2 text-xs dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 font-medium"
-                  placeholder="Masukkan NIP" value="{{ old('nip', $user->nip) }}" autocomplete="off" />
+                  class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full md:w-3/4 p-2 text-xs dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 font-medium"
+                  placeholder="Masukkan NIP" value="{{ old('nip', $user->nip) }}"
+                  autocomplete="off" />
                 @error('nip')
-                  <small class="text-red-500 font-medium text-xs mt-1"> {{ $message }}</small>
+                  <small class="text-red-500 font-medium text-xs mt-1">
+                    {{ $message }}</small>
                 @enderror
               </div>
 
               <div>
-                <label for="jabatan" class="block mb-1 text-xs font-medium text-gray-900 dark:text-white">Jabatan</label>
+                <label for="jabatan"
+                  class="block mb-1 text-xs font-medium text-gray-900 dark:text-white">Jabatan</label>
                 <select id="jabatan" name="jabatan_id"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-xs font-medium rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-3/4 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-xs font-medium rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full md:w-3/4 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
 
                   <option value="">--- Pilih Jabatan ---</option>
 
@@ -76,7 +94,8 @@
                 </select>
 
                 @error('jabatan_id')
-                  <small class="text-red-500 font-medium text-xs mt-1">{{ $message }}</small>
+                  <small
+                    class="text-red-500 font-medium text-xs mt-1">{{ $message }}</small>
                 @enderror
               </div>
 

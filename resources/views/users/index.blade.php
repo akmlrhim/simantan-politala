@@ -52,31 +52,20 @@
               <a href="{{ route('users.edit', $user->id) }}"
                 class="text-blue-600 hover:text-blue-900 dark:text-blue-500 dark:hover:text-blue-700">Edit</a>
               |
-              <button onclick="openModal('deleteModal-{{ $user->id }}')"
+              <button
+                onclick="showDeleteModal('{{ route('users.destroy', $user->id) }}', 'Yakin ingin menghapus pengguna ?')"
                 class="text-red-600 hover:text-red-900 dark:text-red-500 dark:hover:text-red-700">Hapus</button>
             </td>
           </tr>
-
-          {{-- modal konfirmasi hapus  --}}
-          <x-confirm-delete :modal-id="'deleteModal-' . $user->id" :action="route('users.destroy', $user->id)" :message="'Yakin ingin menghapus pengguna ?'" />
         @endforeach
       </tbody>
     </table>
   </div>
 
+  {{-- modal konfirmasi hapus  --}}
+  <x-confirm-delete />
+
   <div class="ml-6 mt-4 text-xs font-medium">
     {{ $users->links() }}
   </div>
-
-  @push('scripts')
-    <script>
-      function openModal(id) {
-        document.getElementById(id).classList.remove('hidden');
-      }
-
-      function closeModal(id) {
-        document.getElementById(id).classList.add('hidden');
-      }
-    </script>
-  @endpush
 @endsection

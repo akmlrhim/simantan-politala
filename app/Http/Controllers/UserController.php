@@ -15,11 +15,11 @@ class UserController extends Controller
 	 */
 	public function index()
 	{
-		$title = 'Data Pengguna';
+		$title = 'Pengguna';
 		$users = DB::table('users')
 			->join('jabatan', 'users.jabatan_id', '=', 'jabatan.id')
 			->select('users.*', 'jabatan.nama as nama_jabatan')
-			->paginate();
+			->paginate(10);
 
 		return view('users.index', compact('title', 'users'));
 	}
@@ -56,7 +56,7 @@ class UserController extends Controller
 			);
 
 			DB::commit();
-			return redirect()->route('users.index')->with('success', 'Pengguna berhasil ditambahkan');
+			return redirect()->route('users.index')->with('success', 'Pengguna berhasil ditambahkan !');
 		} catch (\Exception $e) {
 			DB::rollBack();
 			return redirect()->back()->withInput()->with('error', 'Gagal menambahkan pengguna');
