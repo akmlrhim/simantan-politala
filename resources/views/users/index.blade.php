@@ -1,14 +1,14 @@
 @extends('layouts.main')
 
 @section('content')
-  <div class="flex ml-6 mb-3">
+  <div class="flex md:ml-6 mb-3">
     <a href="{{ route('users.create') }}"
       class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-xs px-3 py-2 tracking-wide focus:outline-none capitalize">
       Tambah Data
     </a>
   </div>
 
-  <div class="relative overflow-x-auto shadow-lg rounded-md ml-6">
+  <div class="relative overflow-x-auto shadow-lg rounded-md md:ml-6">
     <table class="w-full text-xs text-left rtl:text-right text-black dark:text-gray-400">
       <thead
         class="text-xs text-white uppercase bg-gray-800 dark:bg-gray-700 dark:text-gray-400">

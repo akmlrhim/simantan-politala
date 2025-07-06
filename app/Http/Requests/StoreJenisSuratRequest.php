@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateJabatanRequest extends FormRequest
+class StoreJenisSuratRequest extends FormRequest
 {
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -22,15 +22,16 @@ class UpdateJabatanRequest extends FormRequest
 	public function rules(): array
 	{
 		return [
-			'nama' => 'required|string|max:255',
+			'nama' => 'required|unique:jenis_surat,nama,except,id|string|max:255',
 		];
 	}
 
 	public function messages(): array
 	{
 		return [
-			'nama.required' => 'Nama jabatan harus diisi',
-			'nama.max' => 'Nama jabatan maksimal 255 karakter'
+			'nama.required' => 'Jenis surat harus diisi',
+			'nama.unique' => 'Jenis surat sudah terdaftar',
+			'nama.max' => 'Jenis surat maksimal 255 karakter'
 		];
 	}
 }

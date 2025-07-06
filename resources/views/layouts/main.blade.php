@@ -20,7 +20,7 @@
 
   @include('layouts.sidebar')
 
-  <div class="p-4 sm:ml-64 font-sans">
+  <div class="p-4 md:ml-60 font-sans">
     @include('layouts.breadcrumb')
 
     @yield('content')

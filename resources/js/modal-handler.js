@@ -22,17 +22,10 @@ window.showDeleteModal = function (actionUrl, message) {
     }
 };
 
-window.closeModal = function () {
+window.closeDeleteModal = function () {
     const modal = document.getElementById("deleteModal");
     if (modal) {
         modal.classList.remove("flex");
         modal.classList.add("hidden");
-    }
-};
-
-window.showCreateModalIfErrors = function () {
-    const modal = document.getElementById("create-modal");
-    if (modal) {
-        modal.classList.remove("hidden");
     }
 };

@@ -83,7 +83,7 @@ class JabatanController extends Controller
 			return redirect()->back()->with('success', 'Jabatan berhasil diubah !');
 		} catch (\Exception $e) {
 			DB::rollBack();
-			return redirect()->back()->with('error', 'Gagal menambahkan data !');
+			return redirect()->back()->with('error', 'Terjadi kesalahan !');
 		}
 	}
 

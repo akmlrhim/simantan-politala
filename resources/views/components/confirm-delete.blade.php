@@ -3,7 +3,7 @@
   class="hidden fixed inset-0 z-50 justify-center items-center bg-black/30 backdrop-blur-sm backdrop-brightness-90">
   <div class="relative p-4 w-full max-w-md max-h-full">
     <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
-      <button type="button" onclick="closeModal()"
+      <button type="button" onclick="closeDeleteModal()"
         class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
         <svg class="w-3 h-3" xmlns="http://www.w3.org/2000/svg" fill="none"
           viewBox="0 0 14 14">
@@ -30,7 +30,7 @@
             class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-xs inline-flex items-center px-5 py-2.5 text-center me-2">
             Ya, Hapus
           </button>
-          <button type="button" onclick="closeModal()"
+          <button type="button" onclick="closeDeleteModal()"
             class="py-2.5 px-5 text-xs font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
             Batal
           </button>

@@ -25,11 +25,11 @@
         </tr>
       </thead>
       <tbody>
-        @foreach ($jabatan as $j)
+        @foreach ($jenisSurat as $j)
           <tr
             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 font-medium">
             <td class="px-6 py-4" scope="row">
-              {{ method_exists($jabatan, 'firstItem') ? $jabatan->firstItem() + $loop->index : $loop->iteration }}
+              {{ method_exists($jenisSurat, 'firstItem') ? $jenisSurat->firstItem() + $loop->index : $loop->iteration }}
             </td>
             <td class="px-6 py-4">{{ $j->nama }}</td>
 
@@ -38,7 +38,7 @@
                 class="text-blue-600 hover:text-blue-900 dark:text-blue-500 dark:hover:text-blue-700">Edit</button>
               |
               <button
-                onclick="showDeleteModal('{{ route('jabatan.destroy', $j->id) }}', 'Yakin ingin menghapus jabatan ?')"
+                onclick="showDeleteModal('{{ route('jenis-surat.destroy', $j->id) }}', 'Yakin ingin menghapus jenis surat ?')"
                 class="text-red-600 hover:text-red-900 dark:text-red-500 dark:hover:text-red-700">Hapus</button>
             </td>
           </tr>
@@ -52,7 +52,7 @@
 
 
   <div class="ml-6 mt-4 text-xs font-medium">
-    {{ $jabatan->links() }}
+    {{ $jenisSurat->links() }}
   </div>
 
   {{-- create modal  --}}
@@ -63,7 +63,7 @@
         <div
           class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
           <h3 class="text-md font-semibold text-gray-900 dark:text-white">
-            Tambah Data Jabatan
+            Tambah Data Jenis Surat
           </h3>
           <button type="button" data-modal-hide="create-modal"
             class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -76,17 +76,17 @@
             <span class="sr-only">Close modal</span>
           </button>
         </div>
-        <form class="p-4 md:p-5" method="POST" action="{{ route('jabatan.store') }}">
+        <form class="p-4 md:p-5" method="POST" action="{{ route('jenis-surat.store') }}">
           @csrf
           <input type="hidden" name="form_type" value="create">
           <div class="grid gap-4 mb-4 grid-cols-2">
             <div class="col-span-2">
               <label for="nama"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama
-                jabatan </label>
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis
+                Surat </label>
               <input type="text" name="nama" id="nama"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-xs font-medium rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                placeholder="Masukkan nama jabatan" autocomplete="off" />
+                placeholder="Masukkan jenis surat" autocomplete="off" />
               @error('nama')
                 <small class="text-red-500 font-medium text-xs mt-1">
                   {{ $message }}
@@ -115,7 +115,7 @@
         <div
           class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
           <h3 class="text-md font-semibold text-gray-900 dark:text-white">
-            Edit Data Jabatan
+            Edit Data Jenis Surat
           </h3>
           <button type="button" onclick="closeEditModal()"
             class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
@@ -137,11 +137,11 @@
           <div class="grid gap-4 mb-4 grid-cols-2">
             <div class="col-span-2">
               <label for="edit_nama"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama
-                jabatan</label>
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis
+                Surat</label>
               <input type="text" name="nama" id="edit_nama"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-xs font-medium rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                placeholder="Masukkan nama jabatan" autocomplete="off"
+                placeholder="Masukkan jenis surat" autocomplete="off"
                 value="{{ old('nama') }}" />
               @error('nama')
                 <small class="text-red-500 font-medium text-xs mt-1">
@@ -175,7 +175,7 @@
         const modal = document.getElementById('edit-modal');
 
         if (form && inputId && inputNama && modal) {
-          form.action = `/jabatan/${id}`;
+          form.action = `/jenis-surat/${id}`;
           inputId.value = id;
           inputNama.value = nama;
 

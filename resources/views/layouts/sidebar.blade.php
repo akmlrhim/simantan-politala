@@ -48,18 +48,27 @@
       </div>
 
       <li>
-        <a href="{{ route('users.index') }}"
+        <a href="{{ route('jenis-surat.index') }}"
           class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-700 group">
-          <i class="fa-solid fa-user"></i>
-          <span class="ms-3">User</span>
+          <i class="fa-solid fa-envelopes-bulk"></i>
+          <span class="ms-3">Jenis Surat</span>
         </a>
       </li>
+
 
       <li>
         <a href="{{ route('jabatan.index') }}"
           class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-700 group">
           <i class="fa-solid fa-user-tie"></i>
-          <span class="ms-3">Jabatan</span>
+          <span class="ms-4">Jabatan</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="{{ route('users.index') }}"
+          class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-700 group">
+          <i class="fa-solid fa-user"></i>
+          <span class="ms-4">User</span>
         </a>
       </li>
 
