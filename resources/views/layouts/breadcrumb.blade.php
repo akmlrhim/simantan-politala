@@ -8,7 +8,7 @@
     </div>
 
     <ol
-      class="inline-flex items-center text-xs space-x-1 md:space-x-2 rtl:space-x-reverse text-gray-700 dark:text-gray-400">
+      class="inline-flex items-center text-sm space-x-1 md:space-x-2 rtl:space-x-reverse text-gray-700 dark:text-gray-400">
       <li class="inline-flex items-center">
         <a href="{{ route('dashboard') }}"
           class="inline-flex items-center font-medium hover:text-gray-800 dark:hover:text-white">

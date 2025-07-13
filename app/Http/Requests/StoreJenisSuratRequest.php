@@ -25,13 +25,4 @@ class StoreJenisSuratRequest extends FormRequest
 			'nama' => 'required|unique:jenis_surat,nama,except,id|string|max:255',
 		];
 	}
-
-	public function messages(): array
-	{
-		return [
-			'nama.required' => 'Jenis surat harus diisi',
-			'nama.unique' => 'Jenis surat sudah terdaftar',
-			'nama.max' => 'Jenis surat maksimal 255 karakter'
-		];
-	}
 }

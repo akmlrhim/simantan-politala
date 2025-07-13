@@ -3,15 +3,15 @@
 @section('content')
   <div class="flex md:ml-6 mb-3">
     <button data-modal-target="create-modal" data-modal-toggle="create-modal"
-      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-xs px-3 py-2 tracking-wide focus:outline-none capitalize">
+      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-3 py-2 tracking-wide focus:outline-none capitalize">
       Tambah Data
     </button>
   </div>
 
   <div class="relative overflow-x-auto shadow-lg rounded-md md:ml-6">
-    <table class="w-full text-xs text-left rtl:text-right text-black dark:text-gray-400">
+    <table class="w-full text-sm text-left rtl:text-right text-black dark:text-gray-400">
       <thead
-        class="text-xs text-white uppercase bg-gray-800 dark:bg-gray-700 dark:text-gray-400">
+        class="text-sm text-white uppercase bg-gray-800 dark:bg-gray-700 dark:text-gray-400">
         <tr>
           <th scope="col" class="px-6 py-3">
             No.
@@ -51,7 +51,7 @@
   <x-confirm-delete />
 
 
-  <div class="ml-6 mt-4 text-xs font-medium">
+  <div class="ml-6 mt-4 text-sm font-medium">
     {{ $jenisSurat->links() }}
   </div>
 
@@ -85,19 +85,19 @@
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis
                 Surat </label>
               <input type="text" name="nama" id="nama"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-xs font-medium rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm font-medium rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="Masukkan jenis surat" autocomplete="off" />
               @error('nama')
-                <small class="text-red-500 font-medium text-xs mt-1">
+                <small class="text-red-500 font-medium text-sm mt-1 capitalize">
                   {{ $message }}
                 </small>
               @enderror
             </div>
           </div>
           <button data-modal-hide="create-modal" type="button"
-            class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-xs px-3 py-2 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Kembali</button>
+            class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Kembali</button>
           <button type="submit"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
             Simpan
           </button>
         </form>
@@ -140,11 +140,11 @@
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis
                 Surat</label>
               <input type="text" name="nama" id="edit_nama"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-xs font-medium rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm font-medium rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="Masukkan jenis surat" autocomplete="off"
                 value="{{ old('nama') }}" />
               @error('nama')
-                <small class="text-red-500 font-medium text-xs mt-1">
+                <small class="text-red-500 font-medium text-sm mt-1 capitalize">
                   {{ $message }}
                 </small>
               @enderror
@@ -152,11 +152,11 @@
           </div>
 
           <button type="button" onclick="closeEditModal()"
-            class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-xs px-3 py-2 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+            class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
             Kembali
           </button>
           <button type="submit"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
             Simpan
           </button>
         </form>

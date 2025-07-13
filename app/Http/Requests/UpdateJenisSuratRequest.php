@@ -25,12 +25,4 @@ class UpdateJenisSuratRequest extends FormRequest
 			'nama' => 'required|max:255'
 		];
 	}
-
-	public function messages(): array
-	{
-		return [
-			'nama.required' => 'Jenis surat wajib diisi',
-			'nama.max' => 'Maksimal karakter 255'
-		];
-	}
 }

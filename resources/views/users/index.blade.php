@@ -3,15 +3,15 @@
 @section('content')
   <div class="flex md:ml-6 mb-3">
     <a href="{{ route('users.create') }}"
-      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-xs px-3 py-2 tracking-wide focus:outline-none capitalize">
+      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-3 py-2 tracking-wide focus:outline-none capitalize">
       Tambah Data
     </a>
   </div>
 
   <div class="relative overflow-x-auto shadow-lg rounded-md md:ml-6">
-    <table class="w-full text-xs text-left rtl:text-right text-black dark:text-gray-400">
+    <table class="w-full text-sm text-left rtl:text-right text-black dark:text-gray-400">
       <thead
-        class="text-xs text-white uppercase bg-gray-800 dark:bg-gray-700 dark:text-gray-400">
+        class="text-sm text-white uppercase bg-gray-800 dark:bg-gray-700 dark:text-gray-400">
         <tr>
           <th scope="col" class="px-6 py-3">
             No.
@@ -24,9 +24,6 @@
           </th>
           <th scope="col" class="px-6 py-3">
             Role
-          </th>
-          <th scope="col" class="px-6 py-3">
-            NIP
           </th>
           <th scope="col" class="px-6 py-3">
             Jabatan
@@ -43,10 +40,10 @@
             <td class="px-6 py-4" scope="row">
               {{ method_exists($users, 'firstItem') ? $users->firstItem() + $loop->index : $loop->iteration }}
             </td>
-            <td class="px-6 py-4">{{ $user->nama }}</td>
+            <td class="px-6 py-4">{{ $user->nama }} <br /> <span
+                class="text-xs text-gray-600">NIP.{{ $user->nip }}</span></td>
             <td class="px-6 py-4">{{ $user->email }}</td>
             <td class="px-6 py-4">{{ $user->role }}</td>
-            <td class="px-6 py-4">{{ $user->nip }}</td>
             <td class="px-6 py-4">{{ $user->nama_jabatan }}</td>
             <td class="px-6 py-4">
               <a href="{{ route('users.edit', $user->id) }}"
@@ -65,7 +62,7 @@
   {{-- modal konfirmasi hapus  --}}
   <x-confirm-delete />
 
-  <div class="ml-6 mt-4 text-xs font-medium">
+  <div class="ml-6 mt-4 text-sm font-medium">
     {{ $users->links() }}
   </div>
 @endsection

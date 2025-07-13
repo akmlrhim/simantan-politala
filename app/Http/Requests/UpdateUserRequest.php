@@ -29,20 +29,4 @@ class UpdateUserRequest extends FormRequest
 			'role' => 'required|in:Ketua Jurusan,Admin,Sespim/Direktur',
 		];
 	}
-
-	public function messages(): array
-	{
-		return [
-			'nama.required' => 'Nama lengkap harus diisi.',
-			'nama.unique' => 'Nama lengkap sudah terdaftar.',
-			'email.required' => 'Email harus diisi.',
-			'email.unique' => 'Email sudah terdaftar.',
-			'nip.required' => 'NIP harus diisi.',
-			'nip.unique' => 'NIP sudah terdaftar.',
-			'nip.max' => 'NIP tidak boleh lebih dari 20 karakter.',
-			'jabatan_id.required' => 'Jabatan harus dipilih.',
-			'role.required' => 'Role harus dipilih.',
-			'role.in' => 'Role yang dipilih tidak valid.',
-		];
-	}
 }

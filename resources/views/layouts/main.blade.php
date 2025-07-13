@@ -29,14 +29,6 @@
 
   <x-toast></x-toast>
 
-  {{-- custom js  --}}
-  @if ($errors->any())
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        showCreateModalIfErrors();
-      });
-    </script>
-  @endif
 
   @stack('scripts')
 </body>

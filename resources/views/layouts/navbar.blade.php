@@ -2,8 +2,8 @@
   <div class="px-3 py-3 lg:px-5 lg:pl-3">
     <div class="flex items-center justify-between">
       <div class="flex items-center justify-start rtl:justify-end">
-        <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar"
-          type="button"
+        <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar"
+          aria-controls="logo-sidebar" type="button"
           class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-800 dark:focus:ring-gray-600">
           <span class="sr-only">Open sidebar</span>
           <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
@@ -15,10 +15,10 @@
         </button>
 
         <a href="{{ route('dashboard') }}" class="flex ms-2 md:me-24">
-          <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 me-3 bg-white p-1 rounded-lg"
-            alt="Flowbite Logo" />
-          <span class="self-center text-xl font-semibold whitespace-nowrap text-white"> <small
-              class="text-lg font-bold "></small></span>
+          <img src="https://flowbite.com/docs/images/logo.svg"
+            class="h-8 me-3 bg-white p-1 rounded-lg" alt="Flowbite Logo" />
+          <span class="self-center text-xl font-semibold whitespace-nowrap text-white">
+            <small class="text-lg font-bold "></small></span>
         </a>
       </div>
       <div class="flex items-center">
@@ -29,7 +29,8 @@
               aria-expanded="false" data-dropdown-toggle="user-dropdown">
               <span class="sr-only">Open user menu</span>
               <img class="w-8 h-8 rounded-full bg-white p-1"
-                src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="User Avatar">
+                src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                alt="User Avatar">
 
             </button>
           </div>
@@ -42,18 +43,23 @@
                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard
                 </a>
               </li>
-              {{-- <li>
-                <a href="{{ route('dashboard.settings') }}"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard
-                  Settings</a>
-              </li> --}}
+
+              <li>
+                <a href="{{ route('dashboard') }}"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Profil
+                  Saya
+                </a>
+              </li>
+
               <li>
                 <a href="#"
                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                   onclick="event.preventDefault(); document.getElementById('logout').submit();">Logout</a>
               </li>
 
-              <form action="#" method="POST" class="hidden" id="logout">@csrf</form>
+              <form action="{{ route('logout') }}" method="POST" class="hidden"
+                id="logout">@csrf
+              </form>
             </ul>
           </div>
         </div>

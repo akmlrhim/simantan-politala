@@ -25,13 +25,4 @@ class StoreJabatanRequest extends FormRequest
 			'nama' => 'required|unique:jabatan,nama,except,id|string|max:255',
 		];
 	}
-
-	public function messages(): array
-	{
-		return [
-			'nama.required' => 'Nama jabatan harus diisi',
-			'nama.unique' => 'Nama jabatan sudah terdaftar',
-			'nama.max' => 'Nama jabatan maksimal 255 karakter'
-		];
-	}
 }
