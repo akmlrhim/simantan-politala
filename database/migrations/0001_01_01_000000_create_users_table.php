@@ -17,8 +17,8 @@ return new class extends Migration
 			$table->string('email')->unique();
 			$table->string('role');
 			$table->string('nip');
+			$table->string('jabatan');
 			$table->string('foto')->nullable();
-			$table->foreignId('jabatan_id')->nullable()->constrained('jabatan')->nullOnDelete();
 			$table->timestamp('email_verified_at')->nullable();
 			$table->string('password');
 			$table->rememberToken();

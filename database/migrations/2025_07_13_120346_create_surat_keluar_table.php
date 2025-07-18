@@ -11,9 +11,14 @@ return new class extends Migration
 	 */
 	public function up(): void
 	{
-		Schema::create('jabatan', function (Blueprint $table) {
+		Schema::create('surat_keluar', function (Blueprint $table) {
 			$table->id();
-			$table->string('nama');
+			$table->string('nomor_surat', 120);
+			$table->string('hal', 120);
+			$table->date('tanggal_surat');
+			$table->longText('isi_surat');
+			$table->foreignId('created_by')->constrained('users')->onDelete('cascade');
+
 			$table->timestamps();
 		});
 	}
@@ -23,6 +28,6 @@ return new class extends Migration
 	 */
 	public function down(): void
 	{
-		Schema::dropIfExists('jabatan');
+		Schema::dropIfExists('surat_keluar');
 	}
 };

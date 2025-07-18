@@ -7,20 +7,27 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  {{-- logo web --}}
+  <link rel="icon" href="{{ asset('img/logo_politala.png') }}" type="image/x-icon">
+  <link rel="shortcut icon" href="{{ asset('img/logo_politala.png') }}"
+    type="image/x-icon">
+
+  <link rel="stylesheet" href="">
   <title>{{ $title }}</title>
 
   @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
     @vite(['resources/css/app.css', 'resources/js/app.js'])
   @endif
+
+  @stack('css-libs')
 </head>
 
-<body class="antialiased bg-gray-50">
+<body class="antialiased bg-gray-100">
 
   @include('layouts.navbar')
 
   @include('layouts.sidebar')
-
-  <div class="p-4 md:ml-60 font-sans">
+  <div class="p-4 md:ml-60 font-sans min-h-screen overflow-auto">
     @include('layouts.breadcrumb')
 
     @yield('content')
@@ -28,7 +35,6 @@
   </div>
 
   <x-toast></x-toast>
-
 
   @stack('scripts')
 </body>

@@ -117,6 +117,7 @@ return [
     | Supported drivers: "file", "cache"
     |
     */
+	'tinymce-api-key' => env('TINYMCE_API_KEY', 'no-api-key'),
 
 	'maintenance' => [
 		'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),

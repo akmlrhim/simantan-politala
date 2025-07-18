@@ -23,8 +23,8 @@ class UserSeeder extends Seeder
 				'email' => $faker->unique()->safeEmail(),
 				'role' => $faker->randomElement(['Ketua Jurusan', 'Admin', 'Sespim/Direktur']),
 				'nip' => $faker->unique()->numerify('NIP-#########'),
-				'foto' => $faker->imageUrl(640, 480, 'people', true, 'Faker'),
-				'jabatan_id' => $faker->numberBetween(1, 10),
+				'jabatan' => $faker->jobTitle(),
+				'foto' => 'default.jpg',
 				'password' => Hash::make('password'),
 			]);
 		}

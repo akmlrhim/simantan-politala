@@ -15,14 +15,19 @@ class UserController extends Controller
 	 */
 	public function index()
 	{
-		$title = 'Pengguna';
-		$users = DB::table('users')
-			->join('jabatan', 'users.jabatan_id', '=', 'jabatan.id')
-			->select('users.*', 'jabatan.nama as nama_jabatan')
-			->paginate(10);
+		$search = request()->query('search');
+		$query = DB::table('users');
 
-		return view('users.index', compact('title', 'users'));
+		if ($search) {
+			$query->where('nama', 'like', '%' . $search . '%');
+		}
+
+		$users = $query->paginate(10)->appends(['search' => $search]);
+		$title = 'Pengguna';
+
+		return view('users.index', compact('title', 'users', 'search'));
 	}
+
 
 	/**
 	 * Show the form for creating a new resource.
@@ -30,9 +35,8 @@ class UserController extends Controller
 	public function create()
 	{
 		$title = 'Tambah Pengguna';
-		$jabatan = DB::table('jabatan')->get();
 
-		return view('users.create', compact('title', 'jabatan'));
+		return view('users.create', compact('title'));
 	}
 
 	/**
@@ -48,8 +52,8 @@ class UserController extends Controller
 					'nama' => $request->nama,
 					'email' => $request->email,
 					'nip' => $request->nip,
+					'jabatan' => $request->jabatan,
 					'password' => Hash::make($request->password),
-					'jabatan_id' => $request->jabatan_id,
 					'foto' => 'default.png',
 					'role' => $request->role,
 				]
@@ -77,9 +81,8 @@ class UserController extends Controller
 	public function edit(User $user)
 	{
 		$title = 'Edit pengguna';
-		$jabatan = DB::table('jabatan')->get();
 
-		return view('users.edit', compact('title', 'jabatan', 'user'));
+		return view('users.edit', compact('title', 'user'));
 	}
 
 	/**
@@ -93,8 +96,8 @@ class UserController extends Controller
 			$user->update([
 				'nama' => $request->nama,
 				'email' => $request->email,
+				'jabatan' => $request->jabatan,
 				'nip' => $request->nip,
-				'jabatan_id' => $request->jabatan_id,
 				'role' => $request->role,
 			]);
 

@@ -1,6 +1,6 @@
 @if (session('success'))
   <div id="toast-success"
-    class="fixed top-4 right-4 z-50 flex items-center max-w-xs w-full p-4 mb-4 text-sm text-gray-700 bg-white rounded-lg shadow-lg dark:bg-gray-800 dark:text-gray-300"
+    class="fixed top-4 right-4 z-50 flex items-center max-w-xs w-full p-4 mb-4 md:text-sm text-xs text-gray-700 bg-white rounded-lg shadow-lg dark:bg-gray-800 dark:text-gray-300"
     role="alert">
     <div
       class="inline-flex items-center justify-center shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
@@ -10,7 +10,7 @@
       </svg>
       <span class="sr-only">Check icon</span>
     </div>
-    <div class="ms-3 text-sm font-medium">{{ session('success') }}</div>
+    <div class="ms-3 md:text-sm text-xs font-medium">{{ session('success') }}</div>
     <button type="button" data-dismiss-target="#toast-success" aria-label="Close"
       class="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">
       <span class="sr-only">Close</span>
@@ -24,7 +24,7 @@
 
 @if (session('error'))
   <div id="toast-danger"
-    class="fixed top-4 right-4 z-50 flex items-center max-w-xs w-full p-4 mb-4 text-sm text-gray-700 bg-white rounded-lg shadow-lg dark:bg-gray-800 dark:text-gray-300"
+    class="fixed top-4 right-4 z-50 flex items-center max-w-xs w-full p-4 mb-4 md:text-sm text-xs text-gray-700 bg-white rounded-lg shadow-lg dark:bg-gray-800 dark:text-gray-300"
     role="alert">
     <div
       class="inline-flex items-center justify-center shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-red-800 dark:text-red-200">
@@ -34,7 +34,7 @@
       </svg>
       <span class="sr-only">Error icon</span>
     </div>
-    <div class="ms-3 text-sm font-medium">{{ session('error') }}</div>
+    <div class="ms-3 md:text-sm text-xs font-medium">{{ session('error') }}</div>
     <button type="button" data-dismiss-target="#toast-danger" aria-label="Close"
       class="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">
       <span class="sr-only">Close</span>
@@ -48,7 +48,7 @@
 
 @if (session('info'))
   <div id="toast-info"
-    class="fixed top-4 right-4 z-50 flex items-center max-w-xs w-full p-4 mb-4 text-sm text-gray-700 bg-white rounded-lg shadow-lg dark:bg-gray-800 dark:text-gray-300"
+    class="fixed top-4 right-4 z-50 flex items-center max-w-xs w-full p-4 mb-4 md:text-sm text-xs text-gray-700 bg-white rounded-lg shadow-lg dark:bg-gray-800 dark:text-gray-300"
     role="alert">
     <div
       class="inline-flex items-center justify-center shrink-0 w-8 h-8 text-blue-500 bg-blue-100 rounded-lg dark:bg-red-800 dark:text-blue-200">
@@ -60,7 +60,7 @@
       <span class="sr-only">Warning icon</span>
       <span class="sr-only">Error icon</span>
     </div>
-    <div class="ms-3 text-sm font-medium">{{ session('info') }}</div>
+    <div class="ms-3 md:text-sm text-xs font-medium">{{ session('info') }}</div>
     <button type="button" data-dismiss-target="#toast-info" aria-label="Close"
       class="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">
       <span class="sr-only">Close</span>

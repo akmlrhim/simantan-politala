@@ -24,7 +24,7 @@ class UpdateUserRequest extends FormRequest
 		return [
 			'nama' => 'required|string|max:255',
 			'email' => 'required|email|max:255',
-			'jabatan_id' => 'required|exists:jabatan,id',
+			'jabatan' => 'required|string|max:255',
 			'nip' => 'required|nullable|string|max:20',
 			'role' => 'required|in:Ketua Jurusan,Admin,Sespim/Direktur',
 		];

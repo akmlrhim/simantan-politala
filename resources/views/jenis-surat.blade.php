@@ -10,42 +10,39 @@
 
   <div class="relative overflow-x-auto shadow-lg rounded-md md:ml-6">
     <table class="w-full text-sm text-left rtl:text-right text-black dark:text-gray-400">
-      <thead
-        class="text-sm text-white uppercase bg-gray-800 dark:bg-gray-700 dark:text-gray-400">
+      <thead class="text-black uppercase bg-white md:text-sm text-xs">
         <tr>
-          <th scope="col" class="px-6 py-3">
-            No.
-          </th>
-          <th scope="col" class="px-6 py-3">
-            Nama
-          </th>
-          <th scope="col" class="px-6 py-3">
-            Aksi
-          </th>
+          <th scope="col" class="px-6 py-3">No.</th>
+          <th scope="col" class="px-6 py-3">Nama</th>
+          <th scope="col" class="px-6 py-3">Aksi</th>
         </tr>
       </thead>
       <tbody>
-        @foreach ($jenisSurat as $j)
-          <tr
-            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 font-medium">
+        @forelse ($jenisSurat as $j)
+          <tr class="bg-white border-b border-gray-200 md:text-sm text-xs font-medium">
             <td class="px-6 py-4" scope="row">
               {{ method_exists($jenisSurat, 'firstItem') ? $jenisSurat->firstItem() + $loop->index : $loop->iteration }}
             </td>
             <td class="px-6 py-4">{{ $j->nama }}</td>
-
-            <td class="px-6 py-4">
+            <td class="px-6 py-4 flex gap-2">
               <button onclick="openEditModal({{ $j->id }}, '{{ $j->nama }}')"
-                class="text-blue-600 hover:text-blue-900 dark:text-blue-500 dark:hover:text-blue-700">Edit</button>
-              |
+                class="px-3 py-1 font-medium text-white bg-yellow-500 rounded hover:bg-yellow-600">Edit</button>
               <button
                 onclick="showDeleteModal('{{ route('jenis-surat.destroy', $j->id) }}', 'Yakin ingin menghapus jenis surat ?')"
-                class="text-red-600 hover:text-red-900 dark:text-red-500 dark:hover:text-red-700">Hapus</button>
+                class="px-3 py-1 font-medium text-white bg-red-600 rounded hover:bg-red-700">Hapus</button>
             </td>
           </tr>
-        @endforeach
+        @empty
+          <tr>
+            <td colspan="3" class="text-center px-6 py-4 text-gray-500">
+              Tidak ada data dalam tabel.
+            </td>
+          </tr>
+        @endforelse
       </tbody>
     </table>
   </div>
+
 
   {{-- modal konfirmasi hapus  --}}
   <x-confirm-delete />

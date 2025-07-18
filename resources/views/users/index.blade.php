@@ -1,63 +1,76 @@
 @extends('layouts.main')
 
 @section('content')
-  <div class="flex md:ml-6 mb-3">
+  <div
+    class="flex flex-col md:flex-row md:items-center md:justify-between md:ml-6 mb-3 gap-2">
     <a href="{{ route('users.create') }}"
-      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-3 py-2 tracking-wide focus:outline-none capitalize">
+      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-3 py-2 tracking-wide focus:outline-none capitalize w-fit">
       Tambah Data
     </a>
+
+    <form action="{{ route('users.index') }}" method="GET"
+      class="flex items-center gap-2 w-full md:w-auto">
+      <input type="text" name="search" placeholder="Cari pengguna..."
+        class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full md:w-64 p-2 text-sm dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 font-medium"
+        value="{{ request('search') }}" autocomplete="off">
+      <button type="submit"
+        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2">
+        Cari
+      </button>
+    </form>
   </div>
 
+
   <div class="relative overflow-x-auto shadow-lg rounded-md md:ml-6">
-    <table class="w-full text-sm text-left rtl:text-right text-black dark:text-gray-400">
-      <thead
-        class="text-sm text-white uppercase bg-gray-800 dark:bg-gray-700 dark:text-gray-400">
-        <tr>
-          <th scope="col" class="px-6 py-3">
-            No.
-          </th>
-          <th scope="col" class="px-6 py-3">
-            Nama
-          </th>
-          <th scope="col" class="px-6 py-3">
-            Email
-          </th>
-          <th scope="col" class="px-6 py-3">
-            Role
-          </th>
-          <th scope="col" class="px-6 py-3">
-            Jabatan
-          </th>
-          <th scope="col" class="px-6 py-3">
-            Aksi
-          </th>
+    <table class="w-full text-left rtl:text-right text-black dark:text-gray-400">
+      <thead class="md:text-sm text-xs text-black uppercase bg-white">
+        <tr class="border-b-2 border-gray-200">
+          <th scope="col" class="px-6 py-3">No.</th>
+          <th scope="col" class="px-6 py-3">Nama</th>
+          <th scope="col" class="px-6 py-3">Jabatan</th>
+          <th scope="col" class="px-6 py-3">Email</th>
+          <th scope="col" class="px-6 py-3">Role</th>
+          <th scope="col" class="px-6 py-3">Aksi</th>
         </tr>
       </thead>
       <tbody>
-        @foreach ($users as $user)
-          <tr
-            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 font-medium">
+        @forelse ($users as $user)
+          <tr class="bg-white border-b-2 border-gray-200 md:text-sm text-xs font-medium">
             <td class="px-6 py-4" scope="row">
               {{ method_exists($users, 'firstItem') ? $users->firstItem() + $loop->index : $loop->iteration }}
             </td>
             <td class="px-6 py-4">{{ $user->nama }} <br /> <span
                 class="text-xs text-gray-600">NIP.{{ $user->nip }}</span></td>
+            <td class="px-6 py-4">{{ $user->jabatan }}</td>
             <td class="px-6 py-4">{{ $user->email }}</td>
             <td class="px-6 py-4">{{ $user->role }}</td>
-            <td class="px-6 py-4">{{ $user->nama_jabatan }}</td>
-            <td class="px-6 py-4">
-              <a href="{{ route('users.edit', $user->id) }}"
-                class="text-blue-600 hover:text-blue-900 dark:text-blue-500 dark:hover:text-blue-700">Edit</a>
-              |
-              <button
+            <td class="px-6 py-4 flex gap-2">
+              <a href="{{ route('users.edit', $user->id) }}">
+                <button type="button"
+                  class="px-3 py-1 font-medium text-white bg-yellow-500 rounded hover:bg-yellow-600">
+                  Edit
+                </button>
+              </a>
+
+              <button type="button"
                 onclick="showDeleteModal('{{ route('users.destroy', $user->id) }}', 'Yakin ingin menghapus pengguna ?')"
-                class="text-red-600 hover:text-red-900 dark:text-red-500 dark:hover:text-red-700">Hapus</button>
+                class="px-3 py-1 font-medium text-white bg-red-600 rounded hover:bg-red-700">
+                Hapus
+              </button>
+            </td>
+
+          </tr>
+        @empty
+          <tr>
+            <td colspan="5" class="text-center px-6 py-4 text-gray-500">
+              Tidak ada data dalam tabel.
             </td>
           </tr>
-        @endforeach
+        @endforelse
       </tbody>
     </table>
   </div>
+
 
   {{-- modal konfirmasi hapus  --}}
   <x-confirm-delete />
