@@ -18,19 +18,17 @@
       </div>
 
       <li>
-        <a href="{{ route('dashboard') }}"
-          class="flex items-center p-2 text-black rounded-lg hover:bg-blue-900 hover:text-white">
+        <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
           <i class="fa-solid fa-house"></i>
           <span class="ms-2">Dashboard</span>
-        </a>
+        </x-nav-link>
       </li>
 
       <li>
-        <a href="{{ route('surat-keluar.index') }}"
-          class="flex items-center p-2 text-black rounded-lg hover:bg-blue-900 hover:text-white">
+        <x-nav-link href="{{ route('surat-keluar.index') }}" :active="request()->routeIs('surat-keluar.index')">
           <i class="fa-solid fa-envelope-open"></i>
           <span class="ms-2">Surat Keluar</span>
-        </a>
+        </x-nav-link>
       </li>
 
       <div class="flex items-center my-2">
@@ -39,19 +37,18 @@
       </div>
 
       <li>
-        <a href="{{ route('jenis-surat.index') }}"
-          class="flex items-center p-2 text-black rounded-lg hover:bg-blue-900 hover:text-white">
+        <x-nav-link href="{{ route('jenis-surat.index') }}" :active="request()->routeIs('jenis-surat.index')">
           <i class="fa-solid fa-envelopes-bulk"></i>
           <span class="ms-3">Jenis Surat</span>
-        </a>
+        </x-nav-link>
+
       </li>
 
       <li>
-        <a href="{{ route('users.index') }}"
-          class="flex items-center p-2 text-black rounded-lg hover:bg-blue-900 hover:text-white">
+        <x-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
           <i class="fa-solid fa-user"></i>
           <span class="ms-4">User</span>
-        </a>
+        </x-nav-link>
       </li>
 
       <li>

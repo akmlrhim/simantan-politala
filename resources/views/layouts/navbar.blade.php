@@ -15,15 +15,26 @@
       </button>
     </div>
 
-    <!-- Avatar user tetap di kanan -->
     <div class="ml-auto flex items-center">
-      <!-- Avatar user + dropdown seperti sebelumnya -->
       <div class="relative">
         <button type="button"
-          class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300"
+          class="flex items-center text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 px-2 py-1"
           aria-expanded="false" data-dropdown-toggle="user-dropdown">
-          <span class="sr-only">Open user menu</span>
-          <img class="w-8 h-8 rounded-full bg-white p-1" src="#" alt="User Avatar">
+
+          <img class="w-10 h-10 rounded-full "
+            src="{{ Auth::user()->foto ? asset('storage/foto_profil/' . Auth::user()->foto) : asset('storage/foto_profil/default.jpg') }}"
+            alt="User Avatar">
+
+          <div
+            class="mr-4 ml-3 text-white hidden md:flex flex-col text-left leading-tight">
+            <span class="font-semibold">
+              {{ Auth::user()->nama }}
+            </span>
+            <span class="text-xs text-gray-300">
+              {{ Auth::user()->role }}
+            </span>
+          </div>
+
         </button>
 
         <div id="user-dropdown"
