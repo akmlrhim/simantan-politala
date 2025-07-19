@@ -1,6 +1,6 @@
 <div class="p-3 mt-12">
   <nav
-    class="flex flex-col md:flex-row items-center md:items-center justify-center md:justify-between text-center md:text-left px-3 py-3"
+    class="flex flex-col md:flex-row items-start md:items-center justify-center md:justify-between text-center md:text-left px-3 py-3"
     aria-label="Breadcrumb">
 
     <div class="text-2xl font-semibold text-gray-800 dark:text-white mb-2 md:mb-0">

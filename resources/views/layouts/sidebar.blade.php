@@ -25,6 +25,13 @@
       </li>
 
       <li>
+        <x-nav-link href="{{ route('surat-masuk.index') }}" :active="request()->routeIs('surat-masuk.index')">
+          <i class="fa-solid fa-envelope-open-text"></i>
+          <span class="ms-2">Surat Masuk</span>
+        </x-nav-link>
+      </li>
+
+      <li>
         <x-nav-link href="{{ route('surat-keluar.index') }}" :active="request()->routeIs('surat-keluar.index')">
           <i class="fa-solid fa-envelope-open"></i>
           <span class="ms-2">Surat Keluar</span>
@@ -41,7 +48,6 @@
           <i class="fa-solid fa-envelopes-bulk"></i>
           <span class="ms-3">Jenis Surat</span>
         </x-nav-link>
-
       </li>
 
       <li>

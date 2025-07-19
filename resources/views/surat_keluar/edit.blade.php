@@ -27,7 +27,7 @@
 @endpush
 
 @section('content')
-  <div class="m-1.5 overflow-x-auto md:ml-5 md:mr-3">
+  <div class="m-1.5 overflow-x-auto ml-4 mr-4">
     <div class="p-1.5 min-w-full inline-block align-middle">
       <div
         class="shadow-md rounded-lg overflow-visible bg-white p-6 dark:border-neutral-700">

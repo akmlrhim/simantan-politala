@@ -1,14 +1,14 @@
 @extends('layouts.main')
 
 @section('content')
-  <div class="flex md:ml-6 mb-3">
+  <div class="flex ml-6 mb-3">
     <a href="{{ route('surat-keluar.create') }}"
       class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-3 py-2 tracking-wide focus:outline-none capitalize">
       Tambah Data
     </a>
   </div>
 
-  <div class="relative overflow-x-auto shadow-lg rounded-md md:ml-6">
+  <div class="relative overflow-x-auto shadow-lg rounded-md ml-6 mr-3">
     <table class="w-full text-sm text-left rtl:text-right text-black dark:text-gray-400">
       <thead class="text-xs text-black uppercase bg-white">
         <tr class="border-b-2 border-gray-200">

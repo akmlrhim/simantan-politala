@@ -2,7 +2,7 @@
 
 @section('content')
   <div
-    class="flex flex-col md:flex-row md:items-center md:justify-between md:ml-6 mb-3 gap-2">
+    class="flex flex-col md:flex-row md:items-center md:justify-between ml-6 mr-3 mb-3 gap-2">
     <a href="{{ route('users.create') }}"
       class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-3 py-2 tracking-wide focus:outline-none capitalize w-fit">
       Tambah Data
@@ -21,7 +21,7 @@
   </div>
 
 
-  <div class="relative overflow-x-auto shadow-lg rounded-md md:ml-6">
+  <div class="relative overflow-x-auto shadow-lg rounded-md ml-6 mr-6">
     <table class="w-full text-left rtl:text-right text-black dark:text-gray-400">
       <thead class="md:text-sm text-xs text-black uppercase bg-white">
         <tr class="border-b-2 border-gray-200">

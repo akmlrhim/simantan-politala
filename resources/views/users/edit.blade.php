@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-  <div class="m-1.5 overflow-x-auto md:ml-5 md:mr-3">
+  <div class="m-1.5 overflow-x-auto ml-4 mr-4">
     <div class="p-1.5 min-w-full inline-block align-middle">
       <div class="shadow-md rounded-lg overflow-hidden dark:border-neutral-700 bg-white">
         <div class="container mx-auto p-4">
