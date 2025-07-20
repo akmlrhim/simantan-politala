@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -16,7 +17,7 @@ class UserController extends Controller
 	public function index()
 	{
 		$search = request()->query('search');
-		$query = DB::table('users');
+		$query = DB::table('users')->where('id', '!=', Auth::user()->id);
 
 		if ($search) {
 			$query->where('nama', 'like', '%' . $search . '%');

@@ -9,8 +9,7 @@
 
   {{-- logo web --}}
   <link rel="icon" href="{{ asset('img/logo_politala.png') }}" type="image/x-icon">
-  <link rel="shortcut icon" href="{{ asset('img/logo_politala.png') }}"
-    type="image/x-icon">
+  <link rel="shortcut icon" href="{{ asset('img/logo_politala.png') }}" type="image/x-icon">
 
   <link rel="stylesheet" href="">
   <title>{{ $title }}</title>
@@ -36,7 +35,9 @@
 
   <x-toast></x-toast>
 
+  <script src="{{ asset('editor.js') }}"></script>
   @stack('scripts')
+
 </body>
 
 </html>

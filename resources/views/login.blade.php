@@ -19,8 +19,7 @@
   <x-toast></x-toast>
 
   <div class="min-h-screen bg-gray-100 flex items-center justify-center px-4">
-    <div
-      class="bg-white shadow-lg rounded-xl overflow-hidden w-full max-w-5xl flex flex-col lg:flex-row">
+    <div class="bg-white shadow-lg rounded-xl overflow-hidden w-full max-w-5xl flex flex-col lg:flex-row">
 
       <div class="w-full lg:w-1/2 flex items-center justify-center">
         <div class="w-full p-6 sm:p-10 max-h-screen overflow-y-auto">
@@ -34,28 +33,24 @@
           <form class="space-y-5" action="{{ route('login.process') }}" method="POST">
             @csrf
             <div>
-              <label for="email"
-                class="block mb-1 text-sm font-medium text-gray-700">Email
+              <label for="email" class="block mb-1 text-sm font-medium text-gray-700">Email
                 <span class="text-red-700">*</span></label>
               <input type="email" id="email" name="email" autocomplete="off"
                 class="w-full font-medium border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Masukkan email" />
+                placeholder="Masukkan email" value="{{ old('email') }}" />
               @error('email')
-                <small
-                  class="text-xs font-medium capitalize text-red-700">{{ $message }}</small>
+                <x-validation>{{ ucfirst($message) }}</x-validation>
               @enderror
             </div>
 
             <div>
-              <label for="password"
-                class="block mb-1 text-sm font-medium text-gray-700">Password <span
+              <label for="password" class="block mb-1 text-sm font-medium text-gray-700">Password <span
                   class="text-red-700">*</span></label>
               <input type="password" id="password" name="password" autocomplete="off"
                 class="w-full border font-medium border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Masukkan password" />
               @error('password')
-                <small
-                  class="text-xs font-medium capitalize text-red-700">{{ $message }}</small>
+                <x-validation>{{ ucfirst($message) }}</x-validation>
               @enderror
             </div>
 
@@ -68,8 +63,7 @@
       </div>
 
       <!-- Image Section -->
-      <div
-        class="hidden lg:flex w-full lg:w-1/2 items-center justify-center bg-indigo-100 p-6">
+      <div class="hidden lg:flex w-full lg:w-1/2 items-center justify-center bg-indigo-100 p-6">
         <div class="w-full h-64 bg-no-repeat bg-contain bg-center"
           style="background-image: url('https://storage.googleapis.com/devitary-image-host.appspot.com/15848031292911696601-undraw_designer_life_w96d.svg');">
         </div>

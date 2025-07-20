@@ -1,10 +1,9 @@
 <nav class="fixed top-0 z-30 w-full bg-gray-100 ps-0 sm:ps-64">
   <div class="px-4 py-3 flex items-center justify-between w-full">
 
-    <!-- Tombol sidebar hanya untuk layar kecil -->
     <div class="block sm:hidden me-auto">
-      <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar"
-        aria-controls="logo-sidebar" type="button"
+      <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar"
+        type="button"
         class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-200">
         <span class="sr-only">Open sidebar</span>
         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
@@ -18,15 +17,14 @@
     <div class="ml-auto flex items-center">
       <div class="relative">
         <button type="button"
-          class="flex items-center text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 px-2 py-1"
+          class="flex items-center text-sm bg-gray-800 rounded-lg shadow-sm focus:ring-4 focus:ring-gray-300 px-2 py-1"
           aria-expanded="false" data-dropdown-toggle="user-dropdown">
 
           <img class="w-10 h-10 rounded-full "
             src="{{ Auth::user()->foto ? asset('storage/foto_profil/' . Auth::user()->foto) : asset('storage/foto_profil/default.jpg') }}"
             alt="User Avatar">
 
-          <div
-            class="mr-4 ml-3 text-white hidden md:flex flex-col text-left leading-tight">
+          <div class="mr-4 ml-3 text-white hidden md:flex flex-col text-left leading-tight">
             <span class="font-semibold">
               {{ Auth::user()->nama }}
             </span>
@@ -45,17 +43,14 @@
                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Dashboard</a>
             </li>
             <li>
-              <a href="{{ route('dashboard') }}"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profil
+              <a href="{{ route('dashboard') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profil
                 Saya</a>
             </li>
             <li>
-              <a href="#"
-                onclick="event.preventDefault(); document.getElementById('logout').submit();"
+              <a href="#" onclick="event.preventDefault(); document.getElementById('logout').submit();"
                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
             </li>
-            <form id="logout" method="POST" action="{{ route('logout') }}"
-              class="hidden">
+            <form id="logout" method="POST" action="{{ route('logout') }}" class="hidden">
               @csrf
             </form>
           </ul>

@@ -1,15 +1,15 @@
 @extends('layouts.main')
 
 @section('content')
-  <div class="flex md:ml-6 mb-3">
+  <div class="flex sm:px-6 mb-3">
     <button data-modal-target="create-modal" data-modal-toggle="create-modal"
       class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-3 py-2 tracking-wide focus:outline-none capitalize">
       Tambah Data
     </button>
   </div>
 
-  <div class="relative overflow-x-auto shadow-lg rounded-md md:ml-6">
-    <table class="w-full text-sm text-left rtl:text-right text-black dark:text-gray-400">
+  <div class="relative overflow-x-auto shadow-lg rounded-md sm:ml-6">
+    <table class="w-full text-xs md:text-sm text-left rtl:text-right text-black dark:text-gray-400">
       <thead class="text-black uppercase bg-white md:text-sm text-xs">
         <tr>
           <th scope="col" class="px-6 py-3">No.</th>
@@ -25,11 +25,15 @@
             </td>
             <td class="px-6 py-4">{{ $j->nama }}</td>
             <td class="px-6 py-4 flex gap-2">
-              <button onclick="openEditModal({{ $j->id }}, '{{ $j->nama }}')"
-                class="px-3 py-1 font-medium text-white bg-yellow-500 rounded hover:bg-yellow-600">Edit</button>
-              <button
+              <button onclick="openEditModal({{ $j->id }}, '{{ $j->nama }}')" title="Edit"
+                class="px-2 py-1 font-medium text-white bg-yellow-500 rounded hover:bg-yellow-600">
+                <i class="fa-solid fa-pen-to-square"></i>
+              </button>
+              <button title="Hapus"
                 onclick="showDeleteModal('{{ route('jenis-surat.destroy', $j->id) }}', 'Yakin ingin menghapus jenis surat ?')"
-                class="px-3 py-1 font-medium text-white bg-red-600 rounded hover:bg-red-700">Hapus</button>
+                class="px-2 py-1 font-medium text-white bg-red-600 rounded hover:bg-red-700">
+                <i class="fa-solid fa-trash"></i>
+              </button>
             </td>
           </tr>
         @empty
@@ -57,18 +61,16 @@
     class="hidden fixed inset-0 z-50 flex justify-center items-center bg-black/30 backdrop-blur-sm backdrop-brightness-90">
     <div class="relative p-4 w-full max-w-md max-h-full">
       <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
-        <div
-          class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
+        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
           <h3 class="text-md font-semibold text-gray-900 dark:text-white">
             Tambah Data Jenis Surat
           </h3>
           <button type="button" data-modal-hide="create-modal"
             class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
             data-modal-toggle="create-modal">
-            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-              fill="none" viewBox="0 0 14 14">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
             </svg>
             <span class="sr-only">Close modal</span>
           </button>
@@ -78,16 +80,13 @@
           <input type="hidden" name="form_type" value="create">
           <div class="grid gap-4 mb-4 grid-cols-2">
             <div class="col-span-2">
-              <label for="nama"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis
+              <label for="nama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis
                 Surat </label>
               <input type="text" name="nama" id="nama"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm font-medium rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                placeholder="Masukkan jenis surat" autocomplete="off" />
+                placeholder="Masukkan jenis surat" autocomplete="off" value="{{ old('nama') }}" />
               @error('nama')
-                <small class="text-red-500 font-medium text-sm mt-1 capitalize">
-                  {{ $message }}
-                </small>
+                <x-validation> {{ ucfirst($message) }}</x-validation>
               @enderror
             </div>
           </div>
@@ -109,17 +108,15 @@
     class="hidden fixed inset-0 z-50 flex justify-center items-center bg-black/30 backdrop-blur-sm backdrop-brightness-90">
     <div class="relative p-4 w-full max-w-md max-h-full">
       <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
-        <div
-          class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
+        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
           <h3 class="text-md font-semibold text-gray-900 dark:text-white">
             Edit Data Jenis Surat
           </h3>
           <button type="button" onclick="closeEditModal()"
             class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
-            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-              fill="none" viewBox="0 0 14 14">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
             </svg>
             <span class="sr-only">Close modal</span>
           </button>
@@ -133,13 +130,11 @@
 
           <div class="grid gap-4 mb-4 grid-cols-2">
             <div class="col-span-2">
-              <label for="edit_nama"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis
+              <label for="edit_nama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis
                 Surat</label>
               <input type="text" name="nama" id="edit_nama"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm font-medium rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                placeholder="Masukkan jenis surat" autocomplete="off"
-                value="{{ old('nama') }}" />
+                placeholder="Masukkan jenis surat" autocomplete="off" value="{{ old('nama') }}" />
               @error('nama')
                 <small class="text-red-500 font-medium text-sm mt-1 capitalize">
                   {{ $message }}
