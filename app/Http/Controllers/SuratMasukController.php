@@ -6,6 +6,9 @@ use App\Models\SuratMasuk;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreSuratMasukRequest;
 use App\Http\Requests\UpdateSuratMasukRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Throwable;
 
 class SuratMasukController extends Controller
 {
@@ -34,7 +37,34 @@ class SuratMasukController extends Controller
 	 */
 	public function store(StoreSuratMasukRequest $request)
 	{
-		//
+		DB::beginTransaction();
+
+		try {
+			if ($request->hasFile('file_surat')) {
+				$file_surat = $request->file('file_surat');
+				$filename = time() . '.' . $file_surat->getClientOriginalExtension();
+
+				Storage::disk('public')->put('surat_masuk/' . $filename, file_get_contents($file_surat));
+			}
+
+			SuratMasuk::create([
+				'perihal' => $request->perihal,
+				'asal_surat' => $request->asal_surat,
+				'nomor_surat' => $request->nomor_surat,
+				'tanggal_diterima' => $request->tanggal_diterima,
+				'tanggal_surat' => $request->tanggal_surat,
+				'file_surat' => $filename,
+				'status' => 'Pending',
+				'created_by' => Auth::user()->id
+			]);
+
+			DB::commit();
+			return redirect()->route('surat-masuk.index')->with('success', 'Surat masuk berhasil ditambahkan !');
+		} catch (\Throwable $e) {
+
+			DB::rollBack();
+			return redirect()->back()->with('error', 'Terjadi kesalahan !');
+		}
 	}
 
 	/**
@@ -50,7 +80,9 @@ class SuratMasukController extends Controller
 	 */
 	public function edit(SuratMasuk $suratMasuk)
 	{
-		//
+		$title = 'Edit Surat Masuk';
+
+		return view('surat_masuk.edit', compact('title', 'suratMasuk'));
 	}
 
 	/**
@@ -58,7 +90,38 @@ class SuratMasukController extends Controller
 	 */
 	public function update(UpdateSuratMasukRequest $request, SuratMasuk $suratMasuk)
 	{
-		//
+		DB::beginTransaction();
+
+		try {
+			if ($request->hasFile('file_surat')) {
+				$file = $request->file('file_surat');
+
+				if ($file->isValid()) {
+					if ($suratMasuk->file_surat && Storage::disk('public')->exists('surat-masuk/' . $suratMasuk->file_surat)) {
+						Storage::disk('public')->delete('surat-masuk/' . $suratMasuk->file_surat);
+					}
+
+					$filename = time() . '.' . $file->getClientOriginalExtension();
+					$file->storeAs('surat-masuk', $filename, 'public');
+					$suratMasuk->file_surat = $filename;
+				}
+			}
+
+			$suratMasuk->update([
+				'perihal' => $request->perihal,
+				'asal_surat' => $request->asal_surat,
+				'nomor_surat' => $request->nomor_surat,
+				'tanggal_diterima' => $request->tanggal_diterima,
+				'tanggal_surat' => $request->tanggal_surat,
+				'created_by' => Auth::user()->id
+			]);
+
+			DB::commit();
+			return redirect()->route('surat-masuk.index')->with('success', 'Surat masuk berhasil di edit !');
+		} catch (Throwable $e) {
+			DB::rollBack();
+			return redirect()->back()->with('error', 'Terjadi kesalahan saat mengupdate surat masuk !' . $e->getMessage());
+		}
 	}
 
 	/**
@@ -66,6 +129,19 @@ class SuratMasukController extends Controller
 	 */
 	public function destroy(SuratMasuk $suratMasuk)
 	{
-		//
+		DB::beginTransaction();
+
+		try {
+			if ($suratMasuk->file_surat) {
+				Storage::disk('public')->delete('surat_masuk/' . $suratMasuk->file_surat);
+			}
+
+			$suratMasuk->delete();
+
+			DB::commit();
+		} catch (Throwable $e) {
+			DB::rollBack();
+			return redirect()->back()->with('error', 'Terjadi kesalahan saat menghapus surat masuk !');
+		}
 	}
 }

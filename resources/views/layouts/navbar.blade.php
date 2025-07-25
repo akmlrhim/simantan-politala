@@ -1,7 +1,7 @@
 <nav class="fixed top-0 z-30 w-full bg-gray-100 ps-0 sm:ps-64">
   <div class="px-4 py-3 flex items-center justify-between w-full">
 
-    <div class="block sm:hidden me-auto">
+    <div class="block sm:hidden md:hidden me-auto">
       <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar"
         type="button"
         class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-200">

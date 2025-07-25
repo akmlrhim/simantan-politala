@@ -24,12 +24,10 @@ class StoreSuratMasukRequest extends FormRequest
 		return [
 			'perihal' => 'required|string|max:100',
 			'asal_surat' => 'required|string|max:100',
-			'nomor_surat' => 'required|unique:surat_masuk,nomor_surat,except,id|string|max:50',
+			'nomor_surat' => 'required|unique:surat_masuk,nomor_surat|string|max:50',
 			'tanggal_diterima' => 'required|date',
 			'tanggal_surat' => 'required|date',
-			'file_surat' => 'nullable|file|mimes:pdf|max:5120',
-			'status' => 'nullable|string|max:20',
-			'created_by' => 'required|exists:users,id',
+			'file_surat' => 'required|file|mimes:pdf',
 		];
 	}
 }

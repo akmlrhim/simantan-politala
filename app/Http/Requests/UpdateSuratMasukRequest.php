@@ -28,8 +28,6 @@ class UpdateSuratMasukRequest extends FormRequest
       'tanggal_diterima' => 'required|date',
       'tanggal_surat' => 'required|date',
       'file_surat' => 'nullable|file|mimes:pdf|max:5120',
-      'status' => 'nullable|string|max:20',
-      'created_by' => 'required|exists:users,id',
     ];
   }
 }

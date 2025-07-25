@@ -3,13 +3,12 @@
   aria-label="Sidebar">
   <div class="h-full px-3 pb-4 bg-white">
 
-    <!-- Logo moved here -->
     <a href="{{ route('dashboard') }}" class="flex items-center mb-6 ps-2">
       <img src="{{ asset('img/logo_politala.png') }}" class="h-8 me-3 bg-white rounded-lg" alt="Logo" />
       <span class="text-lg font-semibold text-gray-800">Apps</span>
     </a>
 
-    <ul class="space-y-2 font-medium font-sans text-md">
+    <ul class="space-y-2 font-semibold font-sans text-md">
 
       <div class="flex items-center my-2">
         <small class="mx-2 text-black opacity-65">GENERAL</small>

@@ -24,7 +24,7 @@
         <div class="flex items-center text-sm font-medium text-gray-500 dark:text-gray-400">
           <span>Barang</span>
         </div>
-        <div class="text-xl dark:text-gray-100 font-bold">19</div>
+        <div class="text-xl text-black font-bold">19</div>
       </div>
     </div>
     <div class="relative p-6 rounded-2xl bg-white shadow-lg dark:bg-blue-800">
@@ -32,7 +32,7 @@
         <div class="flex items-center text-sm font-medium text-gray-500 dark:text-gray-400">
           <span>Barang</span>
         </div>
-        <div class="text-xl dark:text-gray-100 font-bold">19</div>
+        <div class="text-xl text-black font-bold">19</div>
       </div>
     </div>
   </div>

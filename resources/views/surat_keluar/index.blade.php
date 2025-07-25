@@ -23,15 +23,15 @@
       <tbody>
         @forelse ($suratKeluar as $row)
           <tr class="bg-white border-b-2 border-gray-200">
-            <td class="px-6 py-4" scope="row">
+            <td class="px-6 py-3" scope="row">
               {{ method_exists($suratKeluar, 'firstItem') ? $suratKeluar->firstItem() + $loop->index : $loop->iteration }}
             </td>
-            <td class="px-6 py-4">{{ $row->nomor_surat }}</td>
-            <td class="px-6 py-4">{{ $row->hal }}</td>
-            <td class="px-6 py-4">
+            <td class="px-6 py-3">{{ $row->nomor_surat }}</td>
+            <td class="px-6 py-3">{{ $row->hal }}</td>
+            <td class="px-6 py-3">
               {{ \Carbon\Carbon::parse($row->tanggal_surat)->format('d-m-Y') }}
             </td>
-            <td class="px-6 py-4">
+            <td class="px-6 py-3">
               <a href="{{ route('surat-keluar.file', $row->id) }}" target="_blank">
                 <button title="Lihat File" type="button"
                   class="px-2 py-1 font-medium text-white bg-blue-500 rounded hover:bg-blue-600">
@@ -40,7 +40,7 @@
               </a>
             </td>
 
-            <td class="px-6 py-4 flex gap-2">
+            <td class="px-6 py-3 flex gap-2">
               <a href="{{ route('surat-keluar.edit', $row->id) }}">
                 <button type="button" title="Edit"
                   class="px-2 py-1 font-medium text-white bg-yellow-500 rounded hover:bg-yellow-600">
@@ -57,7 +57,7 @@
           </tr>
         @empty
           <tr>
-            <td colspan="5" class="text-center px-6 py-4 text-gray-500">
+            <td colspan="5" class="text-center px-6 py-3 text-gray-500">
               Tidak ada data dalam tabel.
             </td>
           </tr>

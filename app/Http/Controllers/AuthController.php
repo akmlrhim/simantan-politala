@@ -41,7 +41,7 @@ class AuthController extends Controller
 		$request->session()->regenerate();
 
 		return redirect()->route('dashboard')
-			->with('success', 'Login berhasil, selamat datang,' . Auth::user()->nama . '!');
+			->with('success', 'Login berhasil !');
 	}
 
 	public function logout(Request $request)

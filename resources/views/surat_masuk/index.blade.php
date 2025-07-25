@@ -27,37 +27,49 @@
         <tbody>
           @forelse ($suratMasuk as $row)
             <tr class="bg-white border-b-2 border-gray-200">
-              <td class="px-6 py-4">
+              <td class="px-6 py-3">
                 {{ method_exists($suratMasuk, 'firstItem') ? $suratMasuk->firstItem() + $loop->index : $loop->iteration }}
               </td>
-              <td class="px-6 py-4">{{ $row->perihal }}</td>
-              <td class="px-6 py-4">{{ $row->asal_surat }}</td>
-              <td class="px-6 py-4">{{ $row->nomor_surat }}</td>
-              <td class="px-6 py-4">{{ \Carbon\Carbon::parse($row->tanggal_diterima)->format('d-m-Y') }}</td>
-              <td class="px-6 py-4">{{ \Carbon\Carbon::parse($row->tanggal_surat)->format('d-m-Y') }}</td>
-              <td class="px-6 py-4">
-                <button class="px-3 py-1 font-medium text-white bg-green-500 rounded hover:bg-green-600">Lihat
-                  File</button>
+              <td class="px-6 py-3">{{ $row->perihal }}</td>
+              <td class="px-6 py-3">{{ $row->asal_surat }}</td>
+              <td class="px-6 py-3">{{ $row->nomor_surat }}</td>
+              <td class="px-6 py-3">{{ \Carbon\Carbon::parse($row->tanggal_diterima)->format('d-m-Y') }}</td>
+              <td class="px-6 py-3">{{ \Carbon\Carbon::parse($row->tanggal_surat)->format('d-m-Y') }}</td>
+              <td class="px-6 py-3">
+                <button onclick="showFileModal('{{ asset('storage/surat_masuk/' . $row->file_surat) }}')"
+                  data-modal-target="fileModal" data-modal-toggle="fileModal"
+                  class="px-2 py-1 font-medium text-white bg-blue-500 rounded hover:bg-blue-600">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
               </td>
-              <td class="px-6 py-4">
-                <button class="px-3 py-1 font-medium text-white bg-green-500 rounded hover:bg-green-600">Lihat
-                  File</button>
+              <td class="px-6 py-3">
+                @if ($row->status = 'Pending')
+                  <span
+                    class="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-yellow-900 dark:text-yellow-300">
+                    {{ $row->status }}
+                  </span>
+                @else
+                  <button class="px-2 py-1 font-medium text-white bg-blue-500 rounded hover:bg-blue-600">
+                    <i class="fa-solid fa-eye"></i>
+                  </button>
+                @endif
               </td>
-              <td class="px-6 py-4 flex flex-wrap gap-2">
-                <a href="{{ route('surat-masuk', $row->id) }}" target="_blank">
-                  <button class="px-3 py-1 font-medium text-white bg-green-500 rounded hover:bg-green-600">Lihat</button>
-                </a>
+              <td class="px-6 py-3 flex flex-wrap gap-2">
                 <a href="{{ route('surat-masuk.edit', $row->id) }}">
-                  <button class="px-3 py-1 font-medium text-white bg-yellow-500 rounded hover:bg-yellow-600">Edit</button>
+                  <button class="px-2 py-1 font-medium text-white bg-yellow-500 rounded hover:bg-yellow-600">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </button>
                 </a>
                 <button
                   onclick="showDeleteModal('{{ route('surat-masuk.destroy', $row->id) }}', 'Yakin ingin menghapus pengguna ?')"
-                  class="px-3 py-1 font-medium text-white bg-red-600 rounded hover:bg-red-700">Hapus</button>
+                  class="px-2 py-1 font-medium text-white bg-red-600 rounded hover:bg-red-700">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
               </td>
             </tr>
           @empty
             <tr>
-              <td colspan="9" class="text-center px-6 py-4 text-gray-500">
+              <td colspan="9" class="text-center px-6 py-3 text-gray-500">
                 Tidak ada data dalam tabel.
               </td>
             </tr>
@@ -71,7 +83,55 @@
   {{-- modal konfirmasi hapus  --}}
   <x-confirm-delete />
 
+  {{-- modal file surat  --}}
+  <div id="fileModal" tabindex="-1" aria-hidden="true"
+    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-6xl max-h-full">
+      <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+            File Surat Masuk
+          </h3>
+          <button type="button"
+            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+            data-modal-hide="fileModal">
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+            </svg>
+            <span class="sr-only">Close modal</span>
+          </button>
+        </div>
+        <div class="p-4 md:p-5 space-y-4">
+          <div id="fileViewer" class="w-full h-[500px]">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="ml-6 mt-4 text-sm font-medium">
     {{ $suratMasuk->links() }}
   </div>
+
+  @push('scripts')
+    <script>
+      function showFileModal(fileUrl) {
+        const modal = document.getElementById('fileModal');
+        const viewer = document.getElementById('fileViewer');
+
+        const extension = fileUrl.split('.').pop().toLowerCase();
+
+        if (['pdf', 'jpg', 'jpeg', 'png', 'gif'].includes(extension)) {
+          viewer.innerHTML = `<iframe src="${fileUrl}" class="w-full h-full" frameborder="0"></iframe>`;
+        } else {
+          viewer.innerHTML =
+            `<p class="text-gray-700">File tidak dapat ditampilkan, <a href="${fileUrl}" target="_blank" class="text-blue-600 underline">klik di sini untuk mengunduh</a>.</p>`;
+        }
+
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+    </script>
+  @endpush
 @endsection
