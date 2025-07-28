@@ -17,10 +17,21 @@ class SuratMasukController extends Controller
 	 */
 	public function index()
 	{
-		$title = 'Surat Masuk';
-		$suratMasuk = DB::table('surat_masuk')->paginate(10);
+		$search = request()->query('search');
+		$query = DB::table('surat_masuk');
 
-		return view('surat_masuk.index', compact('title', 'suratMasuk'));
+		if ($search) {
+			$query->where(function ($q) use ($search) {
+				$q->where('perihal', 'like', '%' . $search . '%')
+					->orWhere('asal_surat', 'like', '%' . $search . '%')
+					->orWhere('nomor_surat', 'like', '%' . $search . '%');
+			});
+		}
+
+		$title = 'Surat Masuk';
+		$suratMasuk = $query->paginate(10)->appends(['search' => $search]);
+
+		return view('surat_masuk.index', compact('title', 'suratMasuk', 'search'));
 	}
 
 	/**
@@ -113,14 +124,13 @@ class SuratMasukController extends Controller
 				'nomor_surat' => $request->nomor_surat,
 				'tanggal_diterima' => $request->tanggal_diterima,
 				'tanggal_surat' => $request->tanggal_surat,
-				'created_by' => Auth::user()->id
 			]);
 
 			DB::commit();
 			return redirect()->route('surat-masuk.index')->with('success', 'Surat masuk berhasil di edit !');
 		} catch (Throwable $e) {
 			DB::rollBack();
-			return redirect()->back()->with('error', 'Terjadi kesalahan saat mengupdate surat masuk !' . $e->getMessage());
+			return redirect()->back()->with('error', 'Terjadi kesalahan saat mengupdate surat masuk !');
 		}
 	}
 

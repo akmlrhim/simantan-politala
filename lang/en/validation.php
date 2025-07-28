@@ -151,7 +151,7 @@ return [
     */
 
 	'attributes' => [
-		'jabatan_id' => 'Jabatan',
+		'jenis_surat_id' => 'Jenis surat',
 		'nip' => 'NIP'
 	],
 

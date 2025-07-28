@@ -36,6 +36,19 @@
         </x-nav-link>
       </li>
 
+      <li>
+        <x-nav-link href="{{ route('telahan-staf.index') }}" :active="request()->routeIs('telahan-staf.*')">
+          <i class="fa-solid fa-envelope-circle-check"></i>
+          <span class="ms-2">Telahan Staf</span>
+        </x-nav-link>
+      </li>
+
+      <x-nav-link href="#" :active="request()->routeIs('')">
+        <i class="fa-solid fa-paper-plane"></i>
+        <span class="ms-2">Disposisi</span>
+      </x-nav-link>
+      </li>
+
       <div class="flex items-center my-2">
         <small class="mx-2 text-black opacity-65">ADMIN</small>
         <hr class="h-px flex-grow bg-gray-200 border-0 opacity-20">

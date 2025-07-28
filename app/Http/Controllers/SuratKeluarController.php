@@ -16,10 +16,20 @@ class SuratKeluarController extends Controller
 	 */
 	public function index()
 	{
-		$title = 'Surat Keluar';
-		$suratKeluar = DB::table('surat_keluar')->paginate(10);
+		$search = request()->query('search');
+		$query = DB::table('surat_keluar');
 
-		return view('surat_keluar.index', compact('title', 'suratKeluar'));
+		if ($search) {
+			$query->where(function ($q) use ($search) {
+				$q->where('nomor_surat', 'like', '%' . $search . '%')
+					->orWhere('hal', 'like', '%' . $search . '%');
+			});
+		}
+
+		$title = 'Surat Keluar';
+		$suratKeluar = $query->paginate(10)->appends(['search' => $search]);
+
+		return view('surat_keluar.index', compact('title', 'suratKeluar', 'search'));
 	}
 
 	/**
@@ -117,12 +127,9 @@ class SuratKeluarController extends Controller
 	{
 		$data = SuratKeluar::find($id);
 
-		if (!$data) {
-			return redirect()->back()->with('error', 'Surat tidak ditemukan !');
-		}
-
 		$pdf = Pdf::loadView('surat_keluar.file', compact('data'));
 		$pdf->setPaper('A4', 'portrait');
-		return $pdf->stream('surat_keluar_' . $data->nomor_surat . '.pdf');
+		$filename = 'surat_keluar_' . preg_replace('/[\/\\\\]/', '-', $data->nomor_surat) . '.pdf';
+		return $pdf->stream($filename);
 	}
 }

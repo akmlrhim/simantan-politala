@@ -1,23 +1,6 @@
 @extends('layouts.main')
 
 @section('content')
-  <div class="flex flex-col md:flex-row md:items-center md:justify-between sm:ml-6 mb-3 gap-2">
-    <a href="{{ route('surat-masuk.create') }}"
-      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-3 py-2 tracking-wide focus:outline-none capitalize w-fit">
-      Tambah Data
-    </a>
-
-    <form action="{{ route('surat-masuk.index') }}" method="GET" class="flex items-center gap-2 w-full md:w-auto">
-      <input type="text" name="search" placeholder="Masukkan kata kunci.."
-        class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full md:w-64 p-2 text-sm dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 font-medium"
-        value="{{ request('search') }}" autocomplete="off">
-      <button type="submit"
-        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2">
-        Cari
-      </button>
-    </form>
-  </div>
-
   <div class="relative rounded-md shadow-md overflow-hidden sm:ml-6">
     <div class="overflow-x-auto">
       <table class="w-full text-xs md:text-sm text-left rtl:text-right text-black dark:text-gray-400">
@@ -29,16 +12,16 @@
             <th scope="col" class="px-6 py-3">No Surat</th>
             <th scope="col" class="px-6 py-3">Tgl diterima</th>
             <th scope="col" class="px-6 py-3">Tgl surat</th>
-            <th scope="col" class="px-6 py-3">Lihat dokumen</th>
+            <th scope="col" class="px-6 py-3">dokumen</th>
             <th scope="col" class="px-6 py-3">Telaah staf</th>
             <th scope="col" class="px-6 py-3">Aksi</th>
           </tr>
         </thead>
         <tbody>
-          @forelse ($suratMasuk as $row)
+          @forelse ($data as $row)
             <tr class="bg-white border-b-2 border-gray-200 font-medium">
               <td class="px-6 py-3">
-                {{ method_exists($suratMasuk, 'firstItem') ? $suratMasuk->firstItem() + $loop->index : $loop->iteration }}
+                {{ method_exists($data, 'firstItem') ? $data->firstItem() + $loop->index : $loop->iteration }}
               </td>
               <td class="px-6 py-3">{{ $row->perihal }}</td>
               <td class="px-6 py-3">{{ $row->asal_surat }}</td>
@@ -70,11 +53,6 @@
                     <i class="fa-solid fa-pen-to-square"></i>
                   </button>
                 </a>
-                <button
-                  onclick="showDeleteModal('{{ route('surat-masuk.destroy', $row->id) }}', 'Yakin ingin menghapus ?')"
-                  class="px-2 py-1 font-medium text-white bg-red-600 rounded hover:bg-red-700">
-                  <i class="fa-solid fa-trash"></i>
-                </button>
               </td>
             </tr>
           @empty
@@ -88,10 +66,6 @@
       </table>
     </div>
   </div>
-
-
-  {{-- modal konfirmasi hapus  --}}
-  <x-confirm-delete />
 
   {{-- modal file surat  --}}
   <div id="fileModal" tabindex="-1" aria-hidden="true"
@@ -121,7 +95,7 @@
   </div>
 
   <div class="ml-6 mt-4 text-sm font-medium">
-    {{ $suratMasuk->links() }}
+    {{ $data->links() }}
   </div>
 
   @push('scripts')

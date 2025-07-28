@@ -25,6 +25,7 @@
       word-break: break-word;
       margin: 0;
       padding: 0;
+      text-align: justify
     }
 
     .ckeditor p {
@@ -52,27 +53,28 @@
     }
 
     .ckeditor table {
-      width: 100%;
+      width: 100% !important;
+      max-width: 100% !important;
       border-collapse: collapse;
-      margin: 4px 0;
       font-size: 11pt;
       table-layout: fixed;
       word-wrap: break-word;
+      box-sizing: border-box;
     }
 
-    .ckeditor table th {
-      background-color: gray !important;
-      font-weight: bold;
-      color: #fff;
-      padding: 2px 4px;
-      text-align: center;
-      border: 1px solid #000;
-    }
-
+    .ckeditor table th,
     .ckeditor table td {
-      text-align: center;
+      box-sizing: border-box;
       padding: 2px 4px;
       border: 1px solid #000;
+      word-break: break-word;
+      overflow-wrap: break-word;
+      text-align: center;
+    }
+
+    table,
+    p {
+      page-break-inside: avoid;
     }
 
     .ckeditor table,
@@ -126,8 +128,7 @@
   <table width="100%">
     <tr>
       <td width="15%" align="center">
-        <img src="{{ public_path('img/logo_politala.png') }}" alt="Logo"
-          style="width: 100%;">
+        <img src="{{ public_path('img/logo_politala.png') }}" alt="Logo" style="width: 100%;">
       </td>
       <td align="center">
         <span style="font-size: 14pt; font-weight: bold;">KEMENTERIAN PENDIDIKAN TINGGI,
@@ -137,8 +138,7 @@
         <span style="font-size: 10pt;">
           Jalan A. Yani KM.6.0, Desa Panggung, Kab. Tanah Laut, Prov. Kalimantan Selatan
           70815<br>
-          Telp. (0512) 2021065 Surel <a
-            href="mailto:mail@politala.ac.id">mail@politala.ac.id</a>
+          Telp. (0512) 2021065 Surel <a href="mailto:mail@politala.ac.id">mail@politala.ac.id</a>
         </span>
       </td>
     </tr>
@@ -152,8 +152,7 @@
     </p>
   </div>
 
-  <table
-    style="font-family: 'Times New Roman', Times, serif; font-size: 12pt; line-height: 1.2;">
+  <table style="font-family: 'Times New Roman', Times, serif; font-size: 12pt; line-height: 1.2;">
     <tr>
       <td style="width: 70px; padding: 2px;">Nomor</td>
       <td style="width: 10px; padding: 2px;">:</td>
