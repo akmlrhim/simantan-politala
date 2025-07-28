@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Jabatan;
 use App\Http\Requests\StoreJabatanRequest;
 use App\Http\Requests\UpdateJabatanRequest;
+use Illuminate\Support\Facades\DB;
 
 class JabatanController extends Controller
 {
@@ -13,7 +14,13 @@ class JabatanController extends Controller
      */
     public function index()
     {
-        //
+        $title = 'Jabatan';
+        $jabatan = DB::table('jabatan')->paginate(10);
+
+        return view('jabatan', compact(
+            'title',
+            'jabatan'
+        ));
     }
 
     /**
@@ -29,7 +36,19 @@ class JabatanController extends Controller
      */
     public function store(StoreJabatanRequest $request)
     {
-        //
+        DB::beginTransaction();
+
+        try {
+            Jabatan::create([
+                'nama' => $request->nama
+            ]);
+
+            DB::commit();
+            return redirect()->back()->with('success', 'Jabatan berhasil ditambahkan !');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Terjadi kesalahan !');
+        }
     }
 
     /**
@@ -45,7 +64,7 @@ class JabatanController extends Controller
      */
     public function edit(Jabatan $jabatan)
     {
-        //
+        return response()->json($jabatan);
     }
 
     /**
@@ -53,7 +72,17 @@ class JabatanController extends Controller
      */
     public function update(UpdateJabatanRequest $request, Jabatan $jabatan)
     {
-        //
+        DB::beginTransaction();
+
+        try {
+            $jabatan->update(['nama' => $request->nama]);
+            DB::commit();
+
+            return redirect()->back()->with('success', 'Jabatan berhasil diubah !');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Terjadi kesalahan !');
+        }
     }
 
     /**
@@ -61,6 +90,16 @@ class JabatanController extends Controller
      */
     public function destroy(Jabatan $jabatan)
     {
-        //
+        DB::beginTransaction();
+
+        try {
+            $jabatan->delete();
+
+            DB::commit();
+            return redirect()->back()->with('success', 'Jabatan berhasil dihapus !');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Terjadi kesalahan !');
+        }
     }
 }

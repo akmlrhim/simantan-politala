@@ -64,8 +64,8 @@
 
       <!-- Image Section -->
       <div class="hidden lg:flex w-full lg:w-1/2 items-center justify-center bg-indigo-100 p-6">
-        <div class="w-full h-64 bg-no-repeat bg-contain bg-center"
-          style="background-image: url('https://storage.googleapis.com/devitary-image-host.appspot.com/15848031292911696601-undraw_designer_life_w96d.svg');">
+        <div class="w-full h-64 bg-no-repeat bg-contain bg-center">
+          <img src="{{ asset('img/login_illustration.webp') }}" alt="Illustration" loading='lazy' />
         </div>
       </div>
     </div>
