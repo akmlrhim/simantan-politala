@@ -9,6 +9,8 @@ use App\Http\Requests\UpdateTelahanStafRequest;
 use App\Models\Jabatan;
 use App\Models\JenisSurat;
 use App\Models\SuratMasuk;
+use Illuminate\Support\Facades\Auth;
+use Mews\Purifier\Facades\Purifier;
 
 class TelahanStafController extends Controller
 {
@@ -18,16 +20,9 @@ class TelahanStafController extends Controller
     public function index()
     {
         $title = 'Telahan Staf';
-        $data = DB::table('surat_masuk')
-            ->select(
-                'surat_masuk.id as surat_masuk_id',
-                'surat_masuk.*',
-                'telahan_staf.id as telahan_staf_id'
-            )
-            ->join('telahan_staf', 'surat_masuk.id', '=', 'telahan_staf.surat_masuk_id', 'left')
-            ->paginate(10);
+        $data = DB::table('surat_masuk')->paginate(10);
 
-        return view('telahan-staf.index', compact('title', 'data'));
+        return view('telahan_staf.index', compact('title', 'data'));
     }
 
     /**
@@ -40,7 +35,7 @@ class TelahanStafController extends Controller
         $jabatan = Jabatan::pluck('nama', 'id');
         $jenisSurat = JenisSurat::pluck('nama', 'id');
 
-        return view('telahan-staf.create', compact(
+        return view('telahan_staf.create', compact(
             'title',
             'suratMasuk',
             'jabatan',
@@ -53,7 +48,28 @@ class TelahanStafController extends Controller
      */
     public function store(StoreTelahanStafRequest $request)
     {
-        //
+        DB::beginTransaction();
+
+        try {
+            TelahanStaf::create([
+                'surat_masuk_id' => $request->surat_masuk_id,
+                'dari' => $request->dari,
+                'perihal' => $request->perihal,
+                'isi'  => Purifier::clean($request->isi, 'custom-table'),
+                'fakta_data'  => Purifier::clean($request->fakta_data, 'custom-table'),
+                'saran_tindak' => Purifier::clean($request->saran_tindak, 'custom-table'),
+                'created_by' => Auth::id()
+            ]);
+
+            SuratMasuk::where('id', $request->surat_masuk_id)
+                ->update(['status' => 'Selesai']);
+
+            DB::commit();
+            return redirect()->route('telahan-staf.index')->with('success', 'Telahan staf berhasil dibuat !');
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Terjadi kesalahan !');
+        }
     }
 
     /**
@@ -67,17 +83,49 @@ class TelahanStafController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(TelahanStaf $telahanStaf)
+    public function edit($id)
     {
-        //
+        $title = 'Edit Telahan Staf';
+        $telahanStaf = TelahanStaf::findOrFail($id);
+
+        $existing = TelahanStaf::where('surat_masuk_id', $telahanStaf->first());
+        $jabatan = Jabatan::pluck('nama', 'id');
+        $jenisSurat = JenisSurat::pluck('nama', 'id');
+        $suratMasuk = SuratMasuk::find($telahanStaf->surat_masuk_id);
+
+        return view('telahan_staf.edit', compact(
+            'title',
+            'telahanStaf',
+            'jabatan',
+            'jenisSurat',
+            'suratMasuk'
+        ));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTelahanStafRequest $request, TelahanStaf $telahanStaf)
+    public function update(UpdateTelahanStafRequest $request, $id)
     {
-        //
+        $telahanStaf = TelahanStaf::findOrFail($id);
+
+        DB::beginTransaction();
+
+        try {
+            $telahanStaf->update([
+                'dari' => $request->dari,
+                'perihal' => $request->perihal,
+                'isi'  => Purifier::clean($request->isi, 'custom-table'),
+                'fakta_data'  => Purifier::clean($request->fakta_data, 'custom-table'),
+                'saran_tindak' => Purifier::clean($request->saran_tindak, 'custom-table'),
+            ]);
+
+            DB::commit();
+            return redirect()->route('telahan-staf.index')->with('success', 'Telahan staf berhasil diubah !');
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            return redirect()->back()->withInput()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
 
     /**

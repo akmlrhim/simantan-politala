@@ -32,9 +32,7 @@ class AuthController extends Controller
 		}
 
 		if (!Hash::check($request->password, $user->password)) {
-			return redirect()->back()
-				->withInput()
-				->with('error', 'Password anda salah !');
+			return back()->withInput()->withErrors(['password' => 'Password anda salah']);
 		}
 
 		Auth::login($user);

@@ -32,7 +32,7 @@
       </thead>
       <tbody>
         @forelse ($suratKeluar as $row)
-          <tr class="bg-white border-b-2 border-gray-200 font-medium">
+          <tr class="bg-white border-b-2 border-gray-200">
             <td class="px-6 py-3" scope="row">
               {{ method_exists($suratKeluar, 'firstItem') ? $suratKeluar->firstItem() + $loop->index : $loop->iteration }}
             </td>

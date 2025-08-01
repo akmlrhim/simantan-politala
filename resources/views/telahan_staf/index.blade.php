@@ -5,7 +5,7 @@
     <div class="overflow-x-auto">
       <table class="w-full text-xs md:text-sm text-left rtl:text-right text-black dark:text-gray-400">
         <thead class="text-black uppercase bg-white">
-          <tr class="border-b-2 border-gray-200">
+          <tr class="border-b-2 text-xs border-gray-200">
             <th scope="col" class="px-6 py-3">No.</th>
             <th scope="col" class="px-6 py-3">Perihal</th>
             <th scope="col" class="px-6 py-3">Asal Surat</th>
@@ -19,7 +19,7 @@
         </thead>
         <tbody>
           @forelse ($data as $row)
-            <tr class="bg-white border-b-2 border-gray-200 font-medium">
+            <tr class="bg-white border-b-2 border-gray-200">
               <td class="px-6 py-3">
                 {{ method_exists($data, 'firstItem') ? $data->firstItem() + $loop->index : $loop->iteration }}
               </td>
@@ -35,30 +35,35 @@
                   <i class="fa-solid fa-eye"></i>
                 </button>
               </td>
+
+              {{-- telahan  --}}
               <td class="px-6 py-3">
-                @if ($row->status = 'Pending')
-                  <a href="{{ route('telaah-staf.surat-masuk', $row->id) }}">
+                @if ($row->status == 'Pending')
+                  <a href="{{ route('telahan-staf.surat-masuk', $row->id) }}">
                     <button class="px-2 py-1 font-medium text-white bg-green-500 rounded hover:bg-green-600"
                       title="Buat Telahan Staf">
                       <i class="fa-solid fa-pen"></i>
                     </button>
                   </a>
                 @else
-                  <button class="px-2 py-1 font-medium text-white bg-blue-500 rounded hover:bg-blue-600">
-                    <i class="fa-solid fa-eye"></i>
-                  </button>
+                  <span
+                    class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-green-900 dark:text-green-300">
+                    Selesai
+                  </span>
                 @endif
-              </td>
+
+                {{-- aksi  --}}
               <td class="px-6 py-3 flex flex-wrap gap-2">
-                @if (!($row->status = 'Pending'))
-                  <a href="{{ route('surat-masuk.edit', $row->id) }}">
+                @if ($row->status == 'Selesai')
+                  <a href="{{ route('telahan-staf.surat-masuk.edit', $row->id) }}">
                     <button class="px-2 py-1 font-medium text-white bg-yellow-500 rounded hover:bg-yellow-600"
                       title="Edit">
                       <i class="fa-solid fa-pen-to-square"></i>
                     </button>
                   </a>
+                @else
+                  T
                 @endif
-                T
               </td>
             </tr>
           @empty

@@ -33,7 +33,7 @@
       </thead>
       <tbody>
         @forelse ($users as $user)
-          <tr class="bg-white border-b-2 border-gray-200 md:text-sm text-xs font-medium">
+          <tr class="bg-white border-b-2 border-gray-200 md:text-sm text-xs">
             <td class="px-6 py-3" scope="row">
               {{ method_exists($users, 'firstItem') ? $users->firstItem() + $loop->index : $loop->iteration }}
             </td>

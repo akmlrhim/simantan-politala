@@ -22,7 +22,7 @@
     <div class="overflow-x-auto">
       <table class="w-full text-xs md:text-sm text-left rtl:text-right text-black dark:text-gray-400">
         <thead class="text-black uppercase bg-white">
-          <tr class="border-b-2 border-gray-200">
+          <tr class="border-b-2 text-xs border-gray-200">
             <th scope="col" class="px-6 py-3">No.</th>
             <th scope="col" class="px-6 py-3">Perihal</th>
             <th scope="col" class="px-6 py-3">Asal Surat</th>
@@ -36,7 +36,7 @@
         </thead>
         <tbody>
           @forelse ($suratMasuk as $row)
-            <tr class="bg-white border-b-2 border-gray-200 font-medium">
+            <tr class="bg-white border-b-2 border-gray-200">
               <td class="px-6 py-3">
                 {{ method_exists($suratMasuk, 'firstItem') ? $suratMasuk->firstItem() + $loop->index : $loop->iteration }}
               </td>
@@ -53,15 +53,17 @@
                 </button>
               </td>
               <td class="px-6 py-3">
-                @if ($row->status = 'Pending')
+                @if ($row->status == 'Pending')
                   <span
                     class="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-yellow-900 dark:text-yellow-300">
                     {{ $row->status }}
                   </span>
                 @else
-                  <button class="px-2 py-1 font-medium text-white bg-blue-500 rounded hover:bg-blue-600">
-                    <i class="fa-solid fa-eye"></i>
-                  </button>
+                  <a href="{{ route('surat-masuk.telahan-staf', $row->id) }}" target="_blank">
+                    <button class="px-2 py-1 font-medium text-white bg-green-500 rounded hover:bg-green-600">
+                      <i class="fa-solid fa-file-pdf"></i>
+                    </button>
+                  </a>
                 @endif
               </td>
               <td class="px-6 py-3 flex flex-wrap gap-2">

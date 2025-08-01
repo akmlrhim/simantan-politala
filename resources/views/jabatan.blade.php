@@ -19,7 +19,7 @@
       </thead>
       <tbody>
         @forelse ($jabatan as $j)
-          <tr class="bg-white border-b border-gray-200 md:text-sm text-xs font-medium">
+          <tr class="bg-white border-b border-gray-200 md:text-sm text-xs">
             <td class="px-6 py-3" scope="row">
               {{ method_exists($jabatan, 'firstItem') ? $jabatan->firstItem() + $loop->index : $loop->iteration }}
             </td>

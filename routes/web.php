@@ -27,10 +27,17 @@ Route::middleware('auth')->group(function () {
 		Route::get('file/{id}', [SuratKeluarController::class, 'file'])->name('file');
 	});
 
-	Route::resource('surat-masuk', SuratMasukController::class);
+
+	Route::prefix('surat-masuk')->name('surat-masuk.')->group(function () {
+		Route::resource('/', SuratMasukController::class)->parameters(['' => 'surat_masuk']);
+		Route::get('telahan-staf/{id}', [SuratMasukController::class, 'telahanStaf'])->name('telahan-staf');
+	});
 
 	Route::prefix('telahan-staf')->controller(TelahanStafController::class)->group(function () {
 		Route::get('/', 'index')->name('telahan-staf.index');
-		Route::get('/surat-masuk/{id}', 'create')->name('telaah-staf.surat-masuk');
+		Route::post('store', 'store')->name('telahan-staf.store');
+		Route::get('surat-masuk/{id}', 'create')->name('telahan-staf.surat-masuk');
+		Route::get('surat-masuk/edit/{id}', 'edit')->name('telahan-staf.surat-masuk.edit');
+		Route::put('surat-masuk/update/{id}', 'update')->name('telahan-staf.surat-masuk.update');
 	});
 });

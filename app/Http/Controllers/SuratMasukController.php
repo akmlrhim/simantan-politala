@@ -6,9 +6,11 @@ use App\Models\SuratMasuk;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreSuratMasukRequest;
 use App\Http\Requests\UpdateSuratMasukRequest;
+use App\Models\TelahanStaf;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Throwable;
+use Barryvdh\DomPDF\Facade\Pdf as Pdf;
 
 class SuratMasukController extends Controller
 {
@@ -18,7 +20,13 @@ class SuratMasukController extends Controller
 	public function index()
 	{
 		$search = request()->query('search');
-		$query = DB::table('surat_masuk');
+		$query = DB::table('surat_masuk')
+			->select(
+				'surat_masuk.id as surat_masuk_id',
+				'surat_masuk.*',
+				'telahan_staf.id as telahan_staf_id'
+			)
+			->join('telahan_staf', 'surat_masuk.id', '=', 'telahan_staf.surat_masuk_id', 'left');
 
 		if ($search) {
 			$query->where(function ($q) use ($search) {
@@ -153,5 +161,21 @@ class SuratMasukController extends Controller
 			DB::rollBack();
 			return redirect()->back()->with('error', 'Terjadi kesalahan saat menghapus surat masuk !');
 		}
+	}
+
+	public function telahanStaf($id)
+	{
+		$data = TelahanStaf::where('surat_masuk_id', $id)
+			->first();
+
+		$title = 'Telaahan Staf';
+		// return view('surat_masuk.telahan_staf', [
+		// 	'data' => $surat,
+		// 	'title' => $title,
+		// ]);
+		$pdf = Pdf::loadView('surat_masuk.telahan_staf', compact('data', 'title'));
+		$pdf->setPaper('A4', 'portrait');
+		$filename = 'telahan_staf' . preg_replace('/[\/\\\\]/', '-', $data->nomor_surat) . '.pdf';
+		return $pdf->stream($filename);
 	}
 }

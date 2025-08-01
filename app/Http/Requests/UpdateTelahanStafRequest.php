@@ -11,7 +11,7 @@ class UpdateTelahanStafRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,11 @@ class UpdateTelahanStafRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'dari' => 'required|string',
+            'perihal' => 'required|string',
+            'isi' => 'required',
+            'fakta_data' => 'required',
+            'saran_tindak' => 'required'
         ];
     }
 }

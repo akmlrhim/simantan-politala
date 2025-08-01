@@ -6,20 +6,15 @@
     /* Select2 container styling using Tailwind via regular CSS */
     .select2-container--default .select2-selection--single {
       background-color: #f9fafb;
-      /* bg-gray-50 */
       border: 1px solid #d1d5db;
-      /* border-gray-300 */
       border-radius: 0.5rem;
-      /* rounded-lg */
       height: 2.5rem !important;
       padding-left: 0.75rem;
       padding-right: 2.5rem;
       display: flex;
       align-items: center;
       font-size: 0.875rem;
-      /* text-sm */
       color: #111827;
-      /* text-gray-900 */
     }
 
     .select2-selection__rendered {
@@ -34,7 +29,6 @@
       right: 0.75rem !important;
       width: 2rem !important;
       color: #6b7280;
-      /* text-gray-500 */
     }
 
     .select2-dropdown {
@@ -58,7 +52,6 @@
 
     .select2-results__option--highlighted {
       background-color: #bfdbfe;
-      /* hover:bg-blue-100 */
     }
 
     .select2-search--dropdown .select2-search__field {
@@ -67,6 +60,28 @@
       padding: 0.5rem 0.75rem;
       width: 100%;
     }
+
+    .ck-editor__editable ol {
+      list-style: decimal;
+      margin-left: 1.5rem;
+    }
+
+    .ck-editor__editable ul {
+      list-style: disc;
+      margin-left: 1.5rem;
+    }
+
+    .ck-editor__editable {
+      white-space: pre-wrap;
+      padding: 1rem;
+      margin: 0;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .ck-editor__editable_inline {
+      min-height: 120px;
+    }
   </style>
 @endpush
 
@@ -74,8 +89,11 @@
   <div class="overflow-x-auto md:ml-6 shadow-md">
     <div class="min-w-full inline-block align-middle">
       <div class="rounded-lg overflow-visible bg-white p-6 dark:border-neutral-700">
-        <form action="{{ route('surat-masuk.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('telahan-staf.surat-masuk.update', $telahanStaf->id) }}" method="POST">
           @csrf
+          @method('PUT')
+          <input type="hidden" name="surat_masuk_id" value="{{ $suratMasuk->id }}">
+
           <div class="grid gap-3">
             <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 md:w-3/4">
               <label for="dari" class="text-sm font-bold text-gray-900 dark:text-white md:w-32">
@@ -83,11 +101,13 @@
               </label>
               <div class="w-full md:w-3/4">
                 <select class="select2 w-full" name="dari" id="dari">
-                  <option selected value="">Pilih dari</option>
                   @foreach ($jabatan as $id => $item)
-                    <option value="{{ $id }}">{{ $item }}</option>
+                    <option value="{{ $id }}" {{ old('dari', $telahanStaf->dari) == $id ? 'selected' : '' }}>
+                      {{ $item }}
+                    </option>
                   @endforeach
                 </select>
+
                 @error('dari')
                   <x-validation class="mt-1 block text-sm text-red-600">{{ ucfirst($message) }}</x-validation>
                 @enderror
@@ -101,17 +121,22 @@
               </label>
               <div class="w-full md:w-3/4">
                 <select class="select2 w-full" name="perihal" id="perihal">
-                  <option selected value="">Pilih perihal</option>
                   @foreach ($jenisSurat as $id => $item)
-                    <option value="{{ $id }}">{{ $item }}</option>
+                    <option value="{{ $id }}"
+                      {{ old('perihal', $telahanStaf->perihal) == $id ? 'selected' : '' }}>
+                      {{ $item }}
+                    </option>
                   @endforeach
+
                 </select>
+
                 @error('perihal')
                   <x-validation class="mt-1 block text-sm text-red-600">{{ ucfirst($message) }}</x-validation>
                 @enderror
               </div>
             </div>
 
+            {{-- DASAR   --}}
             <span class="font-bold text-black uppercase">I. Dasar</span>
 
             <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 md:w-3/4">
@@ -158,12 +183,13 @@
                   value="{{ $suratMasuk->perihal }}" disabled>
               </div>
             </div>
+            {{-- END DASAR  --}}
 
             <div>
               <label class="block mb-1 text-md uppercase font-bold text-gray-900 dark:text-white" for="isi">
                 II. Isi
               </label>
-              <textarea name="isi" id="isi_surat" class="editor" placeholder="Masukkan isi disini...">{{ old('isi') }}</textarea>
+              <textarea name="isi" id="isi_surat" class="editor" placeholder="Masukkan isi disini...">{{ old('isi', $telahanStaf->isi) }}</textarea>
               @error('isi')
                 <x-validation>{{ ucfirst($message) }}</x-validation>
               @enderror
@@ -173,7 +199,7 @@
               <label class="block mb-1 text-md uppercase font-bold text-gray-900 dark:text-white" for="fakta_data">
                 II. FAKTA DAN DATA
               </label>
-              <textarea name="fakta_data" id="fakta_data" class="editor" placeholder="Masukkan fakta dan data disini...">{{ old('fakta_data') }}</textarea>
+              <textarea name="fakta_data" id="fakta_data" class="editor" placeholder="Masukkan fakta dan data disini...">{{ old('fakta_data', $telahanStaf->fakta_data) }}</textarea>
               @error('fakta_data')
                 <x-validation>{{ ucfirst($message) }}</x-validation>
               @enderror
@@ -183,7 +209,7 @@
               <label class="block mb-1 text-md uppercase font-bold text-gray-900 dark:text-white" for="saran_tindak">
                 II. SARAN TINDAK
               </label>
-              <textarea name="saran_tindak" class="editor" id="saran_tindak" placeholder="Masukkan saran tindak disini...">{{ old('saran_tindak') }}</textarea>
+              <textarea name="saran_tindak" class="editor" id="saran_tindak" placeholder="Masukkan saran tindak disini...">{{ old('saran_tindak', $telahanStaf->saran_tindak) }}</textarea>
               @error('saran_tindak')
                 <x-validation>{{ ucfirst($message) }}</x-validation>
               @enderror
@@ -221,7 +247,7 @@
         ClassicEditor
           .create(el, {
             toolbar: [
-              'heading', '|',
+              'heading', 'justify', '|',
               'bold', 'italic', 'link', '|',
               'bulletedList', 'numberedList', '|',
               'insertTable', '|',

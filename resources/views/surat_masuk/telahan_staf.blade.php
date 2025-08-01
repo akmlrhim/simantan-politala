@@ -3,8 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Surat Keluar {{ $data->hal }}</title>
-  <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
+  <title>Telaah Staf</title>
   <style>
     @page {
       size: A4;
@@ -121,47 +120,47 @@
       text-align: right;
     }
   </style>
+
 </head>
 
 <body>
 
-  <table style="width:100%">
+  <table width="100%">
     <tr>
       <td width="15%" align="center">
-        <img src="{{ public_path('img/logo_politala.png') }}" alt="Logo" style="width: 100%;">
+        <img src="{{ public_path('img/logo_politala.webp') }}" alt="Logo" style="width: 100%;">
       </td>
       <td align="center">
-        <span style="font-size: 14pt; font-weight: bold;">KEMENTERIAN PENDIDIKAN TINGGI,
-          SAINS, DAN TEKNOLOGI</span><br>
-        <span style="font-size: 14pt; font-weight: bold;">POLITEKNIK NEGERI TANAH
-          LAUT</span><br>
+        <span style="font-size: 14pt; font-weight: bold;">KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN
+          TEKNOLOGI</span><br>
+        <span style="font-size: 14pt; font-weight: bold;">POLITEKNIK NEGERI TANAH LAUT</span><br>
         <span style="font-size: 10pt;">
-          Jalan A. Yani KM.6.0, Desa Panggung, Kab. Tanah Laut, Prov. Kalimantan Selatan
-          70815<br>
+          Jalan A. Yani KM.6.0, Desa Panggung, Kab. Tanah Laut, Prov. Kalimantan Selatan 70815<br>
           Telp. (0512) 2021065 Surel <a href="mailto:mail@politala.ac.id">mail@politala.ac.id</a>
         </span>
       </td>
     </tr>
   </table>
 
-  <hr style="border: 1px solid black; border-top: 4px double black; margin-top: 5px;">
+  <hr style="border: 1px solid black; border-top: 4px double black; margin-top: 5px; margin-bottom: 20px;">
 
-  <div class="tgl_surat">
-    <p>Pelaihari,
-      {{ \Carbon\Carbon::parse($data->tanggal_surat)->locale('id')->translatedFormat('d F Y') }}
-    </p>
-  </div>
+  <h1 style="margin-bottom: 20px;">TELAAHAN STAF</h1>
 
   <table style="font-family: 'Times New Roman', Times, serif; font-size: 12pt; line-height: 1.2;">
     <tr>
-      <td style="width: 70px; padding: 2px;">Nomor</td>
+      <td style="width: 70px; padding: 2px;">Kepada</td>
       <td style="width: 10px; padding: 2px;">:</td>
-      <td style="padding: 2px;">{{ $data->nomor_surat }}</td>
+      <td style="padding: 2px;">Direktur Politeknik Negeri Tanah Laut</td>
     </tr>
     <tr>
-      <td style="padding: 2px;">Hal</td>
+      <td style="padding: 2px;">Dari</td>
       <td style="padding: 2px;">:</td>
-      <td style="padding: 2px;">{{ $data->hal }}</td>
+      <td style="padding: 2px;">Jurusan Komputer dan Bisnis</td>
+    </tr>
+    <tr>
+      <td style="padding: 2px;">Perihal</td>
+      <td style="padding: 2px;">:</td>
+      <td style="padding: 2px;">{{ $data->perihalSurat->nama }}</td>
     </tr>
   </table>
 
@@ -170,16 +169,46 @@
   <table style="width:100%">
     <tr>
       <td>
-        <span class="ckeditor">{!! $data->isi_surat !!}</span>
+        <strong>Perihal : </strong><br>
+        <p style="text-align: justify; margin: 0; line-height: normal;">
+          Berdasarkan surat yang diterima dari {{ $data->suratMasuk->asal_surat }} dengan nomor
+          {{ $data->suratMasuk->nomor_surat }} tanggal {{ $data->suratMasuk->tanggal_surat }},
+          perihal
+          {{ $data->suratMasuk->perihal }}, kami sampaikan hal-hal sebagai berikut:
+        </p>
+      </td>
+    </tr>
+    <br>
+    <tr>
+      <td>
+        <strong style="margin: 0; line-height: 1.2;">Isi surat :</strong><br>
+        <span class="ckeditor">{!! $data->isi !!}</span>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <strong style="margin: 0; line-height: 1.2;">Fakta dan Data :</strong><br>
+        <span class="ckeditor">{!! $data->fakta_data !!}</span>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <strong style="margin: 0; line-height: 1.2;">Saran Tindak :</strong><br>
+        <span class="ckeditor">{!! $data->saran_tindak !!}</span>
       </td>
     </tr>
   </table>
 
+
+
   <div class="signature">
-    <p class="bold">{{ $data->user->jabatan }}</p>
+    <p>Pelaihari, {{ $data->created_at }}</p>
+    <p class="bold">{{ $data->suratDari->nama }}</p>
     <div class="ttd">
       <p class="bold">{{ $data->user->nama }}</p>
-      <p class="bold">NIP. {{ $data->user->nip }}</p>
+      <p class="bold">{{ $data->user->nip }}</p>
     </div>
   </div>
 
