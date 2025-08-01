@@ -64,7 +64,6 @@
                 @enderror
               </div>
 
-
               <div>
                 <label for="nip" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">NIP</label>
                 <input type="text" name="nip" id="nip" inputmode="numeric"

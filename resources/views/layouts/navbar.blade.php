@@ -17,18 +17,18 @@
     <div class="ml-auto flex items-center">
       <div class="relative">
         <button type="button"
-          class="flex items-center text-sm bg-gray-800 rounded-lg shadow-sm focus:ring-4 focus:ring-gray-300 px-2 py-1"
+          class="flex items-center text-sm rounded-lg shadow-sm focus:ring-4 focus:ring-gray-300 px-2 py-1"
           aria-expanded="false" data-dropdown-toggle="user-dropdown">
 
           <img class="w-10 h-10 rounded-full "
             src="{{ Auth::user()->foto ? asset('storage/foto_profil/' . Auth::user()->foto) : asset('storage/foto_profil/default.jpg') }}"
             alt="User Avatar">
 
-          <div class="mr-4 ml-3 text-white hidden md:flex flex-col text-left leading-tight">
+          <div class="mr-4 ml-3 text-black hidden md:flex flex-col text-left leading-tight">
             <span class="font-semibold">
               {{ Auth::user()->nama }}
             </span>
-            <span class="text-xs text-gray-300">
+            <span class="text-xs">
               {{ Auth::user()->role }}
             </span>
           </div>

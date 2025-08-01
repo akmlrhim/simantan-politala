@@ -98,10 +98,7 @@
               @error('file_surat')
                 <x-validation>{{ ucfirst($message) }}</x-validation>
               @enderror
-
             </div>
-
-
 
             <div class="flex gap-3">
               <a href="{{ route('surat-masuk.index') }}"

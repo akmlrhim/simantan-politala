@@ -102,9 +102,19 @@
     </div>
 
     @push('scripts')
+      <script src="{{ asset('editor.js') }}"></script>
+
       <script>
         ClassicEditor
-          .create(document.querySelector('#isi_surat'))
+          .create(document.querySelector('#isi_surat'), {
+            toolbar: [
+              'heading', '|',
+              'bold', 'italic', 'link', '|',
+              'bulletedList', 'numberedList', '|',
+              'insertTable', '|',
+              'undo', 'redo'
+            ],
+          })
       </script>
     @endpush
   @endsection

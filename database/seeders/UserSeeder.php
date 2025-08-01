@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
 				'nama' => $faker->unique()->name(),
 				'email' => $faker->unique()->safeEmail(),
 				'role' => $faker->randomElement(['Ketua Jurusan', 'Admin', 'Sespim/Direktur']),
-				'nip' => $faker->unique()->numerify('#########'),
+				'nip' => $faker->unique()->randomNumber(),
 				'jabatan' => $faker->jobTitle(),
 				'foto' => 'default.jpg',
 				'password' => Hash::make('password'),

@@ -16,7 +16,7 @@ return new class extends Migration
       $table->foreignId('surat_masuk_id')->constrained('surat_masuk')->onDelete('cascade')->onUpdate('cascade');
       $table->foreignId('dari')->constrained('jabatan')->onDelete('cascade')->onUpdate('cascade');
       $table->foreignId('perihal')->constrained('jenis_surat')->onDelete('cascade')->onUpdate('cascade');
-      $table->text('isi_surat');
+      $table->text('isi');
       $table->text('fakta_data');
       $table->text('saran_tindak');
       $table->foreignId('created_by')->constrained('users')->onDelete('cascade')->onUpdate('cascade');

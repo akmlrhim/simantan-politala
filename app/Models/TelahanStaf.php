@@ -10,7 +10,8 @@ class TelahanStaf extends Model
 
     protected $fillable = [
         'surat_masuk_id',
-        'jenis_surat_id',
+        'perihal',
+        'dari',
         'isi_surat',
         'fakta_data',
         'saran_tindak',

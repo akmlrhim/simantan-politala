@@ -6,6 +6,9 @@ use App\Models\TelahanStaf;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreTelahanStafRequest;
 use App\Http\Requests\UpdateTelahanStafRequest;
+use App\Models\Jabatan;
+use App\Models\JenisSurat;
+use App\Models\SuratMasuk;
 
 class TelahanStafController extends Controller
 {
@@ -30,9 +33,19 @@ class TelahanStafController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(TelahanStaf $telahanStaf)
+    public function create($id)
     {
-        //
+        $title = 'Tambah Telahan Staf';
+        $suratMasuk = SuratMasuk::findOrFail($id);
+        $jabatan = Jabatan::pluck('nama', 'id');
+        $jenisSurat = JenisSurat::pluck('nama', 'id');
+
+        return view('telahan-staf.create', compact(
+            'title',
+            'suratMasuk',
+            'jabatan',
+            'jenisSurat'
+        ));
     }
 
     /**

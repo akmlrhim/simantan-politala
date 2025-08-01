@@ -7,6 +7,10 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  {{-- logo web --}}
+  <link rel="icon" href="{{ asset('img/logo_politala.webp') }}" type="image/x-icon">
+  <link rel="shortcut icon" href="{{ asset('img/logo_politala.webp') }}" type="image/x-icon">
+
   <title>{{ $title }}</title>
 
   @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
@@ -62,7 +66,6 @@
         </div>
       </div>
 
-      <!-- Image Section -->
       <div class="hidden lg:flex w-full lg:w-1/2 items-center justify-center bg-indigo-100 p-6">
         <div class="w-full h-64 bg-no-repeat bg-contain bg-center">
           <img src="{{ asset('img/login_illustration.webp') }}" alt="Illustration" loading='lazy' />

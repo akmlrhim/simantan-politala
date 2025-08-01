@@ -29,7 +29,7 @@
             <th scope="col" class="px-6 py-3">No Surat</th>
             <th scope="col" class="px-6 py-3">Tgl diterima</th>
             <th scope="col" class="px-6 py-3">Tgl surat</th>
-            <th scope="col" class="px-6 py-3">Lihat dokumen</th>
+            <th scope="col" class="px-6 py-3">dokumen</th>
             <th scope="col" class="px-6 py-3">Telaah staf</th>
             <th scope="col" class="px-6 py-3">Aksi</th>
           </tr>
