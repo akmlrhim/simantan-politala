@@ -19,10 +19,20 @@ class TelahanStafController extends Controller
      */
     public function index()
     {
-        $title = 'Telahan Staf';
-        $data = DB::table('surat_masuk')->paginate(10);
+        $search = request()->query('search');
+        $query = DB::table('surat_masuk');
 
-        return view('telahan_staf.index', compact('title', 'data'));
+        if ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('perihal', 'like', '%' . $search . '%')
+                    ->orWhere('asal_surat', 'like', '%' . $search . '%')
+                    ->orWhere('nomor_surat', 'like', '%' . $search . '%');
+            });
+        }
+        $title = 'Telahan Staf';
+        $data = $query->paginate(10)->appends(['search' => $search]);
+
+        return view('telahan_staf.index', compact('title', 'data', 'search'));
     }
 
     /**

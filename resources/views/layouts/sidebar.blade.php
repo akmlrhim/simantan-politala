@@ -10,7 +10,7 @@
 
     <ul class="space-y-1 font-sans font-medium text-md">
 
-      <div class="flex items-center my-2">  
+      <div class="flex items-center my-2">
         <small class="mx-2 text-black opacity-65">GENERAL</small>
         <hr class="h-px flex-grow bg-gray-200 border-0 opacity-20">
       </div>
@@ -43,7 +43,7 @@
         </x-nav-link>
       </li>
 
-      <x-nav-link href="#" :active="request()->routeIs('')">
+      <x-nav-link href="{{ route('disposisi.index') }}" :active="request()->routeIs('disposisi.*')">
         <i class="fa-solid fa-paper-plane"></i>
         <span class="ms-2">Disposisi</span>
       </x-nav-link>

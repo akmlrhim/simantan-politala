@@ -1,6 +1,15 @@
 @extends('layouts.main')
 
 @section('content')
+  <div class="flex flex-col md:flex-row md:items-center md:justify-between sm:ml-6 mb-3 gap-2">
+    <form action="{{ route('telahan-staf.index') }}" method="GET" class="flex items-center gap-2 w-full md:w-auto">
+      <input type="text" name="search" placeholder="Cari perihal, asal surat, atau nomor surat (Enter)"
+        class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full md:w-80 p-2 text-xs dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 font-medium"
+        value="{{ request('search') }}" autocomplete="off">
+    </form>
+  </div>
+
+
   <div class="relative rounded-md shadow-md overflow-hidden sm:ml-6">
     <div class="overflow-x-auto">
       <table class="w-full text-xs md:text-sm text-left rtl:text-right text-black dark:text-gray-400">
@@ -8,12 +17,11 @@
           <tr class="border-b-2 text-xs border-gray-200">
             <th scope="col" class="px-6 py-3">No.</th>
             <th scope="col" class="px-6 py-3">Perihal</th>
-            <th scope="col" class="px-6 py-3">Asal Surat</th>
             <th scope="col" class="px-6 py-3">No Surat</th>
             <th scope="col" class="px-6 py-3">Tgl diterima</th>
             <th scope="col" class="px-6 py-3">Tgl surat</th>
             <th scope="col" class="px-6 py-3">dokumen</th>
-            <th scope="col" class="px-6 py-3">Telaah staf</th>
+            <th scope="col" class="px-6 py-3">telahan staf</th>
             <th scope="col" class="px-6 py-3">Aksi</th>
           </tr>
         </thead>
@@ -23,8 +31,10 @@
               <td class="px-6 py-3">
                 {{ method_exists($data, 'firstItem') ? $data->firstItem() + $loop->index : $loop->iteration }}
               </td>
-              <td class="px-6 py-3">{{ $row->perihal }}</td>
-              <td class="px-6 py-3">{{ $row->asal_surat }}</td>
+              <td class="px-6 py-3">
+                {{ $row->perihal }} <br />
+                <span class="text-xs text-gray-600">Asal Surat : {{ $row->asal_surat }}</span>
+              </td>
               <td class="px-6 py-3">{{ $row->nomor_surat }}</td>
               <td class="px-6 py-3">{{ \Carbon\Carbon::parse($row->tanggal_diterima)->format('d-m-Y') }}</td>
               <td class="px-6 py-3">{{ \Carbon\Carbon::parse($row->tanggal_surat)->format('d-m-Y') }}</td>

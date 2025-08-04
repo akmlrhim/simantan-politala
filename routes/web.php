@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DisposisiController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\JenisSuratController;
 use App\Http\Controllers\SuratKeluarController;
@@ -40,4 +41,6 @@ Route::middleware('auth')->group(function () {
 		Route::get('surat-masuk/edit/{id}', 'edit')->name('telahan-staf.surat-masuk.edit');
 		Route::put('surat-masuk/update/{id}', 'update')->name('telahan-staf.surat-masuk.update');
 	});
+
+	Route::resource('disposisi', DisposisiController::class);
 });

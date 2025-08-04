@@ -37,10 +37,12 @@
           <form class="space-y-5" action="{{ route('login.process') }}" method="POST">
             @csrf
             <div>
-              <label for="email" class="block mb-1 text-sm font-medium text-gray-700">Email
-                <span class="text-red-700">*</span></label>
+              <label for="email"
+                class="block mb-1 text-sm font-medium text-gray-700 after:content-['*'] after:ml-1 after:text-red-700">
+                Email
+              </label>
               <input type="email" id="email" name="email" autocomplete="off"
-                class="w-full font-medium border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                class="w-full font-medium border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('email') border-red-700 @enderror"
                 placeholder="Masukkan email" value="{{ old('email') }}" />
               @error('email')
                 <x-validation>{{ ucfirst($message) }}</x-validation>
@@ -48,11 +50,21 @@
             </div>
 
             <div>
-              <label for="password" class="block mb-1 text-sm font-medium text-gray-700">Password <span
-                  class="text-red-700">*</span></label>
-              <input type="password" id="password" name="password" autocomplete="off"
-                class="w-full border font-medium border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Masukkan password" />
+              <label for="password"
+                class="block mb-1 text-sm font-medium text-gray-700 after:content-['*'] after:ml-1 after:text-red-700">
+                Password
+              </label>
+
+              <div class="relative">
+                <input type="password" id="password" name="password" autocomplete="off"
+                  class="w-full border font-medium border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('password') border-red-700 @enderror"
+                  placeholder="Masukkan password" />
+
+                <span id="togglePassword" class="absolute right-3 top-2 cursor-pointer text-gray-500">
+                  <i class="fa-solid fa-eye" id="eyeIcon"></i>
+                </span>
+              </div>
+
               @error('password')
                 <x-validation>{{ ucfirst($message) }}</x-validation>
               @enderror
@@ -73,6 +85,21 @@
       </div>
     </div>
   </div>
+
+
+  {{-- script  --}}
+  <script>
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('password');
+    const eyeIcon = document.getElementById('eyeIcon');
+
+    togglePassword.addEventListener('click', function() {
+      const isPassword = passwordInput.type === 'password';
+      passwordInput.type = isPassword ? 'text' : 'password';
+      eyeIcon.classList.toggle('fa-eye');
+      eyeIcon.classList.toggle('fa-eye-slash');
+    });
+  </script>
 
 </body>
 

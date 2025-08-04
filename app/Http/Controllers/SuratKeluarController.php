@@ -129,7 +129,7 @@ class SuratKeluarController extends Controller
 
 		$pdf = Pdf::loadView('surat_keluar.file', compact('data'));
 		$pdf->setPaper('A4', 'portrait');
-		$filename = 'surat_keluar_' . preg_replace('/[\/\\\\]/', '-', $data->nomor_surat) . '.pdf';
+		$filename = 'Surat Keluar' . preg_replace('/[\/\\\\]/', '-', $data->nomor_surat) . '.pdf';
 		return $pdf->stream($filename);
 	}
 }

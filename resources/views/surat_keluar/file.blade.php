@@ -128,7 +128,7 @@
   <table style="width:100%">
     <tr>
       <td width="15%" align="center">
-        <img src="{{ public_path('img/logo_politala.png') }}" alt="Logo" style="width: 100%;">
+        <img src="{{ public_path('img/logo_politala.webp') }}" alt="Logo" style="width: 100%;">
       </td>
       <td align="center">
         <span style="font-size: 14pt; font-weight: bold;">KEMENTERIAN PENDIDIKAN TINGGI,

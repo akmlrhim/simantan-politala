@@ -1,3 +1,7 @@
+@php
+  use Carbon\Carbon;
+@endphp
+
 <!DOCTYPE html>
 <html lang="id">
 
@@ -144,7 +148,7 @@
 
   <hr style="border: 1px solid black; border-top: 4px double black; margin-top: 5px; margin-bottom: 20px;">
 
-  <h1 style="margin-bottom: 20px;">TELAAHAN STAF</h1>
+  <h1 style="margin-bottom: 20px;">TELAHAN STAF</h1>
 
   <table style="font-family: 'Times New Roman', Times, serif; font-size: 12pt; line-height: 1.2;">
     <tr>
@@ -155,7 +159,7 @@
     <tr>
       <td style="padding: 2px;">Dari</td>
       <td style="padding: 2px;">:</td>
-      <td style="padding: 2px;">Jurusan Komputer dan Bisnis</td>
+      <td style="padding: 2px;">{{ $data->suratDari->nama }}</td>
     </tr>
     <tr>
       <td style="padding: 2px;">Perihal</td>
@@ -172,7 +176,8 @@
         <strong>Perihal : </strong><br>
         <p style="text-align: justify; margin: 0; line-height: normal;">
           Berdasarkan surat yang diterima dari {{ $data->suratMasuk->asal_surat }} dengan nomor
-          {{ $data->suratMasuk->nomor_surat }} tanggal {{ $data->suratMasuk->tanggal_surat }},
+          {{ $data->suratMasuk->nomor_surat }} tanggal
+          {{ Carbon::parse($data->suratMasuk->tanggal_surat)->locale('id')->translatedFormat('d F Y') }},
           perihal
           {{ $data->suratMasuk->perihal }}, kami sampaikan hal-hal sebagai berikut:
         </p>
@@ -201,14 +206,13 @@
     </tr>
   </table>
 
-
-
   <div class="signature">
-    <p>Pelaihari, {{ $data->created_at }}</p>
+    <p>Pelaihari, {{ Carbon::parse($data->created_at)->locale('id')->translatedFormat('d F Y') }}</p>
+
     <p class="bold">{{ $data->suratDari->nama }}</p>
     <div class="ttd">
       <p class="bold">{{ $data->user->nama }}</p>
-      <p class="bold">{{ $data->user->nip }}</p>
+      <p class="bold">NIP. {{ $data->user->nip }}</p>
     </div>
   </div>
 

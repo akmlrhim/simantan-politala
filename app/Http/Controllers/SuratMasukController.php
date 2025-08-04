@@ -20,13 +20,7 @@ class SuratMasukController extends Controller
 	public function index()
 	{
 		$search = request()->query('search');
-		$query = DB::table('surat_masuk')
-			->select(
-				'surat_masuk.id as surat_masuk_id',
-				'surat_masuk.*',
-				'telahan_staf.id as telahan_staf_id'
-			)
-			->join('telahan_staf', 'surat_masuk.id', '=', 'telahan_staf.surat_masuk_id', 'left');
+		$query = DB::table('surat_masuk');
 
 		if ($search) {
 			$query->where(function ($q) use ($search) {
