@@ -152,7 +152,8 @@ return [
 
 	'attributes' => [
 		'jenis_surat_id' => 'Jenis surat',
-		'nip' => 'NIP'
+		'nip' => 'NIP',
+		'jabatan_id' => 'Jabatan'
 	],
 
 ];

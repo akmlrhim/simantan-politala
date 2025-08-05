@@ -18,12 +18,15 @@ class User extends Authenticatable
 	 *
 	 * @var list<string>
 	 */
+
+	protected $with = ['jabatan'];
+
 	protected $fillable = [
 		'nama',
 		'email',
 		'password',
 		'nip',
-		'jabatan',
+		'jabatan_id',
 		'foto',
 		'role',
 	];
@@ -51,8 +54,8 @@ class User extends Authenticatable
 		];
 	}
 
-	public function suratKeluar(): HasMany
+	public function jabatan()
 	{
-		return $this->hasMany(SuratKeluar::class, 'created_by');
+		return $this->belongsTo(Jabatan::class, 'jabatan_id');
 	}
 }

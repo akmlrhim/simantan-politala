@@ -12,19 +12,19 @@
     <table class="w-full text-xs md:text-sm text-left rtl:text-right text-black dark:text-gray-400">
       <thead class="text-black uppercase bg-white md:text-sm text-xs">
         <tr>
-          <th scope="col" class="px-6 py-3">No.</th>
-          <th scope="col" class="px-6 py-3">Nama</th>
-          <th scope="col" class="px-6 py-3">Aksi</th>
+          <th scope="col" class="px-6 py-2">No.</th>
+          <th scope="col" class="px-6 py-2">Nama</th>
+          <th scope="col" class="px-6 py-2">Aksi</th>
         </tr>
       </thead>
       <tbody>
         @forelse ($jabatan as $j)
           <tr class="bg-white border-b border-gray-200 md:text-sm text-xs">
-            <td class="px-6 py-3" scope="row">
+            <td class="px-6 py-2" scope="row">
               {{ method_exists($jabatan, 'firstItem') ? $jabatan->firstItem() + $loop->index : $loop->iteration }}
             </td>
-            <td class="px-6 py-3">{{ $j->nama }}</td>
-            <td class="px-6 py-3 flex gap-2">
+            <td class="px-6 py-2">{{ $j->nama }}</td>
+            <td class="px-6 py-2 flex gap-2">
               <button onclick="openEditModal({{ $j->id }}, '{{ $j->nama }}')" title="Edit"
                 class="px-2 py-1 font-medium text-white bg-yellow-500 rounded hover:bg-yellow-600">
                 <i class="fa-solid fa-pen-to-square"></i>

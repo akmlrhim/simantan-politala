@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Jabatan;
 use App\Models\User;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
@@ -17,13 +18,15 @@ class UserSeeder extends Seeder
 	{
 		$faker = Faker::create();
 
+		$jabatanId = Jabatan::pluck('id')->toArray();
+
 		for ($i = 0; $i < 40; $i++) {
 			User::create([
 				'nama' => $faker->unique()->name(),
 				'email' => $faker->unique()->safeEmail(),
 				'role' => $faker->randomElement(['Ketua Jurusan', 'Admin', 'Sespim/Direktur']),
 				'nip' => $faker->unique()->randomNumber(),
-				'jabatan' => $faker->jobTitle(),
+				'jabatan_id' => $faker->randomElement($jabatanId),
 				'foto' => 'default.jpg',
 				'password' => Hash::make('password'),
 			]);

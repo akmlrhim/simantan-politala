@@ -18,7 +18,7 @@ class JabatanSeeder extends Seeder
 
         for ($i = 0; $i < 40; $i++) {
             Jabatan::create([
-                'nama' => $faker->jobTitle()
+                'nama' => substr($faker->jobTitle(), 0, 20)
             ]);
         }
     }

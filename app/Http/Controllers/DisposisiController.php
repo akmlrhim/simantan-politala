@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Disposisi;
 use App\Http\Requests\StoreDisposisiRequest;
 use App\Http\Requests\UpdateDisposisiRequest;
+use App\Models\SuratMasuk;
 use Illuminate\Support\Facades\DB;
 
 class DisposisiController extends Controller
@@ -28,7 +29,10 @@ class DisposisiController extends Controller
    */
   public function create()
   {
-    //
+    $title = 'Tambah Disposisi';
+    $suratMasuk = SuratMasuk::pluck('perihal', 'id');
+
+    return view('disposisi.create', compact('title', 'suratMasuk'));
   }
 
   /**

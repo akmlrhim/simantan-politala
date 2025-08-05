@@ -41,7 +41,6 @@ class TelahanStaf extends Model
         return $this->belongsTo(JenisSurat::class, 'perihal');
     }
 
-
     public function user()
     {
         return $this->belongsTo(User::class, 'created_by');

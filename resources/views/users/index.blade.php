@@ -37,13 +37,13 @@
             <td class="px-6 py-3" scope="row">
               {{ method_exists($users, 'firstItem') ? $users->firstItem() + $loop->index : $loop->iteration }}
             </td>
-            <td class="px-6 py-3">{{ $user->nama }} <br /> <span
+            <td class="px-6 py-3">{{ $user->nama_lengkap }} <br /> <span
                 class="text-xs text-gray-600">NIP.{{ $user->nip }}</span></td>
-            <td class="px-6 py-3">{{ $user->jabatan }}</td>
+            <td class="px-6 py-3">{{ $user->nama_jabatan }}</td>
             <td class="px-6 py-3">{{ $user->email }}</td>
             <td class="px-6 py-3">{{ $user->role }}</td>
             <td class="px-6 py-3 flex gap-2">
-              <a href="{{ route('users.edit', $user->id) }}">
+              <a href="{{ route('users.edit', $user->user_id) }}">
                 <button type="button" title="Edit"
                   class="px-2 py-1 font-medium text-white bg-yellow-500 rounded hover:bg-yellow-600">
                   <i class="fa-solid fa-pen-to-square"></i>
@@ -51,7 +51,7 @@
               </a>
 
               <button type="button" title="Hapus"
-                onclick="showDeleteModal('{{ route('users.destroy', $user->id) }}', 'Yakin ingin menghapus pengguna ?')"
+                onclick="showDeleteModal('{{ route('users.destroy', $user->user_id) }}', 'Yakin ingin menghapus pengguna ?')"
                 class="px-2 py-1 font-medium text-white bg-red-600 rounded hover:bg-red-700">
                 <i class="fa-solid fa-trash"></i>
               </button>

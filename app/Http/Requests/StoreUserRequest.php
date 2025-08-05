@@ -26,7 +26,7 @@ class StoreUserRequest extends FormRequest
 			'email' => 'required|unique:users,email,except,id|email|max:255',
 			'nip' => 'required|unique:users,nip,except,id|string|max:20',
 			'password' => 'required|min:8',
-			'jabatan' => 'required|string|max:255',
+			'jabatan_id' => 'required|string|max:255',
 			'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 			'role' => 'required|in:Ketua Jurusan,Admin,Sespim/Direktur',
 		];

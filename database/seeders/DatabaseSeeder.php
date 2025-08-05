@@ -19,9 +19,9 @@ class DatabaseSeeder extends Seeder
 		// ]);
 
 		$this->call([
+			JabatanSeeder::class,
 			UserSeeder::class,
 			JenisSuratSeeder::class,
-			JabatanSeeder::class
 		]);
 	}
 }

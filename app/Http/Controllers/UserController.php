@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\Jabatan;
 
 class UserController extends Controller
 {
@@ -17,10 +18,19 @@ class UserController extends Controller
 	public function index()
 	{
 		$search = request()->query('search');
-		$query = DB::table('users')->where('id', '!=', Auth::user()->id);
+		$query = DB::table('users')
+			->join('jabatan', 'users.jabatan_id', '=', 'jabatan.id')
+			->select(
+				'users.*',
+				'users.id as user_id',
+				'users.nama as nama_lengkap',
+				'jabatan.nama as nama_jabatan',
+				'jabatan.id as jabatan_id'
+			)
+			->where('users.id', '!=', Auth::user()->id);
 
 		if ($search) {
-			$query->where('nama', 'like', '%' . $search . '%');
+			$query->where('users.nama', 'like', '%' . $search . '%');
 		}
 
 		$users = $query->paginate(10)->appends(['search' => $search]);
@@ -36,6 +46,7 @@ class UserController extends Controller
 	public function create()
 	{
 		$title = 'Tambah Pengguna';
+		$jabatan = Jabatan::pluck('nama', 'id');
 
 		return view('users.create', compact('title'));
 	}
@@ -53,7 +64,7 @@ class UserController extends Controller
 					'nama' => $request->nama,
 					'email' => $request->email,
 					'nip' => $request->nip,
-					'jabatan' => $request->jabatan,
+					'jabatan_id' => $request->jabatan_id,
 					'password' => Hash::make($request->password),
 					'foto' => 'default.png',
 					'role' => $request->role,
