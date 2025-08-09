@@ -20,7 +20,7 @@
 
   <div class="relative overflow-x-auto shadow-lg rounded-md sm:ml-6">
     <table class="w-full text-xs md:text-sm text-left rtl:text-right text-black dark:text-gray-400">
-      <thead class="text-black uppercase bg-white">
+      <thead class="text-white uppercase bg-gradient-to-r from-blue-600 to-blue-800">
         <tr class="border-b-2 border-gray-200">
           <th scope="col" class="px-6 py-3">No.</th>
           <th scope="col" class="px-6 py-3">Nomor Surat</th>

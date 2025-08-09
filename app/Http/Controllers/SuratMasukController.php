@@ -149,8 +149,8 @@ class SuratMasukController extends Controller
 			}
 
 			$suratMasuk->delete();
-
 			DB::commit();
+			return redirect()->back()->with('success', 'Surat masuk dihapus !');
 		} catch (Throwable $e) {
 			DB::rollBack();
 			return redirect()->back()->with('error', 'Terjadi kesalahan saat menghapus surat masuk !');

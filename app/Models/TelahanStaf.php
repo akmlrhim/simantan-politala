@@ -9,13 +9,6 @@ class TelahanStaf extends Model
 {
     protected $table = 'telahan_staf';
 
-    protected $with = [
-        'suratMasuk',
-        'suratDari',
-        'perihalSurat',
-        'user'
-    ];
-
     protected $fillable = [
         'surat_masuk_id',
         'perihal',

@@ -10,7 +10,7 @@
 
   <div class="relative overflow-x-auto shadow-lg rounded-md sm:ml-6">
     <table class="w-full text-xs md:text-sm text-left rtl:text-right text-black dark:text-gray-400">
-      <thead class="text-black uppercase bg-white md:text-sm text-xs">
+      <thead class="text-white uppercase bg-gradient-to-r from-blue-600 to-blue-800">
         <tr>
           <th scope="col" class="px-6 py-2">No.</th>
           <th scope="col" class="px-6 py-2">Nama</th>
@@ -19,7 +19,7 @@
       </thead>
       <tbody>
         @forelse ($jenisSurat as $j)
-          <tr class="bg-white border-b border-gray-200 md:text-sm text-xs">
+          <tr class="bg-white border-b border-gray-200">
             <td class="px-6 py-2" scope="row">
               {{ method_exists($jenisSurat, 'firstItem') ? $jenisSurat->firstItem() + $loop->index : $loop->iteration }}
             </td>

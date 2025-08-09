@@ -8,7 +8,7 @@
       <span class="text-lg font-semibold text-gray-800">Apps</span>
     </a>
 
-    <ul class="space-y-1 font-sans font-medium text-md">
+    <ul class="space-y-1 font-sans font-medium text-sm">
 
       <div class="flex items-center my-2">
         <small class="mx-2 text-black opacity-65">GENERAL</small>

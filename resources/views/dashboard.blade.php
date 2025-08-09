@@ -2,10 +2,29 @@
 
 @section('content')
   <div class="grid gap-4 lg:grid-cols-3 sm:px-6">
+
+    <div class="hidden md:block p-6 rounded-2xl bg-gradient-to-r from-blue-600 to-blue-800 shadow-lg col-span-full">
+      <div class="flex items-center justify-between">
+        <div class="space-y-2 text-left">
+          <div class="flex items-center gap-3 text-xl font-semibold text-white">
+            <div>
+              <span>Halo,</span>
+              <span class="font-bold">{{ Auth::user()->nama }}</span>
+            </div>
+          </div>
+          <p class="text-sm font-medium text-white">
+            Selamat datang di Sistem Informasi Manajemen Surat
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+
     <div class="relative p-6 rounded-2xl bg-white shadow-lg dark:bg-green-800">
       <div class="flex items-center justify-between">
         <div class="space-y-2 text-left">
-          <div class="flex justify-start text-md font-medium text-gray-500 dark:text-gray-300">
+          <div class="flex justify-start text-sm font-medium text-black dark:text-gray-300">
             <span>Surat Masuk</span>
           </div>
 
@@ -14,7 +33,7 @@
           </div>
 
           <details class="mt-1">
-            <summary class="cursor-pointer text-sm text-gray-600 dark:text-gray-200 hover:underline">
+            <summary class="cursor-pointer text-sm font-medium text-gray-600 dark:text-gray-200 hover:underline">
               Lihat detail
             </summary>
             <div class="mt-2 flex flex-wrap gap-2 text-xs">
@@ -40,7 +59,7 @@
     <div class="relative p-6 rounded-2xl bg-white shadow-lg dark:bg-red-800">
       <div class="flex items-center justify-between">
         <div class="space-y-2 text-left">
-          <div class="flex justify-start text-md font-medium text-gray-500 dark:text-gray-300">
+          <div class="flex justify-start text-sm font-medium text-black dark:text-gray-300">
             <span>Surat Keluar</span>
           </div>
           <div class="text-3xl font-bold text-red-800 dark:text-white">{{ $stats['surat_keluar'] }}</div>
@@ -55,7 +74,7 @@
     <div class="relative p-6 rounded-2xl bg-white shadow-lg dark:bg-blue-800">
       <div class="flex items-center justify-between">
         <div class="space-y-2 text-left">
-          <div class="flex justify-start text-md font-medium text-gray-500 dark:text-gray-300">
+          <div class="flex justify-start text-sm font-medium text-black dark:text-gray-300">
             <span>Jenis Surat</span>
           </div>
           <div class="text-3xl font-bold text-blue-800 dark:text-white">{{ $stats['jenis_surat'] }}</div>
@@ -70,7 +89,7 @@
     <div class="relative p-6 rounded-2xl bg-white shadow-lg dark:bg-emerald-800">
       <div class="flex items-center justify-between">
         <div class="space-y-2 text-left">
-          <div class="flex justify-start text-md font-medium text-gray-500 dark:text-gray-300">
+          <div class="flex justify-start text-sm font-medium text-black dark:text-gray-300">
             <span>Jabatan</span>
           </div>
           <div class="text-3xl font-bold text-emerald-800 dark:text-white">{{ $stats['jabatan'] }}</div>
@@ -85,7 +104,7 @@
     <div class="relative p-6 rounded-2xl bg-white shadow-lg dark:bg-cyan-800">
       <div class="flex items-center justify-between">
         <div class="space-y-2 text-left">
-          <div class="flex justify-start text-md font-medium text-gray-500 dark:text-gray-300">
+          <div class="flex justify-start text-sm font-medium text-black dark:text-gray-300">
             <span>User</span>
           </div>
           <div class="text-3xl font-bold text-cyan-600  dark:text-white">{{ $stats['users'] }}</div>

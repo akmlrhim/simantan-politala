@@ -21,9 +21,8 @@
 
   <div class="relative overflow-x-auto shadow-lg rounded-md sm:ml-6">
     <table class="w-full text-left rtl:text-right text-black dark:text-gray-400">
-      <thead class="md:text-sm text-sm text-black uppercase bg-white">
+      <thead class="md:text-sm text-xs text-white uppercase bg-gradient-to-r from-blue-600 to-blue-800">
         <tr class="border-b-2 border-gray-200">
-          <th scope="col" class="px-6 py-3">No.</th>
           <th scope="col" class="px-6 py-3">Nama</th>
           <th scope="col" class="px-6 py-3">Jabatan</th>
           <th scope="col" class="px-6 py-3">Email</th>
@@ -34,14 +33,13 @@
       <tbody>
         @forelse ($users as $user)
           <tr class="bg-white border-b-2 border-gray-200 md:text-sm text-xs">
-            <td class="px-6 py-3" scope="row">
-              {{ method_exists($users, 'firstItem') ? $users->firstItem() + $loop->index : $loop->iteration }}
-            </td>
             <td class="px-6 py-3">{{ $user->nama_lengkap }} <br /> <span
-                class="text-xs text-gray-600">NIP.{{ $user->nip }}</span></td>
+                class="text-sm text-gray-600">NIP.{{ $user->nip }}</span></td>
             <td class="px-6 py-3">{{ $user->nama_jabatan }}</td>
             <td class="px-6 py-3">{{ $user->email }}</td>
-            <td class="px-6 py-3">{{ $user->role }}</td>
+            <td class="px-6 py-3">
+              <x-role-badge type="role" value="{{ $user->role }}" />
+            </td>
             <td class="px-6 py-3 flex gap-2">
               <a href="{{ route('users.edit', $user->user_id) }}">
                 <button type="button" title="Edit"
