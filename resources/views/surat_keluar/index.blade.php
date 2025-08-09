@@ -11,18 +11,13 @@
       <input type="text" name="search" placeholder="Masukkan kata kunci.."
         class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full md:w-64 p-2 text-sm dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 font-medium"
         value="{{ request('search') }}" autocomplete="off">
-      <button type="submit"
-        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2">
-        Cari
-      </button>
     </form>
   </div>
 
   <div class="relative overflow-x-auto shadow-lg rounded-md sm:ml-6">
-    <table class="w-full text-xs md:text-sm text-left rtl:text-right text-black dark:text-gray-400">
+    <table class="w-full text-xs text-left rtl:text-right text-black dark:text-gray-400">
       <thead class="text-white uppercase bg-gradient-to-r from-blue-600 to-blue-800">
         <tr class="border-b-2 border-gray-200">
-          <th scope="col" class="px-6 py-3">No.</th>
           <th scope="col" class="px-6 py-3">Nomor Surat</th>
           <th scope="col" class="px-6 py-3">Hal</th>
           <th scope="col" class="px-6 py-3">Tanggal Surat</th>
@@ -33,9 +28,6 @@
       <tbody>
         @forelse ($suratKeluar as $row)
           <tr class="bg-white border-b-2 border-gray-200">
-            <td class="px-6 py-3" scope="row">
-              {{ method_exists($suratKeluar, 'firstItem') ? $suratKeluar->firstItem() + $loop->index : $loop->iteration }}
-            </td>
             <td class="px-6 py-3">{{ $row->nomor_surat }}</td>
             <td class="px-6 py-3">{{ $row->hal }}</td>
             <td class="px-6 py-3">

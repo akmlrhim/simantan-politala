@@ -47,9 +47,7 @@
                 <select id="role" name="role"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm font-medium rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full md:w-3/4 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
 
-                  <option value="" {{ old('role', $user->role ?? '') == '' ? 'selected' : '' }}>--- Pilih
-                    Role ---
-                  </option>
+                  <option value="" {{ old('role', $user->role ?? '') == '' ? 'selected' : '' }}>Pilih Role </option>
                   <option value="Admin" {{ old('role', $user->role ?? '') == 'Admin' ? 'selected' : '' }}>Admin
                   </option>
                   <option value="Ketua Jurusan" {{ old('role', $user->role ?? '') == 'Ketua Jurusan' ? 'selected' : '' }}>
@@ -61,6 +59,27 @@
 
                 @error('role')
                   <small class="text-red-500 font-medium text-xs mt-1 capitalize">{{ $message }}</small>
+                @enderror
+              </div>
+
+              <div>
+                <label for="jabatan" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">
+                  Jabatan
+                </label>
+                <div class="w-full md:w-3/4">
+                  <select class="select2 w-full " name="jabatan_id" id="jabatan">
+                    <option disabled {{ old('jabatan_id') == '' ? 'selected' : '' }} value="">Pilih jabatan
+                    </option>
+                    @foreach ($jabatan as $id => $item)
+                      <option value="{{ $id }}"
+                        {{ old('jabatan_id', $user->jabatan_id) == $id ? 'selected' : '' }}>
+                        {{ $item }}
+                      </option>
+                    @endforeach
+                  </select>
+                </div>
+                @error('jabatan_id')
+                  <x-validation class="mt-1 block text-sm text-red-600">{{ ucfirst($message) }}</x-validation>
                 @enderror
               </div>
 

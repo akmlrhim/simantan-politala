@@ -9,7 +9,6 @@
       border: 1px solid #d1d5db;
       border-radius: 0.5rem;
       height: 2.5rem !important;
-      padding-left: 0.75rem;
       padding-right: 2.5rem;
       display: flex;
       align-items: center;

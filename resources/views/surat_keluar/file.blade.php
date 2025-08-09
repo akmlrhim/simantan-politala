@@ -176,7 +176,7 @@
   </table>
 
   <div class="signature">
-    <p class="bold">{{ $data->user->jabatan }}</p>
+    <p class="bold">{{ $data->user->jabatan->nama }}</p>
     <div class="ttd">
       <p class="bold">{{ $data->user->nama }}</p>
       <p class="bold">NIP. {{ $data->user->nip }}</p>

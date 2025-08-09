@@ -34,7 +34,7 @@ class UserController extends Controller
 		}
 
 		$users = $query->paginate(10)->appends(['search' => $search]);
-		$title = 'Pengguna';
+		$title = 'Users';
 
 		return view('users.index', compact('title', 'users', 'search'));
 	}
@@ -45,10 +45,10 @@ class UserController extends Controller
 	 */
 	public function create()
 	{
-		$title = 'Tambah Pengguna';
+		$title = 'Tambah Users';
 		$jabatan = Jabatan::pluck('nama', 'id');
 
-		return view('users.create', compact('title'));
+		return view('users.create', compact('title', 'jabatan'));
 	}
 
 	/**
@@ -72,10 +72,10 @@ class UserController extends Controller
 			);
 
 			DB::commit();
-			return redirect()->route('users.index')->with('success', 'Pengguna berhasil ditambahkan !');
+			return redirect()->route('users.index')->with('success', 'Users berhasil ditambahkan !');
 		} catch (\Exception $e) {
 			DB::rollBack();
-			return redirect()->back()->withInput()->with('error', 'Gagal menambahkan pengguna');
+			return redirect()->back()->withInput()->with('error', 'Gagal menambahkan Users');
 		}
 	}
 
@@ -92,7 +92,7 @@ class UserController extends Controller
 	 */
 	public function edit(User $user)
 	{
-		$title = 'Edit pengguna';
+		$title = 'Edit Users';
 
 		return view('users.edit', compact('title', 'user'));
 	}
@@ -114,10 +114,10 @@ class UserController extends Controller
 			]);
 
 			DB::commit();
-			return redirect()->route('users.index')->with('success', 'Pengguna berhasil diubah !');
+			return redirect()->route('users.index')->with('success', 'Users berhasil diubah !');
 		} catch (\Exception $e) {
 			DB::rollBack();
-			return redirect()->back()->withInput()->with('error', 'Gagal mengubah data pengguna !');
+			return redirect()->back()->withInput()->with('error', 'Gagal mengubah data Users !');
 		}
 	}
 
@@ -132,10 +132,10 @@ class UserController extends Controller
 			$user->delete();
 			DB::commit();
 
-			return redirect()->back()->with('success', 'Pengguna berhasil dihapus !');
+			return redirect()->back()->with('success', 'Users berhasil dihapus !');
 		} catch (\Exception $e) {
 			DB::rollBack();
-			return redirect()->back()->withInput()->with('error', 'Gagal menghapus pengguna !');
+			return redirect()->back()->withInput()->with('error', 'Gagal menghapus Users !');
 		}
 	}
 }

@@ -16,9 +16,8 @@
   <div class="relative rounded-md shadow-md overflow-hidden sm:ml-6">
     <div class="overflow-x-auto">
       <table class="w-full text-xs md:text-sm text-left rtl:text-right text-black dark:text-gray-400">
-        <thead class="text-black uppercase bg-white">
+        <thead class="text-white uppercase bg-gradient-to-r from-blue-600 to-blue-800">
           <tr class="border-b-2 text-xs border-gray-200">
-            <th scope="col" class="px-6 py-3">No.</th>
             <th scope="col" class="px-6 py-3">Perihal</th>
             <th scope="col" class="px-6 py-3">No agenda</th>
             <th scope="col" class="px-6 py-3">tingkat surat</th>
@@ -28,9 +27,6 @@
         <tbody>
           @forelse ($disposisi as $row)
             <tr class="bg-white border-b-2 border-gray-200">
-              <td class="px-6 py-3">
-                {{ method_exists($disposisi, 'firstItem') ? $disposisi->firstItem() + $loop->index : $loop->iteration }}
-              </td>
               <td class="px-6 py-3">
                 {{ $row->perihal }} <br />
                 <span class="text-xs text-gray-600">Asal Surat : {{ $row->asal_surat }}</span>
