@@ -3,13 +3,9 @@
 @php
   $badges = [
       'role' => [
-          'Admin' => 'text-white bg-blue-600',
-          'Ketua Jurusan' => 'text-white bg-green-600',
-          'Sespim/Direktur' => 'text-white bg-purple-600',
-      ],
-      'status_surat' => [
-          'Pending' => 'text-yellow-800 bg-yellow-100',
-          'Selesai' => 'text-green-100 bg-green-800',
+          'Admin' => 'text-blue-800 bg-blue-100',
+          'Ketua Jurusan' => 'text-green-800 bg-green-100',
+          'Sespim/Direktur' => 'text-red-800 bg-red-100',
       ],
   ];
 

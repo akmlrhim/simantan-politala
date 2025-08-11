@@ -153,7 +153,9 @@ return [
 	'attributes' => [
 		'jenis_surat_id' => 'Jenis surat',
 		'nip' => 'NIP',
-		'jabatan_id' => 'Jabatan'
+		'jabatan_id' => 'Jabatan',
+		'kepada_jabatan_id' => 'Tujuan disposisi',
+		'surat_masuk_id' => 'Surat masuk'
 	],
 
 ];

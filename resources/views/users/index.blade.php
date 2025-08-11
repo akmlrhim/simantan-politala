@@ -19,7 +19,6 @@
       <thead class="text-xs text-white uppercase bg-gradient-to-r from-blue-600 to-blue-800">
         <tr class="border-b-2 border-gray-200">
           <th scope="col" class="px-6 py-3">Nama</th>
-          <th scope="col" class="px-6 py-3">NIP</th>
           <th scope="col" class="px-6 py-3">Jabatan</th>
           <th scope="col" class="px-6 py-3">Email</th>
           <th scope="col" class="px-6 py-3">Role</th>
@@ -33,10 +32,12 @@
               <div class="flex items-center gap-2">
                 <img src="{{ asset('storage/foto_profil/' . Auth::user()->foto) }}" alt="Foto {{ $user->nama_lengkap }}"
                   class="w-8 h-8 rounded-full object-cover">
-                <span>{{ $user->nama_lengkap }}</span>
+                <div class="flex flex-col">
+                  <span>{{ $user->nama_lengkap }}</span>
+                  <span class="text-gray-500">NIP. {{ $user->nip }}</span>
+                </div>
               </div>
             </td>
-            <td class="px-6 py-3">{{ $user->nip }}</td>
             <td class="px-6 py-3">{{ $user->nama_jabatan }}</td>
             <td class="px-6 py-3">{{ $user->email }}</td>
             <td class="px-6 py-3">

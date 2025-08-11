@@ -11,7 +11,7 @@ class StoreDisposisiRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,11 @@ class StoreDisposisiRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'surat_masuk_id' => 'required',
+            'nomor_agenda' => 'required',
+            'tingkat_surat' => 'required',
+            'kepada_jabatan_id' => 'required',
+            'instruksi_disposisi' => 'required'
         ];
     }
 }

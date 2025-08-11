@@ -45,7 +45,7 @@
               {{-- telahan  --}}
               <td class="px-6 py-3">
                 @if ($row->status == 'Pending')
-                  <a href="{{ route('telahan-staf.surat-masuk', $row->id) }}">
+                  <a href="{{ route('telahan-staf.create', $row->id) }}">
                     <button class="px-2 py-1 font-medium text-white bg-green-500 rounded hover:bg-green-600"
                       title="Buat Telahan Staf">
                       <i class="fa-solid fa-pen"></i>
@@ -61,7 +61,7 @@
                 {{-- aksi  --}}
               <td class="px-6 py-3 flex flex-wrap gap-2">
                 @if ($row->status == 'Selesai' && $row->telahanStaf)
-                  <a href="{{ route('telahan-staf.surat-masuk.edit', $row->telahanStaf->id) }}">
+                  <a href="{{ route('telahan-staf.edit', $row->telahanStaf->id) }}">
                     <button class="px-2 py-1 font-medium text-white bg-yellow-500 rounded hover:bg-yellow-600"
                       title="Edit">
                       <i class="fa-solid fa-pen-to-square"></i>

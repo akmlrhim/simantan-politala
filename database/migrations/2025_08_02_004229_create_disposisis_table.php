@@ -19,7 +19,7 @@ return new class extends Migration
 
       $table->string('nomor_agenda', 140);
       $table->string('tingkat_surat', 60);
-      $table->string('instruksi_disposisi', 150);
+      $table->json('instruksi_disposisi');
       $table->text('catatan')->nullable();
 
       $table->foreignId('created_by')->constrained('users')

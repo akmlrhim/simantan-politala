@@ -14,8 +14,8 @@ return new class extends Migration
     Schema::create('telahan_staf', function (Blueprint $table) {
       $table->id();
       $table->foreignId('surat_masuk_id')->constrained('surat_masuk')->onDelete('cascade')->onUpdate('cascade');
-      $table->foreignId('dari')->constrained('jabatan')->onDelete('cascade')->onUpdate('cascade');
-      $table->foreignId('perihal')->constrained('jenis_surat')->onDelete('cascade')->onUpdate('cascade');
+      $table->foreignId('dari')->constrained('jabatan')->onDelete('cascade')->onUpdate('cascade'); // dari jabatan siapa
+      $table->foreignId('perihal')->constrained('jenis_surat')->onDelete('cascade')->onUpdate('cascade'); // perihal surat (jenis_surat nya apa)
       $table->text('isi');
       $table->text('fakta_data');
       $table->text('saran_tindak');

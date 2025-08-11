@@ -9,6 +9,7 @@ use App\Http\Controllers\SuratKeluarController;
 use App\Http\Controllers\SuratMasukController;
 use App\Http\Controllers\TelahanStafController;
 use App\Http\Controllers\UserController;
+use App\Models\TelahanStaf;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [AuthController::class, 'index'])->name('login');
@@ -28,19 +29,17 @@ Route::middleware('auth')->group(function () {
 		Route::get('file/{id}', [SuratKeluarController::class, 'file'])->name('file');
 	});
 
-
 	Route::prefix('surat-masuk')->name('surat-masuk.')->group(function () {
 		Route::resource('/', SuratMasukController::class)->parameters(['' => 'surat_masuk']);
 		Route::get('telahan-staf/{id}', [SuratMasukController::class, 'telahanStaf'])->name('telahan-staf');
 	});
 
-	Route::prefix('telahan-staf')->controller(TelahanStafController::class)->group(function () {
-		Route::get('/', 'index')->name('telahan-staf.index');
-		Route::post('store', 'store')->name('telahan-staf.store');
-		Route::get('surat-masuk/{id}', 'create')->name('telahan-staf.surat-masuk');
-		Route::get('surat-masuk/edit/{id}', 'edit')->name('telahan-staf.surat-masuk.edit');
-		Route::put('surat-masuk/update/{id}', 'update')->name('telahan-staf.surat-masuk.update');
+	Route::prefix('telahan-staf')->name('telahan-staf.')->group(function () {
+		Route::resource('/', TelahanStafController::class)->parameters(['' => 'telahan-staf'])->except('destroy', 'create');
+		Route::get('create/{id}', [TelahanStafController::class, 'create'])->name('create');
 	});
 
-	Route::resource('disposisi', DisposisiController::class);
+	Route::prefix('disposisi')->name('disposisi.')->group(function () {
+		Route::resource('/', DisposisiController::class)->parameters(['' => 'disposisi']);
+	});
 });
