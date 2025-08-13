@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Throwable;
+use App\Models\Jabatan;
 use App\Models\Disposisi;
+use App\Models\SuratMasuk;
+use App\Models\DisposisiPenerima;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreDisposisiRequest;
 use App\Http\Requests\UpdateDisposisiRequest;
-use App\Models\DisposisiPenerima;
-use App\Models\Jabatan;
-use App\Models\SuratMasuk;
-use Illuminate\Support\Facades\DB;
-use Throwable;
 
 class DisposisiController extends Controller
 {
@@ -19,10 +20,16 @@ class DisposisiController extends Controller
   public function index()
   {
     $title = 'Disposisi';
-    $disposisi = Disposisi::paginate(10, ['*'], 'disposisi_page')
+    $disposisi = Disposisi::with([
+      'suratMasuk'
+    ])->paginate(10, ['*'], 'disposisi_page')
       ->withQueryString();
 
-    $suratMasuk = SuratMasuk::paginate(5, ['*'], 'suratmasuk_page')
+    $suratMasuk = SuratMasuk::with([
+      'disposisi',
+      'disposisi.user',
+      'disposisi.jabatan'
+    ])->paginate(5, ['*'], 'suratmasuk_page')
       ->withQueryString();
 
     return view('disposisi.index', compact('title', 'disposisi', 'suratMasuk'));
@@ -31,7 +38,7 @@ class DisposisiController extends Controller
   /**
    * Show the form for creating a new resource.
    */
-  public function create()
+  public function create($id)
   {
     $title = 'Tambah Disposisi';
 
@@ -53,10 +60,15 @@ class DisposisiController extends Controller
       "Mohon dikoordinasikan"
     ];
 
-    $suratMasuk = SuratMasuk::get();
+    $suratMasuk = SuratMasuk::findOrFail($id);
     $jabatan = Jabatan::pluck('nama', 'id');
 
-    return view('disposisi.create', compact('title', 'suratMasuk', 'jabatan', 'instruksiList'));
+    return view('disposisi.create', compact(
+      'title',
+      'suratMasuk',
+      'jabatan',
+      'instruksiList',
+    ));
   }
 
   /**
@@ -71,7 +83,8 @@ class DisposisiController extends Controller
         'surat_masuk_id' => $request->surat_masuk_id,
         'nomor_agenda' => $request->nomor_agenda,
         'tingkat_surat' => $request->tingkat_surat,
-        'instruksi_disposisi' => json_encode($request->instruksi_disposisi)
+        'instruksi_disposisi' => json_encode($request->instruksi_disposisi),
+        'created_by' => Auth::user()->id
       ]);
 
       foreach ($request->kepada_jabatan_id as $jabatanId) {
@@ -87,7 +100,7 @@ class DisposisiController extends Controller
         ->with('success', 'Disposisi Berhasil dibuat !');
     } catch (Throwable $e) {
       DB::rollBack();
-      return redirect()->back()->with('error', 'Terjadi kesalahan !');
+      return redirect()->back()->with('error', 'Terjadi kesalahan !' . $e->getMessage());
     }
   }
 

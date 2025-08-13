@@ -125,7 +125,7 @@ class SuratKeluarController extends Controller
 
 	public function file($id)
 	{
-		$data = SuratKeluar::find($id);
+		$data = SuratKeluar::with('user')->find($id);
 
 		$pdf = Pdf::loadView('surat_keluar.file', compact('data'));
 		$pdf->setPaper('A4', 'portrait');

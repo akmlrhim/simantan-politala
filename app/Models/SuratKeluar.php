@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class SuratKeluar extends Model
 {
 	protected $table = 'surat_keluar';
-	protected $with = ['user'];
 
 	protected $fillable = [
 		'nomor_surat',

@@ -10,13 +10,6 @@ class SuratMasuk extends Model
 {
 	protected $table = 'surat_masuk';
 
-	protected $with = [
-		'telahanStaf',
-		'telahanStaf.suratDari',
-		'telahanStaf.perihalSurat',
-		'telahanStaf.user',
-	];
-
 	protected $fillable = [
 		'perihal',
 		'asal_surat',
@@ -28,8 +21,18 @@ class SuratMasuk extends Model
 		'created_by',
 	];
 
-	public function telahanStaf(): HasOne
+	public function telahanStaf()
 	{
 		return $this->hasOne(TelahanStaf::class, 'surat_masuk_id');
+	}
+
+	public function disposisi()
+	{
+		return $this->hasOne(Disposisi::class, 'surat_masuk_id');
+	}
+
+	public function user()
+	{
+		return $this->belongsTo(User::class, 'created_by');
 	}
 }

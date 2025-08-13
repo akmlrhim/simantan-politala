@@ -20,7 +20,14 @@ class TelahanStafController extends Controller
     public function index()
     {
         $search = request()->query('search');
-        $query = SuratMasuk::query();
+        $query = SuratMasuk::with(
+            [
+                'telahanStaf',
+                'telahanStaf.suratDari',
+                'telahanStaf.perihalSurat',
+                'telahanStaf.user',
+            ]
+        );
 
         if ($search) {
             $query->where(function ($q) use ($search) {

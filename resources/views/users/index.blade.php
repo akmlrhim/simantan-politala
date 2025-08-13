@@ -3,7 +3,7 @@
 @section('content')
   <div class="flex flex-col md:flex-row md:items-center md:justify-between sm:ml-6 mb-3 gap-2">
     <a href="{{ route('users.create') }}"
-      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-3 py-2 tracking-wide focus:outline-none capitalize w-fit">
+      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-xs px-3 py-2 tracking-wide focus:outline-none capitalize w-fit">
       Tambah Data
     </a>
 
@@ -15,8 +15,8 @@
   </div>
 
   <div class="relative overflow-x-auto shadow-lg rounded-md sm:ml-6">
-    <table class="w-full text-left rtl:text-right text-black dark:text-gray-400">
-      <thead class="text-xs text-white uppercase bg-gradient-to-r from-blue-600 to-blue-800">
+    <table class="w-full font-medium text-xs text-left rtl:text-right text-black dark:text-gray-400">
+      <thead class="text-white uppercase bg-gradient-to-r from-blue-600 to-blue-800">
         <tr class="border-b-2 border-gray-200">
           <th scope="col" class="px-6 py-3">Nama</th>
           <th scope="col" class="px-6 py-3">Jabatan</th>
@@ -27,34 +27,34 @@
       </thead>
       <tbody>
         @forelse ($users as $user)
-          <tr class="bg-white border-b-2 border-gray-200 text-xs">
+          <tr class="bg-white border-b-2 border-gray-200">
             <td class="px-6 py-3">
               <div class="flex items-center gap-2">
                 <img src="{{ asset('storage/foto_profil/' . Auth::user()->foto) }}" alt="Foto {{ $user->nama_lengkap }}"
                   class="w-8 h-8 rounded-full object-cover">
                 <div class="flex flex-col">
-                  <span>{{ $user->nama_lengkap }}</span>
+                  <span>{{ $user->nama }}</span>
                   <span class="text-gray-500">NIP. {{ $user->nip }}</span>
                 </div>
               </div>
             </td>
-            <td class="px-6 py-3">{{ $user->nama_jabatan }}</td>
+            <td class="px-6 py-3">{{ $user->jabatan->nama }}</td>
             <td class="px-6 py-3">{{ $user->email }}</td>
             <td class="px-6 py-3">
               <x-role-badge type="role" value="{{ $user->role }}" />
             </td>
             <td class="px-6 py-3 flex gap-2">
-              <a href="{{ route('users.edit', $user->user_id) }}">
+              <a href="{{ route('users.edit', $user->id) }}">
                 <button type="button" title="Edit"
-                  class="px-2 py-1 font-medium text-white bg-yellow-500 rounded hover:bg-yellow-600">
-                  <i class="fa-solid fa-pen-to-square"></i>
+                  class="px-2 py-1 font-medium text-white bg-yellow-500 hover:bg-yellow-600 rounded-lg">
+                  <i class="fa-solid fa-pen-to-square"></i> Edit
                 </button>
               </a>
 
               <button type="button" title="Hapus"
-                onclick="showDeleteModal('{{ route('users.destroy', $user->user_id) }}', 'Yakin ingin menghapus pengguna ?')"
-                class="px-2 py-1 font-medium text-white bg-red-600 rounded hover:bg-red-700">
-                <i class="fa-solid fa-trash"></i>
+                onclick="showDeleteModal('{{ route('users.destroy', $user->id) }}', 'Yakin ingin menghapus pengguna ?')"
+                class="px-2 py-1 font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg">
+                <i class="fa-solid fa-trash"></i> Hapus
               </button>
             </td>
           </tr>

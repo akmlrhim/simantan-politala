@@ -18,15 +18,7 @@ class UserController extends Controller
 	public function index()
 	{
 		$search = request()->query('search');
-		$query = DB::table('users')
-			->join('jabatan', 'users.jabatan_id', '=', 'jabatan.id')
-			->select(
-				'users.*',
-				'users.id as user_id',
-				'users.nama as nama_lengkap',
-				'jabatan.nama as nama_jabatan',
-				'jabatan.id as jabatan_id'
-			)
+		$query = User::with('jabatan')
 			->where('users.id', '!=', Auth::user()->id);
 
 		if ($search) {

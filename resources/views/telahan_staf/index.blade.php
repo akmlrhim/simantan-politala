@@ -12,7 +12,7 @@
 
   <div class="relative rounded-md shadow-md overflow-hidden sm:ml-6">
     <div class="overflow-x-auto">
-      <table class="w-full text-xs md:text-sm text-left rtl:text-right text-black dark:text-gray-400">
+      <table class="w-full text-xs font-medium text-left rtl:text-right text-black dark:text-gray-400">
         <thead class="text-white uppercase bg-gradient-to-r from-blue-600 to-blue-800">
           <tr class="border-b-2 text-xs border-gray-200">
             <th scope="col" class="px-6 py-3">Perihal</th>
@@ -37,8 +37,8 @@
               <td class="px-6 py-3">
                 <button onclick="showFileModal('{{ asset('storage/surat_masuk/' . $row->file_surat) }}')"
                   title="Lihat File Surat Masuk" data-modal-target="fileModal" data-modal-toggle="fileModal"
-                  class="px-2 py-1 font-medium text-white bg-blue-500 rounded hover:bg-blue-600">
-                  <i class="fa-solid fa-eye"></i>
+                  class="px-2 py-1 font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600">
+                  <i class="fa-solid fa-eye"></i> Lihat
                 </button>
               </td>
 
@@ -46,9 +46,9 @@
               <td class="px-6 py-3">
                 @if ($row->status == 'Pending')
                   <a href="{{ route('telahan-staf.create', $row->id) }}">
-                    <button class="px-2 py-1 font-medium text-white bg-green-500 rounded hover:bg-green-600"
+                    <button class="px-2 py-1 font-medium text-white bg-green-500 rounded-lg hover:bg-green-600"
                       title="Buat Telahan Staf">
-                      <i class="fa-solid fa-pen"></i>
+                      <i class="fa-solid fa-pen"></i> Buat Telahan
                     </button>
                   </a>
                 @else
@@ -62,9 +62,9 @@
               <td class="px-6 py-3 flex flex-wrap gap-2">
                 @if ($row->status == 'Selesai' && $row->telahanStaf)
                   <a href="{{ route('telahan-staf.edit', $row->telahanStaf->id) }}">
-                    <button class="px-2 py-1 font-medium text-white bg-yellow-500 rounded hover:bg-yellow-600"
+                    <button class="px-2 py-1 font-medium text-white bg-yellow-500 rounded-lg hover:bg-yellow-600"
                       title="Edit">
-                      <i class="fa-solid fa-pen-to-square"></i>
+                      <i class="fa-solid fa-pen-to-square"></i> Edit Telahan
                     </button>
                   </a>
                 @endif

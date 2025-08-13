@@ -1,13 +1,8 @@
 @extends('layouts.main')
 @section('content')
   <div class="flex flex-col md:flex-row md:items-center md:justify-between sm:ml-6 mb-3 gap-2">
-    <a href="{{ route('disposisi.create') }}"
-      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-3 py-2 tracking-wide focus:outline-none capitalize w-fit">
-      Buat Disposisi
-    </a>
-
     <form action="{{ route('disposisi.index') }}" method="GET" class="flex items-center gap-2 w-full md:w-auto">
-      <input type="text" name="search" placeholder="Cari perihal, asal surat, atau nomor surat (Enter)"
+      <input type="text" name="search" placeholder="Masukkan kata kunci"
         class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full md:w-80 p-2 text-xs dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 font-medium"
         value="{{ request('search') }}" autocomplete="off">
     </form>
@@ -21,7 +16,7 @@
       </div>
 
       <div class="overflow-x-auto">
-        <table class="w-full text-xs md:text-sm text-left rtl:text-right text-black dark:text-gray-400">
+        <table class="w-full text-xs font-medium text-left rtl:text-right text-black dark:text-gray-400">
           <thead class="uppercase text-xs">
             <tr>
               <th class="px-6 py-3 font-semibold">Perihal</th>
@@ -30,6 +25,7 @@
               <th class="px-6 py-3 font-semibold">Tgl Diterima</th>
               <th class="px-6 py-3 font-semibold">Tgl Surat</th>
               <th class="px-6 py-3 font-semibold">Dokumen</th>
+              <th class="px-6 py-3 font-semibold">Disposisi</th>
             </tr>
           </thead>
           <tbody>
@@ -46,6 +42,21 @@
                     class="px-3 py-1 text-xs font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600">
                     <i class="fa-solid fa-eye"></i> Lihat
                   </button>
+                </td>
+                <td class="px-6 py-3">
+                  @if ($row->disposisi)
+                    <span
+                      class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-green-900 dark:text-green-300">
+                      Selesai
+                    </span>
+                  @else
+                    <a href="{{ route('disposisi.create', $row->id) }}">
+                      <button
+                        class="px-3 py-1 text-xs font-medium text-white bg-yellow-500 rounded-lg hover:bg-yellow-600">
+                        <i class="fa-solid fa-pen"></i> Disposisikan
+                      </button>
+                    </a>
+                  @endif
                 </td>
               </tr>
             @empty
@@ -68,10 +79,10 @@
     {{-- disposisi table  --}}
     <div class="relative rounded-md shadow-md overflow-hidden sm:ml-6 bg-white">
       <div class="p-3 bg-gradient-to-r from-blue-600 to-blue-800">
-        <h2 class="text-lg font-semibold text-white">Disposisi</h2>
+        <h2 class="text-lg font-semibold text-white">Riwayat Disposisi</h2>
       </div>
       <div class="overflow-x-auto">
-        <table class="w-full text-xs md:text-sm text-left rtl:text-right text-black dark:text-gray-400">
+        <table class="w-full text-xs font-medium text-left rtl:text-right text-black dark:text-gray-400">
           <thead class="uppercase text-xs">
             <tr class="border-b-2 text-xs border-gray-200">
               <th scope="col" class="px-6 py-3">Perihal</th>
@@ -81,34 +92,19 @@
             </tr>
           </thead>
           <tbody>
-            @forelse ($disposisi as $row)
+            @forelse ($disposisi as $d)
               <tr class="bg-white border-b-2 border-gray-200">
                 <td class="px-6 py-3">
-                  {{ $row->perihal }} <br />
-                  <span class="text-xs text-gray-600">Asal Surat : {{ $row->asal_surat }}</span>
+                  {{ $d->suratMasuk->perihal }} <br />
+                  <span class="text-xs text-gray-600">Asal Surat : {{ $d->suratMasuk->asal_surat }}</span>
                 </td>
                 </td>
-                <td class="px-6 py-3">{{ $row->nomor_agenda }}</td>
-                <td class="px-6 py-3">{{ \Carbon\Carbon::parse($row->tanggal_diterima)->format('d-m-Y') }}</td>
-                <td class="px-6 py-3">{{ \Carbon\Carbon::parse($row->tanggal_surat)->format('d-m-Y') }}</td>
-                <td class="px-6 py-3">
-                  <button onclick="showFileModal('{{ asset('storage/surat_masuk/' . $row->file_surat) }}')"
-                    data-modal-target="fileModal" data-modal-toggle="fileModal"
-                    class="px-2 py-1 font-medium text-white bg-blue-500 rounded hover:bg-blue-600">
-                    <i class="fa-solid fa-eye"></i>
-                  </button>
-                </td>
+                <td class="px-6 py-3">{{ $d->nomor_agenda }}</td>
+                <td class="px-6 py-3 capitalize">{{ $d->tingkat_surat }}</td>
 
                 <td class="px-6 py-3 flex flex-wrap gap-2">
-                  <a href="{{ route('surat-masuk.edit', $row->id) }}">
-                    <button class="px-2 py-1 font-medium text-white bg-yellow-500 rounded hover:bg-yellow-600">
-                      <i class="fa-solid fa-pen-to-square"></i>
-                    </button>
-                  </a>
-                  <button
-                    onclick="showDeleteModal('{{ route('surat-masuk.destroy', $row->id) }}', 'Yakin ingin menghapus ?')"
-                    class="px-2 py-1 font-medium text-white bg-red-600 rounded hover:bg-red-700">
-                    <i class="fa-solid fa-trash"></i>
+                  <button class="px-2 py-1 font-medium text-white bg-yellow-600 rounded-lg hover:bg-yellow-700">
+                    <i class="fa-solid fa-circle-info"></i> Detail
                   </button>
                 </td>
               </tr>

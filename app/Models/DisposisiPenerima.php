@@ -10,8 +10,13 @@ class DisposisiPenerima extends Model
 
     protected $fillable = [
         'disposisi_id',
-        'kepada_user_id',
+        'kepada_jabatan_id',
         'diterima_tanggal',
         'status',
     ];
+
+    public function disposisi()
+    {
+        return $this->belongsTo(Disposisi::class, 'disposisi_id');
+    }
 }

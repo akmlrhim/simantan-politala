@@ -3,7 +3,7 @@
 @section('content')
   <div class="flex flex-col md:flex-row md:items-center md:justify-between sm:ml-6 mb-3 gap-2">
     <a href="{{ route('surat-keluar.create') }}"
-      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-3 py-2 tracking-wide focus:outline-none capitalize w-fit">
+      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-xs px-3 py-2 tracking-wide focus:outline-none capitalize w-fit">
       Tambah Data
     </a>
 
@@ -15,7 +15,7 @@
   </div>
 
   <div class="relative overflow-x-auto shadow-lg rounded-md sm:ml-6">
-    <table class="w-full text-xs text-left rtl:text-right text-black dark:text-gray-400">
+    <table class="w-full text-xs font-medium text-left rtl:text-right text-black dark:text-gray-400">
       <thead class="text-white uppercase bg-gradient-to-r from-blue-600 to-blue-800">
         <tr class="border-b-2 border-gray-200">
           <th scope="col" class="px-6 py-3">Nomor Surat</th>
@@ -45,15 +45,15 @@
             <td class="px-6 py-3 flex gap-2">
               <a href="{{ route('surat-keluar.edit', $row->id) }}">
                 <button type="button" title="Edit"
-                  class="px-2 py-1 font-medium text-white bg-yellow-500 rounded hover:bg-yellow-600">
-                  <i class="fa-solid fa-pen-to-square"></i>
+                  class="px-2 py-1 font-medium text-white bg-yellow-500 rounded-lg hover:bg-yellow-600">
+                  <i class="fa-solid fa-pen-to-square"></i> Edit
                 </button>
               </a>
 
               <button title="Hapus"
                 onclick="showDeleteModal('{{ route('surat-keluar.destroy', $row->id) }}', 'Yakin ingin menghapus pengguna ?')"
-                class="px-2 py-1 font-medium text-white bg-red-600 rounded hover:bg-red-700">
-                <i class="fa-solid fa-trash"></i>
+                class="px-2 py-1 font-medium text-white bg-red-600 rounded-lg hover:bg-red-700">
+                <i class="fa-solid fa-trash"></i> Hapus
               </button>
             </td>
           </tr>

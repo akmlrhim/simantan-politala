@@ -28,7 +28,7 @@
             <span class="font-semibold">
               {{ Auth::user()->nama }}
             </span>
-            <span class="text-xs">
+            <span class="text-xs font-medium">
               {{ Auth::user()->role }}
             </span>
           </div>
@@ -40,15 +40,16 @@
           <ul class="py-2" aria-labelledby="user-menu-button">
             <li>
               <a href="{{ route('dashboard') }}"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Dashboard</a>
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 font-medium">Dashboard</a>
             </li>
             <li>
-              <a href="{{ route('dashboard') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profil
+              <a href="{{ route('dashboard') }}"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 font-medium">Profil
                 Saya</a>
             </li>
             <li>
               <a href="#" onclick="event.preventDefault(); document.getElementById('logout').submit();"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 font-medium">Logout</a>
             </li>
             <form id="logout" method="POST" action="{{ route('logout') }}" class="hidden">
               @csrf

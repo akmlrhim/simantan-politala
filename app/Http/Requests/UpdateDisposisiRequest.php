@@ -22,7 +22,11 @@ class UpdateDisposisiRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nomor_agenda' => 'required',
+            'tingkat_surat' => 'required',
+            'instruksi_disposisi' => 'required|array|min:1',
+            'kepada_jabatan_id'   => 'required|array|min:1',
+            'kepada_jabatan_id.*' => 'exists:jabatan,id',
         ];
     }
 }
