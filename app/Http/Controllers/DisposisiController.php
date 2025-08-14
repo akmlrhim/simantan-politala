@@ -107,10 +107,7 @@ class DisposisiController extends Controller
   /**
    * Display the specified resource.
    */
-  public function show(Disposisi $disposisi)
-  {
-    //
-  }
+  public function detail($id) {}
 
   /**
    * Show the form for editing the specified resource.

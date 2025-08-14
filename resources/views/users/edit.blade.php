@@ -1,5 +1,67 @@
 @extends('layouts.main')
 
+@push('css-libs')
+  <link rel="stylesheet" href="{{ asset('select2.css') }}">
+  <style>
+    /* Select2 container styling using Tailwind via regular CSS */
+    .select2-container--default .select2-selection--single {
+      background-color: #f9fafb;
+      border: 1px solid #d1d5db;
+      border-radius: 0.5rem;
+      height: 2.5rem !important;
+      padding-right: 2.5rem;
+      display: flex;
+      align-items: center;
+      font-size: 0.875rem;
+      color: #111827;
+    }
+
+    .select2-selection__rendered {
+      color: #111827;
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+    }
+
+    .select2-selection__arrow {
+      height: 100% !important;
+      top: 0 !important;
+      right: 0.75rem !important;
+      width: 2rem !important;
+      color: #6b7280;
+    }
+
+    .select2-dropdown {
+      background-color: white;
+      border: 1px solid #d1d5db;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      z-index: 9999;
+    }
+
+    .select2-results__option {
+      padding: 0.5rem 0.75rem;
+      cursor: pointer;
+    }
+
+    .select2-results__option--selected {
+      background-color: #dbeafe;
+      color: #1e40af;
+      font-weight: 600;
+    }
+
+    .select2-results__option--highlighted {
+      background-color: #bfdbfe;
+    }
+
+    .select2-search--dropdown .select2-search__field {
+      border: 1px solid #d1d5db;
+      border-radius: 0.375rem;
+      padding: 0.5rem 0.75rem;
+      width: 100%;
+    }
+  </style>
+@endpush
+
 @section('content')
   <div class="overflow-x-auto sm:ml-6 shadow-md">
     <div class="min-w-full inline-block align-middle">
@@ -18,16 +80,6 @@
                   class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full md:w-3/4 p-2 text-sm dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 font-medium"
                   placeholder="Masukkan nama lengkap" value="{{ old('nama', $user->nama) }}" autocomplete="off" />
                 @error('nama')
-                  <x-validation>{{ ucfirst($message) }}</x-validation>
-                @enderror
-              </div>
-
-              <div>
-                <label for="jabatan" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Jabatan</label>
-                <input type="text" name="jabatan" id="jabatan"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full md:w-3/4 p-2 text-sm dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 font-medium"
-                  placeholder="Masukkan jabatan" value="{{ old('jabatan', $user->jabatan) }}" autocomplete="off" />
-                @error('jabatan')
                   <x-validation>{{ ucfirst($message) }}</x-validation>
                 @enderror
               </div>
@@ -107,4 +159,18 @@
       </div>
     </div>
   </div>
+
+  @push('scripts')
+    <script src="{{ asset('jquery.js') }}"></script>
+    <script src="{{ asset('select2.js') }}"></script>
+    <script src="{{ asset('editor.js') }}"></script>
+
+    <script>
+      $(document).ready(function() {
+        $('.select2').select2({
+          width: '100%'
+        });
+      });
+    </script>
+  @endpush
 @endsection

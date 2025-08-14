@@ -42,5 +42,6 @@ Route::middleware('auth')->group(function () {
 	Route::prefix('disposisi')->name('disposisi.')->group(function () {
 		Route::resource('/', DisposisiController::class)->parameters(['' => 'disposisi'])->except('create', 'destroy');
 		Route::get('create/{id}', [DisposisiController::class, 'create'])->name('create');
+		Route::get('detail/{id}', [DisposisiController::class, 'detail'])->name('detail');
 	});
 });

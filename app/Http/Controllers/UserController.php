@@ -85,8 +85,9 @@ class UserController extends Controller
 	public function edit(User $user)
 	{
 		$title = 'Edit Users';
+		$jabatan = Jabatan::pluck('nama', 'id');
 
-		return view('users.edit', compact('title', 'user'));
+		return view('users.edit', compact('title', 'user', 'jabatan'));
 	}
 
 	/**

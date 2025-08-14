@@ -3,14 +3,14 @@
 @section('content')
   <div class="flex sm:px-6 mb-3">
     <button data-modal-target="create-modal" data-modal-toggle="create-modal"
-      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-xs px-3 py-2 tracking-wide focus:outline-none capitalize">
+      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-3 py-2 tracking-wide focus:outline-none capitalize">
       Tambah Data
     </button>
   </div>
 
   <div class="relative overflow-x-auto shadow-lg rounded-md sm:ml-6">
-    <table class="w-full font-medium text-xs text-left rtl:text-right text-black dark:text-gray-400">
-      <thead class="text-white uppercase bg-gradient-to-r from-blue-600 to-blue-800">
+    <table class="w-full font-medium text-xs sm:text-sm text-left rtl:text-right text-black dark:text-gray-400">
+      <thead class="text-white uppercase text-xs bg-gradient-to-r from-blue-600 to-blue-800">
         <tr>
           <th scope="col" class="px-6 py-2">No.</th>
           <th scope="col" class="px-6 py-2">Nama</th>
@@ -26,12 +26,12 @@
             <td class="px-6 py-2">{{ $j->nama }}</td>
             <td class="px-6 py-2 flex gap-2">
               <button onclick="openEditModal({{ $j->id }}, '{{ $j->nama }}')" title="Edit"
-                class="px-2 py-1 font-medium text-white bg-yellow-500 rounded-lg hover:bg-yellow-600">
+                class="px-2 py-1 font-medium text-xs text-white bg-yellow-500 rounded-lg hover:bg-yellow-600">
                 <i class="fa-solid fa-pen-to-square"></i> Edit
               </button>
               <button title="Hapus"
                 onclick="showDeleteModal('{{ route('jabatan.destroy', $j->id) }}', 'Yakin ingin menghapus jabatan ?')"
-                class="px-2 py-1 font-medium text-white bg-red-600 rounded-lg hover:bg-red-700">
+                class="px-2 py-1 font-medium text-xs text-white bg-red-600 rounded-lg hover:bg-red-700">
                 <i class="fa-solid fa-trash"></i> Hapus
               </button>
             </td>
