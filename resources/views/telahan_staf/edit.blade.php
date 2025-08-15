@@ -145,7 +145,7 @@
               <div class="w-full md:w-3/4">
                 <input type="text" id="disabled-input" aria-label="disabled input"
                   class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  value="{{ $suratMasuk->asal_surat }}" disabled>
+                  value="{{ $telahanStaf->suratMasuk->asal_surat }}" disabled>
               </div>
             </div>
 
@@ -156,7 +156,7 @@
               <div class="w-full md:w-3/4">
                 <input type="text" id="disabled-input" aria-label="disabled input"
                   class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  value="{{ $suratMasuk->nomor_surat }}" disabled>
+                  value="{{ $telahanStaf->suratMasuk->nomor_surat }}" disabled>
               </div>
             </div>
 
@@ -167,7 +167,7 @@
               <div class="w-full md:w-3/4">
                 <input type="text" id="disabled-input" aria-label="disabled input"
                   class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  value="{{ \Carbon\Carbon::parse($suratMasuk->tanggal_surat)->format('d-m-Y') }}" disabled>
+                  value="{{ \Carbon\Carbon::parse($telahanStaf->suratMasuk->tanggal_surat)->format('d-m-Y') }}" disabled>
               </div>
             </div>
 
@@ -179,7 +179,7 @@
               <div class="w-full md:w-3/4">
                 <input type="text" id="disabled-input" aria-label="disabled input"
                   class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  value="{{ $suratMasuk->perihal }}" disabled>
+                  value="{{ $telahanStaf->suratMasuk->perihal }}" disabled>
               </div>
             </div>
             {{-- END DASAR  --}}

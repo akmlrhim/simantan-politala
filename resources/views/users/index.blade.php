@@ -41,9 +41,9 @@
             <td class="px-6 py-3">{{ $user->jabatan->nama }}</td>
             <td class="px-6 py-3">{{ $user->email }}</td>
             <td class="px-6 py-3">
-              <x-role-badge type="role" value="{{ $user->role }}" />
+              <x-badge type="role" value="{{ $user->role }}" />
             </td>
-            <td class="px-6 py-3 flex gap-2">
+            <td class="px-6 py-3">
               <a href="{{ route('users.edit', $user->id) }}">
                 <button type="button" title="Edit"
                   class="px-2 py-1 font-medium text-xs text-white bg-yellow-500 hover:bg-yellow-600 rounded-lg">

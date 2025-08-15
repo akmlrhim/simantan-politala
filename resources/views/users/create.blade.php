@@ -103,6 +103,8 @@
                   </option>
                   <option value="Sespim/Direktur" {{ old('role') == 'Sespim/Direktur' ? 'selected' : '' }}>Sespim/Direktur
                   </option>
+                  <option value="User" {{ old('role') == 'User' ? 'selected' : '' }}>User
+                  </option>
                 </select>
                 @error('role')
                   <x-validation>{{ ucfirst($message) }}</x-validation>

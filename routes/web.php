@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DisposisiController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\JenisSuratController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SuratKeluarController;
 use App\Http\Controllers\SuratMasukController;
 use App\Http\Controllers\TelahanStafController;
@@ -43,5 +44,9 @@ Route::middleware('auth')->group(function () {
 		Route::resource('/', DisposisiController::class)->parameters(['' => 'disposisi'])->except('create', 'destroy');
 		Route::get('create/{id}', [DisposisiController::class, 'create'])->name('create');
 		Route::get('detail/{id}', [DisposisiController::class, 'detail'])->name('detail');
+	});
+
+	Route::prefix('profil-saya')->controller(ProfileController::class)->group(function () {
+		Route::get('/', 'index')->name('profil.index');
 	});
 });

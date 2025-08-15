@@ -13,9 +13,12 @@ class Disposisi extends Model
         'nomor_agenda',
         'tingkat_surat',
         'instruksi_disposisi',
-        'kepada_jabatan_id',
         'catatan',
         'created_by'
+    ];
+
+    protected $casts = [
+        'instruksi_disposisi' => 'array'
     ];
 
     public function suratMasuk()
@@ -35,6 +38,6 @@ class Disposisi extends Model
 
     public function disposisiPenerima()
     {
-        return $this->hasOne(DisposisiPenerima::class, 'disposisi_id');
+        return $this->hasMany(DisposisiPenerima::class, 'disposisi_id');
     }
 }

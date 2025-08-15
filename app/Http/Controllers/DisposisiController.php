@@ -20,19 +20,9 @@ class DisposisiController extends Controller
   public function index()
   {
     $title = 'Disposisi';
-    $disposisi = Disposisi::with([
-      'suratMasuk'
-    ])->paginate(10, ['*'], 'disposisi_page')
-      ->withQueryString();
+    $suratMasuk = SuratMasuk::with('disposisi')->paginate(10);
 
-    $suratMasuk = SuratMasuk::with([
-      'disposisi',
-      'disposisi.user',
-      'disposisi.jabatan'
-    ])->paginate(5, ['*'], 'suratmasuk_page')
-      ->withQueryString();
-
-    return view('disposisi.index', compact('title', 'disposisi', 'suratMasuk'));
+    return view('disposisi.index', compact('title', 'suratMasuk'));
   }
 
   /**
@@ -83,7 +73,8 @@ class DisposisiController extends Controller
         'surat_masuk_id' => $request->surat_masuk_id,
         'nomor_agenda' => $request->nomor_agenda,
         'tingkat_surat' => $request->tingkat_surat,
-        'instruksi_disposisi' => json_encode($request->instruksi_disposisi),
+        'instruksi_disposisi' => $request->instruksi_disposisi,
+        'catatan' => $request->catatan,
         'created_by' => Auth::user()->id
       ]);
 
@@ -96,25 +87,57 @@ class DisposisiController extends Controller
       }
 
       DB::commit();
-      return redirect()->route('disposisi.index')
-        ->with('success', 'Disposisi Berhasil dibuat !');
+      return redirect()->route('disposisi.index')->with('success', 'Disposisi Berhasil dibuat !');
     } catch (Throwable $e) {
       DB::rollBack();
-      return redirect()->back()->with('error', 'Terjadi kesalahan !' . $e->getMessage());
+      return redirect()->back()->with('error', 'Terjadi kesalahan !');
     }
   }
 
   /**
    * Display the specified resource.
    */
-  public function detail($id) {}
+  public function detail($id)
+  {
+    $title = 'Detail Disposisi';
+    $disposisi = Disposisi::findOrFail($id);
+
+    return view('disposisi.detail', compact('title', 'disposisi'));
+  }
 
   /**
    * Show the form for editing the specified resource.
    */
-  public function edit(Disposisi $disposisi)
+  public function edit($id)
   {
-    //
+    $title = 'Edit Disposisi';
+    $instruksiList = [
+      "Untuk diagendakan",
+      "Untuk diketahui",
+      "Mohon dapat mendampingi",
+      "Mohon dipelajari",
+      "Mohon menyiapkan bahan",
+      "Mohon disiapkan konsep jawaban",
+      "Mohon dapat mewakili",
+      "Mohon saran / pertimbangan",
+      "Mohon menugaskan perwakilan",
+      "Silahkan diputuskan",
+      "Tidak bisa hadir / izin",
+      "Disetujui",
+      "Mohon ditindaklanjuti sesuai ketentuan",
+      "Diarsipkan",
+      "Mohon dikoordinasikan"
+    ];
+
+    $disposisi = Disposisi::findOrFail($id);
+    $jabatan = Jabatan::pluck('nama', 'id');
+
+    return view('disposisi.edit', compact(
+      'title',
+      'disposisi',
+      'jabatan',
+      'instruksiList'
+    ));
   }
 
   /**
@@ -122,7 +145,41 @@ class DisposisiController extends Controller
    */
   public function update(UpdateDisposisiRequest $request, Disposisi $disposisi)
   {
-    //
+    DB::beginTransaction();
+
+    try {
+      $disposisi->update([
+        'nomor_agenda' => $request->nomor_agenda,
+        'tingkat_surat' => $request->tingkat_surat,
+        'instruksi_disposisi' => $request->instruksi_disposisi,
+        'catatan' => $request->catatan
+      ]);
+
+      $existJabatan = $disposisi->disposisiPenerima()
+        ->pluck('kepada_jabatan_id')
+        ->toArray();
+
+      $newJabatan = array_diff($request->kepada_jabatan_id, $existJabatan);
+
+      foreach ($newJabatan as $jabatanId) {
+        DisposisiPenerima::create([
+          'disposisi_id' => $disposisi->id,
+          'kepada_jabatan_id' => $jabatanId,
+          'status' => 'Terkirim'
+        ]);
+      }
+
+      DB::commit();
+      return redirect()
+        ->route('disposisi.index')
+        ->with('success', 'Disposisi berhasil diperbarui!');
+    } catch (Throwable $e) {
+      DB::rollback();
+      return redirect()
+        ->back()
+        ->withInput()
+        ->with('error', 'Terjadi kesalahan saat memperbarui disposisi!');
+    }
   }
 
   /**

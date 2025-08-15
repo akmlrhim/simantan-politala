@@ -28,7 +28,7 @@ class StoreUserRequest extends FormRequest
 			'password' => 'required|min:8',
 			'jabatan_id' => 'required|string|max:255',
 			'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-			'role' => 'required|in:Ketua Jurusan,Admin,Sespim/Direktur',
+			'role' => 'required|in:Ketua Jurusan,Admin,Sespim/Direktur,User',
 		];
 	}
 }

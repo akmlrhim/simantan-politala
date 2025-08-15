@@ -100,17 +100,23 @@
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm font-medium rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full md:w-3/4 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
 
                   <option value="" {{ old('role', $user->role ?? '') == '' ? 'selected' : '' }}>Pilih Role </option>
-                  <option value="Admin" {{ old('role', $user->role ?? '') == 'Admin' ? 'selected' : '' }}>Admin
+                  <option value="Admin" {{ old('role', $user->role ?? '') == 'Admin' ? 'selected' : '' }}>
+                    Admin
                   </option>
                   <option value="Ketua Jurusan" {{ old('role', $user->role ?? '') == 'Ketua Jurusan' ? 'selected' : '' }}>
-                    Ketua Jurusan</option>
+                    Ketua Jurusan
+                  </option>
                   <option value="Sespim/Direktur"
                     {{ old('role', $user->role ?? '') == 'Sespim/Direktur' ? 'selected' : '' }}>
-                    Sespim/Direktur</option>
+                    Sespim/Direktur
+                  </option>
+                  <option value="User" {{ old('role', $user->role ?? '') == 'User' ? 'selected' : '' }}>
+                    User
+                  </option>
                 </select>
 
                 @error('role')
-                  <small class="text-red-500 font-medium text-xs mt-1 capitalize">{{ $message }}</small>
+                <x-validation>{{ ucfirst($message) }}</x-validation>
                 @enderror
               </div>
 

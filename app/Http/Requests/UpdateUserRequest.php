@@ -26,7 +26,7 @@ class UpdateUserRequest extends FormRequest
 			'email' => 'required|email|max:255',
 			'jabatan_id' => 'required|string|max:255',
 			'nip' => 'required|nullable|string|max:20',
-			'role' => 'required|in:Ketua Jurusan,Admin,Sespim/Direktur',
+			'role' => 'required|in:Ketua Jurusan,Admin,Sespim/Direktur,User',
 		];
 	}
 }

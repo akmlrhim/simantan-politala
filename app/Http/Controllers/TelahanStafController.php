@@ -105,17 +105,14 @@ class TelahanStafController extends Controller
         $title = 'Edit Telahan Staf';
         $telahanStaf = TelahanStaf::findOrFail($id);
 
-        $existing = TelahanStaf::where('surat_masuk_id', $telahanStaf->first());
         $jabatan = Jabatan::pluck('nama', 'id');
         $jenisSurat = JenisSurat::pluck('nama', 'id');
-        $suratMasuk = SuratMasuk::find($telahanStaf->surat_masuk_id);
 
         return view('telahan_staf.edit', compact(
             'title',
             'telahanStaf',
             'jabatan',
             'jenisSurat',
-            'suratMasuk'
         ));
     }
 

@@ -32,8 +32,8 @@
                   <span class="text-xs text-gray-600">Asal Surat : {{ $row->asal_surat }}</span>
                 </td>
                 <td class="px-6 py-3">{{ $row->nomor_surat }}</td>
-                <td class="px-6 py-3">{{ \Carbon\Carbon::parse($row->tanggal_diterima)->format('d-m-Y') }}</td>
-                <td class="px-6 py-3">{{ \Carbon\Carbon::parse($row->tanggal_surat)->format('d-m-Y') }}</td>
+                <td class="px-6 py-3">{{ \Carbon\Carbon::parse($row->tanggal_diterima)->format('d-M-Y') }}</td>
+                <td class="px-6 py-3">{{ \Carbon\Carbon::parse($row->tanggal_surat)->format('d-M-Y') }}</td>
                 <td class="px-6 py-3">
                   <button onclick="showFileModal('{{ asset('storage/surat_masuk/' . $row->file_surat) }}')"
                     data-modal-target="fileModal" data-modal-toggle="fileModal"
@@ -53,21 +53,23 @@
                     </a>
                   @endif
                 </td>
-                <td class="px-6 py-3">
-                  <a href="{{ route('disposisi.detail', $row->id) }}">
-                    <button type="button" title="Detail"
-                      class="px-2 py-1 font-medium text-xs text-white bg-green-900 hover:bg-green-600 rounded-lg">
-                      <i class="fa-solid fa-circle-info"></i> Detail
-                    </button>
-                  </a>
+                @if ($row->disposisi && $row->disposisi->id)
+                  <td class="px-6 py-3">
+                    <a href="{{ route('disposisi.detail', $row->disposisi->id) }}">
+                      <button type="button" title="Detail"
+                        class="px-2 py-1 font-medium text-xs text-white bg-green-900 hover:bg-green-800 rounded-lg">
+                        <i class="fa-solid fa-circle-info"></i> Detail
+                      </button>
+                    </a>
 
-                  <a href="{{ route('disposisi.detail', $row->id) }}">
-                    <button type="button" title="Edit"
-                      class="px-2 py-1 font-medium text-xs text-white bg-yellow-700 hover:bg-yellow-600 rounded-lg">
-                      <i class="fa-solid fa-pen-to-square"></i> Edit
-                    </button>
-                  </a>
-                </td>
+                    <a href="{{ route('disposisi.edit', $row->disposisi->id) }}">
+                      <button type="button" title="Edit"
+                        class="px-2 py-1 font-medium text-xs text-white bg-yellow-700 hover:bg-yellow-600 rounded-lg">
+                        <i class="fa-solid fa-pen-to-square"></i> Edit
+                      </button>
+                    </a>
+                  </td>
+                @endif
               </tr>
             @empty
               <tr>
