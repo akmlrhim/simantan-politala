@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ActivityLog;
+use App\Models\Disposisi;
 use App\Models\Jabatan;
 use App\Models\JenisSurat;
 use App\Models\SuratKeluar;
 use App\Models\SuratMasuk;
-use App\Models\TelahanStaf;
 use App\Models\User;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -21,9 +22,16 @@ class DashboardController extends Controller
 			'jenis_surat' => JenisSurat::count(),
 			'surat_masuk' => SuratMasuk::count(),
 			'surat_keluar' => SuratKeluar::count(),
-			'telahan_staf' => SuratMasuk::where('status', 'Done')->count()
+			'telahan_staf' => SuratMasuk::where('status', 'Selesai')->count(),
+			'disposisi' => Disposisi::count()
 		];
 
-		return view('dashboard', compact('title', 'stats'));
+		$logs = ActivityLog::with('user')->latest()->take(10)->where('user_id', Auth::id())->get();
+
+		return view('dashboard', compact(
+			'title',
+			'stats',
+			'logs'
+		));
 	}
 }

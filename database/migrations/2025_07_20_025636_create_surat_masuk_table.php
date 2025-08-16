@@ -20,7 +20,7 @@ return new class extends Migration
 			$table->date('tanggal_surat');
 			$table->string('file_surat', 255)->nullable();
 			$table->string('status', 20)->default('pending');
-			$table->foreignId('created_by')->constrained('users')->onDelete('cascade');
+			$table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
 			$table->timestamps();
 		});
 	}

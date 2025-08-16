@@ -60,15 +60,15 @@
                   </a>
                 @endif
               </td>
-              <td class="px-6 py-3 flex flex-wrap gap-2">
+              <td class="px-6 py-3">
                 <a href="{{ route('surat-masuk.edit', $row->id) }}">
-                  <button class="px-2 py-1 font-medium text-white bg-yellow-500 rounded-lg hover:bg-yellow-600">
+                  <button class="px-2 py-1 font-medium text-xs text-white bg-yellow-500 rounded-lg hover:bg-yellow-600">
                     <i class="fa-solid fa-pen-to-square"></i> Edit
                   </button>
                 </a>
                 <button
                   onclick="showDeleteModal('{{ route('surat-masuk.destroy', $row->id) }}', 'Yakin ingin menghapus ?')"
-                  class="px-2 py-1 font-medium text-white bg-red-600 rounded-lg hover:bg-red-700">
+                  class="px-2 py-1 font-medium text-white text-xs bg-red-600 rounded-lg hover:bg-red-700">
                   <i class="fa-solid fa-trash"></i> Hapus
                 </button>
               </td>

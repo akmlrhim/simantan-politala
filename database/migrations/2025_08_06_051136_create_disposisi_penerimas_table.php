@@ -14,13 +14,9 @@ return new class extends Migration
         Schema::create('disposisi_penerima', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('disposisi_id')->constrained('disposisi')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
+            $table->foreignId('disposisi_id')->nullable()->constrained('disposisi')->nullOnDelete();
 
-            $table->foreignId('kepada_jabatan_id')->constrained('jabatan')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
+            $table->foreignId('kepada_jabatan_id')->nullable()->constrained('jabatan')->nullOnDelete();
 
             $table->date('diterima_tanggal')->nullable();
             $table->string('status', 70);

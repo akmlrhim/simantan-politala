@@ -72,11 +72,11 @@ class SuratMasukController extends Controller
 			]);
 
 			DB::commit();
-			return redirect()->route('surat-masuk.index')->with('success', 'Surat masuk berhasil ditambahkan !');
+			return redirect()->route('surat-masuk.index')->with('success', 'Surat masuk berhasil ditambahkan.');
 		} catch (\Throwable $e) {
 
 			DB::rollBack();
-			return redirect()->back()->with('error', 'Terjadi kesalahan !');
+			return redirect()->back()->with('error', 'Terjadi kesalahan.');
 		}
 	}
 
@@ -129,10 +129,10 @@ class SuratMasukController extends Controller
 			]);
 
 			DB::commit();
-			return redirect()->route('surat-masuk.index')->with('success', 'Surat masuk berhasil di edit !');
+			return redirect()->route('surat-masuk.index')->with('success', 'Surat masuk berhasil di edit.');
 		} catch (Throwable $e) {
 			DB::rollBack();
-			return redirect()->back()->with('error', 'Terjadi kesalahan saat mengupdate surat masuk !');
+			return redirect()->back()->with('error', 'Terjadi kesalahan saat mengupdate surat masuk.');
 		}
 	}
 
@@ -150,10 +150,10 @@ class SuratMasukController extends Controller
 
 			$suratMasuk->delete();
 			DB::commit();
-			return redirect()->back()->with('success', 'Surat masuk dihapus !');
+			return redirect()->back()->with('success', 'Surat masuk dihapus.');
 		} catch (Throwable $e) {
 			DB::rollBack();
-			return redirect()->back()->with('error', 'Terjadi kesalahan saat menghapus surat masuk !');
+			return redirect()->back()->with('error', 'Terjadi kesalahan saat menghapus surat masuk.');
 		}
 	}
 

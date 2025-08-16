@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\ActivityLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
-use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Throwable;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
   public function index()
   {
     $title = 'Profil Saya';
-    return view('profil-saya', compact('title'));
+    return view('profil.index', compact('title'));
   }
 
   public function updateProfil(Request $request)
@@ -82,6 +82,26 @@ class ProfileController extends Controller
       'password' => Hash::make($request->new_password),
     ]);
 
-    return back()->with('success', 'Kata sandi berhasil diperbarui.');
+    return redirect()->route('dashboard')->with('success', 'Kata sandi berhasil diperbarui.');
+  }
+
+  public function activityLog()
+  {
+    $title = 'Log Aktivitas';
+    $logs = ActivityLog::with('user')
+      ->latest()
+      ->take(10)
+      ->where('user_id', Auth::id())
+      ->get();
+
+    return view('profil.log-aktivitas', compact('title', 'logs'));
+  }
+
+  public function deleteActivityLog()
+  {
+    $log = ActivityLog::where('user_id', Auth::id())->first();
+
+    $log->delete();
+    return redirect()->route('profil.log-aktivitas')->with('success', 'Log aktivitas berhasil dihapus.');
   }
 }

@@ -87,10 +87,10 @@ class DisposisiController extends Controller
       }
 
       DB::commit();
-      return redirect()->route('disposisi.index')->with('success', 'Disposisi Berhasil dibuat !');
+      return redirect()->route('disposisi.index')->with('success', 'Disposisi Berhasil dibuat.');
     } catch (Throwable $e) {
       DB::rollBack();
-      return redirect()->back()->with('error', 'Terjadi kesalahan !');
+      return redirect()->back()->with('error', 'Terjadi kesalahan.');
     }
   }
 
@@ -172,13 +172,13 @@ class DisposisiController extends Controller
       DB::commit();
       return redirect()
         ->route('disposisi.index')
-        ->with('success', 'Disposisi berhasil diperbarui!');
+        ->with('success', 'Disposisi berhasil diperbarui.');
     } catch (Throwable $e) {
       DB::rollback();
       return redirect()
         ->back()
         ->withInput()
-        ->with('error', 'Terjadi kesalahan saat memperbarui disposisi!');
+        ->with('error', 'Terjadi kesalahan saat memperbarui disposisi.');
     }
   }
 

@@ -64,7 +64,7 @@ class UserController extends Controller
 			);
 
 			DB::commit();
-			return redirect()->route('users.index')->with('success', 'Users berhasil ditambahkan !');
+			return redirect()->route('users.index')->with('success', 'Users berhasil ditambahkan.');
 		} catch (\Exception $e) {
 			DB::rollBack();
 			return redirect()->back()->withInput()->with('error', 'Gagal menambahkan Users');
@@ -107,10 +107,10 @@ class UserController extends Controller
 			]);
 
 			DB::commit();
-			return redirect()->route('users.index')->with('success', 'Users berhasil diubah !');
+			return redirect()->route('users.index')->with('success', 'Users berhasil diubah.');
 		} catch (\Exception $e) {
 			DB::rollBack();
-			return redirect()->back()->withInput()->with('error', 'Gagal mengubah data Users !');
+			return redirect()->back()->withInput()->with('error', 'Gagal mengubah data Users.');
 		}
 	}
 
@@ -125,10 +125,10 @@ class UserController extends Controller
 			$user->delete();
 			DB::commit();
 
-			return redirect()->back()->with('success', 'Users berhasil dihapus !');
+			return redirect()->back()->with('success', 'Users berhasil dihapus.');
 		} catch (\Exception $e) {
 			DB::rollBack();
-			return redirect()->back()->withInput()->with('error', 'Gagal menghapus Users !');
+			return redirect()->back()->withInput()->with('error', 'Gagal menghapus Users.');
 		}
 	}
 }

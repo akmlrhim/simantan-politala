@@ -82,10 +82,10 @@ class TelahanStafController extends Controller
                 ->update(['status' => 'Selesai']);
 
             DB::commit();
-            return redirect()->route('telahan-staf.index')->with('success', 'Telahan staf berhasil dibuat !');
+            return redirect()->route('telahan-staf.index')->with('success', 'Telahan staf berhasil dibuat.');
         } catch (\Throwable $e) {
             DB::rollBack();
-            return redirect()->back()->with('error', 'Terjadi kesalahan !');
+            return redirect()->back()->with('error', 'Terjadi kesalahan.');
         }
     }
 
@@ -135,7 +135,7 @@ class TelahanStafController extends Controller
             ]);
 
             DB::commit();
-            return redirect()->route('telahan-staf.index')->with('success', 'Telahan staf berhasil diubah !');
+            return redirect()->route('telahan-staf.index')->with('success', 'Telahan staf berhasil diubah.');
         } catch (\Throwable $e) {
             DB::rollBack();
             return redirect()->back()->withInput()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());

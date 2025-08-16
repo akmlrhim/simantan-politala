@@ -46,9 +46,11 @@ Route::middleware('auth')->group(function () {
 		Route::get('detail/{id}', [DisposisiController::class, 'detail'])->name('detail');
 	});
 
-	Route::prefix('profil-saya')->controller(ProfileController::class)->group(function () {
+	Route::prefix('profil')->controller(ProfileController::class)->group(function () {
 		Route::get('/', 'index')->name('profil.index');
 		Route::patch('update', 'updateProfil')->name('profil.update');
 		Route::patch('update-password', 'updatePassword')->name('profil.update-password');
+		Route::get('log-aktivitas', 'activityLog')->name('profil.log-aktivitas');
+		Route::delete('log-aktivitas', 'deleteActivityLog')->name('profil.delete-log-aktivitas');
 	});
 });

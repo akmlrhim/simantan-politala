@@ -41,10 +41,10 @@ class JenisSuratController extends Controller
 			]);
 
 			DB::commit();
-			return redirect()->back()->with('success', 'Jenis surat berhasil ditambahkan !');
+			return redirect()->back()->with('success', 'Jenis surat berhasil ditambahkan.');
 		} catch (\Exception $e) {
 			DB::rollBack();
-			return redirect()->back()->with('error', 'Terjadi kesalahan !');
+			return redirect()->back()->with('error', 'Terjadi kesalahan.');
 		}
 	}
 
@@ -75,10 +75,10 @@ class JenisSuratController extends Controller
 			$jenisSurat->update(['nama' => $request->nama]);
 			DB::commit();
 
-			return redirect()->back()->with('success', 'Jenis surat berhasil diubah !');
+			return redirect()->back()->with('success', 'Jenis surat berhasil diubah.');
 		} catch (\Exception $e) {
 			DB::rollBack();
-			return redirect()->back()->with('error', 'Terjadi kesalahan !');
+			return redirect()->back()->with('error', 'Terjadi kesalahan.');
 		}
 	}
 
@@ -93,10 +93,10 @@ class JenisSuratController extends Controller
 			$jenisSurat->delete();
 
 			DB::commit();
-			return redirect()->back()->with('success', 'Jenis surat berhasil dihapus !');
+			return redirect()->back()->with('success', 'Jenis surat berhasil dihapus.');
 		} catch (\Exception $e) {
 			DB::rollBack();
-			return redirect()->back()->with('error', 'Terjadi kesalahan !');
+			return redirect()->back()->with('error', 'Terjadi kesalahan.');
 		}
 	}
 }

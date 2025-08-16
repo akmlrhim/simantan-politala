@@ -44,10 +44,10 @@ class JabatanController extends Controller
             ]);
 
             DB::commit();
-            return redirect()->back()->with('success', 'Jabatan berhasil ditambahkan !');
+            return redirect()->back()->with('success', 'Jabatan berhasil ditambahkan.');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->with('error', 'Terjadi kesalahan !');
+            return redirect()->back()->with('error', 'Terjadi kesalahan.');
         }
     }
 
@@ -78,10 +78,10 @@ class JabatanController extends Controller
             $jabatan->update(['nama' => $request->nama]);
             DB::commit();
 
-            return redirect()->back()->with('success', 'Jabatan berhasil diubah !');
+            return redirect()->back()->with('success', 'Jabatan berhasil diubah.');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->with('error', 'Terjadi kesalahan !');
+            return redirect()->back()->with('error', 'Terjadi kesalahan.');
         }
     }
 
@@ -96,10 +96,10 @@ class JabatanController extends Controller
             $jabatan->delete();
 
             DB::commit();
-            return redirect()->back()->with('success', 'Jabatan berhasil dihapus !');
+            return redirect()->back()->with('success', 'Jabatan berhasil dihapus.');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->with('error', 'Terjadi kesalahan !');
+            return redirect()->back()->with('error', 'Terjadi kesalahan.');
         }
     }
 }
