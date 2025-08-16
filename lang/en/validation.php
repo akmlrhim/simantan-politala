@@ -155,7 +155,10 @@ return [
 		'nip' => 'NIP',
 		'jabatan_id' => 'Jabatan',
 		'kepada_jabatan_id' => 'Tujuan disposisi',
-		'surat_masuk_id' => 'Surat masuk'
+		'surat_masuk_id' => 'Surat masuk',
+		'current_password' => 'Kata sandi saat ini',
+		'new_password' => 'Kata sandi baru',
+		'confirm_password' => 'Konfirmasi kata sandi baru',
 	],
 
 ];

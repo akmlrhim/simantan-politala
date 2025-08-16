@@ -48,5 +48,7 @@ Route::middleware('auth')->group(function () {
 
 	Route::prefix('profil-saya')->controller(ProfileController::class)->group(function () {
 		Route::get('/', 'index')->name('profil.index');
+		Route::patch('update', 'updateProfil')->name('profil.update');
+		Route::patch('update-password', 'updatePassword')->name('profil.update-password');
 	});
 });

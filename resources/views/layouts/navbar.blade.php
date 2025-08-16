@@ -32,26 +32,21 @@
               {{ Auth::user()->role }}
             </span>
           </div>
-
         </button>
 
         <div id="user-dropdown"
-          class="absolute right-0 z-50 hidden mt-2 w-48 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow">
+          class="absolute right-0 z-50 hidden mt-2 w-48 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow transition-all duration-200 ease-out transform origin-top scale-95">
           <ul class="py-2" aria-labelledby="user-menu-button">
             <li>
-              <a href="{{ route('dashboard') }}"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 font-medium">Dashboard</a>
-            </li>
-            <li>
-              <a href="{{ route('dashboard') }}"
+              <a href="{{ route('profil.index') }}"
                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 font-medium">Profil
                 Saya</a>
             </li>
             <li>
-              <a href="#" onclick="event.preventDefault(); document.getElementById('logout').submit();"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 font-medium">Logout</a>
+              <a href="#" onclick="event.preventDefault(); document.getElementById('navLogout').submit();"
+                class="block px-4 py-2 text-sm text-red-700 hover:bg-red-100 font-medium">Logout</a>
             </li>
-            <form id="logout" method="POST" action="{{ route('logout') }}" class="hidden">
+            <form id="navLogout" method="POST" action="{{ route('logout') }}" class="hidden">
               @csrf
             </form>
           </ul>
