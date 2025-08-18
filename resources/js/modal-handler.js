@@ -29,3 +29,24 @@ window.closeDeleteModal = function () {
         modal.classList.add("hidden");
     }
 };
+
+window.showConfirmModal = function (actionUrl, message) {
+    const form = document.getElementById("confirmForm");
+    const messageElement = document.getElementById("confirmMessage");
+    const modal = document.getElementById("confirmModal");
+
+    if (form && messageElement && modal) {
+        form.action = actionUrl;
+        messageElement.innerText = message;
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+    }
+};
+
+window.closeConfirmModal = function () {
+    const modal = document.getElementById("confirmModal");
+    if (modal) {
+        modal.classList.remove("flex");
+        modal.classList.add("hidden");
+    }
+};

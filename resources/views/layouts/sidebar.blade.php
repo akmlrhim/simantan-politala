@@ -43,10 +43,18 @@
         </x-nav-link>
       </li>
 
-      <x-nav-link href="{{ route('disposisi.index') }}" :active="request()->routeIs('disposisi.*')">
-        <i class="fa-solid fa-paper-plane"></i>
-        <span class="ms-2">Disposisi</span>
-      </x-nav-link>
+      @if (Auth::user()->role == 'Sespim/Direktur')
+        <x-nav-link href="{{ route('disposisi.index') }}" :active="request()->routeIs('disposisi.*')">
+          <i class="fa-solid fa-paper-plane"></i>
+          <span class="ms-2">Disposisi</span>
+        </x-nav-link>
+      @else
+        <x-nav-link href="{{ route('disposisi.penerima') }}" :active="request()->routeIs('disposisi.*')">
+          <i class="fa-solid fa-paper-plane"></i>
+          <span class="ms-2">Disposisi</span>
+        </x-nav-link>
+      @endif
+
       </li>
 
       <div class="flex items-center my-2">

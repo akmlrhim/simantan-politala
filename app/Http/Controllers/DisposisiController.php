@@ -6,11 +6,13 @@ use Throwable;
 use App\Models\Jabatan;
 use App\Models\Disposisi;
 use App\Models\SuratMasuk;
+use Illuminate\Http\Request;
 use App\Models\DisposisiPenerima;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreDisposisiRequest;
 use App\Http\Requests\UpdateDisposisiRequest;
+
 
 class DisposisiController extends Controller
 {
@@ -100,7 +102,7 @@ class DisposisiController extends Controller
   public function detail($id)
   {
     $title = 'Detail Disposisi';
-    $disposisi = Disposisi::findOrFail($id);
+    $disposisi = Disposisi::with(['disposisiPenerima.jabatan'])->findOrFail($id);
 
     return view('disposisi.detail', compact('title', 'disposisi'));
   }
@@ -182,11 +184,26 @@ class DisposisiController extends Controller
     }
   }
 
-  /**
-   * Remove the specified resource from storage.
-   */
-  public function destroy(Disposisi $disposisi)
+  public function disposisiPenerima()
   {
-    //
+    $title = 'Penerima Disposisi';
+    $jabatanId = Auth::user()->jabatan_id;
+
+    $disposisiPenerima = DisposisiPenerima::with(['disposisi', 'jabatan'])
+      ->where('kepada_jabatan_id', $jabatanId)
+      ->paginate(10);
+
+
+    return view('disposisi.penerima', compact('title', 'disposisiPenerima'));
+  }
+
+  public function updateStatus($id)
+  {
+    $disposisiPenerima = DisposisiPenerima::findOrFail($id);
+    $disposisiPenerima->status = 'Diterima';
+    $disposisiPenerima->diterima_tanggal = now();
+    $disposisiPenerima->save();
+
+    return redirect()->back()->with('success', 'Disposisi ditandai sebagai diterima.');
   }
 }

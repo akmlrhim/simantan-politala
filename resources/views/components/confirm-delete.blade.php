@@ -1,4 +1,3 @@
-{{-- Modal delete global --}}
 <div id="deleteModal"
   class="hidden fixed inset-0 z-50 justify-center items-center bg-black/30 backdrop-blur-sm backdrop-brightness-90">
   <div class="relative p-4 w-full max-w-md max-h-full">
@@ -17,7 +16,6 @@
             d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
         </svg>
         <h3 class="mb-5 text-sm font-medium text-gray-500 dark:text-gray-400" id="modalMessage">
-          Yakin ingin menghapus data ini?
         </h3>
 
         <form id="deleteForm" method="POST">

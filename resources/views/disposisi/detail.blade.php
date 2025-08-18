@@ -20,13 +20,13 @@
         <tr>
           <td class="py-1 font-medium">Tanggal Surat</td>
           <td>:
-            {{ \Carbon\Carbon::parse($disposisi->suratMasuk->tanggal_surat)->translatedFormat('l, d M Y') ?? '-' }}
+            {{ \Carbon\Carbon::parse($disposisi->suratMasuk->tanggal_surat)->translatedFormat('l, d F Y') ?? '-' }}
           </td>
         </tr>
         <tr>
           <td class="py-1 font-medium">Tanggal Diterima</td>
           <td>:
-            {{ \Carbon\Carbon::parse($disposisi->suratMasuk->tanggal_diterima)->translatedFormat('l, d M Y') ?? '-' }}
+            {{ \Carbon\Carbon::parse($disposisi->suratMasuk->tanggal_diterima)->translatedFormat('l, d F Y') ?? '-' }}
           </td>
         </tr>
         <tr>
@@ -86,38 +86,62 @@
       </table>
     </div>
 
-    <div>
-      <h3 class="text-lg font-semibold text-gray-700 mb-2">Penerima Disposisi</h3>
-      <div class="relative overflow-x-auto rounded-sm">
-        <table class="w-full text-sm text-left rtl:text-right text-black dark:text-gray-400">
-          <thead class="text-white text-xs font-semibold uppercase bg-gradient-to-r from-blue-600 to-blue-800">
-            <tr>
-              <th scope="col" class="px-6 py-2">No.</th>
-              <th scope="col" class="px-6 py-2">Kepada</th>
-              <th scope="col" class="px-6 py-2">Tanggal diterima</th>
-              <th scope="col" class="px-6 py-2">status</th>
-            </tr>
-          </thead>
-          <tbody>
-            @foreach ($disposisi->disposisiPenerima as $index => $row)
-              <tr class="bg-white border-b border-gray-200">
-                <td class="px-6 py-2">{{ $index + 1 }}</td>
-                <td class="px-6 py-2">{{ $row->jabatan->nama }}</td>
-                <td class="px-6 py-2">{{ $row->tanggal_diterima ?? '-' }}</td>
-                <td class="px-6 py-2">{{ $row->status }}</td>
+    @if (Auth::user()->role == 'Sespim/Direktur')
+      <div>
+        <h3 class="text-lg font-semibold text-gray-700 mb-2">Penerima Disposisi</h3>
+        <div class="relative overflow-x-auto rounded-sm">
+          <table class="w-full text-sm text-left rtl:text-right text-black dark:text-gray-400">
+            <thead class="text-white text-xs font-semibold uppercase bg-gradient-to-r from-blue-600 to-blue-800">
+              <tr>
+                <th scope="col" class="px-6 py-2">No.</th>
+                <th scope="col" class="px-6 py-2">Kepada</th>
+                <th scope="col" class="px-6 py-2">Tanggal diterima</th>
+                <th scope="col" class="px-6 py-2">status</th>
               </tr>
-            @endforeach
+            </thead>
+            <tbody>
+              @foreach ($disposisi->disposisiPenerima as $index => $row)
+                <tr class="bg-white border-b border-gray-200">
+                  <td class="px-6 py-2">{{ $index + 1 }}</td>
+                  <td class="px-6 py-2">{{ $row->jabatan->nama }}</td>
+                  <td class="px-6 py-2">
+                    {{ $row->diterima_tanggal ? \Carbon\Carbon::parse($row->diterima_tanggal)->translatedFormat('d F Y') : '-' }}
+                  </td>
+                  <td class="px-6 py-2">
+                    @if ($row->status == 'Diterima')
+                      <span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm">
+                        <i class="fa-solid fa-circle-check"></i>
+                        Diterima
+                      </span>
+                    @else
+                      <span class="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm">
+                        <i class="fa-solid fa-paper-plane"></i>
+                        Dikirim
+                      </span>
+                    @endif
+                  </td>
+                </tr>
+              @endforeach
 
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+    @endif
 
     <div class="flex justify-start mt-4">
-      <a href="{{ route('disposisi.index') }}"
-        class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white text-sm rounded-md">
-        Kembali
-      </a>
+      @if (Auth::user()->role == 'Sespim/Direktur')
+        <a href="{{ route('disposisi.index') }}"
+          class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white text-sm rounded-md">
+          Kembali
+        </a>
+      @else
+        <a href="{{ route('disposisi.penerima') }}"
+          class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white text-sm rounded-md">
+          Kembali
+        </a>
+      @endif
+
     </div>
 
 

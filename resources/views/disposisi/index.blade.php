@@ -8,133 +8,73 @@
     </form>
   </div>
 
-  <div class="space-y-4">
-    {{-- Surat Masuk tabel  --}}
-    <div class="relative rounded-lg shadow-lg overflow-hidden sm:ml-6 bg-white">
-      <div class="overflow-x-auto">
-        <table class="w-full text-xs sm:text-sm font-medium text-left rtl:text-right text-black dark:text-gray-400">
-          <thead class="uppercase text-xs bg-gradient-to-r from-blue-600 to-blue-800 text-white">
-            <tr>
-              <th class="px-6 py-3 font-semibold">Perihal</th>
-              <th class="px-6 py-3 font-semibold">No Surat</th>
-              <th class="px-6 py-3 font-semibold">Tgl Diterima</th>
-              <th class="px-6 py-3 font-semibold">Tgl Surat</th>
-              <th class="px-6 py-3 font-semibold">Dokumen</th>
-              <th class="px-6 py-3 font-semibold">Disposisi</th>
-              <th class="px-6 py-3 font-semibold">Aksi</th>
-            </tr>
-          </thead>
-          <tbody>
-            @forelse ($suratMasuk as $row)
-              <tr class="bg-white border-b-2 border-gray-200">
-                <td class="px-6 py-3">
-                  {{ $row->perihal }} <br />
-                  <span class="text-xs text-gray-600">Asal Surat : {{ $row->asal_surat }}</span>
-                </td>
-                <td class="px-6 py-3">{{ $row->nomor_surat }}</td>
-                <td class="px-6 py-3">{{ \Carbon\Carbon::parse($row->tanggal_diterima)->format('d-M-Y') }}</td>
-                <td class="px-6 py-3">{{ \Carbon\Carbon::parse($row->tanggal_surat)->format('d-M-Y') }}</td>
-                <td class="px-6 py-3">
-                  <button onclick="showFileModal('{{ asset('storage/surat_masuk/' . $row->file_surat) }}')"
-                    data-modal-target="fileModal" data-modal-toggle="fileModal"
-                    class="px-3 py-1 text-xs font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600">
-                    <i class="fa-solid fa-eye"></i> Lihat
-                  </button>
-                </td>
-                <td class="px-6 py-3">
-                  @if ($row->disposisi)
-                    <span
-                      class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-green-900 dark:text-green-300">Selesai</span>
-                  @else
-                    <a href="{{ route('disposisi.create', $row->id) }}">
-                      <button class="px-3 py-1 text-xs font-medium text-white bg-blue-900 rounded-lg hover:bg-blue-800">
-                        <i class="fa-solid fa-pen"></i> Disposisikan
-                      </button>
-                    </a>
-                  @endif
-                </td>
-                @if ($row->disposisi && $row->disposisi->id)
-                  <td class="px-6 py-3">
-                    <a href="{{ route('disposisi.detail', $row->disposisi->id) }}">
-                      <button type="button" title="Detail"
-                        class="px-2 py-1 font-medium text-xs text-white bg-green-900 hover:bg-green-800 rounded-lg">
-                        <i class="fa-solid fa-circle-info"></i> Detail
-                      </button>
-                    </a>
-
-                    <a href="{{ route('disposisi.edit', $row->disposisi->id) }}">
-                      <button type="button" title="Edit"
-                        class="px-2 py-1 font-medium text-xs text-white bg-yellow-700 hover:bg-yellow-600 rounded-lg">
-                        <i class="fa-solid fa-pen-to-square"></i> Edit
-                      </button>
-                    </a>
-                  </td>
+  <div class="relative rounded-lg shadow-lg overflow-hidden sm:ml-6 bg-white">
+    <div class="overflow-x-auto">
+      <table class="w-full text-xs sm:text-sm font-medium text-left rtl:text-right text-black dark:text-gray-400">
+        <thead class="uppercase text-xs bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+          <tr>
+            <th class="px-6 py-3 font-semibold">Perihal</th>
+            <th class="px-6 py-3 font-semibold">No Surat</th>
+            <th class="px-6 py-3 font-semibold">Tgl Diterima</th>
+            <th class="px-6 py-3 font-semibold">Tgl Surat</th>
+            <th class="px-6 py-3 font-semibold">Disposisi</th>
+            <th class="px-6 py-3 font-semibold">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          @forelse ($suratMasuk as $row)
+            <tr class="bg-white border-b-2 border-gray-200">
+              <td class="px-6 py-3">
+                {{ $row->perihal }} <br />
+                <span class="text-xs text-gray-600">Asal Surat : {{ $row->asal_surat }}</span>
+              </td>
+              <td class="px-6 py-3">{{ $row->nomor_surat }}</td>
+              <td class="px-6 py-3">{{ \Carbon\Carbon::parse($row->tanggal_diterima)->translatedFormat('d-M-Y') }}</td>
+              <td class="px-6 py-3">{{ \Carbon\Carbon::parse($row->tanggal_surat)->translatedFormat('d-M-Y') }}</td>
+              <td class="px-6 py-3">
+                @if ($row->disposisi)
+                  <span
+                    class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-green-900 dark:text-green-300">Selesai</span>
+                @else
+                  <a href="{{ route('disposisi.create', $row->id) }}">
+                    <button class="px-3 py-1 text-xs font-medium text-white bg-blue-900 rounded-lg hover:bg-blue-800">
+                      <i class="fa-solid fa-pen"></i> Disposisikan
+                    </button>
+                  </a>
                 @endif
-              </tr>
-            @empty
-              <tr>
-                <td colspan="6" class="text-center px-6 py-4 text-gray-500">
-                  Tidak ada data dalam tabel.
-                </td>
-              </tr>
-            @endforelse
-          </tbody>
-        </table>
-      </div>
+              </td>
+              @if ($row->disposisi && $row->disposisi->id)
+                <td class="px-6 py-3">
+                  <a href="{{ route('disposisi.detail', $row->disposisi->id) }}">
+                    <button type="button" title="Detail"
+                      class="px-2 py-1 font-medium text-xs text-white bg-green-900 hover:bg-green-800 rounded-lg">
+                      <i class="fa-solid fa-circle-info"></i> Detail
+                    </button>
+                  </a>
 
+                  <a href="{{ route('disposisi.edit', $row->disposisi->id) }}">
+                    <button type="button" title="Edit"
+                      class="px-2 py-1 font-medium text-xs text-white bg-yellow-700 hover:bg-yellow-600 rounded-lg">
+                      <i class="fa-solid fa-pen-to-square"></i> Edit
+                    </button>
+                  </a>
+                </td>
+              @endif
+            </tr>
+          @empty
+            <tr>
+              <td colspan="6" class="text-center px-6 py-4 text-gray-500">
+                Tidak ada data dalam tabel.
+              </td>
+            </tr>
+          @endforelse
+        </tbody>
+      </table>
     </div>
+
   </div>
 
   <div class="ml-6 mt-4 text-sm font-medium">
     {{ $suratMasuk->links() }}
   </div>
-
-  {{-- modal file surat  --}}
-  <div id="fileModal" tabindex="-1" aria-hidden="true"
-    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative p-4 w-full max-w-6xl max-h-full">
-      <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
-        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-            File Surat Masuk
-          </h3>
-          <button type="button"
-            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-            data-modal-hide="fileModal">
-            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-            </svg>
-            <span class="sr-only">Close modal</span>
-          </button>
-        </div>
-        <div class="p-4 md:p-5 space-y-4">
-          <div id="fileViewer" class="w-full h-[500px]">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  @push('scripts')
-    <script>
-      function showFileModal(fileUrl) {
-        const modal = document.getElementById('fileModal');
-        const viewer = document.getElementById('fileViewer');
-
-        const extension = fileUrl.split('.').pop().toLowerCase();
-
-        if (['pdf', 'jpg', 'jpeg', 'png', 'gif'].includes(extension)) {
-          viewer.innerHTML = `<iframe src="${fileUrl}" class="w-full h-full" frameborder="0"></iframe>`;
-        } else {
-          viewer.innerHTML =
-            `<p class="text-gray-700">File tidak dapat ditampilkan, <a href="${fileUrl}" target="_blank" class="text-blue-600 underline">klik di sini untuk mengunduh</a>.</p>`;
-        }
-
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-      }
-    </script>
-  @endpush
 @endsection

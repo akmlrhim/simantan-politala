@@ -10,6 +10,7 @@ use App\Http\Controllers\SuratKeluarController;
 use App\Http\Controllers\SuratMasukController;
 use App\Http\Controllers\TelahanStafController;
 use App\Http\Controllers\UserController;
+use App\Models\Disposisi;
 use App\Models\TelahanStaf;
 use Illuminate\Support\Facades\Route;
 
@@ -41,9 +42,11 @@ Route::middleware('auth')->group(function () {
 	});
 
 	Route::prefix('disposisi')->name('disposisi.')->group(function () {
-		Route::resource('/', DisposisiController::class)->parameters(['' => 'disposisi'])->except('create', 'destroy');
+		Route::resource('/', DisposisiController::class)->parameters(['' => 'disposisi'])->except('create', 'destroy', 'show');
 		Route::get('create/{id}', [DisposisiController::class, 'create'])->name('create');
 		Route::get('detail/{id}', [DisposisiController::class, 'detail'])->name('detail');
+		Route::get('penerima', [DisposisiController::class, 'disposisiPenerima'])->name('penerima');
+		Route::patch('update/status/{id}', [DisposisiController::class, 'updateStatus'])->name('update-status');
 	});
 
 	Route::prefix('profil')->controller(ProfileController::class)->group(function () {
