@@ -49,7 +49,7 @@
               <td class="px-6 py-3">
                 @if ($row->status == 'Pending')
                   <span
-                    class="bg-yellow-100 text-xs text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-yellow-900 dark:text-yellow-300">
+                    class="bg-yellow-100 text-xs text-yellow-800 font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-yellow-900 dark:text-yellow-300">
                     {{ $row->status }}
                   </span>
                 @else
@@ -67,7 +67,7 @@
                   </button>
                 </a>
                 <button
-                  onclick="showDeleteModal('{{ route('surat-masuk.destroy', $row->id) }}', 'Yakin ingin menghapus ?')"
+                  onclick="showDeleteModal('{{ route('surat-masuk.destroy', $row->id) }}', 'Yakin ingin menghapus surat masuk ?')"
                   class="px-2 py-1 font-medium text-white text-xs bg-red-600 rounded-lg hover:bg-red-700">
                   <i class="fa-solid fa-trash"></i> Hapus
                 </button>

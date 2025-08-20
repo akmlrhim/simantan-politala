@@ -99,9 +99,8 @@ class ProfileController extends Controller
 
   public function deleteActivityLog()
   {
-    $log = ActivityLog::where('user_id', Auth::id())->first();
+    ActivityLog::where('user_id', Auth::id())->delete();
 
-    $log->delete();
     return redirect()->route('profil.log-aktivitas')->with('success', 'Log aktivitas berhasil dihapus.');
   }
 }

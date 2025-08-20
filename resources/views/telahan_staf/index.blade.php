@@ -37,7 +37,7 @@
               <td class="px-6 py-3">
                 <button onclick="showFileModal('{{ asset('storage/surat_masuk/' . $row->file_surat) }}')"
                   title="Lihat File Surat Masuk" data-modal-target="fileModal" data-modal-toggle="fileModal"
-                  class="px-2 py-1 font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600">
+                  class="px-2 py-1 text-xs font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600">
                   <i class="fa-solid fa-eye"></i> Lihat
                 </button>
               </td>
@@ -57,7 +57,7 @@
                 @endif
 
                 {{-- aksi  --}}
-              <td class="px-6 py-3 flex flex-wrap gap-2">
+              <td class="px-6 py-3">
                 @if ($row->status == 'Selesai' && $row->telahanStaf)
                   <a href="{{ route('telahan-staf.edit', $row->telahanStaf->id) }}">
                     <button class="px-2 py-1 font-medium text-white text-xs bg-yellow-500 rounded-lg hover:bg-yellow-600"

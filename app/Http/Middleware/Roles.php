@@ -16,9 +16,15 @@ class Roles
      */
     public function handle(Request $request, Closure $next, ...$roles): Response
     {
-        if (!in_array(Auth::user()->role, $roles)) {
-            abort(403);
+
+        if (!Auth::check()) {
+            return redirect()->route('login');
         }
+
+        if (!empty($roles) && !in_array(Auth::user()->role, $roles)) {
+            return redirect()->back();
+        }
+
         return $next($request);
     }
 }

@@ -10,8 +10,6 @@ use App\Http\Controllers\SuratKeluarController;
 use App\Http\Controllers\SuratMasukController;
 use App\Http\Controllers\TelahanStafController;
 use App\Http\Controllers\UserController;
-use App\Models\Disposisi;
-use App\Models\TelahanStaf;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [AuthController::class, 'index'])->name('login');
@@ -22,33 +20,76 @@ Route::middleware('auth')->group(function () {
 
 	Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-	Route::resource('users', UserController::class);
-	Route::resource('jenis-surat', JenisSuratController::class);
-	Route::resource('jabatan', JabatanController::class);
+	// khusus admin
+	Route::middleware('role:Admin')->group(function () {
+		Route::resource('users', UserController::class);
+		Route::resource('jenis-surat', JenisSuratController::class);
+		Route::resource('jabatan', JabatanController::class);
+	});
 
+	// surat keluar 
 	Route::prefix('surat-keluar')->name('surat-keluar.')->group(function () {
-		Route::resource('/', SuratKeluarController::class)->parameters(['' => 'surat_keluar']);
-		Route::get('file/{id}', [SuratKeluarController::class, 'file'])->name('file');
+		Route::middleware('role:Ketua Jurusan,Admin')->group(function () {
+			Route::resource('/', SuratKeluarController::class)->parameters(['' => 'surat_keluar']);
+			Route::get('file/{id}', [SuratKeluarController::class, 'file'])->name('file');
+		});
+
+		Route::resource('/', SuratKeluarController::class)
+			->except(['index'])
+			->parameters(['' => 'surat_keluar'])
+			->middleware('role:Admin');
 	});
 
+	// surat masuk 
 	Route::prefix('surat-masuk')->name('surat-masuk.')->group(function () {
-		Route::resource('/', SuratMasukController::class)->parameters(['' => 'surat_masuk']);
-		Route::get('telahan-staf/{id}', [SuratMasukController::class, 'telahanStaf'])->name('telahan-staf');
+		Route::middleware('role:Ketua Jurusan,Admin')->group(function () {
+			Route::get('/', [SuratMasukController::class, 'index'])->name('index');
+			Route::get('telahan-staf/{id}', [SuratMasukController::class, 'telahanStaf'])->name('telahan-staf');
+		});
+
+		Route::resource('/', SuratMasukController::class)
+			->except(['index'])
+			->parameters(['' => 'surat_masuk'])
+			->middleware('role:Admin');
 	});
 
+	// telahan staf 
 	Route::prefix('telahan-staf')->name('telahan-staf.')->group(function () {
-		Route::resource('/', TelahanStafController::class)->parameters(['' => 'telahan-staf'])->except('destroy', 'create');
-		Route::get('create/{id}', [TelahanStafController::class, 'create'])->name('create');
+		Route::get('/', [TelahanStafController::class, 'index'])->name('index')->middleware('role:Ketua Jurusan,Admin');
+
+		Route::middleware('role:Ketua Jurusan')->controller(TelahanStafController::class)->group(function () {
+			Route::get('create/{surat_masuk}', 'create')->name('create');
+			Route::post('/', 'store')->name('store');
+			Route::get('/{telahan_staf}/edit', 'edit')->name('edit');
+			Route::put('/{telahan_staf}', 'update')->name('update');
+		});
 	});
 
+	// disposisi 
 	Route::prefix('disposisi')->name('disposisi.')->group(function () {
-		Route::resource('/', DisposisiController::class)->parameters(['' => 'disposisi'])->except('create', 'destroy', 'show');
-		Route::get('create/{id}', [DisposisiController::class, 'create'])->name('create');
-		Route::get('detail/{id}', [DisposisiController::class, 'detail'])->name('detail');
-		Route::get('penerima', [DisposisiController::class, 'disposisiPenerima'])->name('penerima');
-		Route::patch('update/status/{id}', [DisposisiController::class, 'updateStatus'])->name('update-status');
+		Route::resource('/', DisposisiController::class)
+			->parameters(['' => 'disposisi'])
+			->except('create', 'destroy', 'show')
+			->middleware('role:Sespim/Direktur,Admin');
+
+		Route::get('create/{id}', [DisposisiController::class, 'create'])
+			->name('create')
+			->middleware('role:Sespim/Direktur');
+
+		Route::get('detail/{id}', [DisposisiController::class, 'detail'])
+			->name('detail')
+			->middleware('role:Sespim/Direktur,Admin,User');
+
+		Route::get('penerima', [DisposisiController::class, 'disposisiPenerima'])
+			->name('penerima')
+			->middleware('role:User');
+
+		Route::patch('update/status/{id}', [DisposisiController::class, 'updateStatus'])
+			->name('update-status')
+			->middleware('role:User');
 	});
 
+	// profil 
 	Route::prefix('profil')->controller(ProfileController::class)->group(function () {
 		Route::get('/', 'index')->name('profil.index');
 		Route::patch('update', 'updateProfil')->name('profil.update');

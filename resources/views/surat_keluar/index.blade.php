@@ -2,10 +2,12 @@
 
 @section('content')
   <div class="flex flex-col md:flex-row md:items-center md:justify-between sm:ml-6 mb-3 gap-2">
-    <a href="{{ route('surat-keluar.create') }}"
-      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-3 py-2 tracking-wide focus:outline-none capitalize w-fit">
-      Tambah Data
-    </a>
+    @if (Auth::user()->role == 'Admin')
+      <a href="{{ route('surat-keluar.create') }}"
+        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-3 py-2 tracking-wide focus:outline-none capitalize w-fit">
+        Tambah Data
+      </a>
+    @endif
 
     <form action="{{ route('surat-keluar.index') }}" method="GET" class="flex items-center gap-2 w-full md:w-auto">
       <input type="text" name="search" placeholder="Masukkan kata kunci.."
@@ -51,7 +53,7 @@
               </a>
 
               <button title="Hapus"
-                onclick="showDeleteModal('{{ route('surat-keluar.destroy', $row->id) }}', 'Yakin ingin menghapus pengguna ?')"
+                onclick="showDeleteModal('{{ route('surat-keluar.destroy', $row->id) }}', 'Yakin ingin menghapus surat keluar ?')"
                 class="px-2 py-1 font-medium text-white text-xs bg-red-600 rounded-lg hover:bg-red-700">
                 <i class="fa-solid fa-trash"></i> Hapus
               </button>

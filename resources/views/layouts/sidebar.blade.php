@@ -22,33 +22,36 @@
         </x-nav-link>
       </li>
 
-      <li>
-        <x-nav-link href="{{ route('surat-masuk.index') }}" :active="request()->routeIs('surat-masuk.*')">
-          <i class="fa-solid fa-envelope-open-text"></i>
-          <span class="ms-2">Surat Masuk</span>
-        </x-nav-link>
-      </li>
+      @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'Ketua Jurusan')
+        <li>
+          <x-nav-link href="{{ route('surat-masuk.index') }}" :active="request()->routeIs('surat-masuk.*')">
+            <i class="fa-solid fa-envelope-open-text"></i>
+            <span class="ms-2">Surat Masuk</span>
+          </x-nav-link>
+        </li>
 
-      <li>
-        <x-nav-link href="{{ route('surat-keluar.index') }}" :active="request()->routeIs('surat-keluar.*')">
-          <i class="fa-solid fa-envelope-open"></i>
-          <span class="ms-2">Surat Keluar</span>
-        </x-nav-link>
-      </li>
+        <li>
+          <x-nav-link href="{{ route('surat-keluar.index') }}" :active="request()->routeIs('surat-keluar.*')">
+            <i class="fa-solid fa-envelope-open"></i>
+            <span class="ms-2">Surat Keluar</span>
+          </x-nav-link>
+        </li>
 
-      <li>
-        <x-nav-link href="{{ route('telahan-staf.index') }}" :active="request()->routeIs('telahan-staf.*')">
-          <i class="fa-solid fa-envelope-circle-check"></i>
-          <span class="ms-2">Telahan Staf</span>
-        </x-nav-link>
-      </li>
+        <li>
+          <x-nav-link href="{{ route('telahan-staf.index') }}" :active="request()->routeIs('telahan-staf.*')">
+            <i class="fa-solid fa-envelope-circle-check"></i>
+            <span class="ms-2">Telahan Staf</span>
+          </x-nav-link>
+        </li>
+      @endif
 
-      @if (Auth::user()->role == 'Sespim/Direktur')
+
+      @if (Auth::user()->role == 'Sespim/Direktur' || Auth::user()->role == 'Admin')
         <x-nav-link href="{{ route('disposisi.index') }}" :active="request()->routeIs('disposisi.*')">
           <i class="fa-solid fa-paper-plane"></i>
           <span class="ms-2">Disposisi</span>
         </x-nav-link>
-      @else
+      @elseif (Auth::user()->role == 'User')
         <x-nav-link href="{{ route('disposisi.penerima') }}" :active="request()->routeIs('disposisi.*')">
           <i class="fa-solid fa-paper-plane"></i>
           <span class="ms-2">Disposisi</span>
@@ -57,30 +60,32 @@
 
       </li>
 
-      <div class="flex items-center my-2">
-        <small class="mx-2 text-black opacity-65">ADMIN</small>
-        <hr class="h-px flex-grow bg-gray-200 border-0 opacity-20">
-      </div>
+      @if (Auth::user()->role == 'Admin')
+        <div class="flex items-center my-2">
+          <small class="mx-2 text-black opacity-65">ADMIN</small>
+          <hr class="h-px flex-grow bg-gray-200 border-0 opacity-20">
+        </div>
 
-      <li>
-        <x-nav-link href="{{ route('jenis-surat.index') }}" :active="request()->routeIs('jenis-surat.*')">
-          <i class="fa-solid fa-envelopes-bulk"></i>
-          <span class="ms-3">Jenis Surat</span>
+        <li>
+          <x-nav-link href="{{ route('jenis-surat.index') }}" :active="request()->routeIs('jenis-surat.*')">
+            <i class="fa-solid fa-envelopes-bulk"></i>
+            <span class="ms-3">Jenis Surat</span>
+          </x-nav-link>
+        </li>
+
+        <li>
+          <x-nav-link href="{{ route('jabatan.index') }}" :active="request()->routeIs('jabatan.*')">
+            <i class="fa-solid fa-user-tie"></i>
+            <span class="ms-4">Jabatan</span>
+          </x-nav-link>
+        </li>
+
+        <x-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.*')">
+          <i class="fa-solid fa-user"></i>
+          <span class="ms-4">User</span>
         </x-nav-link>
-      </li>
-
-      <li>
-        <x-nav-link href="{{ route('jabatan.index') }}" :active="request()->routeIs('jabatan.*')">
-          <i class="fa-solid fa-user-tie"></i>
-          <span class="ms-4">Jabatan</span>
-        </x-nav-link>
-      </li>
-
-      <x-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.*')">
-        <i class="fa-solid fa-user"></i>
-        <span class="ms-4">User</span>
-      </x-nav-link>
-      </li>
+        </li>
+      @endif
 
       <li>
         <a onclick="event.preventDefault(); document.getElementById('logout').submit();" href="#"

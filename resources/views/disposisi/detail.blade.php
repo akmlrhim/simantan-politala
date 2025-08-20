@@ -86,7 +86,7 @@
       </table>
     </div>
 
-    @if (Auth::user()->role == 'Sespim/Direktur')
+    @if (Auth::user()->role == 'Sespim/Direktur' || Auth::user()->role == 'Admin')
       <div>
         <h3 class="text-lg font-semibold text-gray-700 mb-2">Penerima Disposisi</h3>
         <div class="relative overflow-x-auto rounded-sm">
@@ -130,7 +130,7 @@
     @endif
 
     <div class="flex justify-start mt-4">
-      @if (Auth::user()->role == 'Sespim/Direktur')
+      @if (Auth::user()->role == 'Sespim/Direktur' || Auth::user()->role == 'Admin')
         <a href="{{ route('disposisi.index') }}"
           class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white text-sm rounded-md">
           Kembali
