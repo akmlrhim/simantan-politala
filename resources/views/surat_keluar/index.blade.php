@@ -24,7 +24,7 @@
           <th scope="col" class="px-6 py-3">Hal</th>
           <th scope="col" class="px-6 py-3">Tanggal Surat</th>
           <th scope="col" class="px-6 py-3">Dokumen</th>
-          <th scope="col" class="px-6 py-3">Aksi</th>
+          {!! Auth::user()->role == 'Admin' ? '<th scope="col" class="px-6 py-3">Aksi</th>' : '' !!}
         </tr>
       </thead>
       <tbody>
@@ -44,20 +44,22 @@
               </a>
             </td>
 
-            <td class="px-6 py-3 flex gap-2">
-              <a href="{{ route('surat-keluar.edit', $row->id) }}">
-                <button type="button" title="Edit"
-                  class="px-2 py-1 font-medium text-white text-xs bg-yellow-500 rounded-lg hover:bg-yellow-600">
-                  <i class="fa-solid fa-pen-to-square"></i> Edit
-                </button>
-              </a>
+            @if (Auth::user()->role == 'Admin')
+              <td class="px-6 py-3 flex gap-2">
+                <a href="{{ route('surat-keluar.edit', $row->id) }}">
+                  <button type="button" title="Edit"
+                    class="px-2 py-1 font-medium text-white text-xs bg-yellow-500 rounded-lg hover:bg-yellow-600">
+                    <i class="fa-solid fa-pen-to-square"></i> Edit
+                  </button>
+                </a>
 
-              <button title="Hapus"
-                onclick="showDeleteModal('{{ route('surat-keluar.destroy', $row->id) }}', 'Yakin ingin menghapus surat keluar ?')"
-                class="px-2 py-1 font-medium text-white text-xs bg-red-600 rounded-lg hover:bg-red-700">
-                <i class="fa-solid fa-trash"></i> Hapus
-              </button>
-            </td>
+                <button title="Hapus"
+                  onclick="showDeleteModal('{{ route('surat-keluar.destroy', $row->id) }}', 'Yakin ingin menghapus surat keluar ?')"
+                  class="px-2 py-1 font-medium text-white text-xs bg-red-600 rounded-lg hover:bg-red-700">
+                  <i class="fa-solid fa-trash"></i> Hapus
+                </button>
+              </td>
+            @endif
           </tr>
         @empty
           <tr>

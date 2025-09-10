@@ -52,12 +52,15 @@
                     </button>
                   </a>
 
-                  <a href="{{ route('disposisi.edit', $row->disposisi->id) }}">
-                    <button type="button" title="Edit"
-                      class="px-2 py-1 font-medium text-xs text-white bg-yellow-700 hover:bg-yellow-600 rounded-lg">
-                      <i class="fa-solid fa-pen-to-square"></i> Edit
-                    </button>
-                  </a>
+                  @if (Auth::user()->role == 'Sespim/Direktur')
+                    <a href="{{ route('disposisi.edit', $row->disposisi->id) }}">
+                      <button type="button" title="Edit"
+                        class="px-2 py-1 font-medium text-xs text-white bg-yellow-700 hover:bg-yellow-600 rounded-lg">
+                        <i class="fa-solid fa-pen-to-square"></i> Edit
+                      </button>
+                    </a>
+                  @endif
+
                 </td>
               @endif
             </tr>

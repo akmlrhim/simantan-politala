@@ -21,7 +21,7 @@
             <th scope="col" class="px-6 py-3">Tgl surat</th>
             <th scope="col" class="px-6 py-3">dokumen</th>
             <th scope="col" class="px-6 py-3">telahan staf</th>
-            <th scope="col" class="px-6 py-3">Aksi</th>
+            {!! auth()->user()->role == 'Admin' ? '<th scope="col" class="px-6 py-3">Aksi</th>' : '' !!}
           </tr>
         </thead>
         <tbody>
@@ -42,35 +42,49 @@
                 </button>
               </td>
 
-              {{-- telahan  --}}
+              {{-- telahan staf --}}
               <td class="px-6 py-3">
-                @if ($row->status == 'Pending')
-                  <a href="{{ route('telahan-staf.create', $row->id) }}">
-                    <button class="px-2 py-1 text-xs font-medium text-white bg-green-500 rounded-lg hover:bg-green-600"
-                      title="Buat Telahan Staf">
-                      <i class="fa-solid fa-pen"></i> Buat Telahan
-                    </button>
-                  </a>
+                @if ($row->status === 'Pending')
+                  @if (auth()->user()->role === 'Admin')
+                    <a href="{{ route('telahan-staf.create', $row->id) }}">
+                      <button class="px-2 py-1 text-xs font-medium text-white bg-green-500 rounded-lg hover:bg-green-600"
+                        title="Buat Telahan Staf">
+                        <i class="fa-solid fa-pen"></i> Buat Telahan
+                      </button>
+                    </a>
+                  @else
+                    <span
+                      class="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm 
+                   dark:bg-yellow-900 dark:text-yellow-300">
+                      Pending
+                    </span>
+                  @endif
                 @else
                   <span
-                    class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-green-900 dark:text-green-300">Selesai</span>
-                @endif
-
-                {{-- aksi  --}}
-              <td class="px-6 py-3">
-                @if ($row->status == 'Selesai' && $row->telahanStaf)
-                  <a href="{{ route('telahan-staf.edit', $row->telahanStaf->id) }}">
-                    <button class="px-2 py-1 font-medium text-white text-xs bg-yellow-500 rounded-lg hover:bg-yellow-600"
-                      title="Edit">
-                      <i class="fa-solid fa-pen-to-square"></i> Edit Telahan
-                    </button>
-                  </a>
+                    class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-green-900 dark:text-green-300">
+                    Selesai
+                  </span>
                 @endif
               </td>
+
+              {{-- aksi --}}
+              @if (auth()->user()->role === 'Admin')
+                <td class="px-6 py-3">
+                  @if ($row->status === 'Selesai' && $row->telahanStaf)
+                    <a href="{{ route('telahan-staf.edit', $row->telahanStaf->id) }}">
+                      <button
+                        class="px-2 py-1 font-medium text-white text-xs bg-yellow-500 rounded-lg hover:bg-yellow-600"
+                        title="Edit">
+                        <i class="fa-solid fa-pen-to-square"></i> Edit Telahan
+                      </button>
+                    </a>
+                  @endif
+                </td>
+              @endif
             </tr>
           @empty
             <tr>
-              <td colspan="9" class="text-center px-6 py-3 text-gray-500">
+              <td colspan="{{ auth()->user()->role === 'Admin' ? 7 : 6 }}" class="text-center px-6 py-3 text-gray-500">
                 Tidak ada data dalam tabel.
               </td>
             </tr>
