@@ -80,16 +80,11 @@ Route::middleware('throttle:60,1')->group(function () {
 				->middleware('role:Sespim/Direktur');
 
 			Route::get('detail/{id}', [DisposisiController::class, 'detail'])
-				->name('detail')
-				->middleware('role:Sespim/Direktur,Admin,User');
+				->name('detail');
 
-			Route::get('penerima', [DisposisiController::class, 'disposisiPenerima'])
-				->name('penerima')
-				->middleware('role:User');
+			Route::get('penerima', [DisposisiController::class, 'disposisiPenerima'])->name('penerima');
 
-			Route::patch('update/status/{id}', [DisposisiController::class, 'updateStatus'])
-				->name('update-status')
-				->middleware('role:User');
+			Route::patch('update/status/{id}', [DisposisiController::class, 'updateStatus'])->name('update-status');
 		});
 
 		// profil 

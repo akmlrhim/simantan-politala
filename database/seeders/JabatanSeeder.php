@@ -3,8 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Jabatan;
-use Faker\Factory as Faker;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class JabatanSeeder extends Seeder
@@ -14,12 +12,21 @@ class JabatanSeeder extends Seeder
      */
     public function run(): void
     {
-        $faker = Faker::create();
+        $jabatanList = [
+            'Ketua Jurusan Komputer dan Bisnis',
+            'Direktur / Sekretaris Pimpinan',
+            'Ketua Jurusan Teknologi Industri Pertanian',
+            'Ketua Jurusan Rekayasa dan Industri',
+            'Koordinator Program Studi Teknologi Informasi',
+            'Koordinator Program Studi Agroindustri',
+            'Koordinator Program Studi Teknologi Otomotif',
+            'Koordinator Program Studi Teknologi Rekayasa Komputer dan Jaringan',
+            'Koordinator Program Studi Teknologi Rekayasa Konstruksi Jalan dan Jembatan',
+            'Koordinator Program Studi Akuntansi'
+        ];
 
-        for ($i = 0; $i < 40; $i++) {
-            Jabatan::create([
-                'nama' => substr($faker->jobTitle(), 0, 20)
-            ]);
+        foreach ($jabatanList as $nama) {
+            Jabatan::create(['nama' => $nama]);
         }
     }
 }

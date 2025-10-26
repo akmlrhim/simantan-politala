@@ -7,7 +7,7 @@
       <span class="text-lg font-extrabold text-gray-800">SIMANTAN</span>
     </a>
 
-    <ul class="space-y-1 font-sans font-semibold text-md">
+    <ul class="space-y-1 font-sans font-semibold text-sm">
 
       <div class="flex items-center my-2">
         <small class="mx-2 text-black opacity-65">GENERAL</small>
@@ -46,19 +46,20 @@
         </li>
       @endif
 
-
       @if (Auth::user()->role == 'Sespim/Direktur' || Auth::user()->role == 'Admin')
-        <x-nav-link href="{{ route('disposisi.index') }}" :active="request()->routeIs('disposisi.*')">
-          <i class="fa-solid fa-paper-plane"></i>
-          <span class="ms-2">Disposisi</span>
-        </x-nav-link>
-      @elseif (Auth::user()->role == 'User')
-        <x-nav-link href="{{ route('disposisi.penerima') }}" :active="request()->routeIs('disposisi.*')">
-          <i class="fa-solid fa-paper-plane"></i>
-          <span class="ms-2">Disposisi</span>
-        </x-nav-link>
+        <li>
+          <x-nav-link href="{{ route('disposisi.index') }}" :active="request()->routeIs('disposisi.index')">
+            <i class="fa-solid fa-paper-plane"></i>
+            <span class="ms-2">Disposisi</span>
+          </x-nav-link>
+        </li>
       @endif
 
+      <li>
+        <x-nav-link href="{{ route('disposisi.penerima') }}" :active="request()->routeIs('disposisi.penerima')">
+          <i class="fa-solid fa-circle-check"></i>
+          <span class="ms-2">Disposisi Penerima</span>
+        </x-nav-link>
       </li>
 
       @if (Auth::user()->role == 'Admin')
@@ -81,12 +82,15 @@
           </x-nav-link>
         </li>
 
-        <x-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.*')">
-          <i class="fa-solid fa-user"></i>
-          <span class="ms-4">User</span>
-        </x-nav-link>
+        <li>
+          <x-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.*')">
+            <i class="fa-solid fa-user"></i>
+            <span class="ms-4">User</span>
+          </x-nav-link>
         </li>
       @endif
+
+
 
       <li>
         <a onclick="event.preventDefault(); document.getElementById('logout').submit();" href="#"

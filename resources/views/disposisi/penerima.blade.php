@@ -5,17 +5,17 @@
     <div class="overflow-x-auto">
       <table class="w-full text-xs sm:text-sm font-medium text-left rtl:text-right text-black dark:text-gray-400">
         <thead class="uppercase text-xs bg-gradient-to-r from-blue-600 to-blue-800 text-white">
-          <tr>
-            <th class="px-6 py-3 font-semibold">Data surat masuk</th>
-            <th class="px-6 py-3 font-semibold">No Agenda</th>
-            <th class="px-6 py-3 font-semibold">Tingkat Surat</th>
-            <th class="px-6 py-3 font-semibold">Status</th>
-            <th class="px-6 py-3 font-semibold">Aksi</th>
+          <tr class="whitespace-nowrap">
+            <th class="px-6 py-3">Data surat masuk</th>
+            <th class="px-6 py-3">No Agenda</th>
+            <th class="px-6 py-3">Tingkat Surat</th>
+            <th class="px-6 py-3">Status</th>
+            <th class="px-6 py-3">Aksi</th>
           </tr>
         </thead>
         <tbody>
           @forelse ($disposisiPenerima as $row)
-            <tr class="bg-white border-b-2 border-gray-200">
+            <tr class="bg-white border-b-2 border-gray-200 whitespace-nowrap">
               <td class="px-6 py-3">
                 {{ $row->disposisi->suratMasuk->perihal }} <br />
                 <span class="text-xs text-gray-600">Asal Surat : {{ $row->disposisi->suratMasuk->asal_surat }}</span>

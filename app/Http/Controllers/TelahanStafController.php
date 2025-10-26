@@ -36,6 +36,7 @@ class TelahanStafController extends Controller
                     ->orWhere('nomor_surat', 'like', '%' . $search . '%');
             });
         }
+
         $title = 'Telahan Staf';
         $data = $query->paginate(10)->appends(['search' => $search]);
 
