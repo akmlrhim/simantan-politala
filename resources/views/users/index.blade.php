@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-  <div class="flex flex-col md:flex-row md:items-center md:justify-between sm:ml-6 mb-3 gap-2">
+  <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-3 gap-2">
     <a href="{{ route('users.create') }}"
       class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-3 py-2 tracking-wide focus:outline-none capitalize w-fit">
       Tambah Data
@@ -14,7 +14,7 @@
     </form>
   </div>
 
-  <div class="relative overflow-x-auto shadow-lg rounded-md sm:ml-6">
+  <div class="relative overflow-x-auto shadow-lg rounded-md">
     <table class="w-full font-medium text-xs sm:text-sm text-left rtl:text-right text-black dark:text-gray-400">
       <thead class="text-white text-xs uppercase bg-gradient-to-r from-blue-600 to-blue-800">
         <tr class="border-b-2 border-gray-200">
@@ -73,7 +73,7 @@
   {{-- modal konfirmasi hapus  --}}
   <x-confirm-delete />
 
-  <div class="ml-6 mt-4 text-sm font-medium">
+  <div class="mt-4 text-sm font-medium">
     {{ $users->links() }}
   </div>
 @endsection

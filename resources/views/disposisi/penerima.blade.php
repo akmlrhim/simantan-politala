@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-  <div class="relative rounded-lg shadow-lg overflow-hidden sm:ml-6 bg-white">
+  <div class="relative rounded-lg shadow-lg overflow-hidden bg-white">
     <div class="overflow-x-auto">
       <table class="w-full text-xs sm:text-sm font-medium text-left rtl:text-right text-black dark:text-gray-400">
         <thead class="uppercase text-xs bg-gradient-to-r from-blue-600 to-blue-800 text-white">

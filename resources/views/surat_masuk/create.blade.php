@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-  <div class="overflow-x-auto md:ml-6 shadow-md">
+  <div class="overflow-x-auto shadow-md">
     <div class="min-w-full inline-block align-middle">
       <div class="rounded-lg overflow-visible bg-white p-6 dark:border-neutral-700">
         <form action="{{ route('surat-masuk.store') }}" method="POST" enctype="multipart/form-data">

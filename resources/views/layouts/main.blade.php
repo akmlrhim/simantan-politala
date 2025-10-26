@@ -32,7 +32,7 @@
   @include('layouts.navbar')
 
   @include('layouts.sidebar')
-  <div class="p-4 md:ml-60 font-sans min-h-screen overflow-auto">
+  <div class="p-4 md:ml-64 h-auto pt-18 min-h-screen overflow-auto">
     @include('layouts.breadcrumb')
 
     @yield('content')

@@ -3,7 +3,6 @@
 @push('css-libs')
   <link rel="stylesheet" href="{{ asset('select2.css') }}">
   <style>
-    /* Select2 container styling using Tailwind via regular CSS */
     .select2-container--default .select2-selection--single {
       background-color: #f9fafb;
       border: 1px solid #d1d5db;
@@ -85,7 +84,7 @@
 @endpush
 
 @section('content')
-  <div class="overflow-x-auto md:ml-6 shadow-md">
+  <div class="overflow-x-auto shadow-md">
     <div class="min-w-full inline-block align-middle">
       <div class="rounded-lg overflow-visible bg-white p-6 dark:border-neutral-700">
         <form action="{{ route('telahan-staf.store') }}" method="POST">

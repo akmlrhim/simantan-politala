@@ -1,4 +1,4 @@
-<nav class="fixed top-0 z-30 w-full bg-gray-100 ps-0 sm:ps-64">
+<nav class="fixed bg-white border-b border-gray-200 top-0 z-30 w-full ps-0 sm:ps-64">
   <div class="px-4 py-3 flex items-center justify-between w-full">
 
     <div class="block sm:hidden md:hidden me-auto">
@@ -16,9 +16,8 @@
 
     <div class="ml-auto flex items-center">
       <div class="relative">
-        <button type="button"
-          class="flex items-center text-sm rounded-lg shadow-sm focus:ring-4 focus:ring-gray-300 px-2 py-1"
-          aria-expanded="false" data-dropdown-toggle="user-dropdown">
+        <button type="button" class="flex items-center text-sm" aria-expanded="false"
+          data-dropdown-toggle="user-dropdown">
 
           <img class="w-10 h-10 rounded-full "
             src="{{ Auth::user()->foto ? asset('storage/foto_profil/' . Auth::user()->foto) : asset('storage/foto_profil/default.jpg') }}"
@@ -35,7 +34,7 @@
         </button>
 
         <div id="user-dropdown"
-          class="absolute right-0 z-50 hidden mt-2 w-48 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow transition-all duration-200 ease-out transform origin-top scale-95">
+          class="absolute right-0 z-50 hidden mt-2 w-48 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow">
           <ul class="py-2" aria-labelledby="user-menu-button">
             <li>
               <a href="{{ route('profil.index') }}"

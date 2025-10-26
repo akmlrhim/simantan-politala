@@ -4,24 +4,7 @@
   <div class="space-y-5">
 
     {{-- stats  --}}
-    <div class="grid gap-4 lg:grid-cols-3 sm:px-6">
-
-      <div class="hidden md:block p-6 rounded-2xl bg-gradient-to-r from-blue-600 to-blue-800 shadow-lg col-span-full">
-        <div class="flex items-center justify-between">
-          <div class="space-y-2 text-left">
-            <div class="flex items-center gap-3 text-xl font-semibold text-white">
-              <div>
-                <span>Halo,</span>
-                <span class="font-bold">{{ Auth::user()->nama }}</span>
-              </div>
-            </div>
-            <p class="text-sm font-medium text-white">
-              Selamat datang di Sistem Informasi Manajemen Surat
-            </p>
-          </div>
-        </div>
-      </div>
-
+    <div class="grid gap-4 lg:grid-cols-3">
 
       <div class="relative p-6 rounded-2xl bg-white shadow-lg dark:bg-green-800">
         <div class="flex items-center justify-between">

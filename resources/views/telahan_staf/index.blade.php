@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-  <div class="flex flex-col md:flex-row md:items-center md:justify-between sm:ml-6 mb-3 gap-2">
+  <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-3 gap-2">
     <form action="{{ route('telahan-staf.index') }}" method="GET" class="flex items-center gap-2 w-full md:w-auto">
       <input type="text" name="search" placeholder="Cari perihal, asal surat, atau nomor surat (Enter)"
         class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full md:w-120 p-2 text-sm dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 font-medium"
@@ -10,12 +10,13 @@
   </div>
 
 
-  <div class="relative rounded-md shadow-md overflow-hidden sm:ml-6">
+  <div class="relative rounded-md shadow-md overflow-hidden">
     <div class="overflow-x-auto">
       <table class="w-full text-xs sm:text-sm font-medium text-left rtl:text-right text-black dark:text-gray-400">
         <thead class="text-white text-xs uppercase bg-gradient-to-r from-blue-600 to-blue-800">
-          <tr class="border-b-2 border-gray-200">
+          <tr class="border-b-2 border-gray-200 whitespace-nowrap">
             <th scope="col" class="px-6 py-3">Perihal</th>
+            <th scope="col" class="px-6 py-3">asal surat</th>
             <th scope="col" class="px-6 py-3">No Surat</th>
             <th scope="col" class="px-6 py-3">Tgl diterima</th>
             <th scope="col" class="px-6 py-3">Tgl surat</th>
@@ -26,14 +27,12 @@
         </thead>
         <tbody>
           @forelse ($data as $row)
-            <tr class="bg-white border-b-2 border-gray-200">
-              <td class="px-6 py-3">
-                {{ $row->perihal }} <br />
-                <span class="text-xs text-gray-600">Asal Surat : {{ $row->asal_surat }}</span>
-              </td>
+            <tr class="bg-white border-b-2 border-gray-200 whitespace-nowrap">
+              <td class="px-6 py-3"> {{ $row->perihal }} </td>
+              <td class="px-6 py-3"> {{ $row->asal_surat }} </td>
               <td class="px-6 py-3">{{ $row->nomor_surat }}</td>
-              <td class="px-6 py-3">{{ \Carbon\Carbon::parse($row->tanggal_diterima)->format('d-m-Y') }}</td>
-              <td class="px-6 py-3">{{ \Carbon\Carbon::parse($row->tanggal_surat)->format('d-m-Y') }}</td>
+              <td class="px-6 py-3">{{ \Carbon\Carbon::parse($row->tanggal_diterima)->translatedFormat('d-M-Y') }}</td>
+              <td class="px-6 py-3">{{ \Carbon\Carbon::parse($row->tanggal_surat)->translatedFormat('d-M-Y') }}</td>
               <td class="px-6 py-3">
                 <button onclick="showFileModal('{{ asset('storage/surat_masuk/' . $row->file_surat) }}')"
                   title="Lihat File Surat Masuk" data-modal-target="fileModal" data-modal-toggle="fileModal"
@@ -121,7 +120,7 @@
     </div>
   </div>
 
-  <div class="ml-6 mt-4 text-sm font-medium">
+  <div class="mt-4 text-sm font-medium">
     {{ $data->links() }}
   </div>
 

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ActivityLog;
 use App\Models\Disposisi;
 use App\Models\Jabatan;
 use App\Models\JenisSurat;

@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-  <div class="overflow-x-auto sm:ml-6 shadow-md">
+  <div class="overflow-x-auto shadow-md">
     <div class="min-w-full inline-block align-middle">
       <div class="shadow-md rounded-lg overflow-hidden dark:border-neutral-700 bg-white">
         <div class="container mx-auto p-4">
@@ -45,12 +45,11 @@
               <label class="text-sm font-medium text-gray-700 dark:text-gray-300 md:w-32">File</label>
               <button onclick="showFileModal('{{ asset('storage/surat_masuk/' . $suratMasuk->file_surat) }}')"
                 data-modal-target="fileModal" data-modal-toggle="fileModal"
-                class="w-1/4 px-2 py-1 text-xs font-medium text-blue-600 bg-white hover:text-blue-900 rounded-lg flex items-center gap-1">
+                class="whitespace-nowrap w-1/4 px-2 py-1 text-xs font-medium text-blue-600 bg-white hover:text-blue-900 rounded-lg flex items-center gap-1">
                 <i class="fa-solid fa-eye"></i> Lihat File
               </button>
             </div>
           </div>
-          {{--  --}}
 
           <form action="{{ route('disposisi.store') }}" method="POST" class="space-y-5">
             @csrf

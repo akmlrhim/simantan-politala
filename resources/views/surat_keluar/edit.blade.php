@@ -27,7 +27,7 @@
 @endpush
 
 @section('content')
-  <div class="overflow-x-auto sm:ml-6 shadow-md">
+  <div class="overflow-x-auto shadow-md">
     <div class="min-w-full inline-block align-middle">
       <div class="rounded-lg overflow-visible bg-white p-6 dark:border-neutral-700">
         <form action="{{ route('surat-keluar.update', $suratKeluar->id) }}" method="POST">

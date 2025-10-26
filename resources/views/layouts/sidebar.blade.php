@@ -1,11 +1,10 @@
 <aside id="logo-sidebar"
-  class="fixed top-0 left-0 z-40 w-64 h-screen pt-4 transition-transform -translate-x-full shadow-xl bg-white sm:translate-x-0"
+  class="fixed top-0 left-0 z-40 w-64 h-screen pt-3 transition-transform -translate-x-full bg-white border-r border-gray-200 md:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
   aria-label="Sidebar">
-  <div class="h-full px-3 pb-4 bg-white">
+  <div class="overflow-y-auto py-5 px-3 h-full bg-white dark:bg-gray-800">
 
     <a href="{{ route('dashboard') }}" class="flex items-center mb-6 ps-2">
-      <img src="{{ asset('img/logo_politala.webp') }}" class="h-8 me-3 bg-white rounded-lg" alt="Logo" loading="lazy" />
-      <span class="text-lg font-semibold text-gray-800">Apps</span>
+      <span class="text-lg font-extrabold text-gray-800">SIMANTAN</span>
     </a>
 
     <ul class="space-y-1 font-sans font-semibold text-md">
@@ -36,7 +35,9 @@
             <span class="ms-2">Surat Keluar</span>
           </x-nav-link>
         </li>
+      @endif
 
+      @if (Auth::user()->role === 'Admin')
         <li>
           <x-nav-link href="{{ route('telahan-staf.index') }}" :active="request()->routeIs('telahan-staf.*')">
             <i class="fa-solid fa-envelope-circle-check"></i>

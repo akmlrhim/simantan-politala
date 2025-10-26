@@ -1,14 +1,14 @@
 @extends('layouts.main')
 
 @section('content')
-  <div class="flex sm:px-6 mb-3">
+  <div class="flex mb-3">
     <button data-modal-target="create-modal" data-modal-toggle="create-modal"
       class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-3 py-2 tracking-wide focus:outline-none capitalize">
       Tambah Data
     </button>
   </div>
 
-  <div class="relative overflow-x-auto shadow-lg rounded-md sm:ml-6">
+  <div class="relative overflow-x-auto shadow-lg rounded-md">
     <table class="w-full font-medium text-xs sm:text-sm text-left rtl:text-right text-black dark:text-gray-400">
       <thead class="text-white uppercase text-xs bg-gradient-to-r from-blue-600 to-blue-800">
         <tr>
@@ -52,7 +52,7 @@
   <x-confirm-delete />
 
 
-  <div class="ml-6 mt-4 text-sm font-medium">
+  <div class="mt-4 text-sm font-medium">
     {{ $jabatan->links() }}
   </div>
 

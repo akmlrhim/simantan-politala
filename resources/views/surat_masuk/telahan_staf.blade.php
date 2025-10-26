@@ -7,7 +7,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Telaah Staf</title>
+  <title>Telahan Staf</title>
   <style>
     @page {
       size: A4;

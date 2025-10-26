@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-  <div class="relative overflow-x-auto sm:ml-6 bg-white p-3 shadow-lg rounded-md">
+  <div class="relative overflow-x-auto bg-white p-3 shadow-lg rounded-md">
     <div class="w-full space-y-3">
 
       {{-- Profile Info --}}

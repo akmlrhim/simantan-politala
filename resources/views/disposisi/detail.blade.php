@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-  <div class="relative overflow-x-auto shadow-lg rounded-md sm:ml-6 bg-white p-6 space-y-3">
+  <div class="relative overflow-x-auto shadow-lg rounded-mdbg-white p-6 space-y-3">
     <div>
       <h3 class="text-lg font-semibold text-gray-700 mb-2">Informasi Surat Masuk</h3>
       <table class="w-full text-sm text-gray-700">
@@ -35,7 +35,7 @@
             @if ($disposisi->suratMasuk->file_surat)
               <button onclick="showFileModal('{{ asset('storage/surat_masuk/' . $disposisi->suratMasuk->file_surat) }}')"
                 data-modal-target="fileModal" data-modal-toggle="fileModal"
-                class="w-1/4 px-2 py-1 text-xs font-medium text-blue-600 bg-white hover:text-blue-900 rounded-lg flex items-center gap-1">
+                class="whitespace-nowrap w-1/4 px-2 py-1 text-xs font-medium text-blue-600 bg-white hover:text-blue-900 rounded-lg flex items-center gap-1">
                 <i class="fa-solid fa-eye"></i> Lihat File
               </button>
             @else

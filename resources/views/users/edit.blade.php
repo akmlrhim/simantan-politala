@@ -3,7 +3,6 @@
 @push('css-libs')
   <link rel="stylesheet" href="{{ asset('select2.css') }}">
   <style>
-    /* Select2 container styling using Tailwind via regular CSS */
     .select2-container--default .select2-selection--single {
       background-color: #f9fafb;
       border: 1px solid #d1d5db;
@@ -63,7 +62,7 @@
 @endpush
 
 @section('content')
-  <div class="overflow-x-auto sm:ml-6 shadow-md">
+  <div class="overflow-x-auto shadow-md">
     <div class="min-w-full inline-block align-middle">
       <div class="shadow-md rounded-lg overflow-hidden dark:border-neutral-700 bg-white">
         <div class="container mx-auto p-4">
