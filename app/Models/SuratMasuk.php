@@ -21,6 +21,11 @@ class SuratMasuk extends Model
 		'created_by',
 	];
 
+	protected $casts = [
+		'tanggal_surat' => 'date',
+		'tanggal_diterima' => 'date'
+	];
+
 	public function telahanStaf()
 	{
 		return $this->hasOne(TelahanStaf::class, 'surat_masuk_id');

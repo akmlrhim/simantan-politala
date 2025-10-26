@@ -43,10 +43,6 @@
                 Saya</a>
             </li>
             <li>
-              <a href="{{ route('profil.log-aktivitas') }}"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 font-medium">Log Aktivitas</a>
-            </li>
-            <li>
               <a href="#" onclick="event.preventDefault(); document.getElementById('navLogout').submit();"
                 class="block px-4 py-2 text-sm text-red-700 hover:bg-red-100 font-medium">Logout</a>
             </li>

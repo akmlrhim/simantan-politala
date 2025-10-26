@@ -26,12 +26,9 @@ class DashboardController extends Controller
 			'disposisi' => Disposisi::count()
 		];
 
-		$logs = ActivityLog::with('user')->latest()->take(10)->where('user_id', Auth::id())->get();
-
 		return view('dashboard', compact(
 			'title',
 			'stats',
-			'logs'
 		));
 	}
 }
