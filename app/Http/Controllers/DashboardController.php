@@ -8,7 +8,6 @@ use App\Models\JenisSurat;
 use App\Models\SuratKeluar;
 use App\Models\SuratMasuk;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {

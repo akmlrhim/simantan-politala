@@ -109,8 +109,7 @@
                 <span class="text-xs text-gray-600 italic">disposisi ini ditujukan kepada jabatan :</span>
               </label>
 
-              <div
-                class="border border-gray-300 rounded p-2 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1">
+              <div class="border border-gray-300 rounded p-2 grid grid-cols-2 gap-1">
                 @foreach ($jabatan as $id => $item)
                   <label class="flex items-center space-x-1 cursor-pointer">
                     <input type="checkbox" name="kepada_jabatan_id[]" value="{{ $id }}"
@@ -136,7 +135,6 @@
               <div
                 class="border border-gray-300 rounded p-2 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1">
 
-                {{-- Checkbox dari $instruksiList --}}
                 @foreach ($instruksiList as $instruksi)
                   <label class="flex items-center space-x-1 cursor-pointer">
                     <input type="checkbox" name="instruksi_disposisi[]" value="{{ $instruksi }}"

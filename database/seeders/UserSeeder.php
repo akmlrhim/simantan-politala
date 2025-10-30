@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
 
 		$jabatanId = Jabatan::pluck('id')->toArray();
 
-		for ($i = 0; $i < 40; $i++) {
+		for ($i = 0; $i < 20; $i++) {
 			User::create([
 				'nama' => $faker->unique()->name(),
 				'email' => $faker->unique()->safeEmail(),

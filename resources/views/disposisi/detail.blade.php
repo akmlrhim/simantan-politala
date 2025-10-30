@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-  <div class="relative overflow-x-auto shadow-lg rounded-mdbg-white p-6 space-y-3">
+  <div class="relative overflow-x-auto shadow-lg rounded-md bg-white p-6 space-y-3">
     <div>
       <h3 class="text-lg font-semibold text-gray-700 mb-2">Informasi Surat Masuk</h3>
       <table class="w-full text-sm text-gray-700">

@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateSuratKeluarRequest;
 use Barryvdh\DomPDF\Facade\Pdf as Pdf;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class SuratKeluarController extends Controller
 {
@@ -49,7 +50,7 @@ class SuratKeluarController extends Controller
 		DB::beginTransaction();
 
 		try {
-			SuratKeluar::create([
+			$surat = SuratKeluar::create([
 				'nomor_surat' => $request->nomor_surat,
 				'hal' => $request->hal,
 				'tanggal_surat' => $request->tanggal_surat,
@@ -57,20 +58,24 @@ class SuratKeluarController extends Controller
 				'created_by' => Auth::user()->id,
 			]);
 
+			if ($request->filled('details')) {
+				foreach ($request->details as $detail) {
+					if (!empty($detail['key']) && !empty($detail['value'])) {
+
+						$surat->details()->create([
+							'key' => $detail['key'],
+							'value' => $detail['value']
+						]);
+					}
+				}
+			}
+
 			DB::commit();
 			return redirect()->route('surat-keluar.index')->with('success', 'Surat keluar berhasil ditambahkan.');
 		} catch (\Exception $e) {
 			DB::rollBack();
 			return redirect()->back()->with('error', 'Terjadi kesalahan.');
 		}
-	}
-
-	/**
-	 * Display the specified resource.
-	 */
-	public function show(SuratKeluar $suratKeluar)
-	{
-		//
 	}
 
 	/**
@@ -97,6 +102,19 @@ class SuratKeluarController extends Controller
 				'tanggal_surat' => $request->tanggal_surat,
 				'isi_surat' => $request->isi_surat,
 			]);
+
+			$suratKeluar->details()->delete();
+
+			if ($request->filled('details')) {
+				foreach ($request->details as $detail) {
+					if (!empty($detail['key']) && !empty($detail['value'])) {
+						$suratKeluar->details()->create([
+							'key' => $detail['key'],
+							'value' => $detail['value']
+						]);
+					}
+				}
+			}
 
 			DB::commit();
 			return redirect()->route('surat-keluar.index')->with('success', 'Surat keluar berhasil diperbarui.');
@@ -125,11 +143,49 @@ class SuratKeluarController extends Controller
 
 	public function file($id)
 	{
-		$data = SuratKeluar::with('user')->find($id);
+		$data = SuratKeluar::with(['user', 'details'])->findOrFail($id);
 
-		$pdf = Pdf::loadView('surat_keluar.file', compact('data'));
+		$detailsHtml = view('surat_keluar.partials.details', [
+			'details' => $data->details
+		])->render();
+
+		$isiSurat = $data->isi_surat;
+
+		// cek placeholder 
+		if (str_contains($isiSurat, '{{DETAIL_SURAT}}')) {
+			$isiSurat = str_replace('{{DETAIL_SURAT}}', $detailsHtml, $isiSurat);
+		} else {
+
+			// cari kata kunci jika ada detail nya 
+			$patterns = [
+				'/pada\s*:?\s*(<\/p>|$)/i',
+				'/bertempat\s+di\s*:?\s*(<\/p>|$)/i',
+				'/akan\s+diselenggarakan\s*:?\s*(<\/p>|$)/i',
+			];
+
+			$inserted = false;
+
+			foreach ($patterns as $pattern) {
+				if (preg_match($pattern, $isiSurat)) {
+					$isiSurat = preg_replace($pattern, '$0' . $detailsHtml, $isiSurat, 1);
+					$inserted = true;
+					break;
+				}
+			}
+
+			if (!$inserted) {
+				$isiSurat = preg_replace('/(<\/p>)/i', '$1' . $detailsHtml, $isiSurat, 1);
+			}
+		}
+
+		$pdf = Pdf::loadView('surat_keluar.file', [
+			'data' => $data,
+			'isiSurat' => $isiSurat,
+		]);
+
 		$pdf->setPaper('A4', 'portrait');
-		$filename = 'Surat Keluar' . preg_replace('/[\/\\\\]/', '-', $data->nomor_surat) . '.pdf';
+		$filename = 'Surat Keluar ' . preg_replace('/[\/\\\\]/', '-', $data->nomor_surat) . '.pdf';
+
 		return $pdf->stream($filename);
 	}
 }

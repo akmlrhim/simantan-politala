@@ -91,14 +91,6 @@ class TelahanStafController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(TelahanStaf $telahanStaf)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit($id)

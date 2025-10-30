@@ -11,7 +11,7 @@
     @endif
 
     <form action="{{ route('surat-masuk.index') }}" method="GET" class="flex items-center gap-2 w-full md:w-auto">
-      <input type="text" name="search" placeholder="Cari perihal, asal surat, atau nomor surat"
+      <input type="text" name="search" placeholder="Masukkan kata kunci"
         class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full md:w-80 p-2 text-sm dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 font-medium"
         value="{{ request('search') }}" autocomplete="off">
     </form>
@@ -39,8 +39,8 @@
               <td class="px-6 py-3"> {{ $row->asal_surat }} </td>
               </td>
               <td class="px-6 py-3">{{ $row->nomor_surat }}</td>
-              <td class="px-6 py-3">{{ \Carbon\Carbon::parse($row->tanggal_diterima)->translatedFormat('d-m-Y') }}</td>
-              <td class="px-6 py-3">{{ \Carbon\Carbon::parse($row->tanggal_surat)->translatedFormat('d-m-Y') }}</td>
+              <td class="px-6 py-3">{{ \Carbon\Carbon::parse($row->tanggal_diterima)->translatedFormat('d-M-Y') }}</td>
+              <td class="px-6 py-3">{{ \Carbon\Carbon::parse($row->tanggal_surat)->translatedFormat('d-M-Y') }}</td>
               <td class="px-6 py-3">
                 <button onclick="showFileModal('{{ asset('storage/surat_masuk/' . $row->file_surat) }}')"
                   data-modal-target="fileModal" data-modal-toggle="fileModal"

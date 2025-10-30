@@ -63,7 +63,7 @@
                 Tanggal Surat
               </label>
               <input datepicker datepicker-autohide datepicker-format="yyyy-mm-dd" type="text" id="tanggal_surat"
-                name="tanggal_surat"
+                name="tanggal_surat" autocomplete="off"
                 class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full md:w-3/4 text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                 placeholder="Pilih tanggal surat" value="{{ old('tanggal_surat') }}">
               @error('tanggal_surat')
@@ -79,6 +79,53 @@
               @error('isi_surat')
                 <x-validation>{{ ucfirst($message) }}</x-validation>
               @enderror
+            </div>
+
+            {{-- detail  --}}
+            <div>
+              <label class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">
+                Detail Surat (Opsional)
+              </label>
+
+              <div id="detail-container" class="space-y-3">
+                @php
+                  $oldDetails = old('details', [['key' => '', 'value' => '']]);
+                @endphp
+
+                @foreach ($oldDetails as $i => $detail)
+                  <div class="flex flex-col gap-1 detail-row">
+                    <div class="flex gap-2">
+                      <div class="w-1/3">
+                        <input type="text" name="details[{{ $i }}][key]"
+                          value="{{ old('details.' . $i . '.key', $detail['key']) }}"
+                          placeholder="Nama detail (mis: tempat)"
+                          class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg w-full p-2 text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                          autocomplete="off">
+                        @error('details.' . $i . '.key')
+                          <p class="text-red-600 text-xs mt-1">{{ $message }}</p>
+                        @enderror
+                      </div>
+
+                      <div class="w-2/3">
+                        <input type="text" name="details[{{ $i }}][value]"
+                          value="{{ old('details.' . $i . '.value', $detail['value']) }}"
+                          placeholder="Isi detail (mis: Jakarta)"
+                          class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg w-full p-2 text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                          autocomplete="off">
+                        @error('details.' . $i . '.value')
+                          <p class="text-red-600 text-xs mt-1">{{ $message }}</p>
+                        @enderror
+                      </div>
+                    </div>
+                  </div>
+                @endforeach
+              </div>
+
+              {{-- Tombol tambah field --}}
+              <button type="button" id="add-detail"
+                class="mt-2 text-white bg-green-600 hover:bg-green-700 font-medium rounded-lg text-xs px-3 py-1.5">
+                + Tambah Detail
+              </button>
             </div>
 
             <div class="flex gap-3">
@@ -107,10 +154,50 @@
             'heading', '|',
             'bold', 'italic', 'link', '|',
             'bulletedList', 'numberedList', '|',
+            'outdent', 'indent', '|',
             'insertTable', '|',
             'undo', 'redo'
           ],
         })
+        .then(editor => {
+          editor.editing.view.document.on('keydown', (evt, data) => {
+            if (data.keyCode === 9) {
+              data.preventDefault();
+
+              if (data.domEvent.shiftKey) {
+                editor.execute('outdent');
+              } else {
+                editor.execute('indent');
+              }
+
+              editor.editing.view.focus();
+            }
+          });
+        })
+        .catch(error => {
+          console.error(error);
+        });
+
+      document.addEventListener('DOMContentLoaded', function() {
+        const container = document.getElementById('detail-container');
+        const addButton = document.getElementById('add-detail');
+
+        addButton.addEventListener('click', function() {
+          const index = container.querySelectorAll('.detail-row').length;
+
+          const wrapper = document.createElement('div');
+          wrapper.classList.add('flex', 'flex-col', 'gap-1', 'detail-row');
+          wrapper.innerHTML = `
+        <div class="flex gap-2">
+          <input type="text" name="details[${index}][key]" placeholder="Nama detail (mis: tempat)" autocomplete="off"
+            class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg w-1/3 p-2 text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+          <input type="text" name="details[${index}][value]" placeholder="Isi detail (mis: Auditorium)" autocomplete="off"
+            class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg w-2/3 p-2 text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+        </div>
+      `;
+          container.appendChild(wrapper);
+        });
+      });
     </script>
   @endpush
 @endsection

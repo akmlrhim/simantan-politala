@@ -26,6 +26,19 @@ class StoreSuratKeluarRequest extends FormRequest
 			'hal' => 'required|string|max:120',
 			'tanggal_surat' => 'required|date',
 			'isi_surat' => 'required|string',
+
+			'details' => 'array',
+			'details.*.key' => 'nullable|string|max:100|required_with:details.*.value',
+			'details.*.value' => 'nullable|string|required_with:details.*.key',
+		];
+	}
+
+	public function messages(): array
+	{
+		return [
+			'details.*.key.required_with' => 'Nama detail wajib diisi jika isi detail ada.',
+			'details.*.value.required_with' => 'Isi detail wajib diisi jika nama detail ada.',
+			'details.*.key.max' => 'Nama detail tidak boleh lebih dari 100 karakter.',
 		];
 	}
 }

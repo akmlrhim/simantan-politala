@@ -1,6 +1,13 @@
 @extends('layouts.main')
 
 @section('content')
+  <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-3 gap-2">
+    <a href="{{ route('disposisi.index') }}"
+      class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-md text-xs px-3 py-2 tracking-wide focus:outline-none capitalize w-fit">
+      <i class="fa-solid fa-angle-left mr-2"></i> Kembali ke daftar disposisi
+    </a>
+  </div>
+
   <div class="relative rounded-lg shadow-lg overflow-hidden bg-white">
     <div class="overflow-x-auto">
       <table class="w-full text-xs sm:text-sm font-medium text-left rtl:text-right text-black dark:text-gray-400">

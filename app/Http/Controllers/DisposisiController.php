@@ -186,7 +186,7 @@ class DisposisiController extends Controller
 
   public function disposisiPenerima()
   {
-    $title = 'Penerima Disposisi';
+    $title = 'Disposisi Diterima';
     $jabatanId = Auth::user()->jabatan_id;
 
     $disposisiPenerima = DisposisiPenerima::with(['disposisi', 'jabatan'])

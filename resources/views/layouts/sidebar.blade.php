@@ -7,7 +7,7 @@
       <span class="text-lg font-extrabold text-gray-800">SIMANTAN</span>
     </a>
 
-    <ul class="space-y-1 font-sans font-semibold text-sm">
+    <ul class="space-y-1 font-sans font-medium text-sm">
 
       <div class="flex items-center my-2">
         <small class="mx-2 text-black opacity-65">GENERAL</small>
@@ -54,13 +54,6 @@
           </x-nav-link>
         </li>
       @endif
-
-      <li>
-        <x-nav-link href="{{ route('disposisi.penerima') }}" :active="request()->routeIs('disposisi.penerima')">
-          <i class="fa-solid fa-circle-check"></i>
-          <span class="ms-2">Disposisi Penerima</span>
-        </x-nav-link>
-      </li>
 
       @if (Auth::user()->role == 'Admin')
         <div class="flex items-center my-2">

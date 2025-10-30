@@ -81,14 +81,6 @@ class SuratMasukController extends Controller
 	}
 
 	/**
-	 * Display the specified resource.
-	 */
-	public function show(SuratMasuk $suratMasuk)
-	{
-		//
-	}
-
-	/**
 	 * Show the form for editing the specified resource.
 	 */
 	public function edit(SuratMasuk $suratMasuk)
@@ -159,17 +151,13 @@ class SuratMasukController extends Controller
 
 	public function telahanStaf($id)
 	{
-		$data = TelahanStaf::where('surat_masuk_id', $id)
-			->first();
+		$data = TelahanStaf::where('surat_masuk_id', $id)->firstOrFail();
 
 		$title = 'Telaahan Staf';
-		// return view('surat_masuk.telahan_staf', [
-		// 	'data' => $surat,
-		// 	'title' => $title,
-		// ]);
+
 		$pdf = Pdf::loadView('surat_masuk.telahan_staf', compact('data', 'title'));
 		$pdf->setPaper('A4', 'portrait');
-		$filename = 'telahan_staf' . preg_replace('/[\/\\\\]/', '-', $data->nomor_surat) . '.pdf';
+		$filename = 'Telahan Staf' . preg_replace('/[\/\\\\]/', '-', $data->nomor_surat) . '.pdf';
 		return $pdf->stream($filename);
 	}
 }
