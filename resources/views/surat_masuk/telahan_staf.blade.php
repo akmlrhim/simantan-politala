@@ -211,19 +211,31 @@
       </tr>
     </table>
 
-    <div class="signature">
-      <p>
-        Pelaihari,
-        {{ isset($data->created_at)
-            ? Carbon::parse($data->created_at)->locale('id')->translatedFormat('d F Y')
-            : Carbon::now()->locale('id')->translatedFormat('d F Y') }}
-      </p>
-      <p>{{ $data->suratDari->nama ?? '-' }}</p>
-      <div class="ttd">
-        <p>{{ $data->user->nama ?? '-' }}</p>
-        <p>NIP. {{ $data->user->nip ?? '-' }}</p>
-      </div>
+    <div class="signature" style="margin-top: 50px; width: 100%;">
+      <table
+        style="width: 100%; border: none; border-collapse: collapse; font-family: 'Times New Roman', Times, serif; font-size: 12pt;">
+        <tr>
+          <td style="width: 60%;"></td>
+          <td style="width: 40%; text-align: right;">
+            <p style="margin: 0; text-align: right; white-space: normal;">
+              Tanah Laut, {{ $data->created_at->translatedFormat('d F Y') }}
+            </p>
+            <p style="margin: 0; text-align: right; white-space: normal;">
+              Ketua Jurusan Komputer dan Bisnis
+            </p>
+
+            <div class="ttd" style="margin-top: 10px; margin-bottom: 10px;text-align: center">
+              <img src="{{ public_path('ttd/ttd_kajur_kombis.png') }}" alt="Tanda Tangan"
+                style="width: 70px; height: auto; object-fit: contain;" />
+            </div>
+
+            <p style="margin: 0;">Khairul Anwar Hafizd, M.Kom.</p>
+            <p style="margin: 0;">NIP. 198906012019031015</p>
+          </td>
+        </tr>
+      </table>
     </div>
+
   </div>
 </body>
 

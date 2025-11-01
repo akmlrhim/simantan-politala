@@ -68,17 +68,20 @@
         <td style="width: 60%;"></td>
         <td style="width: 40%; text-align: right;">
           <p class="bold" style="margin: 0; text-align: right; white-space: normal;">
-            {{ $data->user->jabatan->nama }}
+            Ketua Jurusan Komputer dan Bisnis
           </p>
-          <div class="ttd" style="margin-top: 60px;">
-            <p class="bold" style="margin: 0;">{{ $data->user->nama }}</p>
-            <p class="bold" style="margin: 0;">NIP. {{ $data->user->nip }}</p>
+
+          <div class="ttd" style="margin-top: 10px; margin-bottom: 10px;text-align: center">
+            <img src="{{ public_path('ttd/ttd_kajur_kombis.png') }}" alt="Tanda Tangan"
+              style="width: 70px; height: auto; object-fit: contain;" />
           </div>
+
+          <p class="bold" style="margin: 0;">Khairul Anwar Hafizd, M.Kom.</p>
+          <p class="bold" style="margin: 0;">NIP. 198906012019031015</p>
         </td>
       </tr>
     </table>
   </div>
-
 
   <div class="page-break"></div>
 

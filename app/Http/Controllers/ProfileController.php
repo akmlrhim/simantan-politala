@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\ActivityLog;
+use App\Services\UploadService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +13,14 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
+
+  protected $uploadService;
+
+  public function __construct(UploadService $upload)
+  {
+    $this->uploadService = $upload;
+  }
+
   public function index()
   {
     $title = 'Profil Saya';
@@ -24,7 +33,8 @@ class ProfileController extends Controller
       'nama' => 'required',
       'nip' => 'required|numeric|digits_between:10,18',
       'email' => 'required|email',
-      'foto' => 'nullable|mimes:png,jpg,webp|max:2048'
+      'foto' => 'nullable|mimes:png,jpg,webp|max:2048',
+      'ttd' => 'nullable|mimes:png,jpg,webp|max:2048'
     ]);
 
     DB::beginTransaction();
@@ -36,16 +46,7 @@ class ProfileController extends Controller
       $user->nip = $request->nip;
       $user->email = $request->email;
 
-      if ($request->hasFile('foto')) {
-        if ($user->foto && $user->foto !== 'default.jpg' && Storage::disk('public')->exists('foto_profil/' . $user->foto)) {
-          Storage::disk('public')->delete('foto_profil/' . $user->foto);
-        }
-
-        $file = $request->file('foto');
-        $filename = time() . '.' . $file->getClientOriginalExtension();
-        $file->storeAs('foto_profil', $filename, 'public');
-        $user->foto = $filename;
-      }
+      $user->foto = $this->uploadService->uploadFoto($request->file('foto'), $user->foto);
 
       $user->save();
       DB::commit();
@@ -83,24 +84,5 @@ class ProfileController extends Controller
     ]);
 
     return redirect()->route('dashboard')->with('success', 'Kata sandi berhasil diperbarui.');
-  }
-
-  public function activityLog()
-  {
-    $title = 'Log Aktivitas';
-    $logs = ActivityLog::with('user')
-      ->latest()
-      ->take(10)
-      ->where('user_id', Auth::id())
-      ->get();
-
-    return view('profil.log-aktivitas', compact('title', 'logs'));
-  }
-
-  public function deleteActivityLog()
-  {
-    ActivityLog::where('user_id', Auth::id())->delete();
-
-    return redirect()->route('profil.log-aktivitas')->with('success', 'Log aktivitas berhasil dihapus.');
   }
 }

@@ -29,7 +29,7 @@
           <tr class="bg-white border-b-2 border-gray-200 whitespace-nowrap">
             <td class="px-6 py-3">
               <div class="flex items-center gap-2">
-                <img src="{{ asset('storage/foto_profil/' . Auth::user()->foto) }}" alt="Foto {{ $user->nama_lengkap }}"
+                <img src="{{ asset('storage/foto_profil/' . $user->foto) }}" alt="Foto {{ $user->nama_lengkap }}"
                   class="w-8 h-8 rounded-full object-cover">
                 <div class="flex flex-col">
                   <span>{{ $user->nama }}</span>

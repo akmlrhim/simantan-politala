@@ -17,7 +17,6 @@ return new class extends Migration
 			$table->string('hal', 120);
 			$table->date('tanggal_surat');
 			$table->longText('isi_surat');
-			$table->json('meta')->nullable();
 			$table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
 
 			$table->timestamps();
